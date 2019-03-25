@@ -1,0 +1,22 @@
+1、在地址栏中输入域名(www.baidu.com)回车后，浏览器做了什么
+   1>如果是第一次访问，客户端会在本机查找与www.baidu.com对应的ip地址；找不到的话就会发送请求到DNS服务器(域名解析服务器)，找到这个www.baidu.com：ip键值对，
+     然后返回到客户端并把这个键值对保存在本机，那么下次在访问www.baidu.com时就不需要访问DNS了；然后客户端根据返回的ip发送请求到百度服务器。
+     DNS服务器中有这样一个功能：维护一张域名和ip地址的键值对表。例如： www.baidu.com  115.239.211.112     www.sohu.com  118.112.222.221
+   2>百度服务器接受到客户端浏览器发送到的请求报文(字符串)以后，服务器开始解析，然后生成一个响应报文(字符串)，发送到客户端。
+     请求报文和响应报文都是遵循http协议的。
+2、IIS(服务器软件)对请求静态页面和动态页面的处理过程：
+   1>静态页面：如果浏览器请求的是xx.html，那么服务器直接读取xx.html并返回给浏览器
+   2>动态页面：如果浏览器请求的是xx.ashx、xx.aspx等动态页面，IIS发现处理不了，就会在处理程序映射表中根据请求页面的后缀名找到aspnet_isapi.dll，这个dll会把请求
+     转给.net FrameWork，然后会请求会先进入HttpRuntime，然后创建HttpContext对象，然后进入HttpApplication(真正处理请求的对象)，这个对象在处理请求的过程中，
+	 会经过19个事件，这个过程叫请求处理管道。在第11和第12个事件之间有个方法，这个方法创建了客户端请求的页面类对象。
+3、asp.net页面生命周期
+   1>初始化 PreInit Init InitComplete
+   2>加载数据和页面 LoadState ProcessPostDate PreLoad Load 
+   3>触发事件
+   4>保存状态并呈现页面 SaveState SaveStateComplete Render
+   5>卸载 Unload
+4、缓存：页面缓存、数据源缓存、数据缓存。缓存依赖：基于文件的缓存依赖、数据库缓存依赖
+5、过滤器：新建一个MODULE类库，然后添加引用 System.Web，然后新建一个类，实现接口IHttpModule，实现这个接口的方法Init，在这个方法中注册事件，在事件中编写要过滤的代码
+           到此一个过滤器编写好了。然后在需要使用的项目中引用该项目，然后需要在web.config文件中配置，然后就可以用了
+6、全局应用程序类 Global.asax   Application_Start Application_Error
+7、vs2012发布网站 iis部署网站常见问题：1、文件夹权限 2、先装.netframework 后装iis

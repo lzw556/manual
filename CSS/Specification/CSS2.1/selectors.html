@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5 Selectors</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <div class="navbar">
+        <p><a href="syntax.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="cascade.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+    <hr>
+    <h1>5 Selectors</h1>
+    <p><strong>Contents</strong></p>
+    <ul class="table-of-content">
+        <li><a href="#pattern-matching">5.1 Pattern matching</a></li>
+        <li>
+            <a href="#selector-syntax">5.2 Selector syntax</a>
+            <ul class="table-of-content">
+                <li><a href="#selector-syntax-grouping">Grouping</a></li>
+            </ul>
+        </li>
+        <li><a href="#universal-selector">5.3 Universal selector</a></li>
+        <li><a href="#type-selector">5.4 Type selectors</a></li>
+        <li><a href="#attribute-selector">5.5 Attribute selectors</a></li>
+        <li><a href="#class-selector">5.6 Class selectors</a></li>
+        <li><a href="#id-selector">5.7 ID selectors</a></li>
+        <li><a href="#pseudo-selector">5.8 Pseudo-elements and pseudo-classes</a></li>
+        <li>
+            <a href="#pseudo-element-selector">5.9 Pseudo-elements</a>
+            <ul class="table-of-content">
+                <li><a href="#first-line-selector">5.9.1 :first-line pseudo-element</a></li>
+                <li><a href="#first-letter-selector">5.9.2 :first-letter pseudo-element</a></li>
+                <li><a href="#before-selector">5.9.3 :before and :after pseudo-elements</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#pseudo-class-selector">5.10 Pseudo-classes</a>
+            <ul class="table-of-content">
+                <li><a href="#first-child-selector">5.10.1 :first-child pseudo-class</a></li>
+                <li><a href="#link-pseudo-class-selector">5.10.2 link pseudo-classes: :link and :visited</a></li>
+                <li><a href="#dynamic-pseudo-class-selector">5.10.3 dynamic pseudo-classes: :hover,:active and :focus</a></li>
+                <li><a href="#link-pseudo-class-order">5.10.4 link pseudo-classes order</a></li>
+                <li><a href="#lang-pseudo-class-selector">5.10.5 language pseudo-class: :lang</a></li>
+            </ul>
+        </li>
+        <li><a href="#descendant-selector">5.11 Descendant selectors</a></li>
+        <li><a href="#child-selector">5.12 Child selectors</a></li>
+        <li><a href="#adjacent-sibling-selector">5.13 Adjacent sibling selectors</a></li>
+    </ul>
+    <h2><a name="pattern-matching">5.1 Pattern matching</a></h2>
+    <table class="table">
+        <caption>The following table summarizes CSS 2.1 selector syntax:</caption>
+        <thead>
+            <tr>
+                <th>Pattern</th>
+                <th>Meaning</th>
+                <th>Described in section</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>*</td>
+                <td>Mathches any element</td>
+                <td><a href="#universal-selector">Universal selector</a></td>
+            </tr>
+            <tr>
+                <td>E</td>
+                <td>Matches any E element(i.e.,an element of type E)</td>
+                <td><a href="#type-selector">Type selectors</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2><a name="selector-syntax">5.2 选择器语法</a></h2>
+    <p>简单选择器:universal selector,type selector,attribute selector,ID selector</p>
+    <p>选择器是一串用连接符分隔的一个或多个简单选择器.连接符是:white space,&gt;,+</p>
+    <p>选择器匹配到的元素叫作选择器对象.一个选择器的对象总是最后一个简单选择器匹配的元素的子集</p>
+    <h3><a name="selector-syntax-grouping">5.2.1 选择器分组</a></h3>
+    <p>当几个选择器share相同的声明时,他们可以被放进一个以逗号分隔的列表中</p>
+    <h2><a name="universal-selector">5.3 Universal selector</a></h2>
+    <p>*,可以匹配任意单一元素</p>
+    <h2><a name="type-selector">5.4 Type selectors</a></h2>
+    <p>一个类型选择器可以匹配文档树中该元素类型的所有实例</p>
+    <h2><a name="attribute-selector">5.5 Attribute selectors</a></h2>
+    <dl>
+        <dt>[att]</dt>
+        <dd>匹配设置了att属性的元素,无论att的值是什么</dd>
+        <dt>[att=val]</dt>
+        <dd>匹配设置了att属性且att的值等于val的元素</dd>
+        <dt>[att~=val]</dt>
+        <dd>匹配设置了att属性且att的值是一个以white space分隔的值列表,其中之一是val的元素</dd>
+        <dt>[att|=val]</dt>
+        <dd>匹配设置了att属性的元素且att的值等于val,or att的值以val-为前缀的元素</dd>
+    </dl>
+    <h2><a name="class-selector">5.6 Class selectors</a></h2>
+    <p>
+        在[att~=val]中,如果att是class,则[class~=val]可以用.val替代,因此class selector本质上还是attribute selector,从第6章中可以得知,这2种<br>
+        selector的specificity都是(=c)
+    </p>
+    <p>由上可知,.val匹配设置了class属性且class的值是一个以white space分隔的值列表,其中之一是val的元素</p>
+    <h2><a name="id-selector">5.7 ID selectors</a></h2>
+    <p>#val,匹配ID属性值等于val的元素</p>
+    <h2><a name="pseudo-selector">5.8 Pseudo-elements and pseudo-classes</a></h2>
+    <p>
+        pseudo-element和pseudo-class都不会出现在源文档中<br>
+        pseudo-class可以出现在selector的任何位置,pseudo-element只能出现在selector中最后一个简单选择器的后面<br>
+        pseudo-element名和pseudo-class名都是大小写不敏感的
+    </p>
+    <h2><a name="pseudo-element-selector">5.9 Pseudo-elements</a></h2>
+    <p>:first-line,:first-letter,:before,:after</p>
+    <h3><a name="first-line-selector">5.9.1 :first-line pseudo-element</a></h3>
+    <p>:first-line匹配元素内容中的第一行</p>
+    <p>:first-line可能会被UA重写成含有虚拟标签序列的形式</p>
+    <div class="example">
+        <pre>&lt;p&gt;This is first line.<br>This is second line&lt;/p&gt;</pre>
+        <pre>&lt;p&gt;&lt;p:first-line&gt;This is first line.&lt;/p:first-line&gt;<br>This is second line&lt;/p&gt;</pre>
+    </div>
+    <p>如果pseudo-element把一个真实元素拆开了,真实元素会被虚拟标签分隔为2个元素</p>
+    <div class="example">
+        <pre>&lt;p&gt;&lt;span class="test"&gt;This is first line.<br>This is&lt;/span&gt; second line&lt;/p&gt;</pre>
+        <pre>&lt;p&gt;&lt;p:first-line&gt;&lt;span class="test"&gt;This is first line.&lt;/span&gt;&lt;/p:first-line&gt;<br>&lt;span class="test"&gt;This is&lt;/span&gt; second line&lt;/p&gt;</pre>
+    </div>
+    <p>:first-line只能用于block container element,但不能用于table-cell和inline-block容器</p>
+    <p>
+        :first-line的虚拟标签序列必须嵌套在最内层的闭合块级元素中(即虚拟标签的开始标签是在最内层块级元素开始标签之后),比如:
+    </p>
+    <div class="example">
+        <pre>&lt;div&gt;<br>  &lt;p&gt;first paragraph&lt;/p&gt;<br>  &lt;p&gt;second paragraph&lt;/p&gt;<br>&lt;/div&gt;</pre>
+        <pre>&lt;div&gt;<br>  &lt;p&gt;&lt;div:first-line&gt;&lt;p:first-line&gt;first paragraph&lt;/p:first-line&gt;&lt;/div:first-line&gt;&lt;/p&gt;<br>  &lt;p&gt;&lt;p:first-line&gt;second paragraph&lt;/p:first-line&gt;&lt;/p&gt;<br>&lt;/div&gt;</pre>
+    </div>
+    <h3><a name="first-letter-selector">5.9.2 :first-letter pseudo-element</a></h3>
+    <p>
+        :first-letter匹配一个块容器中第一行中的第一个字母,如果这一行中在他前面没有其他内容(比如image)的话
+    </p>
+    <p>:first-letter的虚拟标签紧挨着内容,比如:</p>
+    <div class="example">
+        <pre>&lt;p&gt;&lt;span&gt;The first&lt;/span&gt; few words of an article<br> in the Economist.&lt;p&gt;</pre>
+        <pre>&lt;p&gt;&lt;span&gt;&lt;p:first-letter&gt;T&lt;/p:first-letter&gt;he first&lt;/span&gt; few words of an article<br> in the Economist.&lt;p&gt;</pre>
+    </div>
+    <p>
+        因此:<br>
+        <pre>p span{color:red!important}<br>p:first-letter{color:blue;}</pre>
+        中,字母T的color是blue.因为:first-letter虚拟标签是span的子元素,所以T的color的computed value等于specified value(即blue)
+    </p>
+    <p>
+        :first-letter只能用于block container element,但不能用于table-cell和inline-block容器
+    </p>
+    <p>:first-line和:first-letter关系,如下:</p>
+    <div class="example">
+        <pre>&lt;p&gt;Some text that ends up<br> on two lines&lt;/p&gt;</pre>
+        <pre>&lt;p&gt;&lt;p:first-line&gt;&lt;p:fist-letter&gt;S&lt;/p:fist-letter&gt;ome text that ends up&lt;/p:first-line&gt;<br> on two lines&lt;/p&gt;</pre>
+    </div>
+    <h3><a name="before-selector">5.9.3 :before and :after pseudo-elements</a></h3>
+    <p>
+        :before用来在一个元素的内容之前插入生成内容;:after用来在一个元素的内容之后插入生成内容;
+    </p>
+    <p>
+        当:first-line pseudo-element和:first-letter pseudo-element被应用于含有使用:before或:after生成内容的元素,生成内容表现的和正常内容一样
+    </p>
+    <div class="example">
+        <pre>p.special:before{content:"helloworld"}<br>p.special:first-letter{color:red;}</pre>
+        <p>helloworld中的h的color将变成red.</p>
+    </div>
+    <h2><a name="pseudo-class-selector">5.10 Pseudo-classes</a></h2>
+    <h3><a name="first-child-selector">5.10.1 :first-child pseudo-class</a></h3>
+    <p>
+        :first-child匹配一个元素,这个元素是其他元素的第一个子元素.<br>注意:计算第一个子元素时不考虑匿名元素
+    </p>
+    <h3><a name="link-pseudo-class-selector">5.10.2 link pseudo-classes: :link and :visited</a></h3>
+    <p>
+        :link匹配没有被访问过的链接<br>
+        :visited匹配曾经被访问过的链接
+    </p>
+    <p class="note">
+        <strong>注意:</strong> :link和:visited只能应用于链接(a标签且拥有href属性,所以匹配不到锚点)<br>
+        2种状态互斥.即一个链接不可能同时被这2种状态匹配到,因此其书写的先后顺序对结果无影响
+    </p>
+    <h3><a name="dynamic-pseudo-class-selector">5.10.3 dynamic pseudo-classes: :hover,:active and :focus</a></h3>
+    <p>
+        :hover匹配一个元素,当这个元素被用户使用定点设备虚指但不激活期间.比如当用户把光标(鼠标指针)悬停在元素生成的元素框上期间<br>
+        :active匹配一个元素,当这个元素被用户激活期间,比如,在用户按下鼠标到松开鼠标这段时间<br>
+        :focus匹配一个元素,当这个元素拥有焦点期间
+    </p>
+    <p class="note"><strong>注意:</strong>:active发生期间:hover一直都在发生,但是:hover发生期间:active不发生</p>
+    <div class="example">
+        <pre>a:hover{background-color:pink;}<br>a:active{color:red;}</pre>
+    </div>
+    <h3><a name="link-pseudo-class-order">5.10.4 link pseudo-classes order</a></h3>
+    <p>
+        一个元素可以同时匹配多个伪类.<br>
+        比如用户把光标悬停在一个获得焦点的已访问链接期间,这个链接同时匹配:visited,:focus和:hover<br>
+        比如用户激活一个获得焦点的已访问链接期间,这个链接同时匹配:visited,:focus,:hover和:active.<br>所以对一个链接来说,伪类声明顺序非常重要<br>
+        比如如果先声明a:hover{color:red;}再声明:link{color:blue;},那么当用户hover链接时,color:red就会被color:blue重写;<br>
+        再比如如果先声明a:active{color:red;}再声明:hover{color:blue;},那么当用户active链接时,color:red就会被color:blue重写;<br>
+        因此,为了确保正确的渲染效果,链接伪类的声明顺序是:<br>
+        :link/:visited ->:focus ->:hover ->:active(当然前提是所有链接伪类声明中selector的specificity相等,否则比如a:link:hover就可以写在a:visited前面)
+    </p>
+    <h3><a name="lang-pseudo-class-selector">5.10.5 language pseudo-class: :lang</a></h3>
+    <h2><a name="descendant-selector">5.11 Descendant selectors</a></h2>
+    <p>
+        后代选择器匹配一个元素,这个元素是另一个元素的后代元素;后代选择器由2个或多个以white space分隔的选择器组成
+    </p>
+    <h2><a name="child-selector">5.12 Child selectors</a></h2>
+    <p>
+        子选择器匹配一个元素,这个元素是另一个元素的子元素;子选择器由2个或多个以 > 分隔的选择器组成
+    </p>
+    <h2><a name="adjacent-sibling-selector">5.13 Adjacent sibling selectors</a></h2>
+    <p>
+        相邻兄弟选择器语法:E1 + E2,E2是选择器对象,如果E1和E2拥有相同的父元素并且E1紧挨在E2前面(E1和E2之间无其他元素节点,忽略非元素节点比如文本或注释),则成功匹配到E2
+    </p>
+</body>
+</html>

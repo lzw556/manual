@@ -1,0 +1,66 @@
+﻿1、同步和异步：
+    同步：提交请求——等待服务器处理——处理完毕返回——整体刷新客户端
+	    ——下一次请求。客户端在等待过程中不能做任何事情，一次交互过程必须全部完成才能进行下一次交互。类似打电话
+	异步：提交请求——服务器处理——处理完毕返回——局部刷新客户端。客户端在提交请求后不用等待服务器处理，可以干其他任何的事。类似发短信
+
+	举例子：
+	同步就是你叫我去吃饭，我听到了就和你去吃饭；如果没有听到，你就不停的叫，直到我告诉你听到了，才一起去吃饭。
+    异步就是你叫我，然后自己去吃饭，我得到消息后可能立即走，也可能等到下班才去吃饭。
+2、Ajax是 Asynchronous Javascript And XML 的简写。通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+   传统的网页（不使用 AJAX）如果需要更新内容，必须重载整个网页页面。
+3、Ajax的核心是XMLHttpRequest对象。
+   使用步骤：1、创建XMLHttpRequest对象   var  xhr = createXHR();
+             2、xhr.open("get","text.ashx",false); 第一个参数：发送的请求类型；第二个参数：请求的url；第三个参数：表示是否异步发送请求
+	            注意：1> url相对于执行代码的当前页面
+				      2> open()方法不会真的发送请求，而是启动一个请求以备发送
+					  3> 第三个参数：当传入true时，执行send()方法后不会等到服务器响应，而继续执行后面的代码；当传入false时，执行send()方法后等待
+                         服务器的执行结果的返回，若在等待过程中超时，则不再等待，继续执行后面的脚本代码
+			 3、xhr.send(null);参数表示作为请求主体要发送的数据，如果不需要发送数据，则必须传null。调用send()方法后请求就会被发送到服务器
+ 4、在收到响应后，响应数据会自动填充到XHR对象的属性。
+    1>responseText：作为响应主体被返回的文本
+	2>responseXML：如果响应的类型是"text/xml"或"application/xml"，这个属性中将保存着响应数据的xml文档
+	3>status：响应的http状态码。200代表成功 304代表可以用缓存，当 200=<status<=300时，代表响应成功。
+	4>statusText：http状态码的说明。
+
+	5>readyState：表示请求/响应过程的当前活动阶段。这个属性的可能取值如下：
+	  0：未初始化，尚未调用open()方法。
+	  1：启动，已调用open()方法，但未调用send()
+	  2：发送，已调用send()方法，但未接受到响应
+	  3：接受，已接受到部分响应
+	  4：完成，已接受到全部响应数据，并且可以在客户端使用
+	6>readystatechange事件：当readyState属性的值发生一次变化，就会触发readystatechange事件。通常在调用
+	  open方法之前来指定onreadystatechange事件处理程序以检测请求/响应过程。
+	  xhr.onreadystatechange = function(){
+	      if(xhr.readyState == 4){
+		      if(xhr.status <=304 && xhr.status >=200 || xhr.status==304)
+			    {alert(xhr.responseText);}
+		  }
+		  else{ //不成功 }
+	  };
+	7>get请求：常用于向服务器查询数据。使用get请求经常会发生错误，就是查询字符串的格式问题。解决办法：每个
+	           名称和值都必须用encodeURIComponent()进行编码，然后添加到url的末尾。
+	8>post请求：常用于向服务器发送需要保存的数据。
+5、跨域
+6、用jquery实现ajax
+   1>$.ajax()，jquery底层ajax实现。
+     参数：1>发送数据到服务器
+	          type：请求方式，String类型  值："GET"(默认) "POST"
+			  url：请求的地址，String类型
+			  async：(默认: true) 默认设置下，所有请求均为异步请求。
+			  data：发送到服务器的数据。Object String类型，将自动转换为查询字符串格式。
+			  processData：Boolean类型，默认值为true，通过data传递进来的值，如果不是字符串都会自动转换成查询字符串的格式
+			  contentType：String类型，(默认: "application/x-www-form-urlencoded") 发送信息至服务器时内容编码类型。和form元素
+			               的属性enctype一个意思，默认情况下请求报文中的值用&来分隔。具体见6月10 单文件上传视频。
+	       2>数据类型
+		      dataType：预期服务器返回的数据类型，String类型。值："xml","html","text","json"等
+		   3>回调函数
+		      beforeSend(XHR)：Function类型，发送请求之前可以修改XMLHttpRequest的函数
+			  error(XMLHttpRequest,textStatus,errorThrown)：Function类型，请求失败时调用此函数。3个参数，分别是XHR对象，错误信息和捕获的异常对象
+			  success(data,statusText,jqXHR)：Function类型，请求成功后的回调函数。3个参数，分别是由服务器返回并根据dataType参数处理过的数据，
+			                                  描述状态的字符串，jqXHR对象。
+			  complete(XHR,TS)：Function类型，请求完成后的回调函数(请求成功或失败之后均调用)。
+			  dataFilter(data,type)：Function类型，对服务器返回的原始数据的进行预处理的函数。2个参数：data是返回的原始数据，type是调用jQuery.ajax时提供的dataType参数。
+   2>$.get(url,[data],[callback],[type])，jquery高层ajax实现。
+      参数：url：请求的url; data：发送到服务器的数据key/value字符串；callback：请求成功后的回调函数；type:返回的数据格式 xml text json html等
+   3>$.post(url,[data],[callback],[type])，jquery高层ajax实现。参数和get一样。
+   

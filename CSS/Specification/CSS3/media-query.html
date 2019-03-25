@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Media Query</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body id="body">
+    <h1>Media Queries</h1>
+    <h2>Table of Contents</h2>
+    <ul class="table-of-content">
+        <li><a href="#">1 Background</a></li>
+        <li><a href="#media-query">2 Media query</a></li>
+        <li><a href="#syntax">3 Syntax</a></li>
+        <li><a href="#media-feature">4 Media features</a></li>
+        <li><a href="#">5 Values</a></li>
+        <li><a href="#">6 Units</a></li>
+    </ul>
+    <h2><a name="media-query">2 Media query</a></h2>
+    <p>一个media query语法包含一个可选的修饰符(not or only),一个可选的<a href="../CSS2.1/media.html">media type</a>和0到多个<a href="">media feature expressions</a></p>
+    <p>一个media query是一个logical expression(逻辑表达式),其结果要么是true,要么是false.一个media query结果为true的条件:</p>
+    <ol>
+        <li>media type成功匹配UA运行所在的设备</li>
+        <li>并且所有的media feature expressions返回true</li>
+    </ol>
+    <h2><a name="syntax">3 Syntax</a></h2>
+    <div class="example">
+        <pre>@media all and (min-width:400px){...}     /*表示任意media type并且viewport大于等于400px的media*/</pre>
+    </div>
+    <p>这是一个最简单的media query,其中'all'是media type,'min-width'是media feature,(min-width:400px)是media feature expression</p>
+    <div class="example">
+        <pre>@media (min-width:400px){...}</pre>
+    </div>
+    <p>这个例子和example1是等效的,因为如果media type没有显示指定,则默认是'all'(此时包括'and'也要省略)</p>
+    <div class="example">
+        <pre>@media (min-width:400px) and (orientation:portrait){...}</pre>
+        <p>/*表示任意media type并且viewport大于等于400px并且viewport是竖屏的media*/</p>
+    </div>
+    <p>关键字'and'表示逻辑与,可以用来表示多个media feature expression之间的逻辑与关系,即所有media feature expression都返回true时,media query才会返回true</p>
+    <div class="example">
+        <pre>@media not screen and (min-width:400px){...}     /*表示排除掉media type是screen并且viewport大于等于400px的media*/</pre>
+    </div>
+    <p>关键字'not'表示逻辑非,用来对media query返回的结果取反.使用关键字'not'时,必须指定media type</p>
+    <div class="example">
+        <pre>@media not (screen and (min-width:400px)){...}</pre>
+    </div>
+    <p>和example4是等效的</p>
+    <div class="example">
+        <pre>@media not screen and (min-width:400px), print and (max-width:500px){...}</pre>
+    </div>
+    <div class="example">
+        <pre>@media (not (screen and (min-width:400px))), print and (max-width:500px){...}</pre>
+    </div>
+    <p>example6和example7是等效的</p>
+    <div class="example">
+        <pre>@media only print and (min-width:400px){...}</pre>
+    </div>
+    <p>关键字'only',UA在处理以'only'开头的media query时就好像'only'不存在.使用关键字'only'时,必须指定media type.对于支持media query的UA,'only'有没有都没有影响;对于不支持media query的UA,在处理media query时遇到'only'会忽略指定的样式</p>
+    <div class="example">
+        <pre>@media screen and (min-width:400px), print and (min-width:400px){...}</pre>
+    </div>
+    <p>',',用来把多个media query放进一个以","隔开的media query list中;如果media query list中有任意一个media query返回true,这个media query list就返回true.因此","等效于逻辑或</p>
+    <h2><a name="media-feature">4 Media features</a></h2>
+    <p>在语句构成上,media feature和CSS property类似:都是name和value.但是,两者有重要的区别如下:</p>
+    <ol>
+        <li>property被用在declaration中,表示文档的信息;media feature被用在expression中,表示输出设备的要求</li>
+        <li>大部分media feature接受可选的'min-' or 'max-'前缀的值来表示大于等于或小于等于的条件</li>
+        <li>property总是需要一个值才能形成decoration;media feature在使用时可以有值,也可以不带值</li>
+    </ol>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Media Feature</th><th>Value</th><th>Applies to</th><th>Accepts min/max</th><th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>width</td><td>length</td><td>visual and tactile</td><td>yes</td><td>width of viewport</td>
+            </tr>
+            <tr>
+                <td>height</td><td>length</td><td>visual and tactile</td><td>yes</td><td>height of viewport</td>
+            </tr>
+            <tr>
+                <td>device-width</td><td>length</td><td>visual and tactile</td><td>yes</td><td>width of screen</td>
+            </tr>
+            <tr>
+                <td>device-height</td><td>length</td><td>visual and tactile</td><td>yes</td><td>height of screen</td>
+            </tr>
+            <tr>
+                <td>orientation</td><td> portrait | landscape</td><td>bitmap media types</td><td>no</td><td>portrait:竖屏,即在media feature中,'height'大于等于'width'<br>landscape:横屏,即在media feature中,'width'大于等于'height'</td>
+            </tr>
+            <tr>
+                <td>aspect-ratio</td><td>ratio(比如:16/9)</td><td>bitmap media types</td><td>yes</td><td>在media feature中,'width'/'height'</td>
+            </tr>
+            <tr>
+                <td>device-aspect-ratio</td><td>ratio(比如:16/9)</td><td>bitmap media types</td><td>yes</td><td>在media feature中,'device-width'/'device-height'</td>
+            </tr>
+            <tr>
+                <td>color</td><td>integer</td><td>visual media types</td><td>yes</td><td>the number of bits per color component of the output device</td>
+            </tr>
+            <tr>
+                <td>resolution</td><td>resolution(比如:300dpi)</td><td>bitmap media types</td><td>yes</td><td>分辨率</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

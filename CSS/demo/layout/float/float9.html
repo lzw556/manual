@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .f-cb:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+        .sepline{height:30px;border-bottom:5px dashed #000;margin-bottom:30px;}
+        .container{width:35%;border:1px solid #ccc;margin:0 auto;}
+        .hd,.ft{padding:10px;background-color:#666;color:#fff;}
+    </style>
+</head>
+<body>
+<h2>浮动元素摆放规则5:浮动元素的顶端不能比之前所有浮动元素或块级元素的顶端更高</h2>
+<div class="container">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <p>浮动元素摆放规则4:浮动元素的顶端不能比之前所有浮动元素或块级元素的顶端更高<a style="float:left;width:200px;height:100px;border:1px solid #ccc;" href="http://www.baidu.com">baidu</a>浮动元素摆放规则4:浮动元素的顶端不能比之前所有浮动元素或块级元素的顶端更高
+            浮动元素摆放规则4:浮动元素的顶端不能比之前所有浮动元素或块级元素的顶端更高<a style="float:left;width:450px;height:100px;border:1px solid #ccc;" href="http://www.baidu.com">baidu</a><a style="float:right;width:50px;height:100px;border:1px solid #ccc;" href="http://www.baidu.com">baidu</a></p>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+</body>
+</html>

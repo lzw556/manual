@@ -1,0 +1,22 @@
+1 安装插件Package Control
+  这个插件是管理其他插件的,所以必须首先安装.安装方法:View-Show Console,然后在打开的命令行中输入代码:import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'
+  ,然后回车,等待界面左下角的进度标志完成后,在Preferences下查看如果有Package Control则表示安装成功.
+  常用命令:首先ctrl+shift+p打开Package Control,安装插件:Package Control:Install Package;卸载插件:Package Control:Remove Package;查询已安装插件:Package Control:List Packages;
+2 常用设置
+  1>字体 
+    Preferences-Settings-User   添加代码 "font_size": 16(注意16不能加"",如果加了就不起作用)
+  2>背景色
+    Preferences-Settings-User   添加代码 "color_scheme": "Packages/Color Scheme - Default/Dawn.tmTheme"
+  3>主题(也是安装插件的方法)
+    首先ctrl+shift+p打开Package Control,然后输入Install,在下拉列表中选择Package Control:Install Package后回车,等待左下角的进度完成会弹出
+    插件列表,然后输入要安装的主题Theme-Soda会查询到这个插件(如果已安装就查不到了),选择后回车等待安装完成.
+    最后需要在Preferences-Settings-User   添加代码"theme": "Soda Light.sublime-theme"指白色("theme": "Soda Dark.sublime-theme"指黑色)
+  4>
+     Preferences-key Bingdings-User加入
+     { "keys": ["ctrl+1"], "command": "toggle_comment", "args": { "block": false } },
+     { "keys": ["ctrl+2"], "command": "toggle_comment", "args": { "block": true } },
+3 常用功能(插件)
+  1>右下角可以选择文档类型,比如选择了HTML后,在写HTML标签时会有智能提示(按enter会自动补全)和高亮显示
+  2>解决汉字乱码问题-ConvertToUTF8插件,这个插件不需要操作是自动转换.如果仍然出现乱码，点击file -reloading with encoding - Chinese simplified(GBK);然后file-set file encoding to - utf-8;然后保存
+  3>解决搜狗输入法的候选项不在光标处而是在最底部问题,需要安装IMESupport插件  
+     

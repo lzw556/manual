@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7 Media types</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <div class="navbar">
+        <p><a href="cascade.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="box.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+    <hr>
+    <h1>7 Media types</h1>
+    <p>Contents</p>
+    <ul class="table-of-content">
+        <li><a href="#media-intro">7.1 Introduction to media types</a></li>
+        <li><a href="#media-sheet">7.2 Specifying media-dependent style sheets</a>
+            <ul class="table-of-content">
+                <li><a href="#at-media-rule">7.2.1 The @media rule</a></li>
+            </ul>
+        </li>
+        <li><a href="#media-types">7.3 Recognized media types</a>
+            <ul class="table-of-content">
+                <li><a href="#media-groups">7.3.1 Media groups</a></li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name="media-intro">7.1 Introduction to media types</a></h2>
+    <p>样式表最重要的特性之一是指定同一个文档在不同的media上如何显示</p>
+    <p>针对不同的media type的样式表可能共享一个属性,但是需要不同的属性值</p>
+    <h2><a name="media-sheet">7.2 Specifying media-dependent style sheets</a></h2>
+    <p>目前有两种方式来指定样式表的media依赖:</p>
+    <ol>
+        <li>在样式表内部通过@import or @media 2种at-rule来指定目标media的样式</li>
+        <li>在document language中指定目标media.例如在HTML中,可以通过link元素中的media属性给目标media指定一个样式表</li>
+    </ol>
+    <h3><a name="at-media-rule">7.2.1 The @media rule</a></h3>
+    <p>@media rule指定一系列样式声明的目标media type(多个media type之间以","隔开).@media rule允许在一个样式表中针对不同media声明不同的样式</p>
+    <p>@media rule之外的样式声明适用于所有的media type</p>
+    <h2><a name="media-types">7.3 Recognized media types</a></h2>
+    <dl>
+        <dt>all</dt>
+        <dd>适用于所有设备</dd>
+        <dt>print</dt>
+        <dd>用于在屏幕上用打印模式查看的文档</dd>
+        <dt>screen</dt>
+        <dd>用于计算机屏幕</dd>
+        <dt>speech</dt>
+        <dd>用于语音合成器</dd>
+        <dt>TV</dt>
+        <dd>用于电视类设备</dd>
+    </dl>
+    <p>media type名称是case-insensitive(大小写不敏感的)</p>
+    <h3><a name="media-groups">7.3.1 Media groups</a></h3>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        span{color:#fff;background-color:green;}
+    </style>
+</head>
+<body style="font-family:Simsun;">
+<p style="line-height:16px;font-size:16px;"><span style="line-height:16px;font-size:16px;">雅黑</span></p>
+<p style="line-height:16px;font-size:16px;"><span style="line-height:16px;font-size:30px;">xy雅黑</span><span style="line-height:16px;font-size:12px;">x黑户</span></p>
+p的height由其子元素内容决定,本例中只有一行文本,所以子元素的高度即这个行框(line box)的高度;
+由于这一行中只有一个span非替换行内元素,所以这个行框的高度即span的行内框(inline box)高度;
+span行内框(inline box)高度=
+<p style="line-height:16px;font-size:16px;"><span style="line-height:16px;font-size:12px;">雅黑</span></p>
+-------------
+<p style="line-height:16px;font-size:16px;"><span style="line-height:18px;font-size:16px;">雅黑</span></p>
+<p style="line-height:16px;font-size:16px;"><span style="line-height:18px;font-size:22px;">雅黑</span></p>
+<p style="line-height:16px;font-size:16px;"><span style="line-height:18px;font-size:12px;">雅黑</span></p>
+<p style="line-height:16px;font-size:16px;"><span style="line-height:18px;font-size:18px;">雅黑</span></p>
+<p style="line-height:16px;font-size:16px;"><span style="line-height:18px;font-size:20px;">雅黑</span></p>
+<p style="line-height:16px;font-size:16px;"><span style="line-height:18px;font-size:17px;">雅黑</span></p>
+--------------
+</body>
+</html>

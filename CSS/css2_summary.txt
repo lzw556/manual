@@ -1,0 +1,301 @@
+css布局优缺点：
+  优点：1、有利于seo 2、结构和表现分离，易维护 3、和table布局相比，页面比较小，加载速度快
+  缺点：存在浏览器兼容问题
+
+
+3、css必须放在head元素中，和title元素平级，这样才会起作用。外部样式表link 、嵌套样式表style 、行内样式表
+
+一、选择器
+
+1  css规则的结构: h1       {color:red;background:yellow;}
+                 选择器    声明块
+    1.1 选择器种类:元素选择器,类选择器,ID选择器等
+    1.2 声明块中包括一个或多个声明,每个声明则是一个{属性:值(如果有多个值,一般用空格隔开)}对,每个声明之间用;隔开
+    
+2  元素选择器:即css规则中的选择器是html元素,如:span{color:blue;}
+    2.1 选择器分组:即css规则中的选择器有多个html元素,他们之间用,隔开,这样右边的规则将影响选择器中的所有元素,如:span,h2{color:blue;}
+    2.2 通配选择器:*{color:yellow},这个选择器可以匹配任意元素,因此相当于文档中所有元素组成的分组选择器
+
+3  类选择器:即css规则中的选择器是.class名,区分大小写,如:.name{color:red;}
+    3.1 多类选择器:如.warning.footer{color:red;}, 意义是匹配class属性值中同时包含warning和footer的元素(2个class值用空格隔开)
+    3.2 组合选择器:即css规则中的选择器由元素选择器和类选择器组合,如:p.name{color:red;},意义是匹配class属性值为name的所有p元素
+
+4  ID选择器:即css规则中的选择器是#id名,区分大小写,如:#txtName{color:green;} 
+
+5  属性选择器:即css规则中的选择器是元素属性或元素属性值
+    5.1 简单属性选择:
+       (1)[title]{color:red;},意义是匹配所有设置了title属性的元素
+       (2)a[href]{color:red;},意义是匹配所有设置了href属性的a元素
+       (2)a[href][title]{color:red;},意义是匹配所有同时设置了href属性和title属性的a元素
+    5.2 根据属性值选择:
+       (1)a[href="http://www.google.com"]{color:red;},意义是匹配所有href属性值为http://www.google.com的a元素
+
+7  后代选择器:即CSS规则中的选择器是两个或多个用空格分隔的选择器,从左至右是祖先-后代关系
+    7.1 p span{color:red;},意义是匹配包含在p元素中的所有span元素.
+        即从p的所有后代中匹配
+    7.2 .item .title span,意义是匹配包含在item中的title中的所有span元素
+
+8  子选择器:即CSS规则中的选择器是两个或多个用大于号分隔的选择器,从左至右是祖先-后代关系
+    8.1 p>span{color:red;},意义是匹配包含在p元素的子元素中的所有span元素.
+        即从p的直接子元素中匹配
+
+9  伪类选择器,语法:selector:pseudo-class{property:value;},如a:link{color:red;}
+    9.1 :link,匹配未访问过的链接,只用于超链接,即:前的选择器匹配的只能是a元素
+    9.2 :visited,匹配已访问过的链接,只用于超链接
+    9.3 a元素的伪类顺序很重要:一般是a:link a:visited a:hover a:active
+    9.4 :focus,匹配得到键盘输入焦点的元素,如input:focus{color:yellow;}
+    9.5 :hover,匹配被鼠标悬浮的元素
+    9.6 :active,匹配被激活的元素
+    9.7 :first-child,匹配作为某元素的第一个子元素的元素,如p:first-child{color:red;},意义是匹配作为任何元素的第一个子元素的p元素
+
+10 伪元素选择器,语法:selector:pseudo-element{property:value;}
+    10.1 :first-line,设置文本第一行的样式,只能用于块级元素
+    10.2 :first-letter,设置文本的首字母的样式,只能用于块级元素
+    10.3 :before,在一个元素之前插入新内容,如p:before{content:"haha";color:red;font-size:18px;}
+    10.4 :after,在一个元素之后插入新内容 
+ 
+二、属性
+
+1  背景,即内容区,内边距和边框组成的区域
+    1.1 背景色,background-color,值:颜色名/十六进制颜色值/rgb代码/transparnet(默认透明),如:background-color:red/#000000/rgb(255,255,255)
+    1.2 背景图像,即在元素的背景中设置一个图像,默认位于元素的左上角,并在水平和垂直方向上重复,background-image,值:url("")/none(默认值)
+    1.3 背景重复,即背景图片的平铺模式,background-repeat,值:repeat(默认)/repeat-x/repeat-y/no-repeat
+    1.4 背景定位,即设置背景图像的起始位置,background-position,值有如下:
+      (1)关键字,可以按任何顺序出现,只要保证不超过两个关键字,其中一个对应水平方向,另一个对应垂直方向.如:top left,如果只出现一个关键字,另一个默认是center
+      (2)长度值,即以元素内边距左上角为基点坐标(0,0),背景图像左上角和基点的偏移坐标
+    1.5 属性简写,如:background:background-color background-image background-repeat background-positon,每一个属性都非必须设置(不设置使用默认值)
+
+2  文本
+    1.1 前景色,color,值:颜色名/十六进制值/rgb代码
+    1.2 行高, 行间距/2(上) + font-size + 行间距/2(下) = line-height,上下行间距和字体框组成的框叫做行框,line-height即行框的高度,所以文本的高度(类似height)=line-height*行数.line-height有值如下:
+      (1)normal,默认
+      (2)百分数值,即line-height = font-size * 百分数,如p{line-height:90%;}
+      (3)数字值,即line-height = font-size * 数字,如p{line-height:1.5;}
+      (4)像素值,即line-height = 像素值
+      (5)其中(2)和(3)之间的区别在于继承问题,当是数字值(不带单位)时,子元素的行高=数字值*子元素的font-size,可以理解这时子元素继承的只是因子;反之子元素的行高=值*父元素的font-size,可以理解这时子元素继承的计算值
+    1.3 水平对齐,text-aligh,值:left/right/center
+    1.4 向文本添加装饰,text-decoration,值:none(默认)/underline/overline/line-through/blink
+    1.5 首行缩进,text-indent,值:长度值/百分数值(基于父元素宽度),其中长度值允许为负,这时可以做"悬挂缩进"效果.首行缩进和悬挂缩进是一对相反的格式
+    1.6 字母大小写,text-transform,值:none(默认)/uppercase/lowercase/capitalize
+    1.7 字符间距,letter-spacing,值:normal(默认)/长度值
+    1.8 单词间距,word-spacing,值:normal(默认)/长度值
+    1.9 空白处理,white-space,值有如下:
+      (1)normal(默认),空白被忽略
+      (2)pre,空白被保留,类似html元素pre
+      (3)nowrap,文本不会换行,在同一行上显示,直到遇到<br/>标签为止
+
+3  字体
+    1.1 字体系列,font-family,值:指定字体系列名称/通用字体系列名称
+      (1)这个属性的值是字体系列名称的列表,默认使用第一个字体,如果不支持会继续找下一个,每个字体用,隔开;字体系列名中带空格的要用''括起来
+      (2)5种通用系列:"serif"、"sans-serif"、"cursive"、"fantasy"、"monospace"
+      (3)使用某种特定的字体系列（Geneva）完全取决于用户机器上该字体系列是否可用,因此最好的写法是在列表最后使用一个通用的字体系列
+    1.2 字体风格,font-style,值:normal/italic(斜体)/oblique(倾斜)
+    1.3 字体粗细,font-weight,值:normal/bold/bolder/lighter/100-900(400=normal;700=bold)  
+    1.4 字体尺寸,font-size,值有如下:
+      (1)xx-small x-small small medium(默认) large x-large xx-large
+      (2)smaller(比父元素更小) larger(比父元素更大) 
+      (3)长度值
+      (4)百分数值,基于父元素字体尺寸的百分比
+    1.5 简写属性,如:font:italic bold 12px/30px serif
+      (1)顺序:font-style font-variant font-weight font-size/line-height font-family
+      (2)前3个属性属性任意而且可有可无(未设置使用默认值),后2个顺序不变而且必须有
+
+4  列表
+    1.1 标记类型,list-style-type,值:disc(实心圆,默认)/circle(空心圆)/none等
+    1.2 标记图像,list-style-image,值:url("")/none(默认)
+    1.3 标记位置,list-style-position,值outside(默认)/inside
+    1.4 简写属性,list-style:list-style-type|list-style-image|list-style-position,3个属性属性任意而且非必须,没有设置就使用默认值
+
+5  表格
+    1.1 表格标题位置,caption-side,值:top(默认)/bottom.caption相当于直接放在表前(或表后)的块级元素
+    1.2 表格单元格边框模式,border-collapse,值:separate(分隔,默认)/collapse(合并,相当于1+1=2,这时会忽略border-spacing)
+    1.3 单元格边框之间的间隔,border-spacing,值:length(水平间隔) length(垂直间隔),如果只定义一个值则表示水平和垂直相等,只在border-collapse:separate时才有效
+    1.4 表格布局,table-layout,值:fixed/auto(默认),二者区别:
+      (1)fixed,显示速度快,水平布局和内容无关
+      (2)auto,列的宽度由列单元格中没有折行的最宽的内容设定
+
+6  轮廓,是绘制于元素周围的一条线，位于边框边缘的外围
+    1.1 轮廓样式,outline-style,值:none(默认)/solid/dashed/dotted等,只有设置了outline-style不为none时轮廓才会出现,所以这个属性一定要出现在第一位
+    1.2 轮廓颜色,outline-color,值:颜色名/十六进制颜色值/rgb颜色代码,该属性声明只有放在outline-style声明后才有效
+    1.3 轮廓宽度,outline-width,值:thin/medium(默认)/thick/长度值,该属性声明只有放在outline-style声明后才有效
+    1.4 简写属性,outline:outline-style|outline-color|outline-width
+
+三、视觉格式化理论(只讨论在正常流中的范畴)
+ 
+1  正常流,指西方语言文本从左至右,从上到下显示.要让一个元素不在正常流中唯一的办法是使之成为浮动或定位元素
+
+2  替换元素,指的是浏览器根据元素属性来判断显示具体内容,如input元素,type属性不一样,显示也不同.常见的替换元素有:<img>/<input>
+
+3  非替换元素,指将内容直接告诉浏览器,将其显示出来.常见的有:<p>
+  
+4  块级元素(block-level),在正常流中时会在其生成的元素框之前和之后生成“换行”.所以块级元素在正常流中垂直排列,比较常见的块级元素:p/div/li,通过声明display:block可以让元素生成块级框
+
+5  行内元素(inline-level),不会在其框之前和之后生成"换行",它们是块级元素的后代,比较常见的行内元素:span,a,通过声明display:inline,可以让一个元素生成行内框
+
+6  元素框,css假定每一个元素都会生成一个矩形框,这个矩形框中心有一个内容区,内容区周围有可选的内边距(padding),边框(border),外边距(margin).元素框也叫盒子模型(box model):最中间是内容区,可以想象成盒子里放的东西,css中的width和height指的就是内容区的宽和高;然后往外是padding,可以想象成保护东西的泡沫,内边距包围的区域呈现了元素的背景(background-color);然后往外是border,可以想象成盒子本身;最外层是margin,可以想象成盒子和其他盒子之间的空间.注意:增加内边距/边框/外边距不会影响内容区域的尺寸,但是会增加元素框的总尺寸,进而增加包含块内容区的尺寸
+
+7  包含块,由最近的块级祖先框或表单元格或行内块祖先框的内容边界构成.每个元素都相对于其包含块摆放,包含块是一个元素布局的"上下文"
+
+8  元素尺寸属性(考虑放在视觉格式化中???)      
+    1.1 具体属性
+      (1)height,元素框内容区的高度,值:auto(默认)/长度值/百分数值(相对于包含块的高度),主要用于块级元素和替换元素,对行内非替换元素无效.
+      (2)width,元素框内容区的宽度,值:auto(默认)/长度值/百分数值(相对于包含块的宽度),主要用于块级元素和替换元素,对行内非替换元素无效.
+      (3)margin,围绕在元素框边框外的空白区域,值:0(默认)/auto/长度值(可以为负数)/百分数值(相对于父元素的宽度),可用于所有元素
+         1>margin可以有1-4个值,如下:
+           margin:3px 4px 5px 6px  分别对应top right bottom left
+           margin:3px 4px 5px      相当于margin:3px 4px 5px 4px
+           margin:3px 4px          相当于margin:3px 4px 3px 4px
+           margin:3px              相当于margin:3px 3px 3px 3px
+         2>单边外边距:margin-top margin-right margin-bottom margin-left
+         3>外边距合并:指的是当2个垂直外边距相遇时,它们将形成一个新的外边距,合并后的外边距的高度等于2个发生合并的外边距的高度中的较大者
+      (4)padding,元素框内容区外到元素框边框之间的空白区域,值:0(默认)/auto/长度值/百分数值(相对于父元素的宽度),可以用于所有元素  
+         1>padding可以有1-4个值,如下:
+           padding:3px 4px 5px 6px  分别对应top right bottom left
+           padding:3px 4px 5px      相当于padding:3px 4px 5px 4px
+           padding:3px 4px          相当于padding:3px 4px 3px 4px
+           padding:3px              相当于padding:3px 3px 3px 3px
+         2>单边内边距:padding-top padding-right padding-bottom padding-left
+      (5)border,元素框的边框,可以用于所有元素(和outline类似)
+         1>border-style,边框样式,值:none/solid等,如果为none就不会出现边框
+         2>border-width,边框宽度,值:thin/medium(默认)/thick/长度值,不能是百分数
+         3>border-color,边框颜色,值:颜色名/十六进制颜色值/rgb代码值/transparent
+         4>简写属性,border:border-style|border-width|border-color
+         5>单边属性有4个:border-top(border-top-style|border-top-width|border-top-color) border-right(3个) border-bottom(3个) border-left(3个)
+         6>边框是在元素的背景之上的,所以背景包括内容区,内边距和边框.验证办法:边框设置为不连续的然后宽的,这样背景颜色就会出现在边框的可见部分了
+      
+8  水平格式化
+     8.1 非替换块级元素:正常流中块级元素的元素框的水平部分总和(7个属性值的和)就等于父元素的width
+        (1)auto:弥补所需值和实际值之间的差距
+           1> 只有width和margin-left和margin-right可以设置为auto,padding和border默认值为0,所以如果不设置他们的长度就是0
+           2> 1个auto:如果width/margin-left/margin-right中某个属性设置了auto,而余下2个属性设置特定的值,那么设置为auto的属性会确定所需的长度,从而使元素框的宽度等于父元素的宽度.例如:如果7个属性之和必须是300px的话,则这样设置的话p{margin-left:100px;width:100px;margin-right:auto},margin-left的宽度将是100px
+           3> 2个auto:p{margin-left:auto;width:100px;margin-right:auto}这样的话2个外边距会设置为相等的长度,因此将元素在其父元素中水平居中显示;如果p{margin-left:100px;width:auto;margin-right:auto},那么margin-right的宽度将是0,然后width会设置为所需的值, 从而使元素框的宽度等于父元素的宽度.
+           4> 3个auto:这种情况相当于默认情况,2个外边距都会设置为0,然后width尽可能宽
+        (2)负外边距:
+           仍然遵循7个属性值之和=其父元素的width，只有margin可以为负值
+        (3)百分数:
+           如果margin/padding/width设置为百分数(都是相对应包含块的width),仍然遵循同样的规则,它的用途是尺寸可以随包含块变化
+     8.2 替换块级元素：非替换块级元素的所有规则同样适用于替换块级元素,只有一个例外:如果width为auto,元素的宽度则是内容的固有宽度.如:<img src="1.jpg" style="display:block;"/>,如果1.jpg的宽度是20px,那么元素的宽度也是20px.可以为width指定一个特定值来覆盖这个规则,如果一个替换元素的width不等于其固有宽度,那么height值也会成比例变化,除非height也设置一个特定值
+
+9  垂直格式化
+     9.1 块级元素:正常流中块级元素的元素框的垂直部分总和(7个属性值的和)就等于父元素的height ？？？疑问见css22study/1.html
+        (1)元素的默认高度由内容决定,内容宽度越窄,相应就越高
+        (2)可以对任何块级元素显示设置高度:当指定高度>内容所需高度时,结果就想有额外的内边距一样.当指定高度<所需高度时,用户代理的行为取决于overflow的值
+        (3)auto:
+           1>只有width和margin-top和margin-bottom可以设置为auto,padding和border默认值为0,所以如果不设置他们的长度就是0
+           2>如果margin-top和margin-bottom同时设置为auto,那么它们会自动计算为0,即在正常流中margin-top/margin-bottom设置为auto无效
+
+
+
+7  行内元素：
+               匿名文本：未包含在行内元素中的字符串。例子：<p>I am <em>very</em>happy</p> I am happy都是匿名文本
+			   em框：在字体中定义，也叫字符框。font-size的值确定了em框的高度
+			   内容区：各个em框串在一起组成，因此font-size的值决定了内容区的高度
+			   行间距：是font-size和line-height之差。
+			   行内框：通过向内容区增加行间距，就是把行间距一份为2，分别添加到内容区的顶部和底部
+8  改变元素显示：属性display，影响元素如何显示。值：none,inline,block,inline-block,list-item,run-in
+                 1、将一个无序列表中的项变成inline的效果
+				 2、将几个a元素变成block的效果
+				 3、将一个块元素的display改为inline，那么他的width等块级元素的属性会被忽略；但将它的display
+				    改为inline-block时，width等块级元素的属性还可以用
+				 4、run-in：例子：<h3 style="display:run-in;">这个是h3标题</h3><p>后面的是一个段落</p> ，这样h3
+				                  会变成其后面块级元素内的行内框。只有当run-in后面是一个块级框时才有用
+
+
+2、margin：可以用于所有元素
+                    值：auto(可以水平居中)、length、percentage，默认值未定义(根据浏览器的不同而不同)
+	                例子：div{margin:3px 2em 3px 2px;}，这4个值分别对应top right bottom left，单位可以不同
+					
+					负margin和margin合并
+					margin和行内元素
+					属性margin,margin-top,margin-right,margin-bottom,margin-left
+3、border：可以用于所有元素
+					样式：border-style：值，none，hidden，dotted，dashed,solid,double,groove,ridge,inset,ouset
+						  border-top-style,border-right-style,border-bottom-style,border-left-style
+						  注意当border-style值为none时，边框不存在，因此这时设置的width和color都不起作用的。
+					粗细：border-width：值，thin,medium,thick,length
+						  border-top-width,border-right-width,border-bottom-width,border-left-width
+					颜色：border-color：值，颜色值，transparent（透明）
+						  border-top-color,border-right-color,border-bottom-color,border-left-color
+					属性border,border-top,border-right,border-bottom,border-left：width style color，顺序随意
+
+
+	  七、布局方案：浮动和定位
+1、float：浮动 值：left，right，none 可以用于所有元素。最常见的用途可以使2个块元素横向并列摆放
+2、浮动规则：
+            1>浮动元素会生成一个块级框，不管这个元素是什么
+			2>浮动元素的左(右)外边界不能超过包含块的左(右)内边界，换句话说不管怎么浮动都不可能逃出包含块的内容区
+			3>浮动元素的左(右)外边界必须是包含块中之前出现的浮动元素的右(左)外边界，除非后出现的浮动元素的
+			  顶端在先出现的浮动元素的底端下面。这条规则可以避免浮动元素彼此覆盖。
+			4>左浮动元素的右外边界不会在其右边右浮动元素的左外边界的右边。这条规则可以避免浮动元素相互重叠。
+			5>浮动元素的顶端不能比其包含块的内顶端更高，如果一个浮动元素在2个合并外边距之间，放置这个浮动
+			  元素时就像在2个元素之间有一个块级父元素。
+			6>后出现的浮动元素的顶端不能比之前出现的浮动元素或块级元素的顶端更高
+			7>如果一个浮动元素之前有另一个元素，那么浮动元素的顶端不能比包含该元素的生成框的行框的顶端高
+			8>左浮动元素的左边有另一浮动元素，前者的右外边界不能在包含块的右外边界的右边
+			9>浮动元素必须尽可能高的放置，即在满足其他约束条件的前提下，浮动得尽可能高
+		   10>左(右)浮动元素必须向左(右)尽可能远
+3、通常将浮动元素的父元素设置为浮动元素，就可以把浮动元素包含在父元素中
+4、clear：清除浮动 值：left,right,both,none,只应用于块级元素 
+5、定位原理：利用定位，可以准确的定义元素框相对于其正常位置应该出现在那里，或相对于父元素、另一个元素、浏览器窗口
+            1> position：定位类型 值：static(默认值)，relative，absolute，fixed  可以用于所有元素
+               3种定位的区别就是相对于谁来定位，这也是定位的主要问题
+            2>定位元素的包含块：
+                   1、对于一个非根元素，如果position值是relative或static，包含块就是最近的祖先元素
+				   2、对于一个非根元素，如果position值是absolute，包含块就是最近的position值不是static的祖先元素
+            3>top，right，bottom，left：偏移属性，值：length,percentage,auto,可以用于position不是static的元素
+				   top：表示定位元素上外边距距离包含块顶端多远
+				   right：表示定位元素右外边距距离包含块右边多远
+				   bottom：表示定位元素下外边距距离包含块底部边多远
+				   left：表示定位元素左外边距距离包含块左边多远
+            4>绝对定位position:absolute
+				   1、元素绝对定位时，元素框会从文档流中完全删除。然后相对于其包含块[最近的position值不是static的祖先元素]定位，其边界根据偏移属性(top right等)放置，元素在正常
+					文档流中的空间会被删除。定位元素不会流入其他元素的内容，反之亦然。通常将包含块的position设置为relative而且没有偏移。
+				   2、可以利用绝对定位使元素在包含块中垂直居中：比如：.element{position:absolute;top:0;bottom:0;height:50px;margin:auto 0;}
+			5>z-index：改变元素相互覆盖的顺序  值：integer auto；z-index值越大，这个元素离读者越近。这个属性是解决多个定位元素在一个位置上时，那个在上，那个在下的问题
+			6>固定定位position:fixed：固定元素的包含块是视窗，这是和绝对定位的唯一区别。
+			7>相对定位position:relative：即相对于其本身的位置进行偏移，被定位的元素原来的位置会变成空白
+6、定位总结：1>参照物：相对定位参照物是本身，绝对定位是包含块，固定定位是浏览器视窗 2>后果：相对定位后，元素原来的位置保留；绝对定位后，原来的位置被占
+7、overflow：溢出 值：visible(默认值) hidden scroll auto  用于块级元素和替换元素
+              假定一个元素固定大小，但内容在元素中放不下，这时可以用overflow来控制这种情况。
+			  1、visible表示内容在元素框之外也可见，这会导致内容超出元素框，但元素框的大小不变
+			  2、scroll表示内容在元素框的边界处剪裁，超出的部分需要拖动滚动条才能看到
+			  3、hidden表示内容在元素框的边界处剪裁，超出的部分用户看不到
+			  4、overflow-x overflow-y
+8、clip：剪裁  值：rect(top right bottom left)  只应用于绝对定位元素
+9、visibility：可见性 值：visible(默认值) hidden collapse  用于所有元素
+    
+
+
+
+
+5、content:指定内容 值：normal string uri  只用于:before 和 :after 伪元素
+
+
+
+二、层叠
+1、选择器的权重：主要用来解决当一个元素被应用了多种样式时的冲突问题。那个选择器的权重大就用那个
+                 *                            加  0,0,0,0
+         id值                         加  0,1,0,0
+         类属性值，属性选择或伪类     加  0,0,1,0
+         元素，伪元素                 加  0,0,0,1
+         内联样式表                   加  1,0,0,0
+2、样式继承：指后代元素自动继承祖先元素的样式规则，继承的样式的选择器没有权重（比*的0权重还小）
+3、层叠：就是在对一个元素应用多个css规则发生冲突时，按一定规则（这就是层叠）对这些css规则进行排序，然后选择最优先的应用于这个元素。
+         层叠规则：1、有！important的最优先
+               2、按选择器权重排序
+           3、按出现的先后顺序排序(后>先)   嵌套样式>外部样式
+  三、单位
+1、长度、颜色、时间
+  四、属性
+
+
+   vertical-align：值：baseline(默认值),sub,super,top,text-top,middle,bottom,text-bottom,length,percentage
+                       只应用于行内元素和表单元格
+   
+
+ 4、光标
+    cursor：光标样式  值： pointer小手  default箭头、..等等
+ 5、元素的不透明度
+    opacity：值：从0.0(完全透明)到1.0(完全不透明)
+      例子：#img1{opacity:0.6;
+      filter:alpha(opacity=60);//for ie}

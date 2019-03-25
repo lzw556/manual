@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15 Fonts</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <div class="navbar">
+        <p><a href="colors.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="text.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+    <hr>
+    <h1>15 Fonts</h1>
+    <p><strong>Contents</strong></p>
+    <ul class="table-of-content">
+        <li><a href="#font-intro">15.1 Introduction</a></li>
+        <li><a href="algorithm">15.2 Font matching algorithm</a></li>
+        <li><a href="#font-family">15.3 Font family: the 'font-family' property</a>
+            <ul class="table-of-content">
+                <li><a href="#generic-font-family">15.3.1 Generic font families</a>
+                    <ul class="table-of-content">
+                        <li><a href="#serif">15.3.1.1 serif</a></li>
+                        <li><a href="#sans-serif">15.3.1.2 sans-serif</a></li>
+                        <li><a href="#cursive">15.3.1.3 cursive</a></li>
+                        <li><a href="#fantasy">15.3.1.4 fantasy</a></li>
+                        <li><a href="#monospace">15.3.1.5 monospace</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#font-style">15.4 Font styling: the 'font-style' property</a></li>
+        <li><a href="#font-variant">15.5 Small-caps: the 'font-variant' property</a></li>
+        <li><a href="#font-weight">15.6 Font boldness: the 'font-weight' property</a></li>
+        <li><a href="#font-size">15.7 Font size: the 'font-size' property</a></li>
+        <li><a href="#font-shorthand">15.8 Shorthand font property: the 'font' property</a></li>
+    </ul>
+    <h2><a name="font-intro">15.1 Introduction</a></h2>
+    <p>设置字体属性是样式表最常见的用法之一.不幸的是,巴拉巴拉...</p>
+    <h2><a name="algorithm">15.2 Font matching algorithm(字体匹配策略)</a></h2>
+    <h2><a name="font-family">15.3 Font family: the 'font-family' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>font-family</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>[[&lt;font-family&gt;&nbsp;|&nbsp;&lt;generic-family&gt;] [,&lt;font-family&gt;&nbsp;|&nbsp;&lt;generic-family&gt;]*]&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>取决于UA</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性的值是一个由font family或generic family组成的prioritized list(按优先级排列的列表).每一个family之间以逗号隔开.UA会从这个列表中选择第一个已经安装的或可以根据@font-face下载的字体</p>
+    <p>字体族名要么用引号包起来作为string,要么不用引号.对于字体族名中包含white space,数字或标点符号的,推荐使用引号包起来</p>
+    <h3><a name="generic-font-family">15.3.1 Generic font families</a></h3>
+    <p>generic font family是一种fallback(退路)机制.在最坏的情况下,当指定的字体都不可用时,generic font family可以作为备用字体</p>
+    <p class="note">所以编写者应该总是在一个font-family列表的最后包含至少一个generic font family</p>
+    <h4><a name="serif">15.3.1.1 serif</a></h4>
+    <p>带衬线字体,笔画结尾有特殊的装饰线或衬线.适用于任何文字.</p>
+    <h4><a name="sans-serif">15.3.1.2 sans-serif</a></h4>
+    <p>无衬线字体,笔画结尾是平滑的字体.适用于任何文字</p>
+    <h4><a name="cursive">15.3.1.3 cursive</a></h4>
+    <p>手写体字体</p>
+    <h4><a name="fantasy">15.3.1.4 fantasy</a></h4>
+    <p>主要是那些具有特殊艺术效果的字体</p>
+    <h4><a name="monospace">15.3.1.5 monospace</a></h4>
+    <p>等宽字体,即字体中每个字宽度相同</p>
+    <h2><a name="font-style">15.4 Font styling: the 'font-style' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>font-style</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>normal&nbsp;|&nbsp;italic&nbsp;|&nbsp;oblique&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>normal</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性允许编写者在一个font family下的三种样式:normal,italic和oblique之间选择一个</p>
+    <dl>
+        <dt>normal</dt>
+        <dd>选择指定font-family下的normal字体</dd>
+        <dt>italic</dt>
+        <dd>选择指定font-family下的斜体,如果当前font-family没有可用的斜体版本,会选用倾斜体(oblique)替代</dd>
+        <dt>oblique</dt>
+        <dd>选择指定font-family下的倾斜体,如果当前font-family没有可用的倾斜体版本,会选用斜体(italic)替代</dd>
+    </dl>
+    <h2><a name="font-variant">15.5 Small-caps: the 'font-variant' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>font-variant</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>normal&nbsp;|&nbsp;small-caps&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>normal</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>'normal'值会选择一个非小型大写字母字体,'small-caps'会选择一个小型大写字母字体.在小型大写字母字体中,小写字母看起来和大写字母很相似,但尺寸更小,而且比例稍有差异</p>
+    <h2><a name="font-weight">15.6 Font boldness: the 'font-weight' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>font-weight</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>normal&nbsp;|&nbsp;bold&nbsp;|&nbsp;bolder&nbsp;|&nbsp;lighter&nbsp;|&nbsp;100&nbsp;|&nbsp;200&nbsp;|&nbsp;300&nbsp;|&nbsp;400&nbsp;|&nbsp;500&nbsp;|&nbsp;600&nbsp;|&nbsp;700&nbsp;|&nbsp;800&nbsp;|&nbsp;900&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>normal</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td><a href="#font-weight-coumpted-value">见下文</a></td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性会选择字体的粗细.值为'100'到'900'的有序序列,每个数字表示一个粗细程度,至少和它的前一个一样粗.关键字'normal'等价于400,关键字'bold'等价于700</p>
+    <p>'bolder'和'lighter'用从父元素上继承的font-weight的computed value的相对值来选择字体的粗细,具体映射如下表:</p>
+    <table class="table">
+        <tr>
+            <th>inherited value</th>
+            <th>bolder</th>
+            <th>lighter</th>
+        </tr>
+        <tr>
+            <td>100</td>
+            <td>400</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>200</td>
+            <td>400</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>300</td>
+            <td>400</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>400</td>
+            <td>700</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>500</td>
+            <td>700</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>600</td>
+            <td>900</td>
+            <td>400</td>
+        </tr>
+        <tr>
+            <td>700</td>
+            <td>900</td>
+            <td>400</td>
+        </tr>
+        <tr>
+            <td>800</td>
+            <td>900</td>
+            <td>700</td>
+        </tr>
+        <tr>
+            <td>900</td>
+            <td>900</td>
+            <td>700</td>
+        </tr>
+    </table>
+    <p>无法保证每个'font-weight'值都存在一个更粗的字体.例如,有些字体可能只有normal和bold字体.唯一能保证的是给定font-weight值的字体不会比lighter值对应的字体更细</p>
+    <h2><a name="font-size">15.7 Font size: the 'font-size' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>font-size</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>&lt;absolute-size&gt;&nbsp;|&nbsp;&lt;relative-size&gt;&nbsp;|&nbsp;&lt;length&gt;&nbsp;|&nbsp;&lt;percentage&gt;&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>medium</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>参考从父元素上继承的font-size</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>absolute length</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性可以设置字体的大小.实际上设置的是em square的高度,有些字形可能比em square高或矮</p>
+    <dl>
+        <dt>&lt;absolute-size&gt;</dt>
+        <dd>一个&lt;absolute-size&gt;关键字是字体大小表的一个索引,字体大小表由UA计算和维护,值如下:
+            <p>[xx-small&nbsp;|&nbsp;x-small&nbsp;|&nbsp;small&nbsp;|&nbsp;medium&nbsp;|&nbsp;large&nbsp;|&nbsp;x-large&nbsp;|&nbsp;xx-large]</p>
+            <p>其中'medium'是用户的默认字体大小,CSS absolute-size value和HTML font size映射比例如下表:</p>
+            <table class="table">
+                <tr>
+                    <th>CSS absolute-size value</th>
+                    <td>xx-small</td>
+                    <td>x-small</td>
+                    <td>small</td>
+                    <td>medium</td>
+                    <td>large</td>
+                    <td>x-large</td>
+                    <td>xx-large</td>
+                </tr>
+                <tr>
+                    <th>HTML font size</th>
+                    <td>1</td>
+                    <td></td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+            </table>
+        </dd>
+        <dt>&lt;relative-size&gt;</dt>
+        <dd>[smaller&nbsp;|&nbsp;larger],根据字体大小表和父元素的字体大小来计算当前元素的font-size</dd>
+        <dt>&lt;percentage&gt;</dt>
+        <dd>当前元素的font-size= percentage*父元素的font-size.不允许为负值</dd>
+        <dt>&lt;length&gt;</dt>
+        <dd>'em'和'ex'长度单位参照其父元素的font-size的computed value.不允许为负值</dd>
+    </dl>
+    <h2><a name="font-shorthand">15.8 Shorthand font property: the 'font' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>font-family</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>[[&lt;font-style&gt;&nbsp;||&nbsp;&lt;font-variant&gt;&nbsp;||&nbsp;&lt;font-weight&gt;]?&nbsp;&lt;font-size&gt;[&nbsp;/&nbsp;&lt;line-height&gt;]?&lt;font-family&gt;]&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>见各个单独属性</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>见各个单独属性</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>见各个单独属性</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>'font'是一个简写属性,用来在样式表中一次性设置各个单独的font属性.对于一个给定的有效声明,各个单独的font属性首先都会被重置为其initial value,然后设置被显式声明的属性为指定值</p>
+</body>
+</html>

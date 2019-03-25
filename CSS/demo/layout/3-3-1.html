@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3列(1列定宽2列自适应)-1</title>
+    <style type="text/css">
+        /*辅助样式-begin*/
+        /*1 功能性样式,主要是去除浮动,解决浮动元素的父元素高度塌陷问题*/
+        .f-cb:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+        h2{text-align:center;}
+        .container{width:35%;border:1px solid #ccc;margin:0 auto;}
+        .container p{
+            margin:0;
+            color:#fff;
+            text-align:center;
+        }
+        .hd,.ft{
+            height:50px;
+            background-color:#666;
+            line-height:50px;
+        }
+        .left{
+            /*设置左侧栏内容高度,实际中高度由内容决定*/
+            height:220px;
+            background-color:#009a61;
+            line-height:220px;
+        }
+        .center{
+            /*设置主栏内容高度,实际中高度由内容决定*/
+            height:50px;
+            background-color:#ff9000;
+            line-height:50px;
+        }
+        .right{
+            /*设置右侧栏内容高度,实际中高度由内容决定*/
+            height:80px;
+            background-color:#f10215;
+            line-height:80px;
+        }
+        .sepline{height:30px;border-bottom:5px dashed #000;margin-bottom:30px;}
+        /*辅助样式-end*/
+
+        /*core*/
+        .lmr .bd{
+            padding-left:110px;
+            padding-right:60px;
+        }
+        .lmr .left{
+            float:left;
+            position:relative;
+            left:-110px;
+            width:100px;
+            /*移动.center,由.left下方至.left同行,其左外边界和.left的左外边界重合,并且覆盖在.left上面*/
+            margin-right:-100px;
+        }
+        .lmr .center{
+            float:left;
+            width:100%;
+        }
+        .lmr .right{
+            float:left;
+            position:relative;
+            right:-60px;
+            width:50px;
+            /*移动.right,由.center下方至.center同行,其右外边界和.center的右外边界重合,并且覆盖在.center上面*/
+            margin-left:-50px;
+        }
+
+        .mlr .bd{
+            padding-right:170px;
+        }
+        .mlr .left{
+            float:right;
+            position:relative;
+            right:-110px;
+            width:100px;
+            /*移动.center,由.left下方至.left同行,其右外边界和.left的右外边界重合,并且覆盖在.left上面*/
+            margin-left:-100px;
+        }
+        .mlr .center{
+            float:right;
+            width:100%;
+        }
+        .mlr .right{
+            float:right;
+            position:relative;
+            right:-170px;
+            width:50px;
+            /*移动.center,由.center下方至.center同行,其右外边界和.center的右外边界重合,并且覆盖在.center上面*/
+            margin-right:-100%;
+        }
+
+        .lrm .bd{padding-left:170px;}
+        .lrm .left{
+            float:left;
+            position:relative;
+            left:-170px;
+            width:100px;
+            /*移动.center,由.left下方至.left同行,其左外边界和.left的左外边界重合,并且覆盖在.left上*/
+            margin-right:-100px;
+        }
+        .lrm .center{
+            float:left;
+            width:100%;
+        }
+        .lrm .right{
+            float:left;
+            position:relative;
+            left:-60px;
+            width:50px;
+            /*移动.right,由.center下方至.center同行,其左外边界和.center的左外边界重合,并且覆盖在.center上*/
+            margin-left:-100%;
+        }
+
+        .lmr-mainfirst .bd{
+            padding-left:110px;
+            padding-right:60px;
+        }
+        .lmr-mainfirst .center{
+            float:right;
+            width:100%;
+        }
+        .lmr-mainfirst .left{
+            float:right;
+            position:relative;
+            left:-110px;
+            width:100px;
+            margin-right:-100px;
+        }
+        .lmr-mainfirst .right{
+            float:right;
+            position:relative;
+            right:-60px;
+            width:50px;
+            margin-right:-100%;
+        }
+
+        .mlr-mainfirst .bd{
+            padding-right:170px;
+        }
+        .mlr-mainfirst .center{
+            float:left;
+            width:100%;
+        }
+        .mlr-mainfirst .left{
+            float:left;
+            position:relative;
+            right:-110px;
+            width:100px;
+            margin-left:-100px;
+        }
+        .mlr-mainfirst .right{
+            float:left;
+            position:relative;
+            right:-170px;
+            width:50px;
+            margin-left:-50px;
+        }
+
+        .lrm-mainfirst .bd{
+            padding-left:170px;
+        }
+        .lrm-mainfirst .center{
+            float:right;
+            width:100%;
+        }
+        .lrm-mainfirst .left{
+            float:right;
+            position:relative;
+            left:-170px;
+            width:100px;
+            margin-right:-100px;
+        }
+        .lrm-mainfirst .right{
+            float:right;
+            position:relative;
+            left:-60px;
+            width:50px;
+            margin-right:-50px;
+        }
+    </style>
+</head>
+<body>
+<h2>用float + negative margin + position/relative实现左中右3列布局(圣杯布局)</h2>
+<div class="container lmr">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="left">
+            <p>left</p>
+        </div>
+        <div class="center">
+            <p>center</p>
+        </div>
+        <div class="right">
+            <p>right</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container mlr">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="left">
+            <p>left</p>
+        </div>
+        <div class="center">
+            <p>center</p>
+        </div>
+        <div class="right">
+            <p>right</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container lrm">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="left">
+            <p>left</p>
+        </div>
+        <div class="center">
+            <p>center</p>
+        </div>
+        <div class="right">
+            <p>right</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container lmr-mainfirst">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="center">
+            <p>center</p>
+        </div>
+        <div class="left">
+            <p>left</p>
+        </div>
+        <div class="right">
+            <p>right</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container mlr-mainfirst">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="center">
+            <p>center</p>
+        </div>
+        <div class="left">
+            <p>left</p>
+        </div>
+        <div class="right">
+            <p>right</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container lrm-mainfirst">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="center">
+            <p>center</p>
+        </div>
+        <div class="left">
+            <p>left</p>
+        </div>
+        <div class="right">
+            <p>right</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2列(1列定宽1列自适应)-2</title>
+    <style type="text/css">
+        /*辅助样式-begin*/
+        /*1 功能性样式,主要是去除浮动,解决浮动元素的父元素高度塌陷问题*/
+        .f-cb:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+        h2{text-align:center;}
+        .container{width:35%;border:1px solid #ccc;margin:0 auto;}
+        .container p{
+            /*reset*/
+            margin:0;
+            color:#fff;
+            text-align:center;
+        }
+        .hd,.ft{
+            height:50px;
+            background-color:#666;
+            line-height:50px;
+        }
+        .aside{
+            /*设置侧栏内容高度,实际中高度由内容决定*/
+            height:220px;
+            background-color:#009a61;
+            line-height:220px;
+        }
+        .main{
+            /*设置主栏内容高度,实际中高度由内容决定*/
+            height:50px;
+            background-color:#ff9000;
+            line-height:50px;
+        }
+        .sepline{height:30px;border-bottom:5px dashed #000;margin-bottom:30px;}
+        /*辅助样式-end*/
+
+        /*core*/
+        .test1 .aside{
+            float:left;
+            width:100px;
+            margin-right:-100px;
+        }
+        .test1 .main{
+            float:left;
+            width:100%;
+        }
+
+        .test2 .aside{
+            float:right;
+            width:100px;
+            margin-left:-100px;
+        }
+        .test2 .main{
+            float:right;
+            width:100%;
+        }
+
+        .test3 .main{
+            float:left;
+            width:100%;
+        }
+        .test3 .aside{
+            float:left;
+            width:100px;
+            margin-left:-100px;
+        }
+
+        .test4 .main{
+            float:left;
+            width:100%;
+        }
+        .test4 .aside{
+            float:left;
+            width:100px;
+            margin-left:-100%;
+        }
+
+        .test5 .main{
+            float:right;
+            width:100%;
+        }
+        .test5 .aside{
+            float:right;
+            width:100px;
+            margin-right:-100px;
+        }
+
+        .test6 .main{
+            float:right;
+            width:100%;
+        }
+        .test6 .aside{
+            float:right;
+            width:100px;
+            margin-right:-100%;
+        }
+    </style>
+</head>
+<body>
+<!--<h2>用float + negative margin + position/relative实现左右2列布局(圣杯布局)</h2>-->
+<div class="container test1">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="aside">
+            <p>aside</p>
+        </div>
+        <div class="main">
+            <p>main</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container test2">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="aside">
+            <p>aside</p>
+        </div>
+        <div class="main">
+            <p>main</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container test3">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="main">
+            <p>main</p>
+        </div>
+        <div class="aside">
+            <p>aside</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container test4">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="main">
+            <p>main</p>
+        </div>
+        <div class="aside">
+            <p>aside</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container test5">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="main">
+            <p>main</p>
+        </div>
+        <div class="aside">
+            <p>aside</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+
+<div class="sepline"></div>
+
+<div class="container test6">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <div class="main">
+            <p>main</p>
+        </div>
+        <div class="aside">
+            <p>aside</p>
+        </div>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+<p>
+    0 negative margin作用:移动自身和移动其后元素.
+    1 使用同一方向的浮动,因为在3个列的情况下不同方向太复杂;
+    2 浮动方向是左or右,由html结构中第一栏的位置决定;即如果.left在左则浮动方向为左,如果.left在右则浮动方向为右;
+    3 当negative margin不影响自身只影响其后元素时,对其后元素的影响是有限的,不能超过浮动的边界
+    4 不知道为什么圣杯和双飞翼都不对主栏进行margin值的设置??
+</p>
+</body>
+</html>

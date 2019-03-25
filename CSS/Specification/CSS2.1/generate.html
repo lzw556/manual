@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12 Generated content, automatic numbering, and lists</title>
+    <link rel="stylesheet" href="../base.css">
+    <style>
+        .demo ol{
+            list-style-type:none;
+            counter-reset:item;
+        }
+        .demo ol li{
+            display:block;
+        }
+        .demo ol li:before{
+            content:counters(item,".") " ";
+            counter-increment:item;
+        }
+        body{
+            counter-reset:h-counter;
+        }
+        .demo h1:before{
+            content:counter(h-counter) "-";
+            counter-increment:h-counter;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <p><a href="visual-effects.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="colors.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+    <hr>
+    <h1>12 Generated content, automatic numbering, and lists</h1>
+    <p><strong>Contents</strong></p>
+    <ul class="table-of-content">
+        <li><a href="#before-after-pseudo">12.1 The :before and :after pseudo-elements</a></li>
+        <li><a href="#content">12.2 The 'content' property</a></li>
+        <li><a href="#quotes">12.3 Quotation marks</a>
+            <ul class="table-of-content">
+                <li><a href="#quotes-sepcify">12.3.1 Specifying quotes with the 'quotes' property</a></li>
+                <li><a href="#quotes-insert">12.3.2 Inserting quotes with the 'content' property</a></li>
+            </ul>
+        </li>
+        <li><a href="#counters">12.4 Automatic counters and numbering(自动计数器和编号)</a>
+            <ul class="table-of-content">
+                <li><a href="#scope">12.4.1 Nested counters and scope(嵌套计数器和作用域)</a></li>
+                <li><a href="#counter-style">12.4.2 Counter styles(计数器样式)</a></li>
+                <li><a href="#undisplay-counter">12.4.3 Counters in elements with 'display: none'</a></li>
+            </ul>
+        </li>
+        <li><a href="#list">12.5 Lists</a>
+            <ul class="table-of-content">
+                <li><a href="#list-style">12.5.1 Lists: the 'list-style-type', 'list-style-image', 'list-style-position', and 'list-style' properties</a></li>
+            </ul>
+        </li>
+    </ul>
+    <p>某些情况下,编写者可能想让UA呈现来自document tree之外的内容.这种情况中一个熟悉的例子是编号列表,编写者不想显式地列出编号,而是希望UA自动生成.类似的,编写者可能想在一幅图像的标题前面插入文本"Figure".</p>
+    <p>在CSS2.1中,有2种机制可以生成内容(生成内容在这里的意思是不依赖HTML结构,纯CSS生成;和一般内容都是由document tree生成不同):</p>
+    <ul>
+        <li>'content'属性,结合:before和:after pseudo-element</li>
+        <li>'display'值为'list-item'的元素</li>
+    </ul>
+    <h2><a name="before-after-pseudo">12.1 The :before and :after pseudo-elements</a></h2>
+    <p>编写者使用:before和:after pseudo-element来指定生成内容的位置和style.顾名思义, :before pseudo-element指定在一个元素的内容之前生成内容, :after pseudo-element指定在一个元素的内容之后生成内容.'content'属性结合:before和:after pseudo-element指定生成什么内容.</p>
+    <p class="note">生成内容被包含在元素生成box的content area中,如下例:</p>
+    <div class="example">
+        <pre>p.note{border:solid green;padding:1em;}<br>p.note:before{content:"Note."}</pre>
+    </div>
+    <p class="note">:before and :after pseudo-elements会从document tree中他们依附的元素上继承所有默认可以被继承的属性,默认不可以被继承的属性取initial value.具体如下例:</p>
+    <div class="example">
+        <pre>p.note{font-size:18px;}<br>p.note:before{content:"Note."}<br>其中p.note:before的font-size是18px,继承自p.note;p.note:before的display是inline,取display属性的initial value</pre>
+    </div>
+    <h2><a name="content">12.2 The 'content' property</a></h2>
+    <p>该属性结合:before和:after pseudo-element被用来在文档中生成内容</p>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>content</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>normal&nbsp;|&nbsp;none&nbsp;|&nbsp;[&lt;string&gt;&nbsp;|&nbsp;&lt;uri&gt;&nbsp;|&nbsp;&lt;counter&gt;&nbsp;|&nbsp;attr(&lt;identifier&gt;)&nbsp;|&nbsp;open-quote&nbsp;|&nbsp;close-quote&nbsp;|&nbsp;no-open-quote&nbsp;|&nbsp;no-close-quote]+&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>normal</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td><span class="nonte">:before和:after pseudo-element</span></td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>no</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>对于普通元素,总是normal;对于:before和:after pseudo-element,如果specified value是'normal',则computed value是'none';否则,对于URL就是绝对值URL;对于attr()就是字符串,其他关键字就是specified value</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>'content'属性的值可以接受一个或多个类型是&lt;string&gt;or&lt;uri&gt;or&lt;counter&gt;的值,多个值之间用空格隔开</p>
+    <div class="example">
+        <pre>body{counter-reset:h-counter;}<br>h1:before{content:counter(h-counter) "-";counter-increment:h-counter;}</pre>
+    </div>
+    <div class="demo">
+        <h1>first heading1</h1>
+        <h1>second heading1</h1>
+    </div>
+    <dl>
+        <dt>none</dt>
+        <dd>不生成pseudo-element</dd>
+        <dt>normal</dt>
+        <dd>对于:before和:after pseudo-element,computed value是'none'</dd>
+        <dt>&lt;string&gt;</dt>
+        <dd>text content</dd>
+        <dt>&lt;uri&gt;</dt>
+        <dd>指定了一个外部资源,比如一张图片</dd>
+        <dt>&lt;counter&gt;</dt>
+        <dd>可以通过2个function来指定counter(计数器):counter() or counters(),前者有2种形式:counter(name),counter(name,style),生成的文本是该pseudo-element所在的<a href="#counter-scope">counter scope</a>中给定counter name中最内层counter的值,这个值会被格式化为指定的<a href="#counter-style">counter style</a>.后者也有2种形式:counters(name,string),counters(name,string,style),
+            生成的文本是从该pseudo-element所在的<a href="#counter-scope">counter scope</a>开始由内向外查找,给定counter name中所有counter的值,从最外层counter的值到最内层counter的值,以指定string隔开.关于counter的更多信息见<a href="#counters">automatic counters and numbering </a></dd>
+        <dt>open-quote和close-quote</dt>
+        <dd>这些值会根据'quotes'属性替换为合适的字符串</dd>
+        <dt>no-open-quote和no-close-quote</dt>
+        <dd>不引入内容,但是会增加(减少)引号的嵌套层级</dd>
+        <dt>attr(X)</dt>
+        <dd></dd>
+    </dl>
+    <p class="note">'display'属性控制生成内容是放在一个block box中还是放在一个inline box中.具体如下例:</p>
+    <div class="example">
+        <pre>h1:before{content:"headline";display:inline;}</pre>
+    </div>
+    <p>生成内容不会改变document tree.</p>
+    <h2><a name="quotes">12.3 Quotation marks</a></h2>
+    <h3><a name="quotes-specify">12.3.1 Specifying quotes with the 'quotes' property</a></h3>
+    <h3><a name="quotes-insert">12.3.2 Inserting quotes with the 'content' property</a></h3>
+    <h2><a name="counters">12.4 Automatic counters and numbering</a></h2>
+    <p>在CSS2.1中,automatic numbering由属性'counter-reset'和'counter-increment'控制.这2个属性可以定义一个counter,counter的值通过函数counter() or counters()来引用,并且只能用在'content'属性值中</p>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>counter-reset</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>[&lt;identifier&gt;&nbsp;&lt;integer&gt;?&nbsp;]+&nbsp;|&nbsp;none&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>no</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value相同</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>'counter-reset'属性会创建一个或多个指定名称的counter实例,并重置这些counter的起始值为指定值</p>
+    <p>'counter-reset'属性的值是1个或多个counter名称组成的列表,相邻counter之间以空格隔开;每一个counter名称后面可以跟一个可选的integer,这个integer表示此属性在元素上每次出现时counter的起始值,起始值默认为0</p>
+    <div class="example">
+        <pre>body{counter-reset:section;}    /*创建一个名称是"section"的counter实例,起始值为0*/<br>body{counter-reset:section2 1;}    /*创建一个名称是"section2"的counter实例,并重置起始值为1*/<br>body{counter-reset:section3 1 section4 -1;}    /*创建一个名称是"section3"的counter实例,并重置起始值为1;创建一个名称是"section4"的counter实例,并重置起始值为-1;*/</pre>
+    </div>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>counter-increment</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>[&lt;identifier&gt;&nbsp;&lt;integer&gt;?&nbsp;]+&nbsp;|&nbsp;none&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>no</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value相同</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>一旦使用'counter-reset'创建了一个counter,就可以使用'counter-increment'属性来增加或减少这个counter的值</p>
+    <p>'counter-increment'属性的值是1个或多个counter名称组成的列表,相邻counter之间以空格隔开;每一个counter名称后面可以跟一个可选的integer,这个integer表示此属性在元素上每次出现时counter增加或减少的值,默认为1</p>
+    <div class="example">
+        <pre>body{counter-increment:section;}    /*把名称是"section"的counter的值增加1*/<br>body{counter-reset:section2 1 section3 -1;}    /*把名称是"section2"的counter的值增加1;把名称是"section3"的counter的值减少1;*/</pre>
+    </div>
+    <h3><a name="scope">12.4.1 Nested counters and scope</a></h3>
+    <p class="note">在一个后代元素或者伪元素中重置一个counter，会为这个counter自动创建一个新实例</p>
+    <p><a name="counter-scope">counter scope从文档中设置了该counter的'counter-reset'的第一个元素开始,包含这个元素的后代和后面的兄弟元素及后代.</a></p>
+    <p>使用counter(name)函数引用counter的值</p>
+    <div class="example">
+        <pre>body{counter-reset:section;}      /*创建一个名称是section的counter,默认值是0*/<br>p.note:before{<br>     content:counter(section);      /*显示counter的值*/<br>     counter-increment:section;      /*把名称是section的counter的值增加1*/<br>}</pre>
+    </div>
+    <p>使用counters(name,string)函数引用counter的值</p>
+    <div class="example">
+        <pre>ol{<br>     counter-reset:item;<br>     list-style-type:none;<br>}      <br>li{display:block;}<br>li:before{<br>     content:counters(item,".") " ";      <br>     counter-increment:item;      <br>}</pre>
+    </div>
+    <div class="demo">
+        <ol>
+            <li>item
+                <ol>
+                    <li>item</li>
+                    <li>item
+                        <ol>
+                            <li>item</li>
+                            <li>item</li>
+                            <li>item</li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+            <li>item</li>
+            <li>item</li>
+        </ol>
+    </div>
+    <h3><a name="counter-style">12.4.2 Counter styles</a></h3>
+    <p>默认情况下,counter会被格式化为十进制数,但是所有对'list-style-type'属性可用的值对counter也可用,,如下例:</p>
+    <div class="example">
+        <pre>h1:before{content:counter(heading,"circle");}</pre>
+    </div>
+    <h3><a name="undisplay-counter">12.4.3 Counters in elements with 'display: none'</a></h3>
+    <p>'display'属性值为'none'的元素以及无法生成的pseudo-element(即'content'属性为normal or none)都不能reset或者increment一个counter实例.'visibility'属性值是'hidden'的元素可以increment一个counter实例</p>
+    <h2><a name="list">12.5 Lists</a></h2>
+    <p>'display'属性值为'list-item'的元素会为该元素的内容生成一个principal block box,也可能生成一个marker box作为视觉指示器,表示这是一个list item</p>
+    <p>'list-style'属性允许编写者指定marker box的marker type(image,glyph,number)和marker box相对principal block box的位置(在外部或在内部的内容之前).</p>
+    <p class="note">只有当'list-style-type'和'list-style-image'属性值都是'none'时,才不会生成marker box</p>
+    <p>background属性只适用于principal block box,位于外面的marker box的背景是transparent</p>
+    <h3><a name="list-style">12.5.1 Lists: the 'list-style-type', 'list-style-image', 'list-style-position', and 'list-style' properties</a></h3>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>list-style-type</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>disc&nbsp;|&nbsp;circle&nbsp;|&nbsp;square&nbsp;|&nbsp;decimal&nbsp;|&nbsp;decimal-leading-zero&nbsp;|&nbsp;lower-roman&nbsp;|&nbsp;upper-roman&nbsp;|&nbsp;lower-greek&nbsp;|&nbsp;lower-latin&nbsp;|&nbsp;upper-latin&nbsp;|&nbsp;none&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>disc</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'display'属性值是'list-item'的elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td><span class="note">yes</span></td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value相同</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定list item marker的外观.在'list-style-image'未指定前提下,如果值为'none'则不会生成marker box.否则有3种类型的marker:图形,编号系统和字母系统</p>
+    <p>图形,每一个标记后面不带点</p>
+    <dl>
+        <dt>disc</dt>
+        <dd>圆圈,实心的</dd>
+        <dt>circle</dt>
+        <dd>圆圈,空心的</dd>
+        <dt>disc</dt>
+        <dd>正方形,实心的</dd>
+    </dl>
+    <p>编号系统,每一个标记后面带点</p>
+    <dl>
+        <dt>decimal</dt>
+        <dd>十进制数字,从1.开始(e.g., 1., 2. ,3.)</dd>
+        <dt>decimal-leading-zero</dt>
+        <dd>填充了前导0的十进制数(e.g., 01, 02, 03, ..., 98, 99)</dd>
+        <dt>lower-roman</dt>
+        <dd>小写罗马数字（e.g., i, ii, iii, iv, v,etc.）</dd>
+        <dt>upper-roman</dt>
+        <dd>大写罗马数字（e.g., I, II, III, IV, V,etc.）</dd>
+    </dl>
+    <p>字母系统,每一个标记后面带点</p>
+    <dl>
+        <dt>lower-latin</dt>
+        <dd>小写ascii字母(a, b, c, ...z)</dd>
+        <dt>upper-latin</dt>
+        <dd>大写ascii字母(A, B, C, ...Z)</dd>
+        <dt>lower-greek</dt>
+        <dd>小写古典希腊字母(α,β,γ)</dd>
+    </dl>
+    <p></p>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>list-style-image</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>&lt;uri&gt;&nbsp;|&nbsp;none&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'display'属性值是'list-item'的elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td><span class="note">yes</span></td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>none or 绝对URL</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定一张图片作为list item marker.当这张图片可用时,会代替用'list-style-type'设置的marker</p>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>list-style-position</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>outside&nbsp;|&nbsp;inside&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>outside</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'display'属性值是'list-item'的elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td><span class="note">yes</span></td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value相同</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定marker box相对于principal block box的位置</p>
+    <dl>
+        <dt>outside</dt>
+        <dd>marker box位于principal block box外部</dd>
+        <dt>inside</dt>
+        <dd>marker box位于principal block box内部,作为principal block box内的第一个inline box,<span class="note">在元素内容和所有:before pseudo-element生成的内容之前</span></dd>
+    </dl>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>list-style</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>list-style-type,list-style-image,list-style-position&nbsp;|&nbsp;none&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>见各个单独属性</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'display'属性值是'list-item'的elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td><span class="note">yes</span></td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>见各个单独属性</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p class="note">
+        设置list-style的推荐方式:只把list-style属性设置在ul or ol元素上,然后li通过继承得到list-style的值
+    </p>
+    <p class="note">
+        声明{list-style:none}会把单独属性中的'list-style-type'和'list-style-image'同时设置为none
+    </p>
+</body>
+</html>

@@ -1,0 +1,222 @@
+1 html结构
+  1)如何合理划分页面区域(容器) 为什么要hd/bd/ft?(1语义明确清晰 2hd/ft不频繁变动,经常多个页面共用;bd经常更新)
+  2)容器命名
+  3)容器内部嵌套
+  4)对于常见的功能要比较熟悉其html结构,命名,比如slider
+  5)练习方法:模仿大网站,只写html结构,然后对照
+2 css reset
+  1)解决什么问题?不用会产生什么问题?
+  2)是什么?重置和初始化
+3 多列布局
+  1)水平居中
+  2)左右2列布局(1列定宽1列自适应)
+    2.1 float+margin
+    2.2 float+negative margin+relative(圣杯布局)
+    2.3 float+negative margin+额外div(双飞翼布局)
+  3)左中右3列布局(左右定宽中间自适应)
+    3.1 圣杯布局
+    3.2 双飞翼布局
+
+html语义化(选择使用正确的标签)
+     1.1 纯文本按钮
+         点击提交表单,使用input-(type=submit)/button-(type=submit);
+         点击跳转到链接or锚点,使用a;
+         点击发生普通交互,使用button-(type=button)
+     1.2 纯icon图标
+         1)统一使用span标签来包裹(因为span没有任何语义,i表示italic);class的命名应该是关于图标本身的,要和该图标表示的业务无关
+         2)如果图标不仅是显示,还可以操作,就需要在外层添加包裹标签
+           比如关闭图标(×)/图标dropdown(qq空间顶部菜单),本质上是按钮,就要用button来包裹span;
+           比如购物车图标,本质上是链接,就要用a来包裹span;
+     1.3 加粗文本(需要进一步总结???)
+         strong标签和heading标签使用场景:
+         1 heading要按层级来使用,比如h1(只有一个,代表页面最主要内容),h2(1-10个,表示页面中第二重要的);
+           只用来表示页面结构,不可滥用
+         2 单纯是强调重要
+html书写规范
+   1 嵌套
+     1.1 a中不能嵌套a,不管是直接或间接;
+     1.2 h1-h6中不能嵌套块元素
+     1.3 p中不能嵌套块元素
+     1.4 行内元素中不能嵌套块元素,a标签除外
+   2 并列结构
+     2.1 行内元素(除了a)和块级元素不能并列???
+     2.2 隐藏元素和触发元素相邻并且并列,比如下拉列表
+   3 非div容器(好处是外面少一层div嵌套)
+     3.1 本身是块级元素或者a
+     3.2 容器中无需再细分后代容器
+     3.3 常见的有:
+        <h1 class="logo"><a><img src="logo.jpg"></a></h1>
+        <ul class="nav"></ul>
+   4 单个元素中属性书写顺序
+     个人经验,按照首字母升序;比如alt -> class -> href -> id -> title
+
+css命名
+   1 功能模块(单个)
+     1.1 名词
+     1.2 常见的有:
+          container
+            tabs,没有跳转,仅切换
+            dropdown,
+            card, 容器,一般包含图片,文本,常见上下结构
+            media, 容器,一般包含图片,文本,常见左右结构
+            table,
+            accordion
+          navigation
+            pagination,
+            breadcrumbs
+          media
+            carousel,
+            thunmnail,缩略图,一般只包含图片元素和图片的caption
+            label,
+            badge,
+            progress bar,
+          control
+            slider, 滑动条,常见有声音调节(垂直),验证码/视频快进(水平)
+            button,
+            button group,
+            close button,
+            toggle
+          其他
+            顶部导航条:navbar/top-navbar/top-nav/site-nav/topbar/toolbar,一般包含logo,search,userinfo
+            搜索框:search/search-box
+            主导航:main-nav(默认横向菜单)
+            菜单:menu(默认纵向菜单)
+     1.4 功能模块(多个水平并列)
+         此时最好用结构布局来命名,因为用功能来命名的话会存在一对多的问题
+   2 结构布局
+     2.1 名词
+     2.2 常见的有:
+         上中下- header,content,footer
+         左中右- aside,main,extra/left,middle,right
+         居中-wrapper,container,inner
+         多列-column,gird
+   3 状态
+     3.1 形容词
+     3.2 常见的有:active
+
+常见中英文翻译:
+caption 字幕,标题,图片或照片的说明文字,可以用在图文功能中的文字部分
+topic 话题
+tag/label 标签
+friend-link 友情链接
+partner 合作伙伴
+collapsed 折叠的
+expanded 展开的
+ranking/toplist 排名
+secondary text 副标题
+avatar 头像
+subscribe 订阅
+toggle 切换,一共只有2种状态
+caret dropdown中的小三角
+arrow 带横线的箭头 ->
+feature 特性 特征
+验证码 命名???
+signin 登录
+signup 注册
+signout 注销
+
+页面之间复用模块,基类-子类
+media(基类)
+   书          media-book(子类,基类必须在前面,因为如果放后面的话,比如book-media,就容易和book-card在一起被理解是book为基类)
+   文章 rss    media-rss(子类)
+   排行榜      small
+   about
+card(基类)
+   书          card-book(子类)
+   文章        card-article(子类)
+
+命名尽量以义为主,勿以形为主
+例子:toplist中,每一项包含2个部分,其一是文本,其二是左图右文
+     一开始我自己分别命名为:collapse,expand,主要是从视觉表现考虑
+     现在分别命名为:name,summary,主要是从表达意义考虑
+
+功能模块和具体业务的关系,以左图右文为例:
+具体业务:
+       1 一条足球新闻,左图是内马尔的采访图片,右文是标题
+       2 一条图书信息,左图是XX图书的封面图片,右文是书名
+功能模块:
+       img,title
+总结:
+       功能模块是抽象的,和具体业务无关
+
+
+
+顶部导航条:
+ 原来的结构:
+      navbar
+         navbar-nav
+         navbar-end
+ 现在的结构:
+      navbar
+         navbar-nav float-left
+         navbar-nav float-right
+
+总结:能复用的才用class
+原来的结构和现在的比多了一个class:navbar-end,用这个class的目的仅仅是为了在navbar内部把
+这块内容浮动到右边,这个class很难在具体的navbar中被复用,因为不是每一个navbar都是左右结构
+
+导航条中的子li好像不加class
+
+
+menu nav
+相同:都由若干子项组成
+区别:nav只是导航,menu侧重清单,可以是导航(多数),可以不是(比如一个下拉菜单中可以有导航,但是也可以有打印按钮,添加书签按钮,退出按钮等不是导航链接的元素);
+     或者可以理解为nav是menu中的特例,但是用nav更准确
+
+主页中的logo和登录页中的logo可以都用id选择器吗?
+
+
+主页和搜索页中都有header,所以重构主页,把top-nav,header和main-nav合并成header并且用id选择器
+因为这2个页面中的header是完全相同的所以本质上是同一个具体的对象;这和类的相同不一样,类的相同是语义相同或相近的多个具体对象,其中每个对象
+的内容各不相同,样式也不同
+
+
+
+header
+  由top-nav,search和main-nav组成,公共UI,用在主页和搜索页中,是完全相同的3个具体对象,所以都用id;
+  之所以不用id=header的容器包裹是因为完全没有必要反而多个一个div
+footer
+  公共UI,用在主页,登录页和搜索页中,是完全相同的一个具体对象,所以用id=footer
+
+logo
+  index 1大1小
+  login
+  search
+
+  logo能不能复用
+  语义上都是logo,可以复用
+  但是好像没啥公共样式可以提取
+
+id和class选择器
+id:其中的样式无法复用(多个元素共同使用)
+class:可以复用
+举例:
+#btn
+.btn
+总结:
+      可以被复用的样式,最好定义为class
+      不能被复用的样式,最好定义为id
+
+
+syntax 语法
+
+normalize.css中设置line-height为什么要用html标签选择器而不是body,或者说html和body这两个selector在css中的区别
+全局字体样式设置在body上吗??
+line-height语法
+display中block,list-item区别
+chrome下li标签浮动时display为list-item而不是display
+
+p标签在chrome中默认margin-top为1em,所以如果p中font-size设置为0,其margin-top也会变成0
+
+font-size    line-height
+12           14    1.1666
+16           18    1.125
+20           23    1.15
+30           34    1.1333
+36           41    1.13
+
+浏览器中文本的默认line-height和font-family有关
+offsetHeight
+window.getComputedStyle(element,null).getPropertyName(propertyName)
+
+text-align:为什么明明是让文本在垂直方向上沿左边对齐,但是定义里却是水平方向上对齐呢???个人认为和其值有关,因为left center right是水平方向上的
