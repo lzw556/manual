@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.2.1 Inherit</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        p.cl1{padding:1em;border:solid 1px;color:navy;}
+        p.cl1 span{border:inherit;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 6.2.1 Inherit</h1>
+<a href="sec06-01-02.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec06-03.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>p.cl1{padding:1em;border:solid 1px;color:navy;}
+p.cl1 span{border:inherit;}
+</pre>
+    <p class="cl1">这个P元素,class属性值是'cl1',其文本颜色应该是navy,带一个 1px 的navy边框; <span>SPAN元素</span>作为其子元素,其文本颜色应该是navy; border:inherit会使其从其父元素P那里继承相同的边框</p>
+<p class="cl1">这个P元素,class属性值是'cl1',其文本颜色应该是navy,带一个 1px 的navy边框; <strong>STRONG元素</strong>作为其子元素,其文本颜色应该是navy; 由于'border'属性是inherited:no,故其没有边框</p>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.9.4 link pseudo-classes order</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+       p.cl1 a[href]:link{color:navy;}
+       p.cl1 a[href]:visited{color:purple;}
+       p.cl1 a[href]:hover{background-color:olive;color:white;}
+       p.cl1 a[href]:focus{border:solid 1px;}
+       p.cl1 a[href]:active{color:red;}
+       p.cl2 a[href]:hover{background-color:olive;color:white;}
+       p.cl2 a[href]:focus{border:solid 1px;}
+       p.cl2 a[href]:link{color:navy;}
+       p.cl2 a[href]:visited{color:purple;}
+       p.cl2 a[href]:active{color:red;}
+       p.cl3 a[href]:hover{background-color:olive;color:white;}
+       p.cl3 a[href]:focus{border:solid 1px;}
+       p.cl3 a[href]:active{color:red;}
+       p.cl3 a[href]:link{color:navy;}
+       p.cl3 a[href]:visited{color:purple;}
+       p.cl4 a[href]:link{color:navy;}
+       p.cl4 a[href]:visited{color:purple;}
+       p.cl4 a[href]:active{color:red;}
+       p.cl4 a[href]:hover{background-color:olive;color:white;}
+       p.cl4 a[href]:focus{border:solid 1px;}
+        /*active状态中包含hover和focus,这样会造成2个问题:1 hover和focus不能设置在active后面;2 :hover:active和:focus:active实际都是:active*/
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.9.4 link pseudo-classes order</h1>
+<a href="sec05-09-03.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-09-06.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+    <p>什么是链接伪类顺序?就是适用于链接的pseudo-class selectors的书写顺序</p>
+    <p>在讨论链接伪类顺序时,有一个前提就是:这些pseudo-class selectors的importance相同,并且specificity相同;然后还有一点需要了解:一个元素同一时刻可能匹配多个伪类</p>
+<hr>
+<pre>p.cl1 a[href]:link{color:navy;}
+p.cl1 a[href]:visited{color:purple;}
+p.cl1 a[href]:hover{background-color:olive;color:white;}
+p.cl1 a[href]:focus{border:solid 1px;}
+p.cl1 a[href]:active{color:red;}</pre>
+    <p>正确顺序应该是: :link/:visited -> :hover/:focus -> :active</p>
+    <p class="cl1">这个P元素,class属性值是'cl1',其中有2个链接: <a href="index.html" class="link">link1</a>&nbsp;,&nbsp;<a href="index1.html" class="link">link2</a>,其在各种伪类状态下的样式如下:</p>
+    <dl>
+        <dt><strong>:link</strong></dt>
+        <dd>文本颜色应该是purple</dd>
+        <dt><strong>:visited</strong></dt>
+        <dd>文本颜色应该是navy</dd>
+        <dt><strong>:hover</strong></dt>
+        <dd>文本颜色应该是white,背景颜色应该是olive</dd>
+        <dt><strong>:focus</strong></dt>
+        <dd>应该出现一个 1px 的边框</dd>
+        <dt><strong>:active</strong></dt>
+        <dd>文本颜色应该是red</dd>
+    </dl>
+<hr>
+<pre>p.cl2 a[href]:hover{background-color:olive;color:white;}
+p.cl2 a[href]:focus{border:solid 1px;}
+p.cl2 a[href]:link{color:navy;}
+p.cl2 a[href]:visited{color:purple;}
+p.cl2 a[href]:active{color:red;}</pre>
+    <p>错误顺序1: :hover/:focus -> :link/:visited -> :active</p>
+<p class="cl2">这个P元素,class属性值是'cl2',其中有2个链接: <a href="index.html" class="link">link1</a>&nbsp;,&nbsp;<a href="index1.html" class="link">link2</a>,其在各种伪类状态下的样式如下:</p>
+<dl>
+    <dt><strong>:link</strong></dt>
+    <dd>文本颜色应该是purple</dd>
+    <dt><strong>:visited</strong></dt>
+    <dd>文本颜色应该是navy</dd>
+    <dt><strong>:hover</strong></dt>
+    <dd>文本颜色不应该是white(color样式被:link/:visited中的color样式覆盖),背景颜色应该是olive</dd>
+    <dt><strong>:focus</strong></dt>
+    <dd>应该出现一个 1px 的边框</dd>
+    <dt><strong>:active</strong></dt>
+    <dd>文本颜色应该是red</dd>
+</dl>
+<hr>
+<pre>p.cl3 a[href]:hover{background-color:olive;color:white;}
+p.cl3 a[href]:focus{border:solid 1px;}
+p.cl3 a[href]:active{color:red;}
+p.cl3 a[href]:link{color:navy;}
+p.cl3 a[href]:visited{color:purple;}</pre>
+<p>错误顺序2: :hover/:focus -> :active -> :link/:visited</p>
+<p class="cl3">这个P元素,class属性值是'cl3',其中有2个链接: <a href="index.html" class="link">link1</a>&nbsp;,&nbsp;<a href="index1.html" class="link">link2</a>,其在各种伪类状态下的样式如下:</p>
+<dl>
+    <dt><strong>:link</strong></dt>
+    <dd>文本颜色应该是purple</dd>
+    <dt><strong>:visited</strong></dt>
+    <dd>文本颜色应该是navy</dd>
+    <dt><strong>:hover</strong></dt>
+    <dd>文本颜色不应该是white(color样式被:link/:visited中的color样式覆盖),背景颜色应该是olive</dd>
+    <dt><strong>:focus</strong></dt>
+    <dd>应该出现一个 1px 的边框</dd>
+    <dt><strong>:active</strong></dt>
+    <dd>文本颜色不应该是red(color样式被:link/:visited中的color样式覆盖)</dd>
+</dl>
+<hr>
+<pre>p.cl4 a[href]:link{color:navy;}
+p.cl4 a[href]:visited{color:purple;}
+p.cl4 a[href]:active{color:red;}
+p.cl4 a[href]:hover{background-color:olive;color:white;}
+p.cl4 a[href]:focus{border:solid 1px;}</pre>
+    <p>错误顺序3: :link/:visited -> :active -> :hover/:focus</p>
+<p class="cl4">这个P元素,class属性值是'cl4',其中有2个链接: <a href="index.html" class="link">link1</a>&nbsp;,&nbsp;<a href="index1.html" class="link">link2</a>,其在各种伪类状态下的样式如下:</p>
+<dl>
+    <dt><strong>:link</strong></dt>
+    <dd>文本颜色应该是purple</dd>
+    <dt><strong>:visited</strong></dt>
+    <dd>文本颜色应该是navy</dd>
+    <dt><strong>:hover</strong></dt>
+    <dd>文本颜色应该是white,背景颜色应该是olive</dd>
+    <dt><strong>:focus</strong></dt>
+    <dd>应该出现一个 1px 的边框</dd>
+    <dt><strong>:active</strong></dt>
+    <dd>文本颜色不应该是red(color样式被:hover中的color样式覆盖)</dd>
+</dl>
+<hr>
+<p>错误顺序原因: :active状态包含:hover和:focus,这3种状态又都包含:link/:visited,故如果小状态声明在大状态声明后面就会覆盖大状态</p>
+</body>
+</html>

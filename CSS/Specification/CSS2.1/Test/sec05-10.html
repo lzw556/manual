@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.10 Descendant selectors</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        h2 em{color:navy;}
+        p strong{color:olive;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.10 Descendant selectors</h1>
+<a href="sec05-09-06.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-11.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>h2 em{color:fuchsia;}
+p strong{color:navy;}</pre>
+<hr>
+<h2>在这个H2元素中,<em>EM元素</em>作为这个H2的子元素,其文本颜色应该是navy</h2>
+<p>在这个P元素中,<strong>STRONG元素</strong>作为这个P的子元素,其文本颜色应该是olive</p>
+<p>在这个P元素中,<em>EM元素作为这个P的子元素,其文本颜色不应该是olive;<strong>STRONG元素</strong>作为这个EM的子元素(P的孙子),其文本颜色应该是olive</em></p>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.9.6 Privacy and :visited</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+       :link{color:navy;}
+       :visited{color:purple;}
+       p.cl1 :link{background-color:white;}
+       p.cl1 :visited{background-color:olive;}
+       p.cl2 :link{border:solid 1px;}
+       p.cl2 :visited{border-color:red;}
+       p.cl3 :link{outline:solid 1px;}
+       p.cl3 :visited{outline-color:lime;}
+    </style>
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 5.9.6 Privacy and :visited</h1>
+    <a href="sec05-09-04.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-10.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <pre>:link{color:navy;}
+:visited{color:purple;}
+p.cl1 :link{background-color:white;}
+p.cl1 :visited{background-color:olive;}</pre>
+    <p class="cl1">这个P元素,class属性值是'cl1',其中有2个链接: <a href="index.html" class="link">link1</a>&nbsp;,&nbsp;<a href="index1.html" class="link">link2</a>,如果已被访问过则其背景颜色应该是olive,文本颜色是purple</p>
+<hr>
+    <pre>:link{color:navy;}
+:visited{color:purple;}
+p.cl2 :link{border:solid 1px olive;}
+p.cl2 :visited{border-color:red;}</pre>
+    <p class="cl2">这个P元素,class属性值是'cl2',其中有2个链接: <a href="index.html" class="link">link1</a>&nbsp;,&nbsp;<a href="index1.html" class="link">link2</a>,如果已被访问过则其border-color应该是red</p>
+    <hr>
+    <pre>:link{color:navy;}
+:visited{color:purple;}
+p.cl3 :link{outline:solid 1px yellow;}
+p.cl3 :visited{outline-color:lime;}</pre>
+    <p class="cl3">这个P元素,class属性值是'cl3',其中有2个链接: <a href="index.html" class="link">link1</a>&nbsp;,&nbsp;<a href="index1.html" class="link">link2</a>,如果已被访问过则其outline-color应该是lime</p>
+</body>
+</html>

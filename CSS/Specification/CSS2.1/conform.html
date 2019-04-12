@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3 Conformance: Requirements and Recommendations</title>
+    <link href="../base.css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar">
+    <p><a href="intro.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="syndata.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+</div>
+<hr>
+<h1>3 Conformance: Requirements and Recommendations</h1>
+<p><strong>Contents</strong></p>
+<ul class="table-of-content">
+    <li><a href="#definition">3.1 Definitions</a></li>
+    <li><a href="#conformance">3.2 UA Conformance</a></li>
+    <li><a href="#error">3.3 Error conditions</a></li>
+    <li><a href="#text-css">3.4 The text/css content type</a></li>
+</ul>
+<h2><a name="definition">3.1 Definitions</a></h2>
+<dl>
+    <dt>Source document</dt>
+    <dd>应用了一个或多个样式表的文档.以某种语言编码,并用元素树表示文档</dd>
+    <dt><a name="doclanguage">Document language</a></dt>
+    <dd>source document的编码语言(例如,HTML,XHTML).CSS用来描述document language的表现,但不会改变document language的基本语义</dd>
+    <dt><a name="replaced-element">Replaced element</a></dt>
+    <dd>内容超出CSS formatting model的元素.例如,img.Replaced element通常拥有intrinsic dimensions(固有尺寸):intrinsic width,intrinsic height和intrinsic ratio</dd>
+    <dt><a name="intrinsic-dimension">Intrinsic dimension</a></dt>
+    <dd>由元素自身定义的宽度和高度,不受环境影响.在CSS2.1中,只有Replaced element拥有intrinsic dimensions</dd>
+    <dt><a name="content">Content</a></dt>
+    <dd>source document中元素相关的内容,一些元素没有内容,被称为empty element</dd>
+    <dt><a name="rendered-content">Rendered content</a></dt>
+    <dd>根据相关样式表对元素进行渲染后元素的内容</dd>
+    <dt><a name="doctree">Document tree</a></dt>
+    <dd>source document中的元素树.树上的每一个元素都有且只有一个父元素,除了根元素</dd>
+    <dt><a name="child-element">Child</a></dt>
+    <dd>元素A叫作元素B的子元素当且仅当元素B是元素A的父元素</dd>
+    <dt><a name="descendant-element">Descendant</a></dt>
+    <dd>包括子,孙,...,子子孙孙</dd>
+    <dt><a name="ancestor-element">Ancestor</a></dt>
+    <dd>元素A叫作元素B的祖先元素当且仅当元素B是元素A的后代元素</dd>
+    <dt><a name="sibling-element">Sibling</a></dt>
+    <dd>元素A叫作元素B的兄弟元素当且仅当元素B和元素Ashare同一个父元素.如果文档树中A在B之前,A就是前导兄弟.如果文档树中B在A后面,B就是后继兄弟</dd>
+</dl>
+<h2><a name="conformance">3.2 UA Conformance</a></h2>
+<h2><a name="error">3.3 Error conditions</a></h2>
+<h2><a name="text-css">3.4 The text/css content type</a></h2>
+<p><strong>message entity</strong>.一个content type是"text/css"的message entity表示一个独立的css文档</p>
+</body>
+</html>

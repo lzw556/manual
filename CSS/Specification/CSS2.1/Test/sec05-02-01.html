@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.2.1 Grouping</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        h2,[title="tt1"],li.cl1 em{color:navy;}
+    </style>
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 5.2.1 Grouping</h1>
+    <a href="sec05-02.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-03.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <pre>h2{color:navy;}
+[title="tt1"]{color:navy;}
+li.cl1 em{color:navy;}</pre>
+    <p>等价于:</p>
+    <pre>h2,[title="tt1"],li.cl1 em{color:navy;}</pre>
+    <hr>
+    <h2>这个H2元素的文本颜色应该是navy</h2>
+    <p title="tt1">这个P元素,title属性值是'tt1',其文本颜色应该是navy</p>
+    <ol>
+        <li>LI元素,没有任何属性,故其文本颜色不应该是navy</li>
+        <li class="cl1">这个LI元素,class属性值是'cl1',<em>em元素</em>作为这个LI的子元素,其文本颜色应该是navy</li>
+    </ol>
+</body>
+</html>

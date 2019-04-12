@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.9.1 :first-child</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        li:first-child{color:navy;}
+        p strong:first-child{color:olive;}
+        div > p:first-child{color:maroon;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.9.1 :first-child</h1>
+<a href="sec05-08-03.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-09-02.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>li:first-child{color:navy;}</pre>
+    <ol>
+        <li>
+            这个LI元素,属于其父元素的第一个子元素,其文本颜色应该是navy
+        </li>
+        <li>这个LI元素,不属于其父元素的第一个子元素,故其文本颜色不应该是navy
+            <ol>
+                <li>这个LI元素,属于其父元素的第一个子元素,其文本颜色应该是navy</li>
+                <li>这个LI元素,不属于其父元素的第一个子元素,故其文本颜色不应该是navy</li>
+            </ol>
+        </li>
+        <li>这个LI元素,不属于其父元素的第一个子元素,故其文本颜色不应该是navy</li>
+    </ol>
+    <hr>
+<pre>p strong:first-child{color:olive;}</pre>
+    <p>在这个P元素中,<strong>STRONG元素</strong>作为其第一个子元素,其文本颜色应该是olive;<em>EM元素,不是这个P的第一个子元素,故其文本颜色不应该是olive.<strong>STRONG元素</strong>作为这个EM的第一个子元素(P的孙子),其文本颜色应该是olive</em></p>
+    <hr>
+<pre>div > p:first-child{color:maroon;}</pre>
+    <div>
+        P元素前的文本,没有包含在任何元素中
+        <p>这个P元素,作为div的第一个子元素,其文本颜色应该是maroon</p>
+        P元素后的文本,没有包含在任何元素中
+        <p>这个P元素,不属于div的第一个子元素,故其文本颜色不应该是maroon</p>
+        <ol>
+            <li>这个LI元素,属于其父元素的第一个子元素,其文本颜色应该是navy</li>
+            <li>
+                <p>这个P元素,属于LI的第一个子元素,但不属于div的子元素,故其文本颜色不应该是maroon</p>
+            </li>
+        </ol>
+    </div>
+</body>
+</html>

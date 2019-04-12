@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1 About the CSS 2.1 Specification</title>
+    <link href="../base.css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar">
+    <p><a href="intro.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+</div>
+<hr>
+<h1>1 About the CSS 2.1 Specification</h1>
+<p><strong>Contents</strong></p>
+<ul class="table-of-content">
+    <li><a href="#vs">1.1 CSS 2.1 vs CSS 2</a></li>
+    <li><a href="#reading">1.2 Reading the specification</a></li>
+    <li><a href="#organization">1.3 How the specification is organized</a></li>
+    <li><a href="#convention">1.4 Conventions</a>
+        <ul class="table-of-content">
+            <li><a href="#doc-language">1.4.1 Document language elements and attributes</a></li>
+            <li><a href="#prop-def">1.4.2 CSS property definitions</a>
+                <ul class="table-of-content">
+                    <li><a href="#value">1.4.2.1 Value</a></li>
+                    <li><a href="#initial-value">1.4.2.2 Initial</a></li>
+                    <li><a href="#apply-to">1.4.2.3 Applies to</a></li>
+                    <li><a href="#inherit">1.4.2.4 Inherited</a></li>
+                    <li><a href="#percentage">1.4.2.5 Percentage values</a></li>
+                    <li><a href="#media-apply">1.4.2.6 Media groups</a></li>
+                    <li><a href="#computed-value">1.4.2.7 Computed value</a></li>
+                </ul>
+            </li>
+            <li><a href="#shorthand">1.4.3 Shorthand properties</a></li>
+            <li><a href="#note-and-example">1.4.4 Notes and examples</a></li>
+            <li><a href="#image-and-longdesc">1.4.5 Images and long descriptions</a></li>
+        </ul>
+    </li>
+    <li><a href="#acknowledgement">1.5 Acknowledgments</a></li>
+</ul>
+<h2><a name="vs">1.1 CSS 2.1 vs CSS 2</a></h2>
+<h2><a name="reading">1.2 Reading the specification</a></h2>
+<h2><a name="organization">1.3 How the specification is organized</a></h2>
+<h2><a name="convention">1.4 Conventions</a></h2>
+<h3><a name="doc-language">1.4.1 Document language elements and attributes</a></h3>
+<h3><a name="prop-def">1.4.2 CSS property definitions</a></h3>
+<h4><a name="value">1.4.2.1 Value</a></h4>
+<h4><a name="initial-value">1.4.2.2 Initial</a></h4>
+<h4><a name="apply-to">1.4.2.3 Applies to</a></h4>
+<p>这部分列出属性适用于的元素.所有元素都被认为具有所有属性,但一些属性在某些元素上没有渲染效果</p>
+<h4><a name="inherit">1.4.2.4 Inherited</a></h4>
+<h4><a name="percentage">1.4.2.5 Percentage values</a></h4>
+<p>这部分说明了如果百分比出现在属性值中,应该被怎样解释.如果出现的是"N/A",表示该属性不接受百分比值</p>
+<h4><a name="media-apply">1.4.2.6 Media groups</a></h4>
+<p>这部分说明了属性适用于的媒体类型组</p>
+<h4><a name="computed-value">1.4.2.7 Computed value</a></h4>
+<h3><a name="shorthand">1.4.3 Shorthand properties</a></h3>
+<p>一些属性是简写属性,表示它们允许编写者用一个属性指定几个属性值</p>
+<p>例如,'font'属性是一个用来一次性设置'font-style'，'font-variant'，'font-weight'，'font-size'，'line-height'和 'font-family'的简写属性</p>
+<p class="note">当简写形式中的值被省略时,每个“缺失”的属性会被赋值为其初始值</p>
+<div class="example">
+    <pre>h1 {<br>   font-weight:bold;<br>   font-size:14px;<br>   font-family:serif;<br>   font-variant:normal<br>   font-style:normal<br>}</pre>
+    <p>上面的规则可以用简写属性改写为:</p>
+    <pre>h1{font:14px bold serif;}</pre>
+    <p>在简写属性中,'font-variant'和'font-style'会取各自的initial value</p>
+</div>
+<h3><a name="note-and-example">1.4.4 Notes and examples</a></h3>
+<h3><a name="image-and-longdesc">1.4.5 Images and long descriptions</a></h3>
+<h2><a name="acknowledgement">1.5 Acknowledgments(致谢)</a></h2>
+</body>
+</html>

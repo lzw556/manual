@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.1.2 Computed values</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        .outer{font-size:16px;}
+        .outer p.cl1{font-size:1.5em;}
+        .outer p.cl2{font-size:200%;}
+        .outer p.cl3{line-height:1.5;}
+        .outer p.cl3 strong{font-size:18px;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 6.1.2 Computed values</h1>
+<a href="sec06-01-01.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec06-02-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+    <div class="outer">
+        <pre>.outer{font-size:16px;}
+.outer p.cl1{font-size:1.5em;}
+</pre>
+        <p class="cl1">这个P元素,class属性值是'cl1',<strong>STRONG元素</strong>作为这个P的子元素,其字体大小应该是24px(即P元素'font-size'属性的computed value)</p>
+        <hr>
+        <pre>.outer{font-size:16px;}
+.outer p.cl2{font-size:200%;}
+</pre>
+        <p class="cl2">这个P元素,class属性值是'cl2',<strong>STRONG元素</strong>作为这个P的子元素,其字体大小应该是32px(即P元素'font-size'属性的computed value)</p>
+        <hr>
+        <pre>.outer{font-size:16px;}
+.outer p.cl3{line-height:1.5;}
+.outer p.cl3 strong{font-size:18px;}
+</pre>
+        <p class="cl3">这个P元素,class属性值是'cl3',<strong>STRONG元素</strong>作为这个P的子元素,其行高应该是1.5(即P元素'line-height'属性的computed value)</p>
+    </div>
+</body>
+</html>

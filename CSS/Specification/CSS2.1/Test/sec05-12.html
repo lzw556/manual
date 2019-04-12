@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.12 Adjacent sibling selectors</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        h2 + h3{color:navy;}
+        li.important + li{color:olive;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.12 Adjacent sibling selectors</h1>
+<a href="sec05-11.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec06-01-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>h2 + h3{color:navy;}</pre>
+<h2>这是一个H2元素</h2>
+<h3>这是一个H3元素,其文本颜色应该是navy</h3>
+<h2>这是一个H2元素</h2>
+这些文本不在一个元素中
+<h3>这是一个H3元素,其文本颜色应该是navy</h3>
+<h2>这是一个H2元素</h2>
+<p>这是一个P元素</p>
+<h3>这个H3元素,和H2不是相邻元素,故其文本颜色不应该是navy</h3>
+<hr>
+<pre>li.important + li{color:olive;}</pre>
+<ol>
+    <li>这个LI元素,是LI.important的相邻兄弟,但不是紧跟在其后面的元素,故文本颜色不应该是olive</li>
+    <li class="important">这个LI元素,class属性值是'important'</li>
+    <li>这个LI元素的文本颜色应该是olive</li>
+    <li>这个LI元素,是LI.important的兄弟,但不相邻,故文本颜色不应该是olive</li>
+</ol>
+</body>
+</html>

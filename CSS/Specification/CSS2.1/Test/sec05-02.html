@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.2 Selector syntax</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        p#id1{color:navy;}
+        p.cl1{color:navy;}
+        p[title="tt1"]{color:navy;}
+        *#id2{color:olive;}
+        *.cl2{color:olive;}
+        *[title="tt2"]{color:olive;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.2 Selector syntax</h1>
+&nbsp;&nbsp;&nbsp;<a href="sec05-02-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>p#id1{color:navy;}
+p.cl1{color:navy;}
+p[title="tt1"]{color:navy;}</pre>
+    <p id="id1">这个P元素,id属性值是'id1',其文本颜色应该是navy</p>
+    <p class="cl1">这个P元素,class属性值是'cl1',其文本颜色应该是navy</p>
+    <p title="tt1">这个P元素,title属性值是'tt1',其文本颜色应该是navy</p>
+    <h2 id="id1">这个H2元素,id属性值是'id1',但不是P元素,故其文本颜色不应该是navy</h2>
+    <h2 class="cl1">这个H2元素,class属性值是'cl1',但不是P元素,故其文本颜色不应该是navy</h2>
+    <h2 title="tt1">这个H2元素,title属性值是'tt1',但不是P元素,故其文本颜色不应该是navy</h2>
+<hr>
+<pre>*#id2{color:olive;}   /*等效于#id2{color:olive;}*/
+*.cl2{color:olive;}   /*等效于.cl2{color:olive;}*/
+*[title="tt2"]{color:olive;}   /*等效于[title="tt2"]]{color:olive;}*/</pre>
+<p id="id2">这个P元素,id属性值是'id2',其文本颜色应该是olive</p>
+<p class="cl2">这个P元素,class属性值是'cl2',其文本颜色应该是olive</p>
+<p title="tt2">这个P元素,title属性值是'tt2',其文本颜色应该是olive</p>
+<h2 id="id2">这个H2元素,id属性值是'id2',其文本颜色应该是olive</h2>
+<h2 class="cl2">这个H2元素,class属性值是'cl2',其文本颜色应该是olive</h2>
+<h2 title="tt2">这个H2元素,title属性值是'tt2',其文本颜色应该是olive</h2>
+</body>
+</html>

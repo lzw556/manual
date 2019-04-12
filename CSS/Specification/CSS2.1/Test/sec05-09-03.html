@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.9.3 :hover,:active and :focus</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        li :link{color:navy;}
+        li :visited{color:purple;}
+        li a:hover{background-color:olive;color:white;}
+        li a:focus{border:solid 1px;}
+        li a:active{color:red;}
+        p.cl1:hover{background-color:navy;color:white;}
+        input:hover{background-color:navy;color:white;}
+        input:focus{background-color:olive;color:white;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.9.3 :hover,:active and :focus</h1>
+<a href="sec05-09-02.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-09-04.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>li :link{color:navy;}
+li :visited{color:purple;}
+li a:hover{background-color:olive;color:white;}
+li a:focus{border:solid 1px;}
+li a:active{color:red;}</pre>
+<p>下面的超链接中:<br>如果已被访问过则其文本颜色应该是purple;如果没有被访问过则其文本颜色应该是navy<br>当鼠标悬停在链接上面但是没有激活时,其文本颜色应该是white,背景颜色应该是olive<br>当链接获得焦点时,其应该出现一个 1px 的边框<br>当链接被激活时,其文本颜色应该是red</p>
+<ol>
+    <li>
+        <a href="index.html">index</a>
+    </li>
+    <li>
+        <a href="http://www.baidu.com">baidu</a>
+    </li>
+    <li>
+        <a href="http://www.developer.mozilla.org">MDN</a>
+    </li>
+    <li>
+        <a href="http://www.github.com">github</a>
+    </li>
+</ol>
+<hr>
+<pre>p.cl1:hover{background-color:navy;color:white;}</pre>
+<p class="cl1">这个P元素,class属性值是'cl1',当鼠标悬停在他上面时,其背景颜色应该是navy,文本颜色应该是white</p>
+<hr>
+<pre>input:hover{background-color:navy;color:white;}
+input:focus{background-color:olive;color:white;}</pre>
+<p>在下面的INPUT元素中,当鼠标悬停在上面时,其背景颜色应该是navy,文本颜色应该是white;当获取焦点时,其背景颜色应该是olive,文本颜色应该是white</p>
+<input type="text" name="txt1" value="input1"><br>
+<input type="text" name="txt2" value="input2"><br>
+<input type="text" name="txt3" value="input3">
+</body>
+</html>

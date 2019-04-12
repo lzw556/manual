@@ -38,7 +38,7 @@
         <li><a href="#content">12.2 The 'content' property</a></li>
         <li><a href="#quotes">12.3 Quotation marks</a>
             <ul class="table-of-content">
-                <li><a href="#quotes-sepcify">12.3.1 Specifying quotes with the 'quotes' property</a></li>
+                <li><a href="#quotes-specify">12.3.1 Specifying quotes with the 'quotes' property</a></li>
                 <li><a href="#quotes-insert">12.3.2 Inserting quotes with the 'content' property</a></li>
             </ul>
         </li>
@@ -115,6 +115,10 @@
     <div class="demo">
         <h1>first heading1</h1>
         <h1>second heading1</h1>
+    </div>
+    <p>编写者可以通过在'content'属性后面的字符串中写上"\A"or"\00000a"转义序列,来在生成的内容中包含newline(换行).插入的这个行结束符也受'white-space'属性约束</p>
+    <div class="example">
+        <pre>h1:before{content:"hello\00000A world";white-space:pre;}</pre>
     </div>
     <dl>
         <dt>none</dt>

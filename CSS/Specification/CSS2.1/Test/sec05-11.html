@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.11 Child selector</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        ol > li.important{color:navy;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.11 Child selector</h1>
+<a href="sec05-10.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-12.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>ol > li.important{color:fuchsia;}</pre>
+<ol>
+    <li class="important">这个LI元素,class属性值是'important',作为OL元素的子元素,其文本颜色应该是navy</li>
+    <li>LI元素,没有任何属性,故其文本颜色不应该是navy
+        <ul>
+            <li class="important">这个LI元素,class属性值是'important',不是OL元素的子元素,故其文本颜色不应该是navy</li>
+            <li>LI元素,没有任何属性,故其文本颜色不应该是navy</li>
+        </ul>
+    </li>
+</ol>
+</body>
+</html>

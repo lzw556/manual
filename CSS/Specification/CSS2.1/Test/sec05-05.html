@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.5 Attribute selectors</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        [id]{color:navy;}
+        p[class="cl1"]{color:olive;}
+        p[class~="cl2"]{color:maroon;}
+        p[class|="cl3"]{color:purple;}
+        p[title="tt1"][class="cl4"]{text-decoration:underline;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.5 Attribute selectors</h1>
+<a href="sec05-04.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-05-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>[id]{color:navy;}</pre>
+<p>这个P元素,没有任何属性,故其文本颜色不应该是navy</p>
+<p id="id1">这个P元素,id属性值是'id1',其文本颜色应该是navy</p>
+<h2 id="">这个H2元素,id属性值是'',其文本颜色应该是navy</h2>
+<hr>
+<pre>p[class="cl1"]{color:olive;}</pre>
+<p class="cl1">这个P元素,class属性值是'cl1',其文本颜色应该是olive</p>
+<p class="cl1 test">这个P元素,class属性值是'cl1 test',非刚好等于'cl1',故其文本颜色不应该是olive</p>
+<hr>
+<pre>p[class~="cl2"]{color:maroon;}</pre>
+<p class="cl2">这个P元素,class属性值是'cl2',其文本颜色应该是maroon</p>
+<p class="cl2 test">这个P元素,class属性值是'cl2 test',其文本颜色应该是maroon</p>
+<hr>
+<pre>p[class|="cl3"]{color:purple;}</pre>
+<p class="cl3">这个P元素,class属性值是'cl3',其文本颜色应该是purple</p>
+<p class="cl3 test">这个P元素,class属性值是'cl3 test',其文本颜色不应该是purple</p>
+<p class="cl3-xx">这个P元素,class属性值是'cl3-xx',其文本颜色应该是purple</p>
+<p class="cl3-xx test">这个P元素,class属性值是'cl3-xx test',其文本颜色应该是purple</p>
+<hr>
+<pre>[title="tt1"][class="cl4"]{text-decoration:underline;}</pre>
+<p title="tt1" class="cl4">这个P元素,title属性值是'tt1',class属性值是'cl4',其文本装饰应该是underline</p>
+</body>
+</html>

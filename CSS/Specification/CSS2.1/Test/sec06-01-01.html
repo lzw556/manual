@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.1.1 Sepcified values</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        p.cl1{color:navy;}
+        p.cl1 strong{font-size:24px;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 6.1.1 Sepcified values</h1>
+<a href="sec05-12.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec06-01-02.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>p.cl1{color:navy;}
+p.cl1 strong{font-size:24px;}
+</pre>
+    <p class="cl1">这个P元素,class属性值是'cl1',<strong>STRONG元素</strong>作为这个P的子元素,其文本颜色应该是navy,字体大小应该是24px,背景颜色应该是transparent</p>
+    <p>对于上面的STRONG元素:</p>
+    <dl>
+        <dt><strong>'font-size'</strong></dt>
+        <dd>该属性被显式指定,故这个STRONG元素的'font-size'属性的specified value是24px</dd>
+        <dt><strong>'color'</strong></dt>
+        <dd>该属性没有被显式指定,但由于其inherited:yes,所以此时会发生继承,故这个STRONG元素的'color'属性的specified value是navy(即其父元素P的'color'属性的computed value)</dd>
+        <dt><strong>'background-color'</strong></dt>
+        <dd>该属性没有被显式指定,且其inherited:no,故这个STRONG元素的'background-color'属性的specified value是transparent(即initial vaue)</dd>
+    </dl>
+</body>
+</html>

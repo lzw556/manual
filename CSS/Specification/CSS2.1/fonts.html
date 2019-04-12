@@ -14,7 +14,7 @@
     <p><strong>Contents</strong></p>
     <ul class="table-of-content">
         <li><a href="#font-intro">15.1 Introduction</a></li>
-        <li><a href="algorithm">15.2 Font matching algorithm</a></li>
+        <li><a href="#algorithm">15.2 Font matching algorithm</a></li>
         <li><a href="#font-family">15.3 Font family: the 'font-family' property</a>
             <ul class="table-of-content">
                 <li><a href="#generic-font-family">15.3.1 Generic font families</a>
@@ -201,7 +201,7 @@
                 </tr>
                 <tr>
                     <td>Computed value:</td>
-                    <td><a href="#font-weight-coumpted-value">见下文</a></td>
+                    <td>见下文</td>
                 </tr>
             </table>
         </dd>
@@ -331,7 +331,7 @@
         <dt>&lt;percentage&gt;</dt>
         <dd>当前元素的font-size= percentage*父元素的font-size.不允许为负值</dd>
         <dt>&lt;length&gt;</dt>
-        <dd>'em'和'ex'长度单位参照其父元素的font-size的computed value.不允许为负值</dd>
+        <dd>当应用于其他属性上时,'em'和'ex'长度单位参照当前元素的'font-size'属性的computed value.当应用于'font-size'属性上时,'em'和'ex'长度单位参照其父元素的font-size的computed value(详见<a href="syndata.html#length">relative length unit</a>).不允许为负值</dd>
     </dl>
     <h2><a name="font-shorthand">15.8 Shorthand font property: the 'font' property</a></h2>
     <dl class="prop-definition">

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.9.2 :link and :visited</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        li :link{color:navy;}
+        li :visited{color:purple;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.9.2 :link and :visited</h1>
+<a href="sec05-09-01.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-09-03.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>li :link{color:navy;}
+li :visited{color:purple;}</pre>
+<hr>
+<p>下面的超链接中,如果已被访问过则其文本颜色应该是purple;如果没有被访问过则其文本颜色应该是navy</p>
+<ol>
+    <li>
+        <a href="index.html">index</a>
+    </li>
+    <li>
+        <a href="http://www.baidu.com">baidu</a>
+    </li>
+    <li>
+        <a href="http://www.developer.mozilla.org">MDN</a>
+    </li>
+    <li>
+        <a href="http://www.github.com">github</a>
+    </li>
+</ol>
+<hr>
+<p><a name="anchor1">这个A元素,是一个锚点,不是超链接</a>,故其文本颜色既不应该是navy,也不应该是purple</p>
+</body>
+</html>

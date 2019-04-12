@@ -41,45 +41,41 @@
         </li>
     </ul>
     <h2><a name="value">6.1 Specified,computed,and actual values</a></h2>
-    <p>一旦UA已经解析了文档并构造文档树,它就必须为树中的每一个元素的每一个css属性(适用于目标媒体类型)赋值</p>
+    <p>一旦UA已经解析了文档并构造了<a href="">document tree</a>,它就必须为树中的每一个元素的每一个css属性(适用于目标媒体类型)赋值</p>
     <p>
-        css属性的最终值是通过4步计算得到的:首先通过规范确定specified value,然后把specified value进一步处理为computed value(<strong>主要用于后代继承</strong>),然后<br>
-        如果有必要则把computed value转化为一个绝对值即used value,最后根据本地环境限制进行转换即actual value
+        css属性的最终值是通过4步计算得到的:首先通过规范确定specified value,然后把specified value进一步处理为computed value(主要用于后代继承),然后如果有必要则把computed value转化为一个绝对值即used value,最后根据本地环境限制进行转换即actual value
     </p>
     <h3><a name="specified-value">6.1.1 Specified values</a></h3>
     <p>UA必须先根据下面的机制(按优先顺序)给每一个css属性分配一个specified value:</p>
     <ol>
         <li>如果<a href="#cascade">cascade</a>产生一个值,就使用它</li>
-        <li>否则,如果这个属性是默认可以被继承的并且元素不是文档树的根节点,就使用其父元素的computed value</li>
-        <li>否则,使用这个属性的initial value</li>
+        <li>否则,如果这个属性是默认可以被继承的(即inherited:yes)并且元素不是文档树的根节点,就使用其父元素的computed value(第2步就是<a href="#inheritance">inheritance</a>)</li>
+        <li>否则,使用这个属性的initial value.每一个属性的initial value都定义在<a href="">property definition</a>中</li>
     </ol>
     <h3><a name="computed-value">6.1.2 Computed values</a></h3>
     <p>
-        在层叠期间specified valued被处理为computed value,例如URL被处理为绝对路径,em和ex单位被计算成px或绝对长度.<strong>计算一个属性值不需要UA渲染文档</strong>
+        在层叠期间specified valued被处理为computed value,例如URL被处理为绝对路径,em和ex单位被计算成px或绝对长度.计算一个属性的computed value不需要UA渲染文档
     </p>
-    <p>属性的computed value由属性定义中的computed value指定</p>
+    <p>每一个属性的computed value都定义在<a href="">property definition</a>中.当sepcified value是'inherit'时,computed value的定义见<a href="#inheritance">inheritance</a></p>
     <h3><a name="used-value">6.1.3 Used values</a></h3>
-    <p>处理computed value时,尽量不要格式化文档.但是有些属性值只能在文档布局完成时才被确定.例如,如果一个元素的width<br>
-        是其包含块的特定百分比,那么在其包含块的宽度确定之前这个width都无法确定.used value是把computed value剩余的依赖<br>
-        都处理后得到的绝对值.
+    <p>处理computed value时,尽量不要格式化文档.但是有些属性值只能在文档布局完成时才被确定.例如,如果一个元素的width是其containing block的特定百分比,那么在其containing block的width确定之前这个元素的width都无法确定.used value是把computed value剩余的依赖都处理后得到的绝对值.
     </p>
     <h3><a name="actual-value">6.1.4 Actual values</a></h3>
     <p>
-        原则上,used value被用于渲染,但是UA可能无法在给定的环境中使用该值.例如,UA可能只能用整数像素width来渲染border,因此不得不对宽度进行近似处理.<br>
-        actual value就是对used value进行近似处理后的值.
+        原则上,used value被用于渲染,但是UA可能无法在给定的环境中使用该值.例如,UA可能只能用整数像素width来渲染border,因此不得不对宽度进行近似处理.actual value就是对used value进行近似处理后的值.
     </p>
     <h2><a name="inheritance">6.2 Inheritance</a></h2>
     <p>
-        每一个css属性,其定义中都指出了该属性是默认可以被继承的还是默认不可以被继承的(inherited:yes/no).<br>
-        当元素的一个继承属性(inherited:yes)没有指定值时(6.1.1),就会取其父元素中相同属性的computed value.这个值会成为子元素的specified value和computed value.<br>
-        当元素的一个非继承属性(inherited:no)没有指定值是(6.1.1),就会取自身的initial value
+        当一个元素的某个默认可以继承的CSS属性没有specified value时,这个CSS属性就会取父元素上相同属性的computed value作为specified value.每一个属性默认是否可以被继承(即inherited:yes/no)都定义在<a href="">property definition</a>中
     </p>
+    <p class="note">当发生继承时,子元素继承的是父元素的computed value.这个继承自父元素的computed value会变成子元素的specified value和computed value</p>
     <h3><a name="inheritance-inherit">6.2.1 The 'inherit' value</a></h3>
     <p>
-        对于一个给定元素,inherit表示属性值使用其父元素中相同属性的computed value,不管此属性是否默认可以被继承.
+        对于一个给定元素,'inherit'指定CSS属性的specified value就是其父元素上相同属性的computed value,不管此属性是否默认可以被继承.
     </p>
     <h2><a name="import-rule">6.3 The @import rule</a></h2>
-    <p>TODO</p>
+    <p>'@import'规则允许编写者从其他样式表中导入样式.任何@import规则必须位于所有其它规则(除了@charset,如果有的话)之前.'@import'关键字后面必须跟着想要引入的样式表的URI.字符串也可以接受</p>
+    <p>@import规则可以用来指定导入样式表的<a href="media.html#media-types">media type</a></p>
     <h2><a name="cascade">6.4 The cascade</a></h2>
     <p>样式表有3种origin:author,user and UA</p>
     <ul style="padding-left:1em;">
@@ -88,7 +84,7 @@
         <li><strong>UA:</strong>就是浏览器默认样式表</li>
     </ul>
     <p>这3种来源的样式表在一定范围内会发生重叠,并且根据层叠相互影响</p>
-    <p>css cascade给每一条样式规则设置了权重,当同一元素应用几条规则时,权重最大的优先</p>
+    <p>css cascade给每一条样式规则分配了权重,当若干条规则适用于同一个元素时,权重最大的优先</p>
     <h3><a name="cascading-order">6.4.1 Cascading order</a></h3>
     <ol>
         <li>找出匹配到的所有declaration</li>
@@ -106,6 +102,9 @@
         <li>最后,根据指定顺序排序:如果2个declaration的importance,origin和specificity都相同,后指定的生效</li>
     </ol>
     <h3><a name="!important-rule">6.4.2 !important rules</a></h3>
+    <div class="example">
+        <pre>p{text-indent:1em!important;}</pre>
+    </div>
     <h3><a name="selector-specificity">6.4.3 Calculating a selector's specificity</a></h3>
     <ul>
         <li>style属性中的declaration(=a),如果有则a=1,否则a=0</li>
@@ -115,7 +114,7 @@
     </ul>
     <p>a-b-c-d4种数量连起来表示selector的specificity</p>
     <div class="example">
-        <pre>*{}                        /* specificity=0,0,0,0 */<br>p:befor{}                  /* specificity=0,0,0,2 */<br>.container a[href]:hover{} /* specificity=0,0,3,1 */<br>#id{}                      /* specificity=0,1,0,0 */<br>style=""                   /* specificity=1,0,0,0 */</pre>
+        <pre>*{}                        /* specificity=0,0,0,0 */<br>p:before{}                 /* specificity=0,0,0,2 */<br>.container a[href]:hover{} /* specificity=0,0,3,1 */<br>#id{}                      /* specificity=0,1,0,0 */<br>style=""                   /* specificity=1,0,0,0 */</pre>
     </div>
 </body>
 </html>

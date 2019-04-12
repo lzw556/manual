@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4 Syntax and basic data types</title>
+    <link href="../base.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <p><a href="conform.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="selectors.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+    <hr>
+    <h1>4 Syntax and basic data types</h1>
+    <p><strong>Contents</strong></p>
+    <ul class="table-of-content">
+        <li><a href="#syntax">4.1 Syntax</a>
+            <ul class="table-of-content">
+                <li><a href="#tokenization">4.1.1 Tokenization</a></li>
+                <li><a href="#keywords">4.1.2 Keywords</a>
+                    <ul class="table-of-content">
+                        <li><a href="#vendor-extension">4.1.2.1 Vendor-specific extensions</a></li>
+                        <li><a href="#historical-prefixe">4.1.2.2 Informative Historical Notes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#character">4.1.3 Characters and case</a></li>
+                <li><a href="#statement">4.1.4 Statements</a></li>
+                <li><a href="#at-rule">4.1.5 At-rules</a></li>
+                <li><a href="#block">4.1.6 Blocks</a></li>
+                <li><a href="#rule-set">4.1.7 Rule sets, declaration blocks, and selectors</a></li>
+                <li><a href="#declaration">4.1.8 Declarations and properties</a></li>
+                <li><a href="#comment">4.1.9 Comments</a></li>
+            </ul>
+        </li>
+        <li><a href="#parsing-error">4.2 Rules for handling parsing errors</a></li>
+        <li><a href="#value">4.3 Values</a>
+            <ul class="table-of-content">
+                <li><a href="#number">4.3.1 Integers and real numbers</a></li>
+                <li><a href="#length">4.3.2 Lengths</a></li>
+                <li><a href="#percentage">4.3.3 Percentages</a></li>
+                <li><a href="#uri">4.3.4 URLs and URIs</a></li>
+                <li><a href="#counter">4.3.5 Counters</a></li>
+                <li><a href="#color">4.3.6 Colors</a></li>
+                <li><a href="#string">4.3.7 Strings</a></li>
+                <li><a href="#unsupported-value">4.3.8 Unsupported Values</a></li>
+            </ul>
+        </li>
+        <li><a href="#charset">4.4 CSS style sheet representation</a>
+            <ul class="table-of-content">
+                <li><a href="#escaping">4.4.1 Referring to characters not represented in a character encoding</a></li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name="syntax">4.1 Syntax</a></h2>
+    <h3><a name="tokenization">4.1.1 Tokenization</a></h3>
+    <h3><a name="keywords">4.1.2 Keywords</a></h3>
+    <p>不能放在引号中.因此red是一个keyword,但'red'不是</p>
+    <h4><a name="vendor-extension">4.1.2.1 Vendor-specific extensions(特定供应商扩展)</a></h4>
+    <p>Vendor-specific extensions应该遵循以下格式:<br>'-' + vendor identifier + '-' + meaningful name<br>
+        '_' + vendor identifier + '-' + meaningful name</p>
+    <div class="example">
+        <pre>a:-webkit-any-link{...}<br>p{-moz-background-origin: border}</pre>
+    </div>
+    <h4><a name="historical-prefixe">4.1.2.2 Informative Historical Notes</a></h4>
+    <p>本节是信息性的,非规范</p>
+    <table class="table">
+        <tr>
+            <th>prefix</th><th>organization</th>
+        </tr>
+        <tr>
+            <td>-ms-,-mso-</td><td>Microsoft</td>
+        </tr>
+        <tr>
+            <td>-moz-</td><td>Mozilla</td>
+        </tr>
+        <tr>
+            <td>-o-,-xv-</td><td>Opera Software</td>
+        </tr>
+        <tr>
+            <td>-webkit-</td><td>Apple</td>
+        </tr>
+    </table>
+    <h3><a name="character">4.1.3 Characters and case</a></h3>
+    <ol>
+        <li>所有的CSS syntax是case-insensitive(大小写不敏感的),除了那些不由CSS控制的部分.例如,HTML属性'id'和'class'的值都是case-sentitive(大小写敏感的)</li>
+        <li>CSS中,identifier(标识符)只能包含字母数字,以及连接符"-"和下划线"_",不能以数字开头</li>
+        <li>在CSS中,反斜线(\)字符可以表示3种类型的字符转义
+            <ol>
+                <li>在一个字符串内,后面跟着的换行的"\"会被忽略,看上去好像字符串既不含"\"也不含换行</li>
+                <li>取消特殊CSS字符的含义.例如,"\""</li>
+                <li>允许编写者引用那些难以在文档中直接输入的字符</li>
+            </ol>
+        </li>
+    </ol>
+    <h3><a name="statement">4.1.4 Statements</a></h3>
+    <p>有2种语句:rule-set和at-rule</p>
+    <h3><a name="at-rule">4.1.5 At-rules</a></h3>
+    <div class="example">
+        <pre>@charset "utf-8";      <a href="#"></a><br>@media screen,print{...}     详见<a href="media.html#at-media-rule">The @media rule</a><br>@import "print.css" print     详见<a href="cascade.html#import-rule">The @import rule</a></pre>
+    </div>
+    <h3><a name="block">4.1.6 Blocks</a></h3>
+    <div class="example">
+        <pre>body{font-size:16px;}    /*2个大括号(包含大括号)之间的部分叫作block*/</pre>
+    </div>
+    <h3><a name="rule-set">4.1.7 Rule sets,declaration blocks,and selectors</a></h3>
+    <div class="example">
+        <pre>body{font-size:16px;color:red;}</pre>
+        <p>selector是"{"之前的部分.例如,body</p>
+        <p>declaration block,以"{"开始,"}"结束,之间必须由0或多个以";"分隔的declaration.例如,{font-size:16px;color:red;}</p>
+        <p>rule set由后面跟着一个declaration block的selector组成.例如,body{font-size:16px;color:red;}</p>
+    </div>
+    <h3><a name="declaration">4.1.8 Declarations and properties</a></h3>
+    <div class="example">
+        <pre>body{font-size:16px;color:red;}</pre>
+        <p>一个declaration由property name和":"和property value组成.例如,font-size:16px</p>
+    </div>
+    <h3><a name="comment">4.1.9 Comments</a></h3>
+    <p>注释以"/*"字符开始,以"*/"字符结束</p>
+    <div class="example">
+        <pre>body{font-size:16px;color:red;}     /*this is a comment*/</pre>
+    </div>
+    <h2><a name="parsing-error">4.2 Rules for handling parsing errors</a></h2>
+    <h2><a name="value">4.3 Values</a></h2>
+    <h3><a name="number">4.3.1 Integers and real numbers</a></h3>
+    <p>integer value用&lt;integer&gt;表示,由0-9的数字组成</p>
+    <p>real number value用&lt;number&gt;表示,一个&lt;number&gt;要么是一个&lt;integer&gt;,要么由数字后面跟符号"."后面跟数字组成</p>
+    <p>&lt;integer&gt;和&lt;number&gt;都只能用十进制数字</p>
+    <div class="example">
+        <pre>body{line-height:1.5;}       /*&lt;number&gt; value*/<br>.outer{z-index:1;counter-increment:2;}      /*&lt;integer&gt; value*/</pre>
+    </div>
+    <h3><a name="length">4.1.9 Lengths</a></h3>
+    <p>length涉及距离测量</p>
+    <p>length value用&lt;length&gt;表示,由一个&lt;number&gt;后面跟一个unit identifier(例如,px等)组成.值为0时后面的unit identifier是可选的</p>
+    <p>有2种length unit:relative和absolute.relative length unit在指定length时会相对于另一个length属性</p>
+    <p>relative length unit:</p>
+    <ol>
+        <li><strong>em:</strong>相对于'font-size'</li>
+        <li><strong>ex:</strong>相对于'x-height'</li>
+    </ol>
+    <p>'em'等于当前元素(即使用'em'的元素)'font-size'属性的computed value.例外情况是当在'font-size'属性值中使用'em'时,'em'等于父元素的'font-size'(详见<a href="fonts.html#font-size">'font-size'</a>)</p>
+    <p>'ex'由元素中的第一个可用font决定.'ex'等于当前元素中第一个可用font的'x-height'.例外情况是当在'font-size'属性值中使用'ex'时,'ex'等于父元素的'x-height'(详见<a href="fonts.html#font-size">'font-size'</a>)</p>
+    <div class="example">
+        <pre>h1{line-height:1.2em;}    /*h1的line-height比h1的font-size大20%*/<br>h1{font-size:1.2em;}    /*h1的font-size比h1继承的font-size大20%*/</pre>
+    </div>
+    <p>当为document tree的root element指定relative length unit时,'ex'和'em'相对于CSS属性的initial value</p>
+    <p>子元素不会继承父元素的specified value(relative value),而是继承父元素的computed value(absolute value)</p>
+    <div class="example">
+        <pre>body{font-size:12px;text-indent:3em;}<br>h1{font-size:15px;}</pre>
+        <p>如果h1是body的子元素,那么h1的text-indent是36px,而不是45px</p>
+    </div>
+    <p>absolute length unit彼此之间是固定不变的.包括物理单位(in,cm,mm,pt,pc)和像素单位(px)</p>
+    <ul>
+        <li><strong>in</strong>: 英寸 — 1in is equal
+            to 2.54cm.</li>
+        <li><strong>cm</strong>: centimeters</li>
+        <li><strong>mm</strong>: millimeters</li>
+        <li><strong>pt</strong>: points — the points used by CSS are equal to
+            1/72nd of 1in. </li>
+        <li><strong>pc</strong>: picas — 1pc is equal to 12pt.</li>
+        <li><strong>px</strong>: pixel units — 1px is equal to 0.75pt.</li>
+    </ul>
+    <h3><a name="percentage">4.1.9 Percentages</a></h3>
+    <p>percentage value用&lt;percentage&gt;表示,由一个&lt;number&gt;后面跟一个"%"组成</p>
+    <p>percentage value总是相对于另一个值.每一个接受percentage的属性也定义了这个percentage的参考值</p>
+    <h3><a name="uri">4.1.9 URIs and URLs</a></h3>
+    <p>URI value用&lt;uri&gt;表示,URI value在属性值中用url()表示</p>
+    <h3><a name="counter">4.1.9 Counters</a></h3>
+    <p>counter使用case-sentitive identifier表示(详见<a href="generate.html#counters">'counter-reset' and 'counter-increment'</a>)</p>
+    <p>要引用一个counter值的话,可以用标记'counter(&lt;identifier&gt;)'或者'counter(&lt;identifier&gt;,&lt;'list-style-type'&gt;)'</p>
+    <p>为了引用一系列嵌套的同名counter,可以用标记'counters(&lt;identifier&gt;, &lt;string&gt;)'或者'counters(&lt;identifier&gt;, &lt;string&gt;, &lt;'list-style-type'&gt;)'</p>
+    <p>有关counter的更多信息详见<a href="generate.html#counters">Automatic counters and numbering</a></p>
+    <h3><a name="color">4.1.9 Colors</a></h3>
+    <p>color value用&lt;color&gt;表示,要么是一个keyword,要么是一个符合RGB规范的数值</p>
+    <p>color keywords一共有17种颜色:</p>
+    <table class="table">
+        <tr>
+            <th>keyword</th><th>RGB 十六进制数</th><th>实样</th>
+        </tr>
+        <tr>
+            <td>aqua(水绿)</td><td>#00ffff</td><td style="background-color:aqua;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>black</td><td>#000000</td><td style="background-color:black;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>blue</td><td>#0000ff</td><td style="background-color:blue;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>fuchsia(紫红)</td><td>#ff00ff</td><td style="background-color:fuchsia;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>gray</td><td>#808080</td><td style="background-color:gray;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>green</td><td>#008000</td><td style="background-color:green;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>lime(绿黄)</td><td>#00ff00</td><td style="background-color:lime;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>maroon(褐红)</td><td>#800000</td><td style="background-color:maroon;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>navy(藏青)</td><td>#000080</td><td style="background-color:navy;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>olive(橄榄绿)</td><td>#808000</td><td style="background-color:olive;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>orange</td><td>#ffa500</td><td style="background-color:orange;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>purple</td><td>#800080</td><td style="background-color:purple;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>red</td><td>#ff0000</td><td style="background-color:red;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>silver(银)</td><td>#c0c0c0</td><td style="background-color:silver;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>teal(青)</td><td>#008080</td><td style="background-color:teal;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>white</td><td>#ffffff</td><td style="background-color:white;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>yellow</td><td>#ffff00</td><td style="background-color:yellow;">&nbsp;</td>
+        </tr>
+    </table>
+    <p>RGB value有2种表示形式:</p>
+    <ol>
+        <li>十六进制,例如,#000000</li>
+        <li>rgb函数,例如,rgb(255,0,0)</li>
+    </ol>
+    <h3><a name="string">4.1.9 Strings</a></h3>
+    <p>字符串既能写在双引号里也能写在单引号里</p>
+    <p>字符串中不能直接包含newline(换行).为了在字符串中包含换行,可以用"\A"或者"\00000a",示例见<a href="generate.html#content">'content'</a></p>
+    <h3><a name="unsupported-value">4.1.9 Unsupported Values</a></h3>
+    <h2><a name="charset">4.4 CSS style sheet representation</a></h2>
+    <p>使用@charset规则的编写者必须把该规则放在样式表的开头,前面没有任何字符</p>
+    <div class="example">
+        <pre>@charset "utf-8";</pre>
+    </div>
+    <h3><a name="escaping">4.4.1 Referring to characters not represented in a character encoding</a></h3>
+</body>
+</html>

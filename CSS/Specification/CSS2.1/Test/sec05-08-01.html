@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.8.1 :first-line</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        p:first-line{color:navy;}
+        span.cl1:first-line{color:olive;}
+    </style>
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 5.8.1 :first-line</h1>
+    <a href="sec05-06.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-08-02.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <pre>p:first-line{color:navy;}
+span.cl1:first-line{color:olive;}</pre>
+    <hr>
+    <p>这个P元素,其第一行文本的颜色应该是navy( 为了确保完成:first-line selector的测试,P元素的内容必须要超过1行,因此这里需要一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文本)</p>
+    <span class="cl1">这个SPAN元素,class属性值是'cl1',但不是block-container元素,故其第一行文本的颜色不应该是olive</span>
+</body>
+</html>

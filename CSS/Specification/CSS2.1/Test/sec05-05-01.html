@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.5.1 Class selectors</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        .cl1{color:navy;}
+        p.cl2{color:olive;}
+        p.cl3.cl4{color:maroon;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 5.5.1 Class selectors</h1>
+<a href="sec05-05.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec05-06.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{color:navy;}</pre>
+<h2 class="cl1">这个H2元素,class属性值是'cl1',其文本颜色应该是navy</h2>
+<p class="cl1">这个P元素,class属性值是'cl1',其文本颜色应该是navy</p>
+<hr>
+<pre>p.cl2{color:olive;}</pre>
+<p class="cl2">这个P元素,class属性值是'cl2',其文本颜色应该是olive</p>
+<p class="cl2 test">这个P元素,class属性值是'cl2 test',其文本颜色应该是olive</p>
+<h2 class="cl2">这个H2元素,class属性值是'cl2',但不是P元素,故其文本颜色不应该是olive</h2>
+<hr>
+<pre>p.cl3.cl4{color:maroon;}</pre>
+<p class="cl3 cl4">这个P元素,class属性值是'cl3 cl4',其文本颜色应该是maroon</p>
+<p class="cl3 cl4 cl5">这个P元素,class属性值是'cl3 cl4 cl5',其文本颜色应该是maroon</p>
+<p class="cl3 cl5">这个P元素,class属性值是'cl3 cl5',但值列表中不包含'cl4',故其文本颜色不应该是maroon</p>
+<p class="cl4 cl5">这个P元素,class属性值是'cl4 cl5',但值列表中不包含'cl3',故其文本颜色不应该是maroon</p>
+</body>
+</html>
