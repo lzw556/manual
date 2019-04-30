@@ -5,31 +5,19 @@
     <title>6.4.2 !important rules</title>
     <link rel="stylesheet" href="base.css">
     <style>
-        @import url("styleimport.css");
-        @import "styleimport/styleimport.css";
-        .cl1{
-            font-weight:bold;
-            color:navy;
-            background-color:silver;
-        }
+        #id1{color:olive;}
+        p{color:navy!important;}
     </style>
 </head>
 <body>
 <h1>CSS2.1 Test Suite: 6.4.2 !important rules</h1>
 <a href="sec06-04-01.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec06-04-03.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
 <hr>
-<pre>@import url("styleimport.css");   /* @import规则必须写在最前面,否则无效 */
-@import "styleimport/styleimport.css";
-.cl1{
-    font-weight:bold;
-    color:navy;
-    background-color:silver;
-}</pre>
+<pre>#id1{color:olive;}
+p{color:navy!important;}</pre>
 <hr>
-<p>下面每一种情况应用的样式声明都是: {font-weight:bold; color:navy; background-color:silver;}</p>
-<p style="font-weight:bold;color:navy;background-color:silver;">这个P元素,字体应该是粗体,文本颜色应该是navy,背景颜色应该是silver,这些样式声明来自于行内样式表(style属性)</p>
-<p class="cl1">这个P元素,class属性值是'cl1',字体应该是粗体,文本颜色应该是navy,背景颜色应该是silver,这些样式声明来自于嵌入样式表(style元素)</p>
-<p class="styleimport">这个P元素,class属性值是'styleimport',字体应该是粗体,文本颜色应该是navy,背景颜色应该是silver,这些样式声明是通过嵌入样式表(style元素)中的@import导入的</p>
-<p class="folderstyleimport">这个P元素,class属性值是'folderstyleimport',字体应该是粗体,文本颜色应该是navy,背景颜色应该是silver,这些样式声明是通过嵌入样式表(style元素)中的@import导入的</p>
+    <p id="id1">这个P元素,id属性值是'id1',其文本颜色应该是navy</p>
+<p style="color:maroon">这个P元素,style属性值是'color:maroon',其文本颜色应该是navy</p>
+<p>这个P元素的文本颜色应该是navy</p>
 </body>
 </html>

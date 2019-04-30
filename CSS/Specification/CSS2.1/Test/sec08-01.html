@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.1 Box dimensions</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        .cl1{
+            margin:1em;
+            border:solid 1em olive;
+            padding:1em;
+            color:navy;
+            background-color:silver;
+        }
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.1 Box dimensions</h1>
+<a href="sec07-01.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-02a.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{
+     margin:1em;
+     border:solid 1em olive;
+     padding:1em;
+     color:navy;
+     background-color:silver;
+}</pre>
+    <div style="background-color:silver;">
+        这个DIV元素,没有margin,border,padding,作为一个参考点
+    </div>
+    <div class="cl1">
+        这个DIV元素,class属性值是'cl1',其4个方向上的margin都是1em,4个方向上的border-width都是1em,border-color是olive,4个方向上的padding都是1em
+    </div>
+</body>
+</html>

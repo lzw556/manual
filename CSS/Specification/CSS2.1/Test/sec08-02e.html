@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.2 margin</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test1{
+            color:navy;
+            background-color:silver;
+        }
+        .test2{
+            color:white;
+            background-color:olive;
+        }
+        .cl1{margin:1em;}
+        .cl2{margin:5%;}
+        .cl3{margin:1em 5%;}
+        .cl4{margin:1em .5em 5%;}
+        .cl5{margin:1em -5px 5% 1em;}
+        .cl6{margin:1em;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.2 margin</h1>
+<a href="sec08-02d.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-02-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+    <pre>.cl1{margin:1em;}</pre>
+    <div class="container">
+        <div class="test1">这个DIV元素,没有margin,作为一个参考点</div>
+        <div class="cl1 test1">这个DIV元素,class属性值是'cl1',其4个方向上的margin应该都是1em</div>
+    </div>
+    <hr>
+<pre>.cl2{margin:5%;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有margin,作为一个参考点</div>
+    <div class="cl2 test1">这个DIV元素,class属性值是'cl2',其4个方向上的margin应该都是40px</div>
+</div>
+<hr>
+<pre>.cl3{margin:1em 5%;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有margin,作为一个参考点</div>
+    <div class="cl3 test1">这个DIV元素,class属性值是'cl3',其4个方向上的margin分别是:top 1em, right 40px bottom 1em left 40px</div>
+</div>
+<hr>
+<pre>.cl4{margin:1em .5em 5%;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有margin,作为一个参考点</div>
+    <div class="cl4 test1">这个DIV元素,class属性值是'cl4',其4个方向上的margin分别是:top 1em, right 0.5em bottom 40px left 0.5em</div>
+</div>
+<hr>
+<pre>.cl5{margin:1em -5px 5% 1em;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有margin,作为一个参考点</div>
+    <div class="cl5 test1">这个DIV元素,class属性值是'cl5',其4个方向上的margin分别是:top 1em, right -5px bottom 40px left 1em</div>
+</div>
+<hr>
+<pre>.cl6{margin:1em;}</pre>
+<div class="container" style="width:500px;">
+    在这个DIV中存在一个'span'元素,其背景颜色是'olive',文本颜色是'white';这个<span class="cl6 test2">SPAN元素</span>,其class属性值是'cl6',该SPAN元素在4个方向上的margin分别是:left/right 1em, top和bottom为0,而不是1em,因为margin-top/margin-bottom对inline non-replaced元素无效
+</div>
+</body>
+</html>

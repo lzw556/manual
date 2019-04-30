@@ -38,11 +38,11 @@
         <dt><a name="content-area">content area</a></dt>
         <dd>content area是一个矩形,其尺寸由box的width和height指定.<br>其边界叫作<dfn>content edge</dfn> or <dfn>inner edge</dfn>.<br>4个content edge组成的矩形叫作box的<dfn>content box</dfn>(也就是content area组成的矩形)</dd>
         <dt><a name="padding-area">padding area</a></dt>
-        <dd>padding area是一个矩形然后去掉中间的content area部分,其尺寸由box的padding指定.<br>其外边界叫作<dfn>padding edge</dfn>(内边界就是content edge)<br>4个padding edge组成的矩形叫作box的<dfn>padding box</dfn>(实际是由content area+padding area所组成的矩形)</dd>
+        <dd>padding area是一个矩形然后去掉中间的content area部分,其尺寸由box的padding指定.<br>其外边界叫作<dfn>padding edge</dfn>(内边界就是content edge)<br>4个padding edge组成的矩形叫作box的<dfn>padding box</dfn>(实际是由content area + padding area所组成的矩形)</dd>
         <dt><a name="border-area">border area</a></dt>
-        <dd>border area是一个矩形然后去掉中间的content area和padding area部分,其尺寸由box的border-width指定.<br>其外边界叫作<dfn>border edge</dfn>(内边界就是padding edge)<br>4个border edge组成的矩形叫作box的<dfn>border box</dfn>(实际是由content area+padding area+border area所组成的矩形)</dd>
+        <dd>border area是一个矩形然后去掉中间的content area和padding area部分,其尺寸由box的border-width指定.<br>其外边界叫作<dfn>border edge</dfn>(内边界就是padding edge)<br>4个border edge组成的矩形叫作box的<dfn>border box</dfn>(实际是由content area + padding area + border area所组成的矩形)</dd>
         <dt><a name="margin-area">margin area</a></dt>
-        <dd>margin area是一个矩形然后去掉中间的content area和padding area和border area部分,其尺寸由box的margin指定.<br>其外边界叫作<dfn>margin edge</dfn> or <dfn>outer edge</dfn>(内边界就是border edge)<br>4个margin edge组成的矩形叫作box的<dfn>margin box</dfn>(实际是由content area+padding area+border area所组成的矩形)</dd>
+        <dd>margin area是一个矩形然后去掉中间的content area和padding area和border area部分,其尺寸由box的margin指定.<br>其外边界叫作<dfn>margin edge</dfn> or <dfn>outer edge</dfn>(内边界就是border edge)<br>4个margin edge组成的矩形叫作box的<dfn>margin box</dfn>(实际是由content area + padding area + border area + margin area所组成的矩形)</dd>
     </dl>
     <p class="note">content area,padding area和border area的背景样式由background指定.margin area的背景总是透明的</p>
     <h2><a name="margin">8.2 Margin properties</a></h2>
@@ -163,8 +163,7 @@
     <ul>
         <li>horizontal margin不会collapse</li>
         <li>根元素生成的box的margin不会collapse</li>
-        <li>如果带<a href="vfmmodel.html/#clearance">clearance</a>的元素的margin-top和margin-bottom相邻,该元素的margin会和后面紧挨着的兄弟元素的相邻的margin collapse,但这个产生的collapsed margin<br>
-            不会再和父级块的margin-bottom collapse
+        <li>如果带<a href="vfmmodel.html/#clearance">clearance</a>的元素的margin-top和margin-bottom相邻,该元素的margin会和后面紧挨着的兄弟元素的相邻的margin collapse,但这个产生的collapsed margin不会再和父级块的margin-bottom collapse
         </li>
         <li>如果一个box的'height'属性的computed value是'auto'且'min-height'属性的computed value不是0,这个box的margin-top和其最后一个in-flow子元素的margin-bottom collapse,那么这个子元素的margin-bottom不会和父元素的margin-bottom collapse</li>
     </ul>
@@ -178,7 +177,7 @@
                 <li>box的margin-top和这个box内第一个in-flow子box的margin-top</li>
                 <li>box的margin-bottom和这个box后面紧挨着的in-flow兄弟box的margin-top</li>
                 <li>最后一个in-flow子box的margin-bottom和其父box的margin-bottom,如果这个父box的height的computed value为auto</li>
-                <li>一个box的margin-top和margin-bottom,要求这个box没有建立新的block formatting context,并且'min-height'的computed value为0,'height'的computed value为0orauto,并且没有in-flow子box</li>
+                <li>一个box的margin-top和margin-bottom,要求这个box没有建立新的block formatting context,并且'min-height'的computed value为0,'height'的computed value为0 or auto,并且没有in-flow子box</li>
             </ul>
         </li>
     </ul>

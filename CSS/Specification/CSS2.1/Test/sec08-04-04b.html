@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.4.4 border-right</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test{background-color:silver;border-style:none;}
+        .cl1{border-right:solid;}
+        .cl2{border-right:solid navy;}
+        .cl3{border-right:solid navy 5px;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.4.4 border-right</h1>
+<a href="sec08-04-04a.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-04-04c.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{border-right:solid}</pre>
+<p class="test cl1">这个P元素,class属性值是'cl1',其right border应该是:style solid, width medium, color 文本颜色</p>
+<p style="width:500px;" class="test">在这个P元素中存在一个'span'元素,class属性值是'cl1',这个<span class="cl1 test">SPAN元素</span>的right border应该是:style solid, width medium, color 文本颜色</p>
+<pre>.cl2{border-right:solid navy}</pre>
+<p class="test cl2">这个P元素,class属性值是'cl2',其right border应该是:style solid, width medium, color navy</p>
+<pre>.cl3{border-right:solid navy 5px}</pre>
+<p class="test cl3">这个P元素,class属性值是'cl3',其right border应该是:style solid, width 5px, color navy</p>
+</body>
+</html>

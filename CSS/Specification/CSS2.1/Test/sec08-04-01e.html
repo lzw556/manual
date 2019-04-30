@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.4.1 border-width</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test{background-color:silver;border:solid 0;}
+        .cl1{border-width:1px;}
+        .cl2{border-width:thin;}
+        .cl3{border-width:medium;}
+        .cl4{border-width:thick;}
+        .cl5{border-width:5px;}
+        .test.cl5{color:navy;}
+        .cl6{border-width:0;}
+        .cl7{border-width:-3px;}
+        .cl8{border-width:1px 3px;}
+        .cl9{border-width:1px 3px 5px;}
+        .cl10{border-width:1px 3px 5px 7px;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.4.1 border-width</h1>
+<a href="sec08-04-01d.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-04-02a.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{border-width:1px;}</pre>
+<p class="cl1 test">这个P元素,class属性值是'cl1',其4个方向上的border width应该是1px</p>
+<pre>.cl2{border-width:thin;}</pre>
+<p class="cl2 test">这个P元素,class属性值是'cl2',其4个方向上的border width应该是thin</p>
+<pre>.cl3{border-width:medium;}</pre>
+<p class="cl3 test">这个P元素,class属性值是'cl3',其4个方向上的border width应该是medium(初始值)</p>
+<pre>.cl4{border-width:thick;}</pre>
+<p class="cl4 test">这个P元素,class属性值是'cl4',其4个方向上的border width应该是thick</p>
+<pre>.cl5{border-width:5px;}</pre>
+<p style="width:500px;" class="test">在这个P元素中存在一个'span'元素,class属性值是'cl5',其文本颜色是navy,这个<span class="cl5 test">SPAN元素</span>4个方向上的border width应该是5px</p>
+<pre>.cl6{border-width:0;}</pre>
+<p class="cl6 test">这个P元素,class属性值是'cl6',其4个方向上的border width应该是0(即没有border)</p>
+<pre>.cl7{border-width:-3px;}</pre>
+<p class="cl7 test">这个P元素,class属性值是'cl7',应该没有border,因为'border-width'不允许负值</p>
+<pre>.cl8{border-width:1px 3px;}</pre>
+<p class="cl8 test">这个P元素,class属性值是'cl8',其4个方向上的border width分别是:top/bottom 1px, left/right 3px</p>
+<pre>.cl9{border-width:1px 3px 5px;}</pre>
+<p class="cl9 test">这个P元素,class属性值是'cl9',其4个方向上的border width分别是:top 1px, bottom 5px, left/right 3px</p>
+<pre>.cl10{border-width:1px 3px 5px 7px;}</pre>
+<p class="cl10 test">这个P元素,class属性值是'cl10',其4个方向上的border width分别是:top 1px, right 3px, bottom 5px, left 7px</p>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.4.3 border-right-style</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test{background-color:silver;border-color:navy;border-width:5px;}
+        .cl1{border-right-style:solid;}
+        .cl2{border-right-style:double;}
+        .cl3{border-right-style:dotted;}
+        .cl4{border-right-style:dashed;}
+        .cl5{border-right-style:groove;}
+        .cl6{border-right-style:ridge;}
+        .cl7{border-right-style:inset;}
+        .cl8{border-right-style:outset;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.4.3 border-right-style</h1>
+<a href="sec08-04-03a.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-04-03c.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<p class="test">这个P元素,没有显式设置right border style,故right border style应该是初始值none(即没有right border)</p>
+<pre>.cl1{border-right-style:solid;}</pre>
+<p class="cl1 test">这个P元素,class属性值是'cl1',其right border style应该是solid</p>
+<pre>.cl2{border-right-style:double;}</pre>
+<p class="cl2 test">这个P元素,class属性值是'cl2',其right border style应该是double</p>
+<pre>.cl3{border-right-style:dotted;}</pre>
+<p class="cl3 test">这个P元素,class属性值是'cl3',其right border style应该是dotted</p>
+<pre>.cl4{border-right-style:dashed;}</pre>
+<p class="cl4 test">这个P元素,class属性值是'cl4',其right border style应该是dashed</p>
+<pre>.cl5{border-right-style:groove;}</pre>
+<p class="cl5 test">这个P元素,class属性值是'cl5',其right border style应该是groove</p>
+<pre>.cl6{border-right-style:ridge;}</pre>
+<p class="cl6 test">这个P元素,class属性值是'cl6',其right border style应该是ridge</p>
+<pre>.cl7{border-right-style:inset;}</pre>
+<p class="cl7 test">这个P元素,class属性值是'cl7',其right border style应该是inset</p>
+<pre>.cl8{border-right-style:outset;}</pre>
+<p class="cl8 test">这个P元素,class属性值是'cl8',其right border style应该是outset</p>
+</body>
+</html>

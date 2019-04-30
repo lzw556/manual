@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7.1 Media query</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        @media all and (max-width:800px){
+            p#id1{color:navy;}
+        }
+        @media (max-width:800px){
+            h3{font-weight:normal;}
+        }
+        @media print{
+            p#id2{font-size:30px;}
+        }
+        @media (orientation:portrait){
+            p#id3{background-color:navy;color:white;}
+        }
+    </style>
+</head>
+<body>
+<h1>CSS2.1(and CSS3) Test Suite: 7.1 Media query</h1>
+<a href="sec06-04-03.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>@media all and (max-width:800px){
+    p#id1{color:navy;}
+}</pre>
+<p id="id1">这个P元素,id属性值是'id1',当viewport宽度(UA的窗口宽度)被缩放至小于等于800px时,其文本颜色应该是navy</p>
+<hr>
+<pre>@media (max-width:800px){
+    h3{font-weight:normal;}
+}</pre>
+<h3>这个H3元素,当viewport宽度(UA的窗口宽度)被缩放至小于等于800px时,其字体会由粗体变成正常</h3>
+<hr>
+<pre>@media print{
+    p#id2{font-size:30px;}
+}</pre>
+<p id="id2">这个P元素,id属性值是'id2',当用打印模式查看本文档时,其字体大小会变成30px</p>
+<hr>
+<pre>@media (orientation:portrait){
+    p#id3{background-color:navy;<br>   color:white;}
+}</pre>
+<p id="id3">这个P元素,id属性值是'id3',当viewport是竖屏(高度大于宽度)时,其背景颜色应该是navy,文本颜色应该是white</p>
+</body>
+</html>

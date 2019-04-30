@@ -5,18 +5,19 @@
     <title>6.4.3 Calculating specificity</title>
     <link rel="stylesheet" href="base.css">
     <style>
-        @import url("styleimport.css");
-        @import "styleimport/styleimport.css";
-        .cl1{
-            font-weight:bold;
-            color:navy;
-            background-color:silver;
-        }
+        p[title="tt1"]{font-size:24px;}
+        p.cl1{font-size:20px;}
+        div li p{font-size:18px;}
+        div p{color:navy;font-size:12px;}
+        #id1{font-size:24px;}
+        span.cl2.cl3{font-size:20px;}
+        span.cl2{font-size:12px;}
+        #id2{color:navy;}
     </style>
 </head>
 <body>
 <h1>CSS2.1 Test Suite: 6.4.3 Calculating specificity</h1>
-<a href="sec06-04-02.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec06-04-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<a href="sec06-04-02.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec07-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
 <hr>
 <pre>@import url("styleimport.css");   /* @import规则必须写在最前面,否则无效 */
 @import "styleimport/styleimport.css";
@@ -26,10 +27,31 @@
     background-color:silver;
 }</pre>
 <hr>
-<p>下面每一种情况应用的样式声明都是: {font-weight:bold; color:navy; background-color:silver;}</p>
-<p style="font-weight:bold;color:navy;background-color:silver;">这个P元素,字体应该是粗体,文本颜色应该是navy,背景颜色应该是silver,这些样式声明来自于行内样式表(style属性)</p>
-<p class="cl1">这个P元素,class属性值是'cl1',字体应该是粗体,文本颜色应该是navy,背景颜色应该是silver,这些样式声明来自于嵌入样式表(style元素)</p>
-<p class="styleimport">这个P元素,class属性值是'styleimport',字体应该是粗体,文本颜色应该是navy,背景颜色应该是silver,这些样式声明是通过嵌入样式表(style元素)中的@import导入的</p>
-<p class="folderstyleimport">这个P元素,class属性值是'folderstyleimport',字体应该是粗体,文本颜色应该是navy,背景颜色应该是silver,这些样式声明是通过嵌入样式表(style元素)中的@import导入的</p>
+<pre>p[title="tt1"]{font-size:24px;}       /*a=0 b=0 c=1 d=1*/
+p.cl1{font-size:20px;}       /*a=0 b=0 c=1 d=1*/
+div li p{font-size:18px;}       /*a=0 b=0 c=0 d=3*/
+div p{color:navy;font-size:12px;}       /*a=0 b=0 c=0 d=2*/</pre>
+<p>这个P元素的文本颜色和字体大小应该和其父元素一样</p>
+<div>
+    <p>这个P元素,作为DIV的子元素,其文本颜色应该是navy,字体大小应该是12px</p>
+    <ul>
+        <li><p>这个P元素,作为DIV的后代元素LI的子元素,其文本颜色应该是navy,字体大小应该是18px(div li p重写了div p中的样式)</p></li>
+        <li><p class="cl1">这个P元素,class属性值是'cl1',作为DIV的后代元素LI的子元素,其文本颜色应该是navy,字体大小应该是20px(p.cl1重写了div li p中的样式)</p></li>
+        <li><p title="tt1">这个P元素,title属性值是'tt1',作为DIV的后代元素LI的子元素,其文本颜色应该是navy,字体大小应该是24px(p[title="tt1"]重写了div li p中的样式)</p></li>
+    </ul>
+</div>
+<hr>
+<pre>#id1{font-size:24px;}       /*a=0 b=1 c=0 d=0*/
+span.cl2.cl3{font-size:20px;}       /*a=0 b=0 c=2 d=1*/
+span.cl2{font-size:12px;}       /*a=0 b=0 c=1 d=1*/</pre>
+<ul>
+    <li><span id="id1" class="cl2 cl3">这个SPAN元素,class属性值是'cl2 cl3' id属性值是'id1',其字体大小应该是24px(#id1重写了span.cl2.cl3中的样式)</span></li>
+    <li><span class="cl2">这个SPAN元素,class属性值是'cl2',其字体大小应该是12px</span></li>
+    <li><span class="cl2 cl3">这个SPAN元素,class属性值是'cl2 cl3',其字体大小应该是20px(span.cl2.cl3重写了span.cl2中的样式)</span></li>
+    <li><span>这个SPAN元素的字体大小和其父元素一样</span></li>
+</ul>
+<hr>
+<pre>#id2{color:navy;}       /*a=0 b=1 c=0 d=0, style属性中的样式表的specificity是a=1 b=0 c=0 d=0*/</pre>
+<p id="id2" style="color:olive;">这个P元素,id属性值是'id2',style属性值是'color:olive',其文本颜色应该是olive</p>
 </body>
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.2 margin-left</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test1{
+            color:navy;
+            background-color:silver;
+        }
+        .test2{
+            color:white;
+            background-color:olive;
+        }
+        .cl1{margin-left:1em;}
+        .cl2{margin-left:5%;}
+        .container .cl3{margin-left:-5px;background-color:gray;}
+        .cl4{margin-left:1em;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.2 margin-left</h1>
+<a href="sec08-02c.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-02e.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{margin-left:1em;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有margin,作为一个参考点</div>
+    <div class="cl1">这个DIV元素,class属性值是'cl1',其left margin应该是1em</div>
+</div>
+<hr>
+<pre>.cl2{margin-left:5%;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有margin,作为一个参考点</div>
+    <div class="cl2">这个DIV元素,class属性值是'cl3',其left margin应该是40px</div>
+</div>
+<hr>
+<pre>.cl3{margin-left:-5px;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有margin,作为一个参考点</div>
+    <div class="cl3">这个DIV元素,class属性值是'cl2',其left margin应该是-5px</div>
+</div>
+<hr>
+<pre>.cl4{margin-left:1em;}</pre>
+<div class="container">
+    <strong class="test2">这个STRONG元素作为一个参考点</strong><span class="cl4 test2">这个SPAN元素,class属性值是'cl4',其left margin应该是1em</span>
+</div>
+</body>
+</html>

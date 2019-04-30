@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.4.2 border-right-color</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test{border-style:solid;}
+        .cl1{border-right-color:purple;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.4.2 border-right-color</h1>
+<a href="sec08-04-02a.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-04-02c.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{border-right-color:purple;}</pre>
+<p class="test">这个P元素,没有显式设置right border color,故其right border color应该是初始值即文本color</p>
+<p class="cl1 test">这个P元素,class属性值是'cl1',其right border color应该是purple</p>
+<p style="width:500px;" class="test">在这个P元素中存在一个'span'元素,class属性值是'cl1',这个<span class="cl1 test">SPAN元素</span>的right border color应该是purple</p>
+</body>
+</html>

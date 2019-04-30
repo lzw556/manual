@@ -5,22 +5,41 @@
     <title>6.4.1 Cascading order</title>
     <link rel="stylesheet" href="base.css">
     <style>
+        #id1{color:olive;}
         p{color:navy!important;}
-        p a{color:olive;}
+        #id2{font-size:24px;}
+        span[title="tt1"]{font-size:22px;}
+        span.cl1{font-size:20px;}
+        div li span{font-size:18px;}
+        div span{color:navy;font-size:12px;}
+        #id3{font-size:12px;}
     </style>
 </head>
 <body>
 <h1>CSS2.1 Test Suite: 6.4.1 Cascading order</h1>
 <a href="sec06-03.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec06-04-02.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
 <hr>
-<pre>@import url("styleimport.css");   /* @import规则必须写在最前面,否则无效 */
-@import "styleimport/styleimport.css";
-.cl1{
-    font-weight:bold;
-    color:navy;
-    background-color:silver;
-}</pre>
+<pre>#id1{color:olive;}
+p{color:navy!important;}</pre>
 <hr>
-    <p><a href="index.html">link1</a>, <a href="index1.html">link2</a>666s</p>
+<p id="id1">这个P元素,id属性值是'id1',其文本颜色应该是navy</p>
+<p style="color:maroon">这个P元素,style属性值是'color:maroon',其文本颜色应该是navy</p>
+<p>这个P元素的文本颜色应该是navy</p>
+<hr>
+<pre>span[title="tt1"]{font-size:24px;}       /*a=0 b=0 c=1 d=1*/
+span.cl1{font-size:20px;}       /*a=0 b=0 c=1 d=1*/
+div li span{font-size:18px;}       /*a=0 b=0 c=0 d=3*/
+div span{color:navy;font-size:12px;}       /*a=0 b=0 c=0 d=2*/
+#id3{font-size:12px;}       /*a=0 b=1 c=0 d=0*/</pre>
+<div>
+    <span>这个SPAN元素,作为DIV的子元素,其文本颜色应该是navy,字体大小应该是12px</span>
+    <ul>
+        <li><span>这个SPAN元素,作为DIV的后代元素LI的子元素,其文本颜色应该是navy,字体大小应该是18px(div li span重写了div span中的样式)</span></li>
+        <li><span class="cl1">这个SPAN元素,class属性值是'cl1',作为DIV的后代元素LI的子元素,其文本颜色应该是navy,字体大小应该是20px(span.cl1重写了div li span中的样式)</span></li>
+        <li><span title="tt1">这个SPAN元素,title属性值是'tt1',作为DIV的后代元素LI的子元素,其文本颜色应该是navy,字体大小应该是22px(span[title="tt1"]重写了div li span中的样式)</span></li>
+        <li><span class="cl1" id="id2">这个SPAN元素,class属性值是'cl1',id属性值是'id2',作为DIV的后代元素LI的子元素,其文本颜色应该是navy,字体大小应该是24px(#id2重写了span.cl1中的样式)</span></li>
+        <li><span style="font-size:26px;" id="id3">这个SPAN元素,style属性值是'font-size:26px',id属性值是'id3',作为DIV的后代元素LI的子元素,其文本颜色应该是navy,字体大小应该是26px(style属性中的样式重写了#id3中的样式)</span></li>
+    </ul>
+</div>
 </body>
 </html>

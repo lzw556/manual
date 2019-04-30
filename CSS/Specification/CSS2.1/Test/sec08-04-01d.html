@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.4.1 border-left-width</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test{background-color:silver;border:solid 0;}
+        .cl1{border-left-width:1px;}
+        .cl2{border-left-width:thin;}
+        .cl3{border-left-width:medium;}
+        .cl4{border-left-width:thick;}
+        .cl5{border-left-width:5px;}
+        .test.cl5{color:navy;}
+        .cl6{border-left-width:0;}
+        .cl7{border-left-width:-3px;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.4.1 border-left-width</h1>
+<a href="sec08-04-01c.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-04-01e.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{border-left-width:1px;}</pre>
+<p class="cl1 test">这个P元素,class属性值是'cl1',其left border width应该是1px</p>
+<pre>.cl2{border-left-width:thin;}</pre>
+<p class="cl2 test">这个P元素,class属性值是'cl2',其left border width应该是thin</p>
+<pre>.cl3{border-left-width:medium;}</pre>
+<p class="cl3 test">这个P元素,class属性值是'cl3',其left border width应该是medium(初始值)</p>
+<pre>.cl4{border-left-width:thick;}</pre>
+<p class="cl4 test">这个P元素,class属性值是'cl4',其left border width应该是thick</p>
+<pre>.cl5{border-left-width:5px;}</pre>
+<p style="width:500px;" class="test">在这个P元素中存在一个'span'元素,class属性值是'cl5',其文本颜色是navy,这个<span class="cl5 test">SPAN元素</span>的left border width应该是5px</p>
+<pre>.cl6{border-left-width:0;}</pre>
+<p class="cl6 test">这个P元素,class属性值是'cl6',其left border width应该是0(即没有left border)</p>
+<pre>.cl7{border-left-width:-3px;}</pre>
+<p class="cl7 test">这个P元素,class属性值是'cl7',应该没有left border,因为'border-left-width'不允许负值</p>
+</body>
+</html>

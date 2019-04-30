@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.4.3 border-style</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test{border-color:navy;border-width:5px;}
+        .cl1{border-style:solid;}
+        .cl2{border-style:solid double;}
+        .cl3{border-style:solid double dotted;}
+        .cl4{border-style:solid double dotted dashed;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.4.3 border-style</h1>
+<a href="sec08-04-03d.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-04-04a.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{border-style:solid;}</pre>
+<p class="test">这个P元素,没有显式设置border style,故其border style应该是初始值none(即没有border)</p>
+<p class="cl1 test">这个P元素,class属性值是'cl1',其4个方向上的border style应该是solid</p>
+<p style="width:600px;" class="test">在这个P元素中存在一个'span'元素,class属性值是'cl1',这个<span class="cl1 test">SPAN元素</span>4个方向上的border style应该是solid</p>
+<pre>.cl2{border-style:solid double;}</pre>
+<p class="cl2 test">这个P元素,class属性值是'cl2',其4个方向上的border style分别是:top/bottom solid, left/right double</p>
+<pre>.cl3{border-style:solid double dotted;}</pre>
+<p class="cl3 test">这个P元素,class属性值是'cl3',其4个方向上的border style分别是:top solid, bottom dotted, left/right double</p>
+<pre>.cl4{border-style:solid double dotted dashed;}</pre>
+<p class="cl4 test">这个P元素,class属性值是'cl4',其4个方向上的border style分别是:top solid, right double, bottom dotted, left dashed</p>
+</body>
+</html>

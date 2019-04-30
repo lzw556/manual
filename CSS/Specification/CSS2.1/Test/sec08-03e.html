@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.3 Padding</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test1{
+            color:navy;
+            background-color:silver;
+        }
+        .test2{
+            color:white;
+            background-color:olive;
+        }
+        .test3{
+            background-color:gray;color:white;
+        }
+        .cl1{padding:1em;}
+        .cl2{padding:5%;}
+        .cl3{padding:1em 5%;}
+        .cl4{padding:1em .5em 5%;}
+        .cl5{padding:1em 5% .5em 1em;}
+        .cl6{padding:1em;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.3 padding</h1>
+<a href="sec08-03d.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-04-01a.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{padding:1em;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有padding,作为一个参考点</div>
+    <div class="cl1 test3">这个DIV元素,class属性值是'cl1',其4个方向上的padding应该是1em</div>
+</div>
+<hr>
+<pre>.cl2{padding:5%;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有padding,作为一个参考点</div>
+    <div class="cl2 test3">这个DIV元素,class属性值是'cl1',其4个方向上的padding应该是40px</div>
+</div>
+<hr>
+<pre>.cl3{padding:1em 5%;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有padding,作为一个参考点</div>
+    <div class="cl3 test3">这个DIV元素,class属性值是'cl1',其4个方向上的padding分别是top/bottom 1em, right/left 40px</div>
+</div>
+<hr>
+<pre>.cl4{padding:1em .5em 5%;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有padding,作为一个参考点</div>
+    <div class="cl4 test3">这个DIV元素,class属性值是'cl1',其4个方向上的padding分别是top 1em, bottom 40px, right/left 0.5em</div>
+</div>
+<hr>
+<pre>.cl5{padding:1em 5% .5em 1em;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有padding,作为一个参考点</div>
+    <div class="cl5 test3">这个DIV元素,class属性值是'cl1',其4个方向上的padding分别是top 1em, right 40px, bottom 0.5em, left 1em</div>
+</div>
+<hr>
+<pre>.cl6{margin:1em;}</pre>
+<div class="container" style="width:500px;">
+    在这个DIV中存在一个'span'元素,其背景颜色是'olive',文本颜色是'white';这个<span class="cl6 test2">SPAN元素</span>,其class属性值是'cl6',该SPAN元素在4个方向上的padding都是1em
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.4.3 border-top-style</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test{background-color:silver;border-color:navy;border-width:5px;}
+        .cl1{border-top-style:solid;}
+        .cl2{border-top-style:double;}
+        .cl3{border-top-style:dotted;}
+        .cl4{border-top-style:dashed;}
+        .cl5{border-top-style:groove;}
+        .cl6{border-top-style:ridge;}
+        .cl7{border-top-style:inset;}
+        .cl8{border-top-style:outset;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.4.3 border-top-style</h1>
+<a href="sec08-04-02e.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-04-03b.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<p class="test">这个P元素,没有显式设置top border style,故top border style应该是初始值none(即没有top border)</p>
+<pre>.cl1{border-top-style:solid;}</pre>
+<p class="cl1 test">这个P元素,class属性值是'cl1',其top border style应该是solid</p>
+<pre>.cl2{border-top-style:double;}</pre>
+<p class="cl2 test">这个P元素,class属性值是'cl2',其top border style应该是double</p>
+<pre>.cl3{border-top-style:dotted;}</pre>
+<p class="cl3 test">这个P元素,class属性值是'cl3',其top border style应该是dotted</p>
+<pre>.cl4{border-top-style:dashed;}</pre>
+<p class="cl4 test">这个P元素,class属性值是'cl4',其top border style应该是dashed</p>
+<pre>.cl5{border-top-style:groove;}</pre>
+<p class="cl5 test">这个P元素,class属性值是'cl5',其top border style应该是groove</p>
+<pre>.cl6{border-top-style:ridge;}</pre>
+<p class="cl6 test">这个P元素,class属性值是'cl6',其top border style应该是ridge</p>
+<pre>.cl7{border-top-style:inset;}</pre>
+<p class="cl7 test">这个P元素,class属性值是'cl7',其top border style应该是inset</p>
+<pre>.cl8{border-top-style:outset;}</pre>
+<p class="cl8 test">这个P元素,class属性值是'cl8',其top border style应该是outset</p>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.3 padding-right</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .test1{
+            color:navy;
+            background-color:silver;
+        }
+        .test2{
+            color:white;
+            background-color:olive;
+        }
+        .test3{
+            background-color:gray;color:white;
+        }
+        .cl1{padding-right:1em;}
+        .cl2{padding-right:5%;}
+        .cl3{padding-right:1em;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 8.3 padding-right</h1>
+<a href="sec08-03a.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec08-03c.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+<pre>.cl1{padding-right:1em;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有padding,作为一个参考点</div>
+    <div class="cl1 test3">这个DIV元素,class属性值是'cl1',其right padding应该是1em</div>
+</div>
+<hr>
+<pre>.cl2{padding-right:5%;}</pre>
+<div class="container">
+    <div class="test1">这个DIV元素,没有padding,作为一个参考点</div>
+    <div class="cl2 test3">这个DIV元素,class属性值是'cl2',其right padding应该是40px</div>
+</div>
+<hr>
+<pre>.cl3{padding-right:1em;}</pre>
+<div class="container">
+    <span class="cl3 test2">这个SPAN元素,class属性值是'cl3',其right padding应该是1em</span>
+</div>
+<hr>
+</body>
+</html>
