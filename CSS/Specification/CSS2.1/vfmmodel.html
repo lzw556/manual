@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>9Visual formatting model</title>
-    <link rel="stylesheet" href="../base.css">
+    <link href="/CSS/base.css" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
@@ -90,23 +90,23 @@
         </li>
     </ul>
     <h2><a name="vfm-introduction">9.1 Introduction to the visual formatting model</a></h2>
-    在visual formatting model中,文档树中的每一个元素会根据<a href="box.html">box model</a>生成0或多个boxes.这些boxes的布局由以下因素控制:
+    在visual formatting model中,<a href="conform.html#doctree">document tree</a>中的每一个元素会根据<a href="box.html">box model</a>生成0或多个boxes.这些boxes的布局由以下因素控制:
     <ul>
         <li><a href="box.html#box-dimension">box dimensions</a> and <a href="#box-type">type</a></li>
         <li><a href="#position-scheme">positioning scheme</a>(normal flow,float,and absolute positioning)</li>
-        <li>relationships between elements in the <a href="conformance/#dom"></a>document tree</li>
+        <li>relationships between elements in the <a href="conform.html#doctree">document tree</a></li>
     </ul>
     <h3><a name="viewport">9.1.1 The viewport</a></h3>
-    <p>连续媒体的UA通常会给用户提供一个viewport,用户通过他来查阅文档.当viewport大小发生变化时UA可能改变文档布局.</p>
+    <p>连续媒体的UA通常会给用户提供一个viewport(一个window或者屏幕上其他的可视区域),用户通过他来查阅文档.当viewport大小发生变化时UA可能改变文档布局.</p>
     <p>当viewport比渲染文档的画布区域小时,UA应该提供一种滚动机制.</p>
     <h3><a name="containing-block">9.1.2 Containing block</a></h3>
-    <p>许多box的position和size是根据被称为<dfn>containing block</dfn>的矩形的边界来计算的.一般把生成box作为后代box的containing block,我们说一个box为后代建立了containing block</p>
+    <p>在CSS 2.1中,许多box的position和size是相对于一个被称为<dfn>containing block</dfn>的矩形来计算的.一般把生成box作为后代box的containing block,我们说一个box为后代建立了containing block</p>
     <p>每一个box都根据其containing block确定position,但是不受该包含块限制,可能会overflow.</p>
     <p>具体<a href="vfmdetails.html#containing-block-definition">定义</a>见下章</p>
     <h2><a name="box-type">9.2 Controlling box generation</a></h2>
     <p>'display'属性指定box的type</p>
     <h3><a name="block-level">9.2.1 Block-level elements and block boxes</a></h3>
-    <p>'display'属性值设置为:'block','list-item','table'可以使元素会变成block-level.每一个block-level element会生成一个principal block-level box,block-level box参与<a href="#block-formatting-context">block formatting context</a></p>
+    <p>'display'属性值设置为:'block','list-item','table'可以使元素会变成block-level.每一个block-level element会生成一个principal block-level box,有些block-level box比如'list-item'元素除了生成一个principal block-level box之外,还会生成额外的box.block-level box参与<a href="#block-formatting-context">block formatting context</a></p>
     <dl>
         <dt><a name="block-container-box">block container box</a></dt>
         <dd>non-replaced,'display'值是'block','list-item','inline-block','table-cell'的元素会生成block container box<br>
@@ -128,7 +128,7 @@
     <h3><a name="inline-level">9.2.2 inline-level elements and inline boxes</a></h3>
     <p>'display'属性值设置为:'inline','inline-block','inline-table'可以使元素会变成inline-level.inline-level元素会生成inline-level box,inline-level box参与<a href="#inline-formatting-context">inline formatting context</a></p>
     <dl>
-        <dt><a name="block-container-box">inline box</a></dt>
+        <dt><a name="inline-box">inline box</a></dt>
         <dd>non-replaced,'display'值是'inline'的元素会生成inline box</dd>
         <dt>atomic(原子) inline-level box</dt>
         <dd>是inline-level box但不是inline box的叫作atomic inline-level box,比如replaced inline-level element,inline-block element.<br>
@@ -161,7 +161,7 @@
                     <td>Media:</td><td></td>
                 </tr>
                 <tr>
-                    <td>Computed value:</td><td>和specified value一样,除了定位元素,浮动元素和根元素</td>
+                    <td>Computed value:</td><td>和specified value一样,除了positioned element,浮动元素和根元素</td>
                 </tr>
             </table>
         </dd>
@@ -172,7 +172,7 @@
         <dt>block</dt>
         <dd>会让元素生成一个principal block-level box</dd>
         <dt>inline-block</dt>
-        <dd>会让元素生成一个inline-level <a href="#block-container-box">block container box</a>.内部被格式化成一个block box(个人理解即一个新的BFC),自身被格式化成一个原子inline-level box(个人理解相当于inline replaced元素)</dd>
+        <dd>会让元素生成一个inline-level <a href="#block-container-box">block container box</a>.内部被格式化成一个block box(个人理解即建立一个新的BFC),自身被格式化成一个原子inline-level box(个人理解相当于inline replaced元素)</dd>
         <dt>list-item</dt>
         <dd>会让元素(比如li)生成一个principal block-level box和一个marker box</dd>
         <dt>none</dt>
@@ -201,8 +201,8 @@
     <h2><a name="position-scheme">9.3 Position schemes</a></h2>
     <ol>
         <li><a href="#normal-flow">Normal flow</a>.normal flow包括block-level box的<a href="#block-formatting">block formatting</a>,inline-level box的<a href="#inline-formatting">inline formatting</a>和block-level box与inline-level box的<a href="#relative-positioning">relative positioning</a></li>
-        <li><a href="#float">Floats</a>.在浮动模型中,一个box首先根据normal flow来放置,然后从normal flow中取出来并尽可能地向左或向右放置</li>
-        <li><a href="#absolute-positioning">Absolute positioning</a>.在绝对定位模型中,一个box从normal flow中全部移除(不影响其后的兄弟元素)并根据其containing block确定位置</li>
+        <li><a href="#float">Floats</a>.在浮动模型中,一个box首先根据normal flow进行布局,然后从normal flow中取出来并尽可能地向左或向右移动</li>
+        <li><a href="#absolute-positioning">Absolute positioning</a>.在绝对定位模型中,box从normal flow中完全被移除,然后根据其containing block确定position</li>
     </ol>
     <p class="note">如果一个元素是floated,absolutely positioned,或是root element,他就叫<a name="out-of-flow">out of flow</a>(流外元素).如果一个元素不是out of flow,他就是<a name="in-flow">in-flow</a>(流内元素)</p>
     <h3><a name="position">9.3.1 Choosing a positioning scheme:'position' property</a></h3>
@@ -238,17 +238,17 @@
         <dt>static</dt>
         <dd>normal box,根据normal flow进行布局.属性'top','right','bottom','left'无效</dd>
         <dt>relative</dt>
-        <dd>box的位置根据normal flow来计算,这个位置叫作其在normal flow中的位置.<span class="note">然后根据其在normal flow中的位置进行偏移.如果一个box(A)是relatively positioned,其后面的box仍按照box(A)没有偏移来计算</span>
+        <dd>box首先根据normal flow or float进行布局,<span class="note">然后相对于这个position进行offset</span>
         </dd>
         <dt>absolute</dt>
         <dd>
-            box的位置由属性'top','right','bottom','left'来指定.这些属性指定相对于containing block的偏移量.绝对定位的box从normal flow中被移除,意味着对后面的兄弟box的布局没有影响
+            box的position由属性'top','right','bottom','left'来指定.这些属性指定相对于containing block的偏移量.绝对定位的box从normal flow中被移除,意味着对后面的兄弟box的布局没有影响
         </dd>
         <dt>fixed</dt>
-        <dd>box的位置根据绝对定位模型来计算.当media type是handheld,projection,screen,tty and tv时,box相对于viewport固定,不会随滚动而发生移动</dd>
+        <dd>box的position根据绝对定位模型来计算.当media type是handheld,projection,screen,tty and tv时,box相对于viewport固定,不会随滚动而发生移动</dd>
     </dl>
     <h3><a name="box-offset">9.3.2 Box offsets:'top','right','bottom','left'</a></h3>
-    <p>如果一个元素的'position'属性有一个不是'static'的值,它就叫作positioned element.positioned element生成<a name="positioned-box">positioned box</a>,根据'top','right','bottom','left'来布局</p>
+    <p>如果一个元素的'position'属性有一个不是'static'的值,它就叫作<a name="positioned-element">positioned element</a>.positioned element生成<a name="positioned-box">positioned box</a>,根据'top','right','bottom','left'来布局</p>
     <dl class="prop-definition">
         <dt><span class="prop-name"><strong>top</strong></span></dt>
         <dd class="prop-content">
@@ -277,7 +277,7 @@
             </table>
         </dd>
     </dl>
-    <p>这个属性指定了一个绝对定位box的margin-top的edge(上外边距边界)到其<a href="vfmdetails.html#containing-block-definition">containing block</a>的top edge(参考线)<strong>下方</strong>之间的距离;对于相对定位的box,这个属性指定了其margin-top的edge到其原来在normal flow中的位置时自身的top content edge(参考线)<strong>下方</strong>之间的距离.正值在参考线下方,负值在参考线上方
+    <p>这个属性指定了一个绝对定位box的margin-top的edge(上外边距边界)到其<a href="vfmdetails.html#containing-block-definition">containing block</a>的top edge(参考线)<strong>下方</strong>之间的距离;对于相对定位的box,这个属性指定了其margin-top的edge到其原来在normal flow中的position时自身的top content edge(参考线)<strong>下方</strong>之间的距离.正值在参考线下方,负值在参考线上方
     </p>
     <div>
         <dl class="prop-definition">
@@ -309,7 +309,7 @@
             </dd>
         </dl>
     </div>
-    <p>这个属性指定了一个绝对定位box的margin-right的edge(右外边距边界)到其<a href="vfmdetails.html#containing-block-definition">containing block</a>的right edge(参考线)<strong>左边</strong>之间的距离;对于相对定位的box,这个属性指定了其margin-right的edge到其原来在normal flow中的位置时自身的right content edge(参考线)<strong>左边</strong>之间的距离.正值在参考线左边,负值在参考线右边
+    <p>这个属性指定了一个绝对定位box的margin-right的edge(右外边距边界)到其<a href="vfmdetails.html#containing-block-definition">containing block</a>的right edge(参考线)<strong>左边</strong>之间的距离;对于相对定位的box,这个属性指定了其margin-right的edge到其原来在normal flow中的position时自身的right content edge(参考线)<strong>左边</strong>之间的距离.正值在参考线左边,负值在参考线右边
     </p>
     <dl class="prop-definition">
         <dt><span class="prop-name"><strong>bottom</strong></span></dt>
@@ -339,7 +339,7 @@
             </table>
         </dd>
     </dl>
-    <p>这个属性指定了一个绝对定位box的margin-bottom的edge(下外边距边界)到其<a href="vfmdetails.html#containing-block-definition">containing block</a>的bottom edge(参考线)<strong>上方</strong>之间的距离;对于相对定位的box,这个属性指定了其margin-bottom的edge到其原来在normal flow中的位置时自身的bottom content edge(参考线)<strong>上方</strong>之间的距离.正值在参考线上方,负值在参考线下方
+    <p>这个属性指定了一个绝对定位box的margin-bottom的edge(下外边距边界)到其<a href="vfmdetails.html#containing-block-definition">containing block</a>的bottom edge(参考线)<strong>上方</strong>之间的距离;对于相对定位的box,这个属性指定了其margin-bottom的edge到其原来在normal flow中的position时自身的bottom content edge(参考线)<strong>上方</strong>之间的距离.正值在参考线上方,负值在参考线下方
     </p>
     <dl class="prop-definition">
         <dt><span class="prop-name"><strong>left</strong></span></dt>
@@ -369,7 +369,7 @@
             </table>
         </dd>
     </dl>
-    <p>这个属性指定了一个绝对定位box的margin-left的edge(左外边距边界)到其<a href="vfmdetails.html#containing-block-definition">containing block</a>的left edge(参考线)<strong>右边</strong>之间的距离;对于相对定位的box,这个属性指定了其margin-left的edge到其原来在normal flow中的位置时自身的left content edge(参考线)<strong>右边</strong>之间的距离.正值在参考线右边,负值在参考线左边
+    <p>这个属性指定了一个绝对定位box的margin-left的edge(左外边距边界)到其<a href="vfmdetails.html#containing-block-definition">containing block</a>的left edge(参考线)<strong>右边</strong>之间的距离;对于相对定位的box,这个属性指定了其margin-left的edge到其原来在normal flow中的position时自身的left content edge(参考线)<strong>右边</strong>之间的距离.正值在参考线右边,负值在参考线左边
     </p>
     <dl>
         <dt>length</dt>
@@ -382,42 +382,102 @@
     <h2><a name="normal-flow">9.4 Normal flow</a></h2>
     <p>box在normal flow中属于一个格式化上下文,可能是block formatting context或inline formatting context,但不能两者都是</p>
     <h3><a name="block-formatting-context">9.4.1 Block formatting contexts</a></h3>
-    <p class="note">float元素,absolutely positioned元素,不是block-level box的block container box(比如non-replaced inline-block,non-replaced table-cells和table-caption),以及'overflow'属性值不是'visible'的<a href="#block-box">block box</a>会为其内容建立新的block formatting context</p>
-    <p>在block formatting context中,box从其containing block的顶部开始在垂直方向上一个接一个地放置,2个兄弟box之间的垂直距离由'margin'指定.垂直方向上相邻的margin会collapse;每一个box的margin-left edge挨着containing block的left edge
-    </p>
+    <p>建立一个BFC的条件,至少满足以下其中之一:</p>
+    <ul>
+        <li>float</li>
+        <li>absolutely positioned element</li>
+        <li><a href="#block-container-box">block container box</a> that are not <a href="#block-box">block box</a>, eg. inline-block, table-cell, table-caption</li>
+        <li>overflow属性值不是'visible'的<a href="#block-box">block box</a></li>
+    </ul>
+    <p class="note">建立BFC的box本身可能不是<a href="#in-flow">in-flow</a>元素,但是BFC内部描述的是<a href="#in-flow">in-flow</a> block-level box的布局方式</p>
+    <p>BFC规则:</p>
+    <ul>
+        <li>只能由block-level box参与</li>
+        <li>boxes从其containing block的顶部开始,在垂直方向上一个接一个地进行布局.2个兄弟box之间的垂直距离由margin属性决定.<a name="margin-collapsing"></a>在同一个BFC中垂直方向上相邻的2个margin会发生<a href="box.html#collapsing-margin">collapse</a></li>
+        <li>每一个box的left outer edge挨着其containing block的left edge.即使在出现浮动的情况下也是如此,除非这个box建立了一个新的BFC(这种情况详见<a href="Test/sec09-04-01.html#stopping-text-wrap">BFC会阻止文本环绕浮动</a>)</li>
+    </ul>
+    <p class="note">以上规则只对一个BFC中的<a href="#in-flow">in-flow</a> block-level box 元素有效</p>
+    <p>BFC作用:</p>
+    <ul>
+        <li>contain float(理论来自: <a href="vfmdetails.html#root-height">'Auto' heights for block formatting context</a>, 示例:<a href="Test/sec09-04-01.html#BFC-contain-float">contain float</a>)</li>
+        <li>prevent margin collapsing(理论来自: <a href="#margin-collapsing">BFC规则第2条</a>, 示例:<a href="Test/sec09-04-01.html#prevent-margin-collapsing">prevent margin collapsing</a>)</li>
+        <li>prevent text wrapping(理论来自: <a href="">BFC规则第2条</a>, 示例:<a href="Test/sec09-04-01.html#stopping-text-wrap">prevent text wrapping</a>)</li>
+    </ul>
     <h3><a name="inline-formatting-context">9.4.2 Inline formatting contexts</a></h3>
-    <p>如果一个block container box中不包含block-level box,那么它就会建立一个inline formatting context(参考<a href="#block-container-box">block container box</a>)</p>
-    <p class="note">在inline formatting context中,box从其containing block的顶部开始一个接一个地水平放置的.这些box之间水平方向上margin,padding和border都有效.这些box可能以不同的方式垂直对齐:以他们的顶部或底部对齐,或者以他们里面的文本的baseline对齐.
-    </p>
+    <p>和可以明确地触发BFC不同,你无法通过一种明确的方式来建立一个新IFC,如果一个<a href="#block-container-box">block container box</a>中不包含block-level box,那么它就会建立一个inline formatting context(来自: CSS 2.2 spec)</p>
+    <p>IFC规则:</p>
+    <ul>
+        <li>只能由inline-level box参与</li>
+        <li>boxes从其containing block的顶部开始,在水平方向上一个接一个地进行布局.这些boxes之间水平方向上的margin, padding和border相互影响</li>
+        <li>这些boxes可能以不同的方式垂直对齐:top or bottom or 内部文本的baseline</li>
+    </ul>
     <p>
-        包含来自同一行的box的矩形区域叫作<dfn>line box</dfn>,line box的宽度由containing block和浮动决定.line box的height由<a href="vfmdetails.html#line-height">line-height</a>决定
+        包含来自同一行上的box的矩形区域叫作<dfn>line box</dfn>
     </p>
-    <p>line box总是足够高,能够容纳他包包含的所有box.当一个box(A)的高度小于他所在的line box高度时,line box中box(A)的垂直对齐方式由<a href="vfmdetails.html#vertical-align">vertical-align</a>决定.当几个inline-level box在水平方向上无法共存于一个line box时,他们会被分到2个或多个垂直堆叠的line box中去.
-    </p>
-    <p>一般来说,line box的left edge挨着containing block的left edge,right edge挨着containing block的right edge.然而,floating box可能会移动到containing block edge和line box edge之间(即文本环绕),这时就会减少line box的width</p>
-    <p>当一行中所有的inline-level box的总宽度小于所在line box的宽度时,这些box的水平分布由<a href="text.html#text-align">text-align</a>决定</p>
-    <p>当一个inline-level box的宽度超出其所在line box的宽度时,他会被分隔成几个box并且这些box会跨多line box分布.如果一个inline-level box无法分隔(例如,这个box中只有一个字符,或语言特定的单词分隔规则不允许分隔,或这个box的white-space的值为'nowarp' or 'pre')时.那么这个box会从line box中溢出.当一个inline-level box被分隔后,margin,border,padding在分隔处没有视觉效果.
-    </p>
+    <p>line box 特性:</p>
+    <ul>
+        <li>垂直方向上:
+            <ol>
+                <li>Line box's height >= the tallest box's height</li>
+                <li>when a box's height < line box's height,其垂直对齐由vertical-align属性决定</li>
+                <li>line box的height由<a href="vfmdetails.html#line-height">line-height calculation</a>决定</li>
+            </ol>
+        </li>
+        <li>水平方向上:
+            <ol>
+                <li>when boxes's total width < line box's width,其水平对齐由text-align属性决定</li>
+                <li>when boxes's total width > line box's width,boxes会分布到2个或多个垂直堆叠的line box中</li>
+                <li>when an inline box's width > line box's width,box会被分隔为多个box且这些box会分布到多个line box中<br>
+                    这个box在分隔处的margin,border,padding没有视觉效果<br>
+                    如果这个box不能分隔( eg. white-space:nowrap),其会从line box中overflow</li>
+                <li>通常,line box的left edge挨着containing block的left edge,right edge挨着containing block的right edge.<br>
+                    当存在浮动时,floating box会出现在这2个edge之间,所以line box的宽度由containing block和浮动决定</li>
+            </ol>
+        </li>
+    </ul>
     <h3><a name="relative-positioning">9.4.3 Relative positioning</a></h3>
-    <p>一旦box根据normal flow or 浮动摆放好以后,他可能会相对于这个位置进行移动,这就叫作relative positioning.用这种方式偏移box(A)不会影响其后面的box(B),因为box(B)在摆放时会按照box(A)没有被偏移一样并且box(B)在box(A)偏移之后没有重新定位,这意味着relative positioning可能会导致box重叠
-    </p>
-    <p>一个相对定位的box保持其在normal flow中的大小,'left'把box向右移,'right'把box向左移,如果box没有被拉伸或分割,<span class="note">'left'和'right'的used value总是满足:left=-right</span>;如果'left'和'right'都是'auto'(各自的initial value),他们的used value为0,box在水平方向上无偏移.如果'left'为'auto',他的used value为负的'right'值;如果'right'为'auto',他的used value为负的'left'值;如果'left'和'right'都不是'auto',box的位置被over-constrained(过渡约束)了,他们其中一个会被忽略.如果box的containing block的'direction'为'ltr',那么'left'有效,'right'被忽略变成-'left'
-    </p>
-    <p>
-        'top'把box向下移,'bottom'把box向上移,如果box没有被拉伸或分割,<span class="note">'top'和'bottom'的used value总是满足:top=-bottom</span>;如果两者都是'auto',他们的used value都为0;如果其中之一为'auto',他的used value是另一个的负值,如果都不是'auto','bottom'的值会被忽略
-    </p>
+    <p>定义:</p>
+    <p>box首先根据normal flow or float进行布局,然后相对于这个position进行offset,这就叫作relative positioning</p>
+    <p class="note">relative positioning的作用对象可以分为2部分:normal flow中的元素和浮动元素</p>
+    <p>适用于:</p>
+    <p>all elements,除了'table-row','table-cell','table-caption'</p>
+    <p>特性:</p>
+    <ul>
+        <li>属于<a href="#positioned-element">positioned element</a></li>
+        <li>发生offset后,对其后面跟着element的position没有影响,仍然保留offset前的positon和size</li>
+        <li>可能和其他element发生overlap,此时会建立新的<a href="#stacking-context">stacking context</a></li>
+        <li>offset参考:元素本身生成的box在定位前的4个inner edge</li>
+        <li>offset坐标系
+            <ul>
+                <li>top:element的top inner edge向下offset的距离</li>
+                <li>right:element的right inner edge向左offset的距离</li>
+                <li>bottom:element的bottom inner edge向上offset的距离</li>
+                <li>left:element的left inner edge向右offset的距离</li>
+            </ul>
+        </li>
+    </ul>
+    <p class="note">left和right的used value总遵循:left = - right</p>
+    <p class="note">如果left和right属性值都是'auto',box会停留在原来的position,不会发生offset</p>
     <h2><a name="float-position">9.5 Floats</a></h2>
-    <p>
-        浮动box最有趣的特性是内容会沿着它的某一侧排列.如果是左浮动box,内容会沿其右侧排列;如果是右浮动box,内容会沿其左侧排列
-    </p>
-    <p>
-        一个浮动box会向左or向右移动直到其outer edge碰到其containing block edge或者其他的浮动box的outer edge.如果存在line box,浮动box的margin-top edge和line box的顶部对齐;如果没有足够的水平空间来浮动,浮动box就会向下浮动直到空间合适或没有其他浮动
-    </p>
-    <p class="note">
-        因为浮动box不在流中(<a href="#out-of-flow">out of flow</a>),在浮动box之前或之后创建的非定位in-flow block box会垂直排列,就像浮动box不存在一样.但是,这些block box中与浮动box挨着的line box会根据需要缩短,以便给浮动box的margin box留出足够空间.当前行里浮动盒之前的所有内容都会在浮动方向另一侧的相同行重新排列
-    </p>
-    <p>浮动box的内容会堆叠起来</p>
-    <p class="note">一个浮动box有可能和normal flow中的其他box发生重叠,出现这种情况时,浮动box会被渲染在in-flow block之前,in-flow inline之后</p>
+    <p>定义:</p>
+    <p>box首先根据normal flow进行布局,然后脱离normal flow并尽可能远的移动到其containing block的left or right</p>
+    <p>特性:</p>
+    <ul>
+        <li>自身变化
+            <ul>
+                <li>会生成一个block box</li>
+                <li>根据offset属性进行精准定位</li>
+                <li>TODO:尺寸</li>
+            </ul>
+        </li>
+        <li>浮动元素虽然不在normal flow中,<span class="note">但是仍然会影响normal flow中的其他element</span>
+            <ul>
+                <li>文本环绕,本质原因是和浮动元素相邻的line box会根据需要被缩短,以便为浮动元素的margin box留出足够空间</li>
+                <li>紧跟在浮动元素后面的non-positioned block box会占据浮动元素在normal flow中的位置,从而和浮动元素发生overlap.此时,渲染顺序从后到前依次是:in-flow block,float box,in-flow inline</li>
+                <li>在同一个BFC中,浮动元素的margin box不会和block-level replaced element 或者 normal flow中可以创建BFC的element发生overlap</li>
+            </ul>
+        </li>
+    </ul>
     <h3><a name="float">9.5.1 Positioning the float:the 'float' property</a></h3>
     <dl class="prop-definition">
         <dt>
@@ -435,7 +495,7 @@
                 </tr>
                 <tr>
                     <td>Applies to:</td>
-                    <td>all elements,除了absolutely positioned的元素</td>
+                    <td><span class="note">all elements,除了absolutely positioned的元素</span></td>
                 </tr>
                 <tr>
                     <td>Inherited:</td>
@@ -465,20 +525,14 @@
         <dd>box不浮动</dd>
     </dl>
     <p>浮动规则:</p>
-    <ol>
-        <li>左浮动box的margin-left edge不能在其containing block的left edge的左边</li>
-        <li>如果当前box是左浮动的,并且在此之前源文档中已经有左浮动box,那么对于之前的左浮动box,当前box的margin-left edge必须在其magrin-right edge的右边,或者当前box的顶部必须低于其底部
-        </li>
-        <li>左浮动box的margin-right edge不能在挨着他的右浮动box的margin-left edge的右边</li>
-        <li>浮动box的margin-top edge不能高于其containing block的顶部.如果浮动box出现在2个collapsing margins之间,</li>
-        <li>浮动box的margin-top edge不能高于源文档中之前出现的block box或浮动box的上外边界</li>
-        <li>浮动box的margin-top edge不能高于源文档中之前出现的line box的顶部</li>
-        <li>左边存在另一个左浮动box的左浮动box的margin-right edge不能在其containing block的right edge的右边</li>
-        <li>浮动box必须尽可能高地摆放</li>
-        <li>左浮动box必须尽可能向左摆放</li>
-    </ol>
+    <ul>
+        <li>左浮动box的left margin edge不能超出其containing block的left edge, <br>or 不能超出源文档中之前出现的任意一个左浮动box的right margin edge,除非其在这个左浮动box的下方</li>    
+        <li>浮动box的top margin edge不能超出其containing block的top edge, <br>or 不能超出源文档中之前出现的任意一个block box的top outer edge, <br>or 不能超出源文档中之前出现的任意一个浮动 box的top outer edge <br> or 不能超出源文档中之前出现的任意一个line box的top edge</li>
+        <li>左浮动box与其后相邻的右浮动box之间不会发生overlap</li>
+        <li>左浮动box与其后相邻的左浮动box之间的width之和不能超出其containing block的width</li>
+    </ul>
     <h3><a name="clear">9.5.2 Controlling flow next to floats:the 'clear' property</a></h3>
-    <p>该属性说明了元素盒的哪一边不能与之前的浮动盒相邻.'clear'属性不考虑元素自身内部或者其它block formatting context中的浮动</p>
+    <p>该属性说明了box的哪一边不能与之前的浮动box相邻.'clear'属性不考虑元素自身内部或者其它block formatting context中的浮动</p>
     <dl class="prop-definition">
         <dt>
             <span class="prop-name"><strong>clear</strong></span>
@@ -518,23 +572,40 @@
     </dl>
     <dl>
         <dt>left</dt>
-        <dd>要求box的border-top edge位于源文档中之前出现的所有左浮动box的margin-bottom edge下方</dd>
+        <dd>要求当前box的top border edge位于源文档中之前出现的所有左浮动box的bottom margin edge下方</dd>
         <dt>right</dt>
-        <dd>要求box的border-top edge位于源文档中之前出现的所有右浮动box的margin-bottom edge下方</dd>
+        <dd>要求当前box的top border edge位于源文档中之前出现的所有右浮动box的bottom margin edge下方</dd>
         <dt>both</dt>
-        <dd>要求box的border-top edge位于源文档中之前出现的所有左浮动box和右浮动box的margin-bottom edge下方</dd>
+        <dd>要求当前box的top border edge位于源文档中之前出现的所有左浮动box和右浮动box的bottom margin edge下方</dd>
         <dt>none</dt>
-        <dd>box位置和浮动之间不存在约束</dd>
+        <dd>box的position和浮动之间不存在约束</dd>
     </dl>
-    <p>'clear'值不为'none'意味着要引入<a name="clearance">clearance</a>.clearance会阻止margin collapsing,并作为margin-top上方的空间,用来在垂直方向上把元素推离浮动元素</p>
-    <p>clearance的高度计算,首先要确定元素的上边框边界的位置.该位置就是'clear'为'none'时的上边框边界实际所在的位置.这个高度取其中2个高度中的较大值:</p>
+    <p>'clear'值不为'none'意味着要引入<a name="clearance">clearance</a>.clearance会阻止margin collapsing,并作为元素margin-top上方的空间,用来在垂直方向上把元素推离浮动元素</p>
+    <p>clearance的高度计算,首先要确定元素的上边框边界的position.该position就是'clear'为'none'时的上边框边界实际所在的position.这个高度取其中2个高度中的较大值:</p>
     <ol>
         <li>把box的上边框边界放到将被clear的浮动元素的下外边界下方所需的高度</li>
-        <li>把box的上边框边界放到其假定位置所需的高度</li>
+        <li>把box的上边框边界放到其假定position所需的高度</li>
     </ol>
     <h2><a name="absolute-position">9.6 Absolute positioning</a></h2>
-    <p>在绝对定位模型中,box相对于containing block精确偏移.box会从normal flow中被完全移除(不会影响其后的兄弟box).一个绝对定位box会为其normal flow中的子元素和绝对定位(不包含fixed)的后代元素建立新的containing block.绝对定位box可能会遮挡其他box的内容,这取决于重叠box的stack level
-    </p>
+    <p>定义:</p>
+    <p>box从normal flow中完全被移除,然后根据其containing block确定position</p>
+    <p>特性:</p>
+    <ul>
+        <li><span class="note">不会影响normal flow中的其他element</span></li>
+        <li>会生成一个block box</li>
+        <li>TODO:尺寸</li>
+        <li>属于<a href="#positioned-element">positioned element</a></li>
+        <li>可能和其他element发生overlap,此时会建立新的<a href="#stacking-context">stacking context</a></li>
+        <li>offset参考:containing block的4个edge</li>
+        <li>offset坐标系
+            <ul>
+                <li>top:element的top margin edge向下offset的距离</li>
+                <li>right:element的right margin edge向左offset的距离</li>
+                <li>bottom:element的bottom margin edge向上offset的距离</li>
+                <li>left:element的left margin edge向右offset的距离</li>
+            </ul>
+        </li>
+    </ul>
     <h3><a name="fixed-position">9.6.1 Fixed positioning</a></h3>
     <p>fixed定位是绝对定位的子类,唯一的区别就是fixed定位的containing block是viewport</p>
     <h2><a name="dis-pos-flo">9.7 Relationships between 'display','position',and 'float'</a></h2>
@@ -564,17 +635,20 @@
     </table>
     <h2><a name="comparison">9.8 Comparison of normal flow,floats,and absolute positioning</a></h2>
     <h3><a name="comp-normal-flow">9.8.1 Normal flow</a></h3>
-    <p>containing block,block formatting context or inline formatting context</p>
+    <p>BFC,IFC,normal flow中元素的relative positioning</p>
     <h3><a name="comp-relative-positioning">9.8.2 Relative positioning</a></h3>
-    <p>相对于其原来在normal flow中的位置进行偏移</p>
+    <p>box首先根据normal flow or float进行布局,然后相对于这个position进行offset</p>
+    <p class="note">保留offset之前的position和size,对normal flow中其后的元素无影响</p>
     <h3><a name="comp-float">9.8.3 Floating a box</a></h3>
     <p>
-        脱离normal flow,浮动至containing block edge
+        box首先根据normal flow进行布局,然后脱离normal flow并尽可能远的移动到其containing block的left or right
     </p>
+    <p class="note">对normal flow中其后的元素有影响</p>
     <h3><a name="comp-absolute">9.8.4 Absolute positioning</a></h3>
     <p>
-        相对于containing block进行偏移,定位box的containing block由最近的定位祖先box建立(如果不存在,就用<a href="#initial-containing-block">initial containing block</a>)
+        box从normal flow中完全被移除,然后根据其containing block确定position
     </p>
+    <p class="note">对normal flow中其后的元素无影响</p>
     <h2><a name="stacking-context">9.9 Layered presentation</a></h2>
     <h3><a name="z-index">9.9.1 Sepcifying the stack level:the 'z-index' property</a></h3>
     <dl class="prop-definition">
@@ -614,7 +688,7 @@
             </table>
         </dd>
     </dl>
-    <p>对于一个定位box,'z-index'属性指定了:</p>
+    <p>对于一个positioned box,'z-index'属性指定了:</p>
     <ol>
         <li>在当前stacking context(堆叠上下文)中box的stack level(堆叠层级)</li>
         <li>box是否应该建立一个stacking context</li>
@@ -623,12 +697,12 @@
         <dt>&lt;integer&gt;</dt>
         <dd>整数是当前stacking context中box的stack level,并且会建立一个新的stacking context</dd>
         <dt>auto</dt>
-        <dd>当前stacking context中box的stack level为0,box不会建立新的stacking context除非他是根元素</dd>
+        <dd>当前stacking context中box的stack level为0,box不会建立新的stacking context除非他是root element</dd>
     </dl>
-    <p>每一个box都有一个用3个维度表示的位置.除了他的水平和垂直位置,box还会沿z轴排列</p>
-    <p>每一个box都属于一个stacking context,在给定stacking context中,每一个定位box都有一个integer stack level,表示在同一stacking context中相对于其他stack level的box在z轴上的位置.stack level更大的box总是被格式化在stack level低的box前面.box的stack level可以为负.同一个stacking context中stack level相同的box按照文档树顺序从后向前堆叠
+    <p>每一个box都有一个用3个维度表示的position.除了水平和垂直上的position,box还会沿z轴一个压一个地排列</p>
+    <p>每一个box都属于一个stacking context,在给定stacking context中,每一个定位box都有一个integer stack level,表示在同一stacking context中相对于其他stack level的box在z轴上的position.stack level更大的box总是被格式化在stack level低的box前面.box的stack level可以为负.同一个stacking context中stack level相同的box按照文档树顺序从后向前堆叠
     </p>
-    <p>根元素形成the root stacking context,其它stacking context由任意'z-index'的计算值不为'auto'的定位元素(包括相对定位元素)生成,stacking context不一定与containing block有关</p>
+    <p>根元素形成the root stacking context,其它stacking context由任意'z-index'的计算值不为'auto'的positioned element(包括相对positioned element)生成,stacking context不一定与containing block有关</p>
     <p>在每一个stacking context中,下面的层从后向前进行绘制:</p>
     <ol>
         <li>元素的background和border形成的stacking context</li>
@@ -678,5 +752,9 @@
         </dd>
     </dl>
     <p>这个属性指定了基本书写方向</p>
+    <hr>
+    <div class="navbar">
+        <p><a href="box.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="vfmdetails.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
 </body>
 </html>

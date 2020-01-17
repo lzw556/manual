@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/zwcss/css/main.css">
+    <!-- <link href="/bootstrap-master/dist/css/bootstrap-grid.css" rel="stylesheet"> -->
+    <style>
+        .flex-container{
+            display:flex;
+            flex-wrap:wrap;
+            border:solid 1px #ccc;
+            width:500px;
+        }
+        .flexbox{
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: 0;
+            border:solid 1px #ccc;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div style="width:960px;margin:0 auto;">
+        <h1>this is a h1, and <a href="#">this is a link</a>, which is a child of h1</h1>
+        <ul>
+            <li>
+                <p>this is a paragraph</p>
+            </li>
+            <li>
+                <a href="#">this is a link</a>
+            </li>
+        </ul>
+        <ol>
+            <li>this is a list item</li>
+        </ol>
+        <table class="table table-bordered">
+            <caption>2018-2019 Premier League</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th>Position</th>
+                    <th>Club</th>
+                    <th>Played</th>
+                    <th>Won</th>
+                    <th>Draw</th>
+                    <th>Lost</th>
+                    <th>Goals For</th>
+                    <th>Goals Against</th>
+                    <th>Goals Difference</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Manchester City</td>
+                    <td>38</td>
+                    <td>32</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>95</td>
+                    <td>23</td>
+                    <td>+72</td>
+                    <td>98</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Liverpool</td>
+                    <td>38</td>
+                    <td>30</td>
+                    <td>7</td>
+                    <td>1</td>
+                    <td>89</td>
+                    <td>22</td>
+                    <td>+67</td>
+                    <td>97</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Chelsea</td>
+                    <td>38</td>
+                    <td>21</td>
+                    <td>9</td>
+                    <td>8</td>
+                    <td>63</td>
+                    <td>39</td>
+                    <td>+24</td>
+                    <td>72</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Tottenham Hotspur</td>
+                    <td>38</td>
+                    <td>23</td>
+                    <td>2</td>
+                    <td>13</td>
+                    <td>67</td>
+                    <td>23</td>
+                    <td>+39</td>
+                    <td>71</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Arsenal</td>
+                    <td>38</td>
+                    <td>21</td>
+                    <td>7</td>
+                    <td>10</td>
+                    <td>73</td>
+                    <td>51</td>
+                    <td>+22</td>
+                    <td>70</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Manchester United</td>
+                    <td>38</td>
+                    <td>19</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>65</td>
+                    <td>54</td>
+                    <td>+11</td>
+                    <td>66</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Wolverhampton Wanderers</td>
+                    <td>38</td>
+                    <td>16</td>
+                    <td>9</td>
+                    <td>13</td>
+                    <td>47</td>
+                    <td>46</td>
+                    <td>+1</td>
+                    <td>57</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Everton</td>
+                    <td>38</td>
+                    <td>15</td>
+                    <td>9</td>
+                    <td>14</td>
+                    <td>54</td>
+                    <td>46</td>
+                    <td>+8</td>
+                    <td>54</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Leicester City</td>
+                    <td>38</td>
+                    <td>15</td>
+                    <td>7</td>
+                    <td>16</td>
+                    <td>51</td>
+                    <td>38</td>
+                    <td>+3</td>
+                    <td>52</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>West Ham United</td>
+                    <td>38</td>
+                    <td>15</td>
+                    <td>7</td>
+                    <td>16</td>
+                    <td>52</td>
+                    <td>55</td>
+                    <td>-3</td>
+                    <td>52</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li style="color:#222;">list item gray-darker</li>
+            <li style="color:#333;">list item gray-dark</li>
+            <li style="color:#666;">list item gray-normal</li>
+            <li style="color:#ccc;">list item gray-light</li>
+            <li style="color:#e6e6e6;">list item gray-lighter</li>
+        </ul>
+        <div class="flex-container">
+            <div class="flexbox">div1,which's content has a lot of text in order to complete this test case.</div>
+            <div class="flexbox">div2,which's content also has a lot of text.</div>
+            <div class="flexbox">div3</div>
+            <div class="flexbox">我爱北京天安门</div>
+        </div>
+
+
+        <br>
+        <br>
+        <br>
+        <div class="g">
+            <div class="u-12-12">col-12-12 only one column in this row</div>
+            <div class="u-5-5">col-5-5 only one column in this row</div>
+        </div>
+        <div class="g">
+            <div class="u-6-12">half column of two in this row</div>
+            <div class="u-6-12">half column of two in this row</div>
+        </div>
+        <div class="g">
+            <div class="u-4-12">1/3 column of three in this row</div>
+            <div class="u-4-12">1/3 column of three in this row</div>
+            <div class="u-4-12">1/3 column of three in this row</div>
+            <div class="u-4-12">1/3 column of three in this row</div>
+            <div class="u-8-12">2/3 column of three in this row</div>
+        </div>
+        <div class="g">
+            <div class="u-3-12">1/3 column of three in this row</div>
+            <div class="u-3-12">1/3 column of three in this row</div>
+            <div class="u-3-12">1/3 column of three in this row</div>
+            <div class="u-3-12">1/3 column of three in this row</div>
+            <div class="u-3-12">2/3 column of three in this row</div>
+            <div class="u-9-12">2/3 column of three in this row</div>
+        </div>
+        <div class="g">
+            <div class="u-1-5">1/3 column of three in this row</div>
+            <div class="u-4-5">1/3 column of three in this row</div>
+            <div class="u-2-5">1/3 column of three in this row</div>
+            <div class="u-3-5">1/3 column of three in this row</div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="g">
+            <div class="u-6-12">
+                <div class="g">
+                    <div class="u-1-5">1/3 column of three in this row</div>
+                    <div class="u-4-5">1/3 column of three in this row</div>
+                </div>
+            </div>
+            <div class="u-6-12">
+                <div class="g">
+                    <div class="u-2-5">1/3 column of three in this row</div>
+                    <div class="u-3-5">1/3 column of three in this row</div>
+                </div>
+            </div>
+        </div>
+        <div class="g">
+            <div class="u-lg-3-12 u-md-6-12">1/4 column</div>
+            <div class="u-lg-3-12 u-md-6-12">1/4 column</div>
+            <div class="u-lg-3-12 u-md-6-12">1/4 column</div>
+            <div class="u-lg-3-12 u-md-6-12">1/4 column</div>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">3/12</div>
+                <div class="col-lg-3 col-md-6">3/12</div>
+                <div class="col-lg-3 col-md-6">3/12</div>
+                <div class="col-lg-3 col-md-6">3/12</div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <button class="btn">default button</button>
+        <a class="btn" href=#>default button</a>
+        <input class="btn" type="submit" value="default button">
+        <input class="btn" type="reset" value="default button">
+        <input class="btn" type="button" value="default button">
+        <input class="btn" type="button" value="default button" disabled>
+        <a class="btn disabled" href="#">default button</a>
+        <br>
+        <br>
+        <br>
+        <button class="btn btn-primary">primay button</button>
+        <a class="btn btn-success" href=#>success button</a>
+        <input class="btn btn-error" type="submit" value="error button">
+        <button class="btn btn-primary" disabled>btn,primay</button>
+        <a class="btn btn-success disabled" href=#>btn,success</a>
+        <input class="btn btn-error" type="submit" value="btn,error" disabled>
+        <br>
+        <br>
+        <br>
+        <button class="btn btn-outline-primary">primay button</button>
+        <a class="btn btn-outline-success" href=#>success button</a>
+        <input class="btn btn-outline-error" type="submit" value="error button">
+        <button class="btn btn-outline-primary" disabled>btn,primay</button>
+        <a class="btn btn-outline-success disabled" href=#>btn,success</a>
+        <input class="btn btn-outline-error" type="submit" value="btn,error" disabled>
+        <br>
+        <br>
+        <br>
+        <button class="btn btn-outline-primary btn-lg">primay button</button>
+        <a class="btn btn-outline-success btn-lg btn-block" href=#>success button</a>
+        <input class="btn btn-outline-error btn-lg" type="submit" value="error button">
+        <button class="btn btn-primary btn-sm">primay button</button>
+        <a class="btn btn-success btn-sm btn-block" href=#>success button</a>
+        <input class="btn btn-error btn-sm" type="submit" value="error button">
+        <br>
+        <br>
+        <br>
+        <ul class="breadcrumb breadcrumb-lg">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Docs</a></li>
+            <li class="active">CSS</li>
+        </ul>
+        <br>
+        <br>
+        <br>
+        <ul class="pagination">
+            <li class="disabled"><span>previous</span></li>
+            <li class="active"><em>1</em></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li class="gap"><span>...</span></li>
+            <li><a href="#">100</a></li>
+            <li><a href="#">next</a></li>
+        </ul>
+        <br>
+        <br>
+        <br>
+        <ul class="tabs" id="tabs">
+            <li class="active"><a href="#">中超</a></li>
+            <li><a href="#" id="zj">中甲</a></li>
+            <li id="li1" data-target="tab"><a href="#">足协杯</a>
+                <ul id="ul2">
+                    <li id="li2">list item 1</li>
+                    <li>list item 1</li>
+                </ul>
+            </li>
+            <li class="disabled"><a href="#">亚冠</a></li>
+        </ul>
+        <div>中超</div>
+        <div style="display: none;">中甲</div>
+        <div style="display: none;">足协杯</div>
+        <div style="display: none;">亚冠</div>
+        <br>
+        <br>
+        <br>
+        <div style="margin:1em;padding:2em;width:100px;height:100px;background-color:silver;background-image:url(../../18.png);background-repeat: no-repeat;"></div>
+    </div>
+    <script src="/JS/jquery-2.2.4.min.js"></script>
+    <script src="/JS/tab.js"></script>
+
+    <script>
+        $(function(){
+            
+            debugger
+            var a = $("#li2").closest("li");    
+            var b = $("#li1").data("target");
+            var c = $("#tabs").find("li");
+            var d = $("#tabs").find("a");
+            var e  = $("#zj").parent();
+            var f  = $("#zj").parent("ul");
+        });
+    </script>
+</body>
+</html>

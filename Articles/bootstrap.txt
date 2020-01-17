@@ -1,0 +1,31 @@
+项目文件分门别类
+    一 layout
+        1 _grid.scss 
+        3 utilities                     utilities for layout
+              /_display.scss 
+              /_flex.scss
+              /_spacing.scss
+              /_visibility.scss
+        4 _code.scss                    code
+        5 _tables.scss                  table
+    二 content
+        1 _reboot.scss                  重置样式
+        2 _type.scss                    typography 排版
+        3 _images.scss                  Images and Figures
+        4 _code.scss                    code
+        5 _tables.scss                  table
+    三 utilities
+        1 utilities/_borders.scss 
+        2 utilities/_clearfix.scss 
+        3 _close.scss                   close icon
+        4 utilities                     color
+              /_text.scss
+              /_background.scss     
+        5 utilities/_display.scss       display     
+        6 utilities/_embed.scss
+        7 utilities/_flex.scss
+        8 utilities/_float.scss     
+
+
+
+

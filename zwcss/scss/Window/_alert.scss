@@ -1,0 +1,10 @@
+// name: 警告对话框, 弹出警告框, 弹出对话框
+// overview: 
+//     一种window, 通常由message, icon, informative text, suppression checkbox(禁止继续弹出选项), response button,
+//     help button组成
+// how to open: application根据需要自动弹出
+// how to close: 当一个alert被display在屏幕上的时候, 他会一直保持open状态直到用户click alert上的response button
+// interaction: 
+//     modal dialog, alert被关闭之前阻止用户对application的其他一切交互
+// when to use: 当application因为一个error, or 潜在的风险需要对用户进行警告时
+

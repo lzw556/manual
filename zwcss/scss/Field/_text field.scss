@@ -1,0 +1,11 @@
+// name: 文本字段
+// overview: 一行或多行文本输入框, 输入框中可以包括plain text(纯文本, or 普通文本) 和 sytled text
+// interaction: input or edit text
+// when to use: 数据录入
+// design guideline:
+//     使用label or placeholder来帮助传递目的
+//     field validation, 执行字段验证
+//     formattedtext, 使用数字格式文本来表示一个数字型数据, 比如 1000.5, $100,000
+//     line break, 比如clipped text(剪切), or wrapped text(换行), or truncated text(截断, 通过省略号指示)
+//     其中剪切和截断的可以使用tooltip来display完整的text
+//     secure text, 比如password, 手机号码 

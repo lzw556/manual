@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>4 Syntax and basic data types</title>
-    <link href="../base.css" rel="stylesheet">
+    <link href="/CSS/base.css" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
@@ -81,7 +81,7 @@
     </table>
     <h3><a name="character">4.1.3 Characters and case</a></h3>
     <ol>
-        <li>所有的CSS syntax是case-insensitive(大小写不敏感的),除了那些不由CSS控制的部分.例如,HTML属性'id'和'class'的值都是case-sentitive(大小写敏感的)</li>
+        <li>所有的CSS syntax是case-insensitive(大小写不敏感的),除了那些不由CSS控制的部分.例如,HTML属性'id'和'class'的值都是case-sensitive(大小写敏感的)</li>
         <li>CSS中,identifier(标识符)只能包含字母数字,以及连接符"-"和下划线"_",不能以数字开头</li>
         <li>在CSS中,反斜线(\)字符可以表示3种类型的字符转义
             <ol>
@@ -127,7 +127,7 @@
     <div class="example">
         <pre>body{line-height:1.5;}       /*&lt;number&gt; value*/<br>.outer{z-index:1;counter-increment:2;}      /*&lt;integer&gt; value*/</pre>
     </div>
-    <h3><a name="length">4.1.9 Lengths</a></h3>
+    <h3><a name="length">4.3.2 Lengths</a></h3>
     <p>length涉及距离测量</p>
     <p>length value用&lt;length&gt;表示,由一个&lt;number&gt;后面跟一个unit identifier(例如,px等)组成.值为0时后面的unit identifier是可选的</p>
     <p>有2种length unit:relative和absolute.relative length unit在指定length时会相对于另一个length属性</p>
@@ -158,17 +158,17 @@
         <li><strong>pc</strong>: picas — 1pc is equal to 12pt.</li>
         <li><strong>px</strong>: pixel units — 1px is equal to 0.75pt.</li>
     </ul>
-    <h3><a name="percentage">4.1.9 Percentages</a></h3>
+    <h3><a name="percentage">4.3.3 Percentages</a></h3>
     <p>percentage value用&lt;percentage&gt;表示,由一个&lt;number&gt;后面跟一个"%"组成</p>
     <p>percentage value总是相对于另一个值.每一个接受percentage的属性也定义了这个percentage的参考值</p>
-    <h3><a name="uri">4.1.9 URIs and URLs</a></h3>
+    <h3><a name="uri">4.3.4 URIs and URLs</a></h3>
     <p>URI value用&lt;uri&gt;表示,URI value在属性值中用url()表示</p>
-    <h3><a name="counter">4.1.9 Counters</a></h3>
-    <p>counter使用case-sentitive identifier表示(详见<a href="generate.html#counters">'counter-reset' and 'counter-increment'</a>)</p>
+    <h3><a name="counter">4.3.5 Counters</a></h3>
+    <p>counter使用case-sensitive identifier表示(详见<a href="generate.html#counters">'counter-reset' and 'counter-increment'</a>)</p>
     <p>要引用一个counter值的话,可以用标记'counter(&lt;identifier&gt;)'或者'counter(&lt;identifier&gt;,&lt;'list-style-type'&gt;)'</p>
     <p>为了引用一系列嵌套的同名counter,可以用标记'counters(&lt;identifier&gt;, &lt;string&gt;)'或者'counters(&lt;identifier&gt;, &lt;string&gt;, &lt;'list-style-type'&gt;)'</p>
     <p>有关counter的更多信息详见<a href="generate.html#counters">Automatic counters and numbering</a></p>
-    <h3><a name="color">4.1.9 Colors</a></h3>
+    <h3><a name="color">4.3.6 Colors</a></h3>
     <p>color value用&lt;color&gt;表示,要么是一个keyword,要么是一个符合RGB规范的数值</p>
     <p>color keywords一共有17种颜色:</p>
     <table class="table">
@@ -232,15 +232,19 @@
         <li>十六进制,例如,#000000</li>
         <li>rgb函数,例如,rgb(255,0,0)</li>
     </ol>
-    <h3><a name="string">4.1.9 Strings</a></h3>
+    <h3><a name="string">4.3.7 Strings</a></h3>
     <p>字符串既能写在双引号里也能写在单引号里</p>
     <p>字符串中不能直接包含newline(换行).为了在字符串中包含换行,可以用"\A"或者"\00000a",示例见<a href="generate.html#content">'content'</a></p>
-    <h3><a name="unsupported-value">4.1.9 Unsupported Values</a></h3>
+    <h3><a name="unsupported-value">4.3.8 Unsupported Values</a></h3>
     <h2><a name="charset">4.4 CSS style sheet representation</a></h2>
     <p>使用@charset规则的编写者必须把该规则放在样式表的开头,前面没有任何字符</p>
     <div class="example">
         <pre>@charset "utf-8";</pre>
     </div>
     <h3><a name="escaping">4.4.1 Referring to characters not represented in a character encoding</a></h3>
+    <hr>
+    <div class="navbar">
+        <p><a href="conform.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="selectors.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
 </body>
 </html>

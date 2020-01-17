@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10.8 line box height calculation</title>
+    <link href="base.css" rel="stylesheet">
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 10.8 line box height calculation</h1>
+    <a href="sec10-08e.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec10-0.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <h3>The line box height is the distance between the uppermost box top and the lowermost box bottom(includes the strut),so a line box is always tall enough for all of the boxes it contains</h3>
+    <p>example1:</p>
+    <div class="container" style="line-height:51px;">
+        <span class="badge badge-primary">primary</span><span class="badge badge-success">primary</span>
+    </div>
+    <p>当第二个primary的font-size增加时,其baseline位置下降,因此导致第一个primary需要下降自身位置来使自己的baseline和第二个primary的baseline对齐</p>
+    <div class="container" style="line-height:51px;">
+        <span class="badge badge-primary">primary</span><span class="badge badge-success badge-big">primary</span>
+    </div>
+    <p>example2:</p>
+    <div class="container" style="line-height:51px;">
+        <span class="badge badge-primary">primary</span>
+    </div>
+    <p>当primary的font-family:serif和strut的font-family:microsoft不一致时,其baseline在strut的baseline之上,需要下降自身位置</p>
+    <div class="container" style="line-height:51px;">
+        <span class="badge badge-primary" style="font-family:serif;">primary</span>
+    </div>
+</body>
+</html>

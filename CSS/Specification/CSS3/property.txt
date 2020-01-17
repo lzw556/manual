@@ -1,0 +1,8 @@
+border-radius
+box-shadow
+opacity
+box-sizing
+user-select
+
+//others
+rgba()

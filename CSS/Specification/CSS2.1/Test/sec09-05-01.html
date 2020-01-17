@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9.5.1 float</title>
+    <style>
+       .container{width:400px;padding:2em;border-style:solid;margin-top:1em;}
+       .container img:first-child{margin-left:1em;margin-right:1em;}
+       .fl{float:left;}
+       .fr{float:right;}
+       .stacking{margin-top:1em;margin-right:-1em;width:100px;height:100px;background-color:yellow;}
+       .test1{background-color:silver;color:navy;}
+       .box{height:100px;}
+       .box-s{height:60px;}
+       .box-l{height:150px;}
+       .box-w{width:360px;}
+       .clearfix{clear:both;}
+    </style>
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 9.5.1 float</h1>
+    <a href="sec09-04-03.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec09-05-02.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <h3>浮动特性：文本环绕</h3>
+    <div class="container">这个DIV元素,其4个方向上的padding是2em.在这个DIV中存在3个IMG元素,第一个IMG元素是:<img src="../../30.png">;第二个IMG元素是:<img src="../../25.png">;最后一个IMG元素是:<img src="../../18.png"></div>
+    <div class="container">这个DIV元素,其4个方向上的padding是2em.在这个DIV中存在3个IMG元素,第一个IMG元素是:<img class="fl" src="../../30.png">;第二个IMG元素是:<img class="fl" src="../../25.png">;最后一个IMG元素是:<img class="fl" src="../../18.png">
+        <p>以上3个IMG元素的float属性值均是left,故这3个IMG元素都会被向左移动,直到其left outer edge碰到其containing block的left inner edge或之前出现的其他floated box的right outer edge,且这3个IMG的top outer edge和所在的line box的top edge对齐</p>
+    </div>
+    <hr>
+    <h3>浮动特性：位置被占据</h3>
+    <div class="container">
+        <div class="test1">这个DIV元素,其后紧跟着一个IMG元素</div>
+        <img src="../../30.png">
+        <div class="test1">这个DIV元素,其前面相邻的兄弟元素是一个IMG元素</div>
+    </div>
+    <div class="container">
+        <div class="test1">这个DIV元素,其后紧跟着一个IMG元素,这个IMG元素的float属性值是left</div>
+        <img class="fl" src="../../30.png">
+        <div class="test1">这个DIV元素,其前面相邻的兄弟元素是一个IMG元素,这个IMG元素的float属性值是left.因为floated元素不在流内,所以DIV元素会表现的就好像这个floated的IMG元素不存在一样.但是与这个floated的IMG元素相邻的line box会被缩短</div>
+    </div>
+    <hr>
+    <h3>浮动特性：阻止文本环绕</h3>
+    <div class="container">
+        <img src="../../30.png">
+        <div class="test1">这个DIV元素,其前面相邻的兄弟元素是一个IMG元素</div>
+    </div>
+    <div class="container">
+        <img class="fl" src="../../30.png">
+        <div class="test1">这个DIV元素,其前面相邻的兄弟元素是一个IMG元素,这个IMG元素的float属性值是left.因为floated元素不在流内,所以这个DIV元素会占据IMG元素原来的空间</div>
+    </div>
+    <div class="container">
+        <img class="fl" src="../../30.png">
+        <div class="test1" style="overflow:auto;">这个DIV元素,其前面相邻的兄弟元素是一个IMG元素,这个IMG元素的float属性值是left.因为floated元素不在流内,所以这个DIV元素会占据IMG元素原来的空间.当DIV元素的overflow属性值不是'visible'时,这个DIV元素就不会和IMG元素的margin box发生重叠.</div>
+    </div>
+    <hr>
+    <h3>浮动特性：发生overlap时的渲染顺序</h3>
+    <div class="container">
+        <div class="fl stacking">left-floating box</div>
+        <div class="test1">这个DIV元素,其前面相邻的兄弟元素是一个floated的DIV元素.这个DIV元素的内容会和floated的DIV元素的内容发生重叠.此时相关内容的stack顺序(按从后到前)是:in-flow block(即本例中的DIV元素),floated box(即本例中的floatedDIV元素),in-flow inline(即本例中的DIV元素中的line box)</div>
+    </div>
+    <hr>
+    <div class="container">
+        <div>浮动规则1:一个左浮动box的left outer edge不会位于其containing block的left inner edge的左边</div>
+        <div class="fl test1 box-s">left-floating box</div>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+    <div class="container">
+        <div>浮动规则2:如果当前box是向左浮动的,并且在这之前源文档中还有元素生成了左浮动box,那么对于每一个之前的box,要么当前box的left outer edge在之前的box的right outer edge的右边,要么其顶部要低于之前box的底部</div>
+        <div class="fl test1 box">left-floating box</div>
+        <p>这个P元素,只是用来降低其后面紧跟着的浮动box的top outer edge</p>
+        <div class="fl test1 box-l">another left-floating box</div>
+        <div class="fl test1 box-s">another left-floating box</div>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+    <p>浮动规则3:左浮动盒的right outer edge不能位于挨着它的任意右浮动盒的left outer edge的右边</p>
+    <div class="container">
+        <div class="test1 fl">left-floating box</div>
+        <div class="test1 fr">right-floating box</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
+        <div class="test1 fl box box-w">left-floating box</div>
+        <div class="test1 fr">right-floating box</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
+        <div class="test1 fl">left-floating box</div>
+        <div class="test1 fr box box-w">right-floating box</div>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+    <p>浮动规则4:浮动box的top outer edge不能高于其containing block的top inner edge</p>
+    <div class="container">
+        <div class="test1 fl">left-floating box</div>
+        <div class="test1 fr">right-floating box</div>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+    <p>浮动规则5:浮动box的top outer edge不能高于源文档中之前元素生成的浮动box的top outer edge</p>
+    <div class="container">
+        <div class="test1 fl">left-floating box</div>
+        <div class="test1 fr box">right-floating box</div>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+    <p>浮动规则6:浮动box的top outer edge不能高于源文档中之前元素生成的box所在的line box的top edge</p>
+    <div class="container">
+        在这个DIV中存在2个inline元素,第一个是span元素:<span class="test1">SPAN元素</span>,第二个是IMG元素:<img src="../../25.png">
+    </div>
+    <div class="container">
+        在这个DIV中存在2个inline元素,第一个是span元素:<span class="test1">SPAN元素</span>,第二个是IMG元素:<img class="fl" src="../../25.png">
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+</body>
+</html>

@@ -1,0 +1,10 @@
+// name: 滑块, or 滑动器
+// overview: 一个水平 or 垂直的轨道, 然后加一个滑块(thumb), thumb的形状可以是圆形, or 正方形, or 其他
+// interaction: 
+//     拖动滑块, or 滚动鼠标滚轮, 使thumb停留在轨道上的某个位置, 这个位置代表一个范围值中的具体值, 
+//     轨道的一端是最小值, 另一端是最大值
+// when to use: 让用户在一个范围值中选择一个值
+// design guideline: 
+//     tick marks(刻度线), 可以让用户在一个范围内更容易定位到一个具体值
+//     把thumb改变的值实时的反馈给用户
+//     在slider旁边使用stepper来display当前值  

@@ -1,0 +1,20 @@
+component function
+    1 tooltip(提示条)
+        是一种小的, 交互式的文本提示
+        和由'title' attribute生成的标准HTML tooltip相比, 是一种增强version
+        使用场景:当用户hover一个图标元素时, tooltip可以清晰传递关于这个图标元素的某种信息
+    2 badge()  
+    3 breadcrumb
+    4 pagination
+    5 carousel
+    6 dropdown
+    7 modal
+
+
+
+
+
+
+clttype=1&isPlanToVisitting=0&isKp=0&txtLnkName=AAC16011908495&Sex=0&marriage=4&txtMobile=18013496172&selCertificateType=1&txtLnkID=&txtAge=&selEducation=&selLnkProvince=&selLnkCity=&selLocalLivedTime=&txtRqrAmount=8&txtRqrDuration=&txtRqrDate=&selLoanCity=66&selRqrReason=1&selReturnSource=&txtMaxAcceptMonthRate=&txtMaxAcceptServiceRate=&selLoanEmergencyDegrees=&selShares=&selCompanyNature=&txtCmpName=AAC16011908495%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8&selTrade=&txtCmpAddr=991105AAC16011908495&txtScale=0&selEnterpriseType=&security=2&selFundMonth=16&txtFundMonthPayAmount=555&selSecurityMonth=16&txtSecurityMonthPayAmount=5555&selYearBill=&selToPrivate=&selToPublic=&selYearSalary=&selLiabilityRate=&selOPYears=&txtSignAmount=&txtYearAmount=0&selYearInCome=&selFounderBackground=&txtStockYearInComeRate=&selIndustrySegmentation=&txtCmpName2=AAC16011908495%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8&selCmpPosition=&selWorkProvince=&selWorkCity=&selWorkYears=&selMonthSalary=&txtCardSalary=&selFundMonth=&txtFundMonthPayAmount=0&selSecurityMonth=16&txtSecurityMonthPayAmount=0&txtCreditCount=&txtCreditCardMaxAmount=&txtCreditTotal=&selCreditUsed=&otherBanks=&selMasterCredit=2&zhiMaCreditPoint=&weiLiDaiAmount=&selSpouceCredit=&selEnterpriseCredit=&txtEnterpriseOverdueCount=&txtEnterpriseMaxOverMonth=&gerendaikuan=32&qiyedaikuan=1&HasHouse=2&selHouType=1&selHouseProperty=&selHouAreaProvince=10&selHouAreaCity=66&txtHouSquare=&txtHouAddr=&txtHouAmout=&txtHouAssessment=&txtHouseAge=&txtHouLoanBalance=&selHouMonthRepay=&selHouReturnMonth=&HasCar=1&selCarBrandProvince=&selCarBrandCity=&txtCarBuyAmout=0&txtCarAge=&selCarDistance=&selCarAssessment=&selCarLoan=&selCarLoanMonthlyPaymentsAmount=&CarLoanPaymentsMonths=&txtCarLoadRest=&IsHaveEquipment=2&txtEquipmentYearLimit=&txtEquipmentNowAmount=&txtEquipmentBuyAmount=&selEquipmentIsMortgage=&InsuranceInfo=2&selInsuranceType=&selPaymentType=&selPolicyEffectedTime=&txtPolicyPaiedMonths=&txtPolicyAmountPaiedPerMonth=&txtPolicyPaiedYears=&selInsurancePerson=&selInsuranceCompany=&IsGuarantee=2&firstReturnSource=&secondReturnSource=&returnWish=&customerSummary=&expertSuggest=
+     
+    

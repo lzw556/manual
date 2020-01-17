@@ -1,0 +1,9 @@
+.clearfix{
+    @include clearfix;
+}
+.anchor-link{
+    color:$body-color;
+    &:hover{
+        text-decoration: none;
+    }
+}

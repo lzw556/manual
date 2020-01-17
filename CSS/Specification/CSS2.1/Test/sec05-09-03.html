@@ -24,7 +24,7 @@ li :visited{color:purple;}
 li a:hover{background-color:olive;color:white;}
 li a:focus{border:solid 1px;}
 li a:active{color:red;}</pre>
-<p>下面的超链接中:<br>如果已被访问过则其文本颜色应该是purple;如果没有被访问过则其文本颜色应该是navy<br>当鼠标悬停在链接上面但是没有激活时,其文本颜色应该是white,背景颜色应该是olive<br>当链接获得焦点时,其应该出现一个 1px 的边框<br>当链接被激活时,其文本颜色应该是red</p>
+<p>在下面的列表中,超链接在各种伪类状态下的样式如下:</p>
 <ol>
     <li>
         <a href="index.html">index</a>
@@ -39,6 +39,18 @@ li a:active{color:red;}</pre>
         <a href="http://www.github.com">github</a>
     </li>
 </ol>
+<dl>
+    <dt><strong>:link</strong></dt>
+    <dd>文本颜色应该是navy</dd>
+    <dt><strong>:visited</strong></dt>
+    <dd>文本颜色应该是purple</dd>
+    <dt><strong>:hover</strong></dt>
+    <dd>文本颜色应该是white,背景颜色应该是olive</dd>
+    <dt><strong>:focus</strong></dt>
+    <dd>应该出现一个 1px 的边框</dd>
+    <dt><strong>:active</strong></dt>
+    <dd>文本颜色应该是red</dd>
+</dl>
 <hr>
 <pre>p.cl1:hover{background-color:navy;color:white;}</pre>
 <p class="cl1">这个P元素,class属性值是'cl1',当鼠标悬停在他上面时,其背景颜色应该是navy,文本颜色应该是white</p>

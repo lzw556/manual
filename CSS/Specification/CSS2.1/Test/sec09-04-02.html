@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9.4.2 inline formatting contexts</title>
+    <link href="base.css" rel="stylesheet">
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 9.4.2 inline formatting contexts</h1>
+    <a href="sec09-04-01.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec09-04-03.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <p>在IFC中,box从其containing block的顶部开始,在水平方向上一个接一个地摆放</p>
+    <div class="container">
+        <span class="badge badge-primary">primary</span><span class="badge badge-success badge-super">primary</span><img src="../../30.png">
+    </div>
+    <p>在IFC中,2个box水平方向之间的距离由margin, padding和border决定</p>
+    <div class="container">
+        <span class="badge badge-primary">primary</span><span class="badge badge-success badge-super p-l-10 p-r-10 m-l-10 m-r-10">primary</span><img src="../../30.png">
+    </div>
+    <p>在IFC中,box在垂直方向上可以以不同方式对齐:</p>
+    <dl>
+        <dt>baseline(默认)</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png">
+            </div>
+        </dd>
+        <dt>sub</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-sub">
+            </div>
+        </dd> 
+        <dt>super</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-super">
+            </div>
+        </dd> 
+        <dt>middle</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-middle">
+            </div>
+        </dd> 
+        <dt>text-top</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-texttop">
+            </div>
+        </dd> 
+        <dt>text-bottom</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-textbottom">
+            </div>
+        </dd> 
+        <dt>top</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-top">
+            </div>
+        </dd>
+        <dt>bottom</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-bottom">
+            </div>
+        </dd>       
+    </dl>
+    <p>boxes total宽度比 line box的宽度小,由 text-align 决定其水平对齐:</p>
+    <dl>
+        <dt>text-left</dt>
+        <dd>
+            <div class="container" style="text-align:left;">
+                <span class="badge badge-primary">primary</span><span class="badge badge-success badge-super">primary</span><img src="../../30.png">
+            </div>
+        </dd>
+        <dt>text-center</dt>
+        <dd>
+            <div class="container" style="text-align:center;">
+                <span class="badge badge-primary">primary</span><span class="badge badge-success badge-super">primary</span><img src="../../30.png">
+            </div>
+        </dd>
+        <dt>text-right</dt>
+        <dd>
+            <div class="container" style="text-align:right;">
+                <span class="badge badge-primary">primary</span><span class="badge badge-success badge-super">primary</span><img src="../../30.png">
+            </div>
+        </dd>
+    </dl>
+    <p>当boxes's total width > line box's width,boxes会分布到2个或多个垂直堆叠的line box中</p>
+    <div class="container" style="width:200px;">
+        <span class="badge badge-primary">primary</span> <span class="badge badge-primary">primary</span> <span class="badge badge-primary">primary</span> <span class="badge badge-primary">primary</span>
+    </div>
+    <p>a box的宽度比 line box的宽度大,这个box会被分隔为多个box,在分隔处margin,padding,border没有效果</p>
+    <div class="container" style="width:200px;">
+        <span class="badge badge-primary p-l-10 p-r-10">primary, padding:0 10px, margin-right:10px</span> <span class="badge badge-primary">primary</span>
+    </div>
+</body>
+</html>

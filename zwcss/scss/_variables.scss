@@ -1,0 +1,48 @@
+//Global variables
+
+//color
+$white:#fff;
+$gray-lighter:#e6e6e6;
+$gray-light:#ddd;
+$gray-normal:#666;
+$gray-dark:#333;
+$gray-darker:#222;
+$black:#000;
+
+$primary:#0078e7;
+//$primary:#054ada,hover:#022fb1;
+$theme-colors:(
+    "primary": $primary,
+    "success":#28a745,
+    "error":#ca3c3c
+);
+
+//typograph
+
+//font, line-height, color for body, heading 
+$font-family-base:Arial,"Microsoft Yahei",sans-serif;
+
+$font-size-base:14px;
+$font-size-lg:16px;
+$font-size-sm:12px;
+
+$font-weight-lighter:lighter;
+$font-weight-light:300;
+$font-weight-normal:400;
+$font-weight-bold:700;
+$font-weight-bolder:bolder;
+$font-weight-base:$font-weight-normal;
+
+$line-height-base:1.5;
+
+$link-color: $primary;
+$link-decoration:none;
+$link-hover-color:darken($link-color,15%);
+$link-hover-decoration:underline;
+
+$border-width:1px;
+$border-color:$gray-lighter;
+
+$border-radius:.25em;
+
+

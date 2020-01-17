@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>6 Assigning property values,Cascading,and Inheritance</title>
-    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="/CSS/base.css">
 </head>
 <body>
     <div class="navbar">
@@ -52,11 +52,13 @@
         <li>否则,如果这个属性是默认可以被继承的(即inherited:yes)并且元素不是文档树的根节点,就使用其父元素的computed value(第2步就是<a href="#inheritance">inheritance</a>)</li>
         <li>否则,使用这个属性的initial value.每一个属性的initial value都定义在<a href="">property definition</a>中</li>
     </ol>
+    <a href="Test/sec06-01-01.html" target="blank" class="demo">demo</a>
     <h3><a name="computed-value">6.1.2 Computed values</a></h3>
     <p>
         在层叠期间specified valued被处理为computed value,例如URL被处理为绝对路径,em和ex单位被计算成px或绝对长度.计算一个属性的computed value不需要UA渲染文档
     </p>
     <p>每一个属性的computed value都定义在<a href="">property definition</a>中.当sepcified value是'inherit'时,computed value的定义见<a href="#inheritance">inheritance</a></p>
+    <a href="Test/sec06-01-02.html" target="blank" class="demo">demo</a>
     <h3><a name="used-value">6.1.3 Used values</a></h3>
     <p>处理computed value时,尽量不要格式化文档.但是有些属性值只能在文档布局完成时才被确定.例如,如果一个元素的width是其containing block的特定百分比,那么在其containing block的width确定之前这个元素的width都无法确定.used value是把computed value剩余的依赖都处理后得到的绝对值.
     </p>
@@ -73,9 +75,11 @@
     <p>
         对于一个给定元素,'inherit'指定CSS属性的specified value就是其父元素上相同属性的computed value,不管此属性是否默认可以被继承.
     </p>
+    <a href="Test/sec06-02-01.html" target="blank" class="demo">demo</a>
     <h2><a name="import-rule">6.3 The @import rule</a></h2>
     <p>'@import'规则允许编写者从其他样式表中导入样式.任何@import规则必须位于所有其它规则(除了@charset,如果有的话)之前.'@import'关键字后面必须跟着想要引入的样式表的URI.字符串也可以接受</p>
     <p>@import规则可以用来指定导入样式表的<a href="media.html#media-types">media type</a></p>
+    <a href="Test/sec06-03.html" target="blank" class="demo">demo</a>
     <h2><a name="cascade">6.4 The cascade</a></h2>
     <p>样式表有3种origin:author,user and UA</p>
     <ul style="padding-left:1em;">
@@ -101,10 +105,12 @@
         <li>如果importance和origin相同,则根据selector的<a href="#selector-specificity">specificity</a>来排序:更特殊的selector会重写一般的selector,伪元素和伪类分别算作常规元素和常规类</li>
         <li>最后,根据指定顺序排序:如果2个declaration的importance,origin和specificity都相同,后指定的生效</li>
     </ol>
+    <a href="Test/sec06-04-01.html" target="blank" class="demo">demo</a>
     <h3><a name="!important-rule">6.4.2 !important rules</a></h3>
     <div class="example">
         <pre>p{text-indent:1em!important;}</pre>
     </div>
+    <a href="Test/sec06-04-02.html" target="blank" class="demo">demo</a>
     <h3><a name="selector-specificity">6.4.3 Calculating a selector's specificity</a></h3>
     <ul>
         <li>style属性中的declaration(=a),如果有则a=1,否则a=0</li>
@@ -115,6 +121,11 @@
     <p>a-b-c-d4种数量连起来表示selector的specificity</p>
     <div class="example">
         <pre>*{}                        /* specificity=0,0,0,0 */<br>p:before{}                 /* specificity=0,0,0,2 */<br>.container a[href]:hover{} /* specificity=0,0,3,1 */<br>#id{}                      /* specificity=0,1,0,0 */<br>style=""                   /* specificity=1,0,0,0 */</pre>
+    </div>
+    <a href="Test/sec06-04-03.html" target="blank" class="demo">demo</a>
+    <hr>
+    <div class="navbar">
+        <p><a href="selectors.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="media.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
     </div>
 </body>
 </html>

@@ -1,0 +1,35 @@
+$breadcrumb-divider: quote("/");//separator默认是正斜杠
+$breadcrumb-divider-padding-x: .5em;
+$breadcrumb-divider-color: $gray-normal;
+$breadcrumb-divider-active-color: $gray-normal;
+.breadcrumb{
+    @include clearfix;
+    li{
+        float: left;
+        + li{
+            //不把padding全加在separator上是因为当separator因为兼容性显示不出来时各个item之间仍然有间距
+            padding-left: $breadcrumb-divider-padding-x;
+            &:before{
+                padding-right: $breadcrumb-divider-padding-x;
+                content: $breadcrumb-divider;
+                color: $breadcrumb-divider-color;
+            }
+        }
+        a{display: inline-block;}//增加hyperlink的点击区域,此处不能用block,因为这样separator会和a之间换行
+        &.active{
+            color: $breadcrumb-divider-active-color;
+        }
+    }
+}
+
+//size
+.breadcrumb-lg{
+    font-size: $font-size-lg;
+}
+
+//markup
+// <ul class="breadcrumb breadcrumb-lg">
+// <li><a href="#">Home</a></li>
+// <li><a href="#">Docs</a></li>
+// <li class="active">CSS</li>
+// </ul>

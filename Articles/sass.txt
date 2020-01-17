@@ -1,0 +1,79 @@
+variable
+    1 decoration 
+        $variablename:$variablevalue;   eg. $font-size-base:12px;
+    2 note
+        必须先声明,后使用
+        同一个variable可以在多处声明,后面的会overwrite前面的变量值
+        eg. 
+            $font-size-base:12px;
+            $font-size-base:18px;
+            .btn{font-size:$font-size-base;}        ->        .btn{font-size:18px;} 
+    3 default value
+        syntax
+            $variablename:$variablevalue !default;  eg. $font-size-base:12px !default;
+        为什么在SASS中要引用变量默认值的机制
+            试想这样一个场景:你编写了一个UI library,其中有些变量可以让用户进行自定义,然后在library内部应用这些用户自定义的值.
+            但是如果用户没有自定义,那这些变量应该有自己的默认值
+            为了实现这个需求,仅依靠2中的overwrite是做不到的,针对这个情况,SASS才提供了变量默认值的机制
+        什么是变量默认值
+            对于一个变量,如果其没有在其他地方声明或值为null,此时这个变量的值就是默认值;否则,使用其他地方声明时的值
+style rule
+    1 nesting
+    2 grouping selector
+    3 插值
+property decoration
+    1 插值
+    2 nesting
+parent selector
+    &
+placeholder selector
+    %
+at-rule
+    1 @import       
+        partial
+        nesting
+        插值
+    2 @mixin and @include
+        是什么
+            mixin允许你定义可以复用的样式块,常见形式就是定义个无语义的class mixin
+        argument and optional argument
+    3 @function
+    4 @extend
+        placeholder selector
+    5 @at-root
+    6 flow control
+        @if and @else
+        @each
+        @for
+        @while
+value
+    number
+    string
+    color
+    list
+        using list
+            index
+            access an element
+            遍历
+            add
+            find
+        不可变性
+        argument list
+    map
+        using map
+            look up a value
+            遍历
+            add
+        不可变性
+    true and false
+    null,官方文档上说当属性值是null时,编译时这个声明会被忽略,但是发现并没有
+    function
+operator    
+    equality
+    relational
+    numeric
+    string
+    boolean
+Built-In function(内置函数)
+
+

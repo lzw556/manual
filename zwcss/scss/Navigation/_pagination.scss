@@ -1,0 +1,74 @@
+$pagination-border-width: 1px;
+$pagination-border-color: $gray-light;
+$pagination-padding-x: 1em;
+$pagination-padding-y: .5em;
+$pagination-hover-bg: $gray-lighter;
+$pagination-active-color: $white;
+$pagination-active-bg: $primary;
+$pagination-active-border-color: $primary;
+$pagination-disabled-color: darken($gray-light, 10%);
+
+//border padding可以加在li元素上,也可以加在a元素上
+//最终加在a元素上的原因是a元素必不可少,li元素可有可无
+.pagination{
+    @include clearfix;
+    li{
+        float: left;
+        a,
+        em,
+        span{
+            position: relative;
+            display: block;//不用inline-block, 是因为虽然效果一样,但是兼容性不好
+            //collapse border,这样虽然视觉上border合二为一了,但是存在当前box的right border被其后相邻box的left border覆盖的问题
+            margin-left: -$pagination-border-width;
+            border: solid $pagination-border-width $pagination-border-color;
+            padding: $pagination-padding-y $pagination-padding-x;            
+        }
+        a{
+            &:hover{
+                text-decoration: none;
+                background-color: $pagination-hover-bg;
+            }
+            &:focus{
+                outline: 0;
+            }
+        }
+        &:first-child{
+            a,
+            span{
+                margin-left: 0;
+            }
+        }
+        &.active{
+            em{
+                //为了正确地显示border
+                //之前margin-left:-1px会让后面a的left border覆盖前面的right border
+                //z-index 默认值是0
+                z-index: 1;
+                font: inherit;
+                color: $pagination-active-color;
+                background-color: $pagination-active-bg;
+                border-color: $pagination-active-border-color;
+            }
+        }
+        &.disabled,
+        &.gap{
+            span{
+                color: $pagination-disabled-color;
+                cursor: default;
+            }
+        }
+    }
+}
+
+//markup
+// <ul class="pagination">
+// <li class="disabled"><span>previous</span></li>
+// <li class="active"><em>1</em></li>
+// <li><a href="#">2</a></li>
+// <li><a href="#">3</a></li>
+// <li><a href="#">4</a></li>
+// <li class="gap"><span>...</span></li>
+// <li><a href="#">100</a></li>
+// <li><a href="#">next</a></li>
+// </ul>

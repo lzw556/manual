@@ -1,3 +1,77 @@
 @charset "utf-8";
 body{background:#ffffff url("basebg.gif");}
-.container{border:solid 1px;width:800px;}
+.v-align-top{vertical-align:top;}
+.v-align-bottom{vertical-align:bottom;}
+.v-align-sub{vertical-align:sub;}
+.v-align-super{vertical-align:super;}
+.v-align-middle{vertical-align:middle;}
+.v-align-texttop{vertical-align:text-top;}
+.v-align-textbottom{vertical-align:text-bottom;}
+.container{
+    margin-bottom:1em;
+    border:solid 1px;
+    width:800px;
+    font-family:'microsoft yahei';
+    font-size:16px;
+    line-height:1.5;
+}
+.badge{
+    display:inline;
+    color:#fff;
+}
+.badge-primary{
+    background-color:navy;
+}
+.badge-secondary{
+    background-color:gray;
+}
+.badge-success{
+    background-color:green;
+}
+.badge-danger{
+    background-color:maroon;
+}
+.badge-lg{
+    font-size:120%;
+}
+.badge-big{
+    font-size:150%;
+}
+.badge-super{
+    font-size:300%;
+}
+.divider{
+    margin:2em 0;
+    border:dashed;
+}
+.m-l-10{margin-left:10px;}
+.m-r-10{margin-right:10px;}
+.p-l-10{padding-left:10px;}
+.p-r-10{padding-right:10px;}
+.border{border:solid 1px;}
+.m-l-10{margin-left:10px;}
+.m-r-10{margin-right:10px;}
+.p-l-10{padding-left:10px;}
+.p-r-10{padding-right:10px;}
+.m-t-10{margin-top:10px;}
+.m-b-10{margin-bottom:10px;}
+.p-t-10{padding-top:10px;}
+.p-b-10{padding-bottom:10px;}
+.line{
+    position:relative;
+    display:inline-block;
+    margin-right:-100%;
+    border-top:dotted 1px #000;
+    width:100%;   
+}
+.line.baseline{
+    border-color:red;
+} 
+.line.text-top{
+    border-color:green;
+    vertical-align:text-top;
+}
+.line.text-bottom{
+    border-color:green;
+    vertical-align:text-bottom;
+}         

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10.8 line-height</title>
+    <link href="base.css" rel="stylesheet">
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 10.8 line-height</h1>
+    <a href="sec10-08b.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec10-08d.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <h3>replaced inline element : 设置line-height:100px没有效果</h3>
+    <div class="container">
+        <img src="../../30.png" class="v-align-top" style="line-height:100px;"> 
+    </div>
+    <h3>block container element : line-height属性值表示该元素中line box的最小height(即strut的高度)</h3>
+    <div class="container" style="line-height:30px">
+        对于block container element,其内容由inline-level element组成,其line-height属性表示该元素中line box的最小height
+    </div>
+    <div class="container" style="line-height:30px">
+        <img src="../../50.png" class="v-align-top"> ,这张图片的margin box的height是50px,大于strut的height
+    </div>
+    <h3>non-replaced inline element : line-height属性值表示其在参与计算其所在line box的height时使用的有效height</h3>
+    <div class="container" style="line-height:31px;">
+        <span class="badge badge-success badge-big v-align-top">primary</span> 0 + 31px + 0
+    </div>
+    <div class="container" style="line-height:21px;">
+        <span class="badge badge-success badge-big v-align-top">primary</span> -5px + 31px + -5px
+    </div>
+    <div class="container" style="line-height:41px;">
+        <span class="badge badge-success badge-big v-align-top">primary</span> 5px + 31px + 5px
+    </div>
+</body>
+</html>

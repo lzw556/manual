@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>10 Visual formatting model details</title>
-    <link rel="stylesheet" href="../base.css">
+    <link href="/CSS/base.css" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
@@ -54,21 +54,18 @@
     </ul>
     <h2><a name="containing-block-definition">10.1 Definition of containing block</a></h2>
     <p>
-        计算一个box的位置和尺寸时,会相对于一个特定的矩形,这个矩形叫作元素的containing block.一个元素的containing block定义如下:
+        计算一个box的position和size时,会相对于一个特定的矩形,这个矩形叫作元素的containing block.其定义如下:
     </p>
-    <ol>
-        <li>根元素所在的containing block是一个被称为initial containg block的矩形.尺寸为viewport,被固定在画布开始的位置</li>
-        <li>对于其他元素,如果其'position'值为'static' or 'relative',那么其containing block由最近的<a href="vfmmodel.html#block-container-box">block container box</a>祖先的content edge形成</li>
-        <li>如果元素的'position'值为'fixed',那么其containing block由<a href="vfmmodel.html#viewport">viewport</a>建立</li>
-        <li>如果元素的'position'值为'absolute',那么其containing block由最近的<a href="vfmmodel.html#positioned-box">positioned box</a>祖先建立,方式如下:
+    <ul>
+        <li>root element: initial containg block.尺寸为viewport,被固定在画布开始的位置</li>
+        <li>其他元素
             <ol>
-                <li>如果这个祖先是inline element,containing block就是环绕着为该元素生成的第一个和最后一个行内盒的内边距框的边界框(bounding box)</li>
-                <li>否则,<a name="padding-box-cb">containing block由祖先的<span class="note">padding edge</span>形成</a></li>
+                <li>如果其'position'值为'static' or 'relative': 最近的box type是block container box的祖先元素的content box</li>
+                <li>如果其'position'值为'fixed': viewport</li>
+                <li>如果其'position'值为'absolute':最近的positioned 祖先元素的padding box</li>
             </ol>
-            如果没有这样的祖先,其containing block就是initial containing block
         </li>
-    </ol>
-    <p class="note">containing block所在的矩形可以由content edge形成,也可以由padding edge形成,和元素根据box model生成的矩形并不一样</p>
+    </ul>
     <h2><a name="width">10.2 Content width:the 'width' property</a></h2>
     <dl class="prop-definition">
         <dt><span class="prop-name"><strong>width</strong></span></dt>
@@ -87,13 +84,13 @@
                     <td>Inherited</td><td>no</td>
                 </tr>
                 <tr>
-                    <td>Percentages:</td><td>refer to width of containing block</td>
+                    <td>Percentages:</td><td><span class="note">refer to width of containing block</span></td>
                 </tr>
                 <tr>
                     <td>Media:</td><td></td>
                 </tr>
                 <tr>
-                    <td>Computed value:</td><td>和指定值相同的百分比or'auto',or绝对长度</td>
+                    <td>Computed value:</td><td>和specified value相同的百分比 or 'auto',or 绝对长度</td>
                 </tr>
             </table>
         </dd>
@@ -105,54 +102,36 @@
         <dt>&lt;length&gt;</dt>
         <dd>用一个长度值指定了content area的width,不能为负</dd>
         <dt>&lt;percentage&gt;</dt>
-        <dd>指定一个百分比width,不能为负.该百分比根据元素的containing block的width来计算.(如果一个绝对定位元素且其containing block是block container box,那么这个元素的width的百分比是根据其containing block的padding box的width来计算的,具体见<a href="#padding-box-cb">上面</a>)</dd>
+        <dd>指定一个百分比width,不能为负.该百分比根据元素的containing block的width来计算</dd>
         <dt>auto</dt>
         <dd>取决于其他属性值</dd>
     </dl>
     <h2><a name="computing-width-margins">10.3 Calculating widths and margins</a></h2>
-    <p>
-        'width','margin-left','margin-right','left','right'这些用来布局的属性,其值取决于元素生成box的type和这些属性值之间的相互影响.原则上,used value和computed value相同,就是把'auto'替换为合适的值,百分比相对于containing block进行计算
+    <p> 原则上,used value和computed value相同,就是把'auto'替换为合适的值,百分比相对于containing block进行计算
     </p>
     <h3><a name="inline-width">10.3.1 Inline,non-replaced elements</a></h3>
-    <p>'width'属性不适用.computed value是'auto'的margin-left或margin-right的used value为0</p>
+    <p>'width'属性不适用</p>
+    <p>computed value是'auto'的margin-left或margin-right的used value会变成0</p>
     <h3><a name="inline-replaced-width">10.3.2 Inline,replaced elements</a></h3>
-    <p>computed value是'auto'的margin-left或margin-right的used value为0.<br>如果元素的'width'的computed value是'auto',并且具有一个固有宽度,那么该元素的'width'的used value就是这个固有宽度</p>
+    <p>如果元素的'width'属性的computed value是'auto',并且具有一个intrinsic width(固有宽度),那么该元素的'width'属性的used value就是这个intrinsic width</p>
+    <p>computed value是'auto'的margin-left或margin-right的used value会变成0</p>
     <h3><a name="block-width">10.3.3 Block-level,non-replaced elements in normal flow</a></h3>
     <p>几个水平属性之间必须遵循如下约束:<br>
        'margin-left'+'border-left-width'+'padding-left'+'width'+'padding-right'+'border-right-width'+'margin-right' = width of containing block
     </p>
-    <p>在满足等式的前提下,如果'width'的值是'auto',那么其他的'auto'都会被变成0,所以等式中'auto'的绝对长度计算如下:</p>
-    <ul class="table-of-content">
-        <li><strong>有且仅有一个'auto'值</strong>
-            <ol>
-                <li>'width'值是'auto',那么'width'的used value由等式计算得出</li>
-                <li>'margin-left'值是'auto',那么'margin-left'的used value由等式计算得出</li>
-                <li>'margin-right'值是'auto',那么'margin-right'的used value由等式计算得出</li>
-            </ol>
-        </li>
-        <li><strong>有2个'auto'值</strong>
-            <ol>
-                <li>'width'值为'auto','margin-left'值为'auto',则'margin-left'的'auto'值会被变成0,'width'的used value由等式计算得出</li>
-                <li>'width'值为'auto','margin-right'值为'auto',则'margin-right'的'auto'值会被变成0,'width'的used value由等式计算得出</li>
-                <li>'margin-left'和'margin-right'值都是'auto',则<strong>'margin-left'等于'margin-right','auto'的绝对长度由等式计算得出,实际上此时box在其containing block中水平居中</strong></li>
-            </ol>
-        </li>
-        <li><strong>有3个'auto'值</strong>
-            <ol>
-                <li>如果这3个属性值都是'auto',那么'margin-left'和'margin-right'的'auto'值会被变成0,'width'的used value由等式计算得出</li>
-            </ol>
-        </li>
-    </ul>
-    <p>
-        如果以上属性的computed value不满足这个等式时,就把这种情况叫作'过度限制'.这时如果'direction'值为'ltr',那么会忽略'margin-right'的specified value并将其计算成满足等式所需的值<span class="note">关于'过度限制',在chrome中测试(测试代码:<code>.outer{width:300px;}.inner{width:500px;}</code>)时发现并非如此,自己也没有找到相应资料,故先搁置</span>
-    </p>
+    <p>如果只有一个属性值是'auto',则其used value由等式计算得出</p>
+    <p>如果'width'属性值是'auto',则其他的'auto'值会变成0,那么'width'属性的used value由等式计算得出</p>
+    <p>如果'margin-left'和'margin-right'都是'auto'(隐含之意'width'不是'auto'),则他们的used value相等,那么这两者的used value由等式计算得出</p>
+    <p class="note">利用上面这个规则可以实现这种效果:在containing block中水平居中固定width的block-level element</p>
     <h3><a name="block-replaced-width">10.3.4 Block-level,replaced elements in normal flow</a></h3>
-    <p>'width'属性的used value由<a href="#inline-replaced-width">10.3.2 Inline,replaced elements</a>来决定,然后由<a href="#block-width">10.3.3 Block-level,non-replaced elements</a>来决定margin.<br>换句话说,当'width'值是'auto'时,'width'的used value是元素的固有宽度.margin则根据10.3.3中的等式计算得出</p>
+    <p>如果'width'属性的computed value是'auto',并且具有一个intrinsic width(固有宽度),那么该元素的'width'属性的used value就是这个intrinsic width</p>
+    <p>left margin和right margin遵循<a href=#block-width>10.3.3</a>中的规则</p>
     <h3><a name="float-width">10.3.5 Floating,non-replaced elements</a></h3>
-    <p>computed value是'auto'的margin-left或margin-right的used value为0.<span class="note">如果'width'的computed value是'auto',那么其used value是'shrink-to-fit' width(自适应宽度)</span></p>
+    <p><span class="note">如果'width'属性的computed value是'auto',那么其used value是'shrink-to-fit' width(自适应宽度)</span></p>
+    <p>computed value是'auto'的margin-left或margin-right的used value会变成0</p>
     <h3><a name="float-replaced-width">10.3.6 Floating,replaced elements</a></h3>
-    <p>computed value是'auto'的margin-left或margin-right的used value为0.'width'属性的used value由<a href="#inline-replaced-width">10.3.2 Inline,replaced elements</a>来决定.换句话说,当'width'值是'auto'时,'width'的used value是元素的固有宽度
-    </p>
+    <p>如果元素的'width'属性的computed value是'auto',并且具有一个intrinsic width(固有宽度),那么该元素的'width'属性的used value就是这个intrinsic width</p>
+    <p>computed value是'auto'的margin-left或margin-right的used value会变成0</p>
     <h3><a name="abs-non-replaced-width">10.3.7 Absolutely positioned,non-replaced elements</a></h3>
     <p>几个水平属性之间必须遵循如下约束:<br>
        'left'+'margin-left'+'border-left-width'+'padding-left'+'width'+'padding-right'+'border-right-width'+'margin-right'+'right' = width of containing block</p>
@@ -164,48 +143,37 @@
                 <li>如果'margin-left'和'margin-right'中有一个是'auto',则由等式计算出这个值</li>
             </ol>
         </li>
-        <li>否则,首先把值是'auto'的'margin-left'或'margin-right'变成0;然后判断
+        <li>否则('left','width'和'right'至少有一个'auto'),首先把值是'auto'的'margin-left'或'margin-right'变成0;然后判断
             <ol type="A">
-                <li>如果'left','width'和'right'都是'auto',
+                <li class="note">如果'width'是'auto','left'和'right'都不是'auto',则由等式计算出'width'</li>
+                <li>如果'width'是'auto','left' or 'right'中至少有一个'auto',则<span class="note">'width'是'shrink-to-fit'(自适应宽度)</span>,然后判断
                     <ol>
-                        <li>如果containing block的'direction'值是'ltr',则'left'是其在normal flow中的位置;然后再应用规则G计算出'width'和'right'</li>
-                        <li>如果containing block的'direction'值是'rlt',则'right'是其在normal flow中的位置;然后再应用规则E计算出'width'和'left'</li>
+                        <li>如果'left'是'auto',则由等式计算出'left'</li>
+                        <li>如果'right'是'auto',则由等式计算出'right'</li>
+                        <li>如果'left'和right'都是'auto',则'left'是其在normal flow中的位置,然后由等式计算出'right'</li>
                     </ol>
                 </li>
-                <li>如果'left'是'auto','width'和'right'都不是'auto',则由等式计算出'left'</li>
-                <li>如果'width'是'auto','left'和'right'都不是'auto',则由等式计算出'width'</li>
-                <li>如果'right'是'auto','left'和'width'都不是'auto',则由等式计算出'right'</li>
-                <li>如果'left'和'width'都是'auto','right'不是'auto',则'width'是'shrink-to-fit'(自适应宽度),然后由等式计算出'left'</li>
-                <li>如果'left'和'right'都是'auto','width'不是'auto',然后判断
+                <li>如果'width'不是'auto',然后判断
                     <ol>
-                        <li>如果containing block的'direction'值是'ltr',则'left'是其在normal flow中的位置;然后由等式计算出'right'</li>
-                        <li>如果containing block的'direction'值是'rtl',则'right'是其在normal flow中的位置;然后由等式计算出'left'</li>
+                        <li>如果'left'是'auto',则由等式计算出'left'</li>
+                        <li>如果'right'是'auto',则由等式计算出'right'</li>
+                        <li>如果'left'和right'都是'auto',则'left'是其在normal flow中的位置,然后由等式计算出'right'</li>
                     </ol>
                 </li>
-                <li>如果'width'和'right'都是'auto','left不是'auto',则'width'是'shrink-to-fit'(自适应宽度),然后由等式计算出'right'</li>
             </ol>
         </li>
     </ol>
     <h3><a name="abs-replaced-width">10.3.8 Absolutely positioned,replaced elements</a></h3>
-    <p>'width'的used value由<a href="#inline-replaced-width">10.3.2 Inline,replaced elements</a>决定.</p>
-    <ol>
-        <li>如果'left'和'right'都是'auto',则判断如果containing block的'direction'值是'ltr'('rtl'),则'left'('right')是其在normal flow中的位置;<br>
-        </li>
-        <li>如果'left'或'right'是'auto',则把值是'auto'的'margin-left'或'margin-right'变成0,然后由10.3.7中的等式计算出另一个'auto'值</li>
-        <li>如果'left'和'right'都不是'auto',
-            <ol>
-                <li>如果'margin-left'和'margin-right'都是'auto',则'margin-left'和'margin-right'相等且其值不是负数,然后由10.3.7中的等式计算出'margin-left'和'margin-right'</li>
-                <li>否则,如果'margin-left'和'margin-right'相等时由等式计算出其值是负数,则如果containing block的'direction'值是'ltr'('rtl'),那么'margin-left'('margin-right')值变为0,然后由等式计算出'margin-right'</li>
-                <li>如果'margin-left'和'margin-right'中有一个是'auto',则由10.3.7中的等式计算出这个值</li>
-            </ol>
-        </li>
-    </ol>
+    <p>如果元素的'width'属性的computed value是'auto',并且具有一个intrinsic width(固有宽度),那么该元素的'width'属性的used value就是这个intrinsic width</p>
+    <p>left/right margin和left/right遵循<a href=#abs-non-replaced-width>10.3.7</a>中的规则</p>
     <h3><a name="inline-block-width">10.3.9 'Inline-block',non-replaced elements in normal flow</a></h3>
-    <p>如果'width'是'auto',其used value就是'shrink-to-fit'(自适应宽度).computed value为'auto'的'margin-left'或'margin-right'的used value变为'0'.(实际上和<a href="#float-width">10.3.5 Floating, non-replaced elements</a>中的规则是一样的)</p>
+    <p>如果'width'属性的computed value是'auto',那么其used value是'shrink-to-fit' width(自适应宽度)</p>
+    <p>computed value是'auto'的margin-left或margin-right的used value会变成0</p>
+    <p class="note">和<a href="#float-width">10.3.5</a>中的规则完全一样</p>
     <h3><a name="inline-block-replaced-width">10.3.10 'Inline-block',replaced elements in normal flow</a></h3>
-    <p>和<a href="#inline-replaced-width">10.3.2 Inline,replaced elements</a>完全一致</p>
+    <p>和<a href="#inline-replaced-width">10.3.2 Inline,replaced elements</a>中的规则完全一样</p>
     <h2><a name="min-max-width">10.4 Minimum and maximum widths: 'min-width' and 'max-width'</a></h2>
-    <p>这2个属性允许编写者把width of content area约束在一个特定的范围内</p>
+    <p>这2个属性允许编写者把content area's width 约束在一个特定的范围内</p>
     <dl class="prop-definition">
         <dt><span class="prop-name"><strong>min-width</strong></span></dt>
         <dd class="prop-content">
@@ -229,7 +197,7 @@
                     <td>Media:</td><td></td>
                 </tr>
                 <tr>
-                    <td>Computed value:</td><td>和specified value相同的百分比,or绝对长度</td>
+                    <td>Computed value:</td><td>和specified value相同的百分比,or 绝对长度</td>
                 </tr>
             </table>
         </dd>
@@ -257,7 +225,7 @@
                     <td>Media:</td><td></td>
                 </tr>
                 <tr>
-                    <td>Computed value:</td><td>和specified value相同的百分比or'none',or绝对长度</td>
+                    <td>Computed value:</td><td>和specified value相同的百分比 or 'none',or 绝对长度</td>
                 </tr>
             </table>
         </dd>
@@ -293,7 +261,7 @@
                     <td>Media:</td><td></td>
                 </tr>
                 <tr>
-                    <td>Computed value:</td><td>百分比or'auto',or绝对长度</td>
+                    <td>Computed value:</td><td>百分比 or 'auto', or 绝对长度</td>
                 </tr>
             </table>
         </dd>
@@ -305,26 +273,30 @@
         <dt>&lt;length&gt;</dt>
         <dd>用一个长度值指定了content area的height,不能为负</dd>
         <dt>&lt;<a name="height-percentage">percentage</a>&gt;</dt>
-        <dd>指定一个百分比height,不能为负.该百分比根据元素的containing block的height来计算.如果containing block的height没有指定并且box不是绝对定位的,那么百分比会计算为'auto'(如果一个绝对定位元素且其containing block是block-level box,那么这个元素的height的百分比是根据其containing block的padding box的height来计算的)</dd>
+        <dd>指定一个百分比height,不能为负.该百分比根据元素的containing block的height来计算.如果containing block的height没有指定并且box不是绝对定位的,那么百分比会计算为'auto'</dd>
         <dt>auto</dt>
         <dd>取决于其他属性值</dd>
     </dl>
     <h2><a name="computing-height-margins">10.6 Calculating heights and margins</a></h2>
     <h3><a name="inline-height">10.6.1 Inline,non-replaced elements</a></h3>
-    <p>'height'属性不适用.content area的height应该基于font,但本规范没有具体说明.例如,UA可能会使用font的em-box或font的ascender和descender(前者能够确保编写者可以相对于'line-height'控制背景样式化，但会导致字形绘制在content area外;后者能够确保em-box上方和下方的字形仍然在content area内,但会导致不同的font有不同大小的box);<br>'margin-top'和'margin-bottom'属性适用但无效果</p>
+    <p>'height'属性不适用,'margin-top'和'margin-bottom'属性不适用</p>
+    <p>content area的height应该基于font,但是本规范没有明确指定</p>
+    <p class="note">在大多数UA中,content area的height由font metrics中的acender和decender组成</p>
     <p class="note">inline,non-replaced element垂直方向上的padding,border和margin从content area的顶部和底部开始,和'line-height'无关.'line-height'只在计算line box的height时使用</p>
     <h3><a name="inline-replaced-height">10.6.2 Inline replaced elements,block-level replaced elements in normal flow,'inline-block' replaced elements in normal flow and floating replaced elements</a></h3>
-    <p>computed value是'auto'的margin-top或margin-bottom的used value为0.如果元素的'height'的computed value是'auto',并且具有一个固有高度,那么该元素的'height'的used value就是这个固有高度</p>
+    <p>如果元素的'height'属性的computed value是'auto',并且具有一个intrinsic height(固有高度),那么该元素的'height'属性的used value就是这个intrinsic height</p>
+    <p>computed value是'auto'的margin-top或margin-bottom的used value会变成0</p>
     <h3><a name="block-height">10.6.3 Block-level non-replaced elements in normal flow when 'overflow' computes to 'visible'</a></h3>
-    <p>computed value是'auto'的margin-top或margin-bottom的used value为0.如果'height'是'auto',元素的高度取决于其是否含有block-level子级以及该子级是否拥有padding or border:</p>
-    <p>元素的高度是从top content edge到下列位置之间的距离:</p>
+    <p>如果'height'是'auto',元素的height取决于其是否含有block-level子元素以及该子元素是否拥有padding or border:</p>
+    <p>元素的height是从该元素的top content edge到下列位置之间的距离:</p>
     <ol>
-        <li>最后一个line box的bottom edge,如果该box建立了一个inline formatting context的话</li>
-        <li>最后一个in-flow子元素的margin-bottom edge,如果该子元素的margin-bottom没有和元素的margin-bottom发生collapse</li>
-        <li>最后一个in-flow子元素的border-bottom edge,如果该子元素的margin-top没有和元素的margin-bottom发生collapse</li>
+        <li>最后一个line box的bottom edge,如果该box建立了一个IFC</li>
+        <li>最后一个in-flow子元素的bottom margin edge,如果该子元素的bottom margin没有和其父元素的bottom margin发生collapse</li>
+        <li>最后一个in-flow子元素的bottom border edge,如果该子元素的top margin没有和其父元素的bottom margin发生collapse</li>
         <li>0</li>
     </ol>
-    <p>只考虑normal flow中的子元素</p>
+    <p class="note">在上面的规则中,只考虑normal flow中的子元素,浮动和绝对定位子元素会被忽略</p>
+    <p>computed value是'auto'的margin-top或margin-bottom的used value会变成0</p>
     <h3><a name="abs-non-replaced-height">10.6.4 Absolutely positioned,non-replaced elements</a></h3>
     <p>几个垂直属性之间必须遵循如下约束:<br>
         'top'+'margin-top'+'border-top-width'+'padding-top'+'height'+'padding-bottom'+'border-bottom-width'+'margin-bottom'+'bottom' = height of containing block</p>
@@ -335,28 +307,29 @@
                 <li>如果'margin-left'和'margin-right'中有一个是'auto',则由等式计算出这个值</li>
             </ol>
         </li>
-        <li>否则,首先把值是'auto'的'margin-top'或'margin-bottom'变成0;然后判断
+        <li>否则('top','height'和'bottom'至少有一个'auto'),首先把值是'auto'的'margin-top'或'margin-bottom'变成0;然后判断
             <ol type="A">
-                <li>如果'top','height'和'bottom'都是'auto',则'top'是其在normal flow中的位置;然后再应用规则D计算出'height'和'bottom'
+                <li class="note">如果'height'是'auto','top'和'bottom'都不是'auto',则由等式计算出'height'</li>
+                <li>如果'height'是'auto','top'和'bottom'中至少有一个'auto',则'height'由<a href="#root-height">10.6.7中规则</a>计算得出
+                    <ol>
+                        <li>如果'top'是'auto',则由等式计算出'top'</li>
+                        <li>如果'bottom'是'auto',则由等式计算出'bottom'</li>
+                        <li>如果'top'和'bottom'都是'auto',则'top'是其在normal flow中的位置,然后由等式计算出'bottom'</li>
+                    </ol>
                 </li>
-                <li>如果'top'和'height'是'auto','bottom'不是'auto',则'height'由<a href="#root-height">10.6.7中规则</a>计算得出,然后由等式计算出'top'</li>
-                <li>如果'top'和'bottom'是'auto','height'不是'auto',则'top'是其在normal flow中的位置;然后由等式计算出'bottom'</li>
-                <li>如果'height'和'bottom'是'auto','top'不是'auto',则'height'由<a href="#root-height">10.6.7中规则</a>计算得出,然后由等式计算出'bottom'</li>
-                <li>如果'top'是'auto','height'和'bottom'都不是'auto',则由等式计算出'top'</li>
-                <li>如果'height'是'auto','top'和'bottom'都不是'auto',则由等式计算出'height'</li>
-                <li>如果'bottom'是'auto','top'和'height'都不是'auto',则由等式计算出'bottom'</li>
+                <li>如果'height'不是'auto',然后判断
+                    <ol>
+                        <li>如果'top'是'auto',则由等式计算出'top'</li>
+                        <li>如果'bottom'是'auto',则由等式计算出'bottom'</li>
+                        <li>如果'top'和'bottom'都是'auto',则'top'是其在normal flow中的位置,然后由等式计算出'bottom'</li>
+                    </ol>
+                </li>
             </ol>
         </li>
     </ol>
     <h3><a name="abs-replaced-height">10.6.5 Absolutely positioned,replaced elements</a></h3>
-    <p>'height'由<a href="#inline-replaced-height">10.6.2 inline replaced elements</a>决定</p>
-    <ol>
-        <li>如果'top'和'bottom'都是'auto',则'top'是其在normal flow中的位置</li>
-        <li>如果'bottom'是'auto',则把值是'auto'的'margin-top'或'margin-bottom'变成0</li>
-        <li>如果'top'和'bottom'都不是'auto',则判断如果'margin-top'和'margin-bottom'都是'auto',则上面的约束等式中'margin-top'和'margin-bottom'值相等
-        </li>
-        <li>如果此时只剩下一个'auto'了，由等式求出这个值</li>
-    </ol>
+    <p>如果元素的'height'属性的computed value是'auto',并且具有一个intrinsic height(固有高度),那么该元素的'height'属性的used value就是这个intrinsic height</p>
+    <p>top/bottom margin和top/bottom遵循10.6.4中的规则</p>
     <h3><a name="block-root-margin">10.6.6 Complicated cases</a></h3>
     <p>本节适用于:</p>
     <ul>
@@ -364,14 +337,14 @@
         <li>inline-block,non-replaced elements</li>
         <li>floating,non-replaced elements</li>
     </ul>
-    <p>computed value是'auto'的margin-top或margin-bottom的used value为0.<br>如果'height'是'auto','height'由<a href="#root-height">10.6.7中规则</a>中得出</p>
-    <p>对于'inline-block'元素,计算line box高度时使用margin box</p>
+    <p>如果'height'是'auto',则其used value由<a href="#root-height">10.6.7中规则</a>中得出</p>
+    <p>computed value是'auto'的margin-top或margin-bottom的used value会变成0</p>
     <h3><a name="root-height">10.6.7 'Auto' heights for block formatting context roots</a></h3>
-    <p>在特定情况下(例如,上面的<a href="#abs-non-replaced-height">10.6.4</a>和<a href="#block-root-margin">10.6.6</a>),一个建立了block formatting context的元素的'height'计算如下:</p>
+    <p>在特定情况下(例如,上面的<a href="#abs-non-replaced-height">10.6.4</a>和<a href="#block-root-margin">10.6.6</a>),一个建立了BFC的元素的'height'计算如下:</p>
     <p>如果元素中只含有inline-level子元素,'height'就是最高line box顶部和最低line box底部之间的距离</p>
-    <p>如果元素中含有block-level子元素,'height'就是最高block-level子级box的margin-top edge和最低block-level子级box的margin-bottom edge之间的距离</p>
+    <p>如果元素中含有block-level子元素,'height'就是最高block-level子元素的top margin edge和最低block-level子元素的bottom margin edge之间的距离</p>
     <p>绝对定位的子元素会被忽略,相对定位的子元素不考虑其偏移</p>
-    <p class="note">另外,如果元素中含有浮动后代并且这个浮动后代的margin-bottom edge在元素的bottom content edge下方,那么'height'会增加以至于包含这些edge</p>
+    <p class="note">另外,如果元素中含有浮动后代并且这个浮动后代的bottom margin edge在元素的bottom content edge下方,那么'height'会增加以至于包含这些edge.只考虑在这个BFC中的浮动后代</p>
     <h2><a name="min-max-height">10.7 Minimum and maximum heights:'min-height' and 'max-height'</a></h2>
     <p>这2个属性允许编写者把height of content area约束在一个特定的范围内</p>
     <dl class="prop-definition">
@@ -397,7 +370,7 @@
                     <td>Media:</td><td></td>
                 </tr>
                 <tr>
-                    <td>Computed value:</td><td>和specified value相同的百分比,or绝对长度</td>
+                    <td>Computed value:</td><td>和specified value相同的百分比, or 绝对长度</td>
                 </tr>
             </table>
         </dd>
@@ -425,7 +398,7 @@
                     <td>Media:</td><td></td>
                 </tr>
                 <tr>
-                    <td>Computed value:</td><td>和specified value相同的百分比or'none',or绝对长度</td>
+                    <td>Computed value:</td><td>和specified value相同的百分比 or 'none', or 绝对长度</td>
                 </tr>
             </table>
         </dd>
@@ -444,9 +417,19 @@
     <h2><a name="line-height">10.8 Line height calculations:the 'line-height' and 'vertical-align' properties</a></h2>
     <p>line box的height由以下规则决定:</p>
     <ol>
-        <li>计算line box中每一个inline-level box的height(此height不是box的content area的height).对于替换元素,inline-block元素和inline-table元素,这个height是其margin box的height;<br>
-        对于<a href="#inline-box">inline box</a>,这个height就是其line-height</li>
-        <li>inline-level box是根据其'vertical-align'属性进行垂直对齐的.</li>
+        <li>对于line box中的每一个inline-level box,其在参与计算line box的height时使用的有效height如下:
+            <ol>
+                <li>对于replaced element, inline-block element 和 inline-table element,这个有效height是其margin box的height
+                <li>对于<a href="vfmmodel.html#inline-box">inline box</a>,这个有效height是其line-height. inline box的line-height由以下组成:
+                    <ol>
+                        <li>top half-leading</li>
+                        <li>A + D ,对于给定font-size的给定font, 其中A代表其字体度量中baseline上方的高度, D代表其字体度量中baseline下方的深度. <span class="note">A + D 实际上就是inline box中content area的height, 其中的padding, border和margin不参与line box's height的计算</span></li>
+                        <li>bottom half-leading</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li>inline-level box是根据其'vertical-align'属性进行垂直对齐的(换句话说,对齐方式不同会导致inline box在line box中的垂直位置发生改变,进而导致line box的height发生变化).</li>
         <li>line box的height就是最高box的顶部到最低box的底部之间的距离</li>
     </ol>
     <p>空的inline元素生成空的inline box,但是这些box仍然具有margin,padding,border和line-height,从而影响这些计算,就像有内容的inline元素一样</p>
@@ -483,12 +466,18 @@
             </table>
         </dd>
     </dl>
-    <p>对于一个由inline-level元素组成的block container box,'line-height'指定了line box的最小高度(个人理解,最小高度就是说当这个block container box中包含的inline-level元素全部是inline box时每一个line box的height;如果
-    其中一个line box中包含一个height比'line-height'大的图片,此时元素的'line-height'就会重新计算了(会比指定的'line-height'大)),就好像每一个line box以一个具有和该元素相同的font-size和line-height且width为0的inline box开始一样,我们把这种假想盒叫做"strut"</p>
-    <p>对于non-replaced inline元素,'line-height'指定的height被用来计算line box的height</p>
+    <dl>
+        <dt>strut</dt>
+        <dd>位于每一个line box的开头,拥有和当前元素一样的font-size和line-height,zero-width inline box.这是一个假想box</dd>
+    </dl>
+    <p>'line-height'属性应用于不同元素时的意义:</p>
+    <ol>
+        <li>应用于block container element时,如果这个元素的内容由inline-level元素组成(即建立一个IFC),'line-height'表示这个元素中每一个line box的最小height,这个最小height实际上就是'strut'的height</li>
+        <li>应用于inline non-replaced element时,'line-height'表示这个inline box在参与计算其所在line box的height时使用的有效height</li>
+    </ol>
     <dl>
         <dt>normal</dt>
-        <dd>告诉UA根据元素的font设置一个合理的used value,我们推荐应介于1.0到1.2之间.和&lt;number&gt;含义一样,computed value是'normal'</dd>
+        <dd>告诉UA基于元素的font设置一个合理的used value,我们推荐应介于1.0到1.2之间.和&lt;number&gt;含义一样,computed value是'normal'</dd>
         <dt>&lt;length&gt;</dt>
         <dd>指定长度被用来计算line box的height.负值是非法的</dd>
         <dt>&lt;number&gt;</dt>
@@ -555,5 +544,15 @@
         <dt>bottom</dt>
         <dd>把对齐子树底端和line box的底端对齐</dd>
     </dl>
+    <p>baseline of 'inline-block'</p>
+    <ol>
+        <li>如果其中没有in-flow的line box,其baseline是bottom margin edge</li>
+        <li>如果其'overflow'属性的computed value不是'visible',其baseline是bottom margin edge</li>
+        <li>否则,其baseline是其中最后一个line box的baseline</li>
+    </ol>
+    <hr>
+    <div class="navbar">
+        <p><a href="vfmmodel.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="visual-effects.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
 </body>
 </html>

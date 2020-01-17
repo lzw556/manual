@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>5 Selectors</title>
-    <link rel="stylesheet" href="../base.css">
+    <link href="/CSS/base.css" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
@@ -82,14 +82,18 @@
         </li>
     </ul>
     <p class="note">自己总结:simple selector就是不含combinators的selector</p>
+    <a href="Test/sec05-02.html" target="blank" class="demo">demo</a>
     <p>selector是一串用连接符分隔的一个或多个简单selector.连接符是:white space,&gt;,+</p>
     <p>selector匹配到的元素叫作selector对象.一个selector的对象总是最后一个简单selector匹配的元素的子集</p>
     <h3><a name="selector-syntax-grouping">5.2.1 Grouping(selector分组)</a></h3>
-    <p>当几个selectorshare相同的声明时,他们可以被放进一个以逗号分隔的列表中</p>
+    <p>当几个selector share相同的声明时,他们可以被放进一个以逗号分隔的列表中</p>
+    <a href="Test/sec05-02-01.html" target="blank" class="demo">demo</a>
     <h2><a name="universal-selector">5.3 Universal selector</a></h2>
     <p>*,可以匹配任意单一元素.如果在一个simple selector中除了*之外还有别的字符,那么*可以忽略.例如,*#myid和#myid等价,*.note和.note等价,*[href]和[href]等价</p>
+    <a href="Test/sec05-03.html" target="blank" class="demo">demo</a>
     <h2><a name="type-selector">5.4 Type selectors</a></h2>
-    <p>一个类型selector可以匹配文档树中该元素类型的所有实例</p>
+    <p>一个type selector可以匹配文档树中该元素类型的所有实例</p>
+    <a href="Test/sec05-04.html" target="blank" class="demo">demo</a>
     <h2><a name="attribute-selector">5.5 Attribute selectors</a></h2>
     <dl>
         <dt>[att]</dt>
@@ -101,6 +105,7 @@
         <dt>[att|=val]</dt>
         <dd>匹配设置了'att'属性的元素且'att'的值等于val,or 'att'的值以val-为前缀的元素</dd>
     </dl>
+    <a href="Test/sec05-05.html" target="blank" class="demo">demo</a>
     <h3><a name="class-selector">5.5.1 Class selectors</a></h3>
     <p>
         在[att~=val]中,如果'att'是class,则[class~=val]可以用.val替代,因此class selector本质上还是attribute selector,从<a href="cascade.html#selector-specificity">selector-specificity</a>中可以得知,这2种selector的specificity都是(=c)
@@ -109,11 +114,13 @@
     <div class="example">
         <pre>p.warning.note{...}   /*这个selector匹配class="warning card note",不匹配class="note card"*/</pre>
     </div>
+    <a href="Test/sec05-05-01.html" target="blank" class="demo">demo</a>
     <h2><a name="id-selector">5.6 ID selectors</a></h2>
     <p>#val,匹配ID属性值等于'val'的元素</p>
     <p>ID selector比attribute selector的特殊性更高.例如,#val比[id=val]的specificity更高,详见<a href="cascade.html#selector-specificity">selector-specificity</a></p>
+    <a href="Test/sec05-06.html" target="blank" class="demo">demo</a>
     <h2><a name="pseudo-selector">5.7 Pseudo-elements and pseudo-classes</a></h2>
-    <p>在CSS2.1中,样式通常是根据元素在document tree中的位置来添加的.但在有些常见的排版场景下可能无法根据document tree的结构来添加样式.例如,HTML4,没有元素对应的是一个段落的第一行,所以简单CSSselector无法引用它</p>
+    <p>在CSS2.1中,样式通常是根据元素在document tree中的位置来添加的.但在有些常见的排版场景下可能无法根据document tree的结构来添加样式.例如,HTML4,没有元素对应的是一个段落的第一行,所以简单CSS selector无法引用它</p>
     <p>为了允许根据document tree之外的信息来格式化，CSS引入了pseudo-elements和pseudo-classes的概念</p>
     <ol>
         <li>pseudo-elements,主要用来给一个元素的特定部分指定样式</li>
@@ -122,13 +129,14 @@
     <p>
         pseudo-element和pseudo-class都不会出现在源文档中<br>
         pseudo-class可以出现在selector的任何位置,pseudo-element只能出现在selector中最后一个简单selector的后面<br>
-        pseudo-element名和pseudo-class名都是大小写不敏感的
+        pseudo-element名和pseudo-class名都是case-insensitive
     </p>
     <h2><a name="pseudo-element-selector">5.8 Pseudo-elements</a></h2>
     <p>:first-line, :first-letter, :before, :after</p>
     <h3><a name="first-line-selector">5.8.1 :first-line pseudo-element</a></h3>
     <p>:first-line对一个<a href="vfmmodel.html#block-container-box">block container element</a>中的第一行应用样式.第一行的长度取决于很多因素:包括元素width,文档width,font-size等. :first-line不会匹配任何真正的HTML元素</p>
     <p>可以用在:first-line selector中的CSS属性有:font,color,background,'word-spacing','letter-spacing','text-decoration','text-transform'和'line-height'</p>
+    <a href="Test/sec05-08-01.html" target="blank" class="demo">demo</a>
     <p>:first-line可能会被UA重写成含有虚拟标签序列的形式</p>
     <div class="example">
         <pre>&lt;p&gt;This is first line.<br>This is second line&lt;/p&gt;</pre>
@@ -145,12 +153,13 @@
     <div class="example">
         <pre>&lt;div&gt;<br>  &lt;p&gt;first paragraph&lt;/p&gt;<br>  &lt;p&gt;second paragraph&lt;/p&gt;<br>&lt;/div&gt;</pre>
         <pre>&lt;div&gt;<br>  &lt;p&gt;&lt;div:first-line&gt;&lt;p:first-line&gt;first paragraph&lt;/p:first-line&gt;&lt;/div:first-line&gt;&lt;/p&gt;<br>  &lt;p&gt;&lt;p:first-line&gt;second paragraph&lt;/p:first-line&gt;&lt;/p&gt;<br>&lt;/div&gt;</pre>
-    </div>
+    </div>  
     <h3><a name="first-letter-selector">5.8.2 :first-letter pseudo-element</a></h3>
     <p>
         :first-letter对一个<a href="vfmmodel.html#block-container-box">block container element</a>中第一行中的第一个字母应用样式,如果这一行中在他前面没有其他内容(比如image)的话
     </p>
-    可以用在:first-letter selector中的CSS属性有:font,color,background,'word-spacing','letter-spacing','text-decoration','text-transform','line-height',margin,padding,border,'vertical-align'
+    <p>可以用在:first-letter selector中的CSS属性有:font,color,background,'word-spacing','letter-spacing','text-decoration','text-transform','line-height',margin,padding,border,'vertical-align'</p>
+    <a href="Test/sec05-08-02.html" target="blank" class="demo">demo</a>
     <p>:first-letter的虚拟标签紧挨着内容,比如:</p>
     <div class="example">
         <pre>&lt;p&gt;&lt;span&gt;The first&lt;/span&gt; few words of an article<br> in the Economist.&lt;p&gt;</pre>
@@ -176,12 +185,14 @@
         <pre>p.special:before{content:"helloworld"}<br>p.special:first-letter{color:red;}</pre>
         <p>helloworld中的h的color将变成red.</p>
     </div>
+    <a href="Test/sec05-08-03.html" target="blank" class="demo">demo</a>
     <h2><a name="pseudo-class-selector">5.9 Pseudo-classes</a></h2>
     <h3><a name="first-child-selector">5.9.1 :first-child pseudo-class</a></h3>
     <p>
         :first-child匹配一个元素,这个元素是其他元素的第一个子元素
     </p>
     <p class="note">注意:计算第一个子元素时不考虑匿名元素</p>
+    <a href="Test/sec05-09-01.html" target="blank" class="demo">demo</a>
     <h3><a name="link-pseudo-class-selector">5.9.2 link pseudo-classes: :link and :visited</a></h3>
     <p>
         :link匹配没有被访问过的链接<br>
@@ -191,6 +202,7 @@
         <strong>注意</strong> :link和:visited只能应用于链接(a标签且href属性值不为空,所以匹配不到锚点)<br>
         2种状态互斥.即一个链接不可能同时被这2种状态匹配到,因此其书写的先后顺序对结果无影响
     </p>
+    <a href="Test/sec05-09-02.html" target="blank" class="demo">demo</a>
     <h3><a name="dynamic-pseudo-class-selector">5.9.3 dynamic pseudo-classes: :hover,:active and :focus</a></h3>
     <p>
         :hover匹配一个元素,当这个元素被用户使用定点设备虚指但不激活期间.比如当用户把光标(鼠标指针)悬停在元素生成的元素框上期间<br>
@@ -198,10 +210,12 @@
         :focus匹配一个元素,当这个元素拥有焦点期间
     </p>
     <p>dynamic pseudo-classes可以应用于任何元素</p>
+    <a href="Test/sec05-09-03.html" target="blank" class="demo">demo</a>
     <h3><a name="link-pseudo-class-order">5.9.4 link pseudo-classes order</a></h3>
     <p>
         一个元素在同一时间可能匹配多个伪类.例如,:active发生期间:hover一直都在发生.所以对一个链接来说,伪类声明顺序非常重要,正确的链接伪类的声明顺序是: :link/:visited ->:hover ->:active
     </p>
+    <a href="Test/sec05-09-04.html" target="blank" class="demo">demo</a>
     <h3><a name="lang-pseudo-class-selector">5.9.5 language pseudo-class: :lang</a></h3>
     <h3><a name="privacy-visited">5.9.6 privacy and :visited</a></h3>
     <p>这一段落不是规范中的内容</p>
@@ -223,6 +237,7 @@
             <p>即便是上述样式,你也不能给访问过和未访问过设置不同的透明度</p>
         </li>
     </ol>
+    <a href="Test/sec05-09-06.html" target="blank" class="demo">demo</a>
     <p>有关隐私和:visited selector的更多信息详见MDN中的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Privacy_and_the_:visited_selector">Privacy and the :visited selector</a></p>
     <div class="example">
         <pre>:link {<br>  outline:dotted 1px blue;<br>  background-color:white;    /*必须指定一个值,否则无法对:visited进行修改*/<br>}</pre>
@@ -232,13 +247,20 @@
     <p>
         后代selector匹配一个元素,这个元素是另一个元素的后代元素;后代selector由2个或多个以white space分隔的selector组成
     </p>
+    <a href="Test/sec05-10.html" target="blank" class="demo">demo</a>
     <h2><a name="child-selector">5.11 Child selectors</a></h2>
     <p>
         子selector匹配一个元素,这个元素是另一个元素的子元素;子selector由2个或多个以 > 分隔的selector组成
     </p>
+    <a href="Test/sec05-11.html" target="blank" class="demo">demo</a>
     <h2><a name="adjacent-sibling-selector">5.12 Adjacent sibling selectors</a></h2>
     <p>
         相邻兄弟selector语法:E1 + E2,E2是selector对象,如果E1和E2拥有相同的父元素并且E1紧挨在E2前面(E1和E2之间无其他元素节点,忽略非元素节点比如文本或注释),则成功匹配到E2
     </p>
+    <a href="Test/sec05-12.html" target="blank" class="demo">demo</a>
+    <hr>
+    <div class="navbar">
+        <p><a href="syndata.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="cascade.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
 </body>
 </html>

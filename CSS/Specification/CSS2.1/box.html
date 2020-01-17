@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>8Box model</title>
-    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="/CSS/base.css">
 </head>
 <body>
     <div class="navbar">
@@ -45,6 +45,7 @@
         <dd>margin area是一个矩形然后去掉中间的content area和padding area和border area部分,其尺寸由box的margin指定.<br>其外边界叫作<dfn>margin edge</dfn> or <dfn>outer edge</dfn>(内边界就是border edge)<br>4个margin edge组成的矩形叫作box的<dfn>margin box</dfn>(实际是由content area + padding area + border area + margin area所组成的矩形)</dd>
     </dl>
     <p class="note">content area,padding area和border area的背景样式由background指定.margin area的背景总是透明的</p>
+    <a class="demo" href="Test/sec08-01.html" target="blank">demo</a>
     <h2><a name="margin">8.2 Margin properties</a></h2>
     <p>marign属性指定了一个box中<a href="#margin-area">margin area</a>的width</p>
     <dl class="prop-definition">
@@ -83,6 +84,7 @@
         </dd>
     </dl>
     <p class="note">以上这2个属性对inline non-replaced元素无效</p>
+    <div class="demo"><a href="Test/sec08-02a.html" target="blank">margin-top</a>&nbsp;<a href="Test/sec08-02c.html" target="blank"> margin-bottom</a></div>
     <dl class="prop-definition">
         <dt><span class="prop-name"><strong>margin-left</strong></span>,<span class="prop-name"><strong>margin-right</strong></span></dt>
         <dd class="prop-content">
@@ -118,6 +120,7 @@
             </table>
         </dd>
     </dl>
+    <div class="demo"><a href="Test/sec08-02d.html" target="blank">margin-left</a>&nbsp;<a href="Test/sec08-02b.html" target="blank"> margin-right</a></div>
     <dl class="prop-definition">
         <dt><span class="prop-name"><strong>margin</strong></span></dt>
         <dd class="prop-content">
@@ -157,19 +160,20 @@
     <div class="example">
         <pre>body{margin:1em;}         /*top=1em right=1em bottom=1em left=1em*/<br>body{margin:1em 2em;}     /*top=1em right=2em bottom=1em left=2em*/<br>body{margin:1em 2em 3em;} /*top=1em right=2em bottom=3em left=2em*/</pre>
     </div>
+    <a class="demo" href="Test/sec08-02e.html" target="blank">demo</a>
     <h3><a name="collapsing-margin">8.2.1 Collapsing margins</a></h3>
     <p>2个or多个box(可能但不一定是兄弟)中相邻的margin会被结合形成一个margin.margin按这种方式结合叫作collapse,产生的margin叫作collapsed margin</p>
     <p>相邻的margin会collapse,除了:</p>
     <ul>
         <li>horizontal margin不会collapse</li>
         <li>根元素生成的box的margin不会collapse</li>
-        <li>如果带<a href="vfmmodel.html/#clearance">clearance</a>的元素的margin-top和margin-bottom相邻,该元素的margin会和后面紧挨着的兄弟元素的相邻的margin collapse,但这个产生的collapsed margin不会再和父级块的margin-bottom collapse
+        <li>如果带<a href="vfmmodel.html#clearance">clearance</a>的元素的margin-top和margin-bottom相邻,该元素的margin会和后面紧挨着的兄弟元素的相邻的margin collapse,但这个产生的collapsed margin不会再和父级块的margin-bottom collapse
         </li>
         <li>如果一个box的'height'属性的computed value是'auto'且'min-height'属性的computed value不是0,这个box的margin-top和其最后一个in-flow子元素的margin-bottom collapse,那么这个子元素的margin-bottom不会和父元素的margin-bottom collapse</li>
     </ul>
     <p>2个margin相邻的满足条件:</p>
     <ul>
-        <li>都属于<a href="vfmmodel.html/#in-flow">in-flow</a> <a href="vfmmodel.html/#block-level">block-level boxes</a>,这些boxes处于同一个<a href="vfmmodel.html/#block-formatting-context">block formatting context</a>中</li>
+        <li>都属于<a href="vfmmodel.html#in-flow">in-flow</a> <a href="vfmmodel.html#block-level">block-level boxes</a>,这些boxes处于同一个<a href="vfmmodel.html#block-formatting-context">block formatting context</a>中</li>
         <li>2个margin之间不能存在line boxes,clearance,padding,border</li>
         <li>
             都属于vertically-adjacent的box edges.即构成下列某一对:
@@ -199,6 +203,7 @@
     <p>多个margin collapse以后形成的collapsed margin的width是这些被collapse的margin中的最大值.<br>
     如果2个margin中有一个正值和一个负值,collapse后的margin=正值-负值的绝对值<br>
     如果2个margin都是负值,collapse后的margin=0-较大的负值的绝对值</p>
+    <a class="demo" href="Test/sec08-02-01.html" target="blank">demo</a>
     <h2><a name="padding">8.3 Padding properties</a></h2>
     <p>padding属性指定了一个box中<a href="#padding-area">padding area</a>的width</p>
     <dl class="prop-definition">
@@ -218,7 +223,7 @@
                 </tr>
                 <tr>
                     <td>Applies to:</td>
-                    <td>all elements,除了display值为:table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column的元素</td>
+                    <td>all elements,除了display值是table系列的元素(table-caption,table,inline-table和table-cell这4种例外)</td>
                 </tr>
                 <tr>
                     <td>Inherited:</td>
@@ -239,6 +244,9 @@
             </table>
         </dd>
     </dl>
+    <div class="demo"><a href="Test/sec08-03a.html" target="blank">padding-top</a>&nbsp;<a href="Test/sec08-03b.html" target="blank">padding-right</a>
+        &nbsp;<a href="Test/sec08-03c.html" target="blank">padding-bottom</a>&nbsp;<a href="Test/sec08-03d.html" target="blank">padding-left</a>
+    </div>
     <dl class="prop-definition">
         <dt><span class="prop-name"><strong>padding</strong></span></dt>
         <dd class="prop-content">
@@ -253,7 +261,7 @@
                 </tr>
                 <tr>
                     <td>Applies to:</td>
-                    <td>all elements,除了display值为:table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column的元素</td>
+                    <td>all elements,除了display值是table系列的元素(table-caption,table,inline-table和table-cell这4种例外)</td>
                 </tr>
                 <tr>
                     <td>Inherited:</td>
@@ -278,6 +286,7 @@
     <div class="example">
         <pre>body{padding:1em;}         /*top=1em right=1em bottom=1em left=1em*/<br>body{padding:1em 2em;}     /*top=1em right=2em bottom=1em left=2em*/<br>body{padding:1em 2em 3em;} /*top=1em right=2em bottom=3em left=2em*/</pre>
     </div>
+    <a class="demo" href="Test/sec08-03e.html" target="blank">demo</a>
     <h2><a name="border">8.4 Border properties</a></h2>
     <p>border属性指定了一个box中<a href="#border-area">border area</a>的color,style和width</p>
     <h3><a name="border-width">8.4.1 Border width</a></h3>
@@ -320,6 +329,8 @@
             </table>
         </dd>
     </dl>
+    <div class="demo"><a href="Test/sec08-04-01a.html" target="blank">border-top-width</a>&nbsp;<a href="Test/sec08-04-01b.html" target="blank">border-right-width</a>
+        &nbsp;<a href="Test/sec08-04-01c.html" target="blank">border-bottom-width</a>&nbsp;<a href="Test/sec08-04-01d.html" target="blank">border-left-width</a></div>
     <dl class="prop-definition">
         <dt>
             <span class="prop-name"><strong>border-width</strong></span>
@@ -361,6 +372,7 @@
     <div class="example">
         <pre>h1{border-width:1em;}         /*top=1em right=1em bottom=1em left=1em*/<br>h1{border-width:1em 2em;}     /*top=1em right=2em bottom=1em left=2em*/<br>h1{border-width:1em 2em 3em;} /*top=1em right=2em bottom=3em left=2em*/</pre>
     </div>
+    <a href="Test/sec08-04-01e.html" target="blank" class="demo">demo</a>
     <h3><a name="border-color">8.4.2 Border color</a></h3>
     <p>border-color属性指定了一个box中<a href="#border-area">border area</a>的color</p>
     <dl class="prop-definition">
@@ -402,6 +414,8 @@
         </dd>
     </dl>
     <p class="note">如果一个元素的border-color没有指定,UA必须取该元素的color属性的值来作为border-color的computed value</p>
+    <div class="demo"><a href="Test/sec08-04-02a.html" target="blank">border-top-color</a>&nbsp;<a href="Test/sec08-04-02b.html" target="blank">border-right-color</a>
+        &nbsp;<a href="Test/sec08-04-02c.html" target="blank">border-bottom-color</a>&nbsp;<a href="Test/sec08-04-02d.html" target="blank">border-left-color</a></div>
     <dl class="prop-definition">
         <dt>
             <span class="prop-name"><strong>border-color</strong></span>
@@ -442,8 +456,9 @@
     <div class="example">
         <pre>h1{border-color:red;}            /*top=red right=red bottom=red left=red*/<br>h1{border-color:red green;}      /*top=red right=green bottom=red left=green*/<br>h1{border-color:red green blue;} /*top=red right=green bottom=blue left=green*/</pre>
     </div>
+    <a href="Test/sec08-04-02e.html"  target="blank" class="demo">demo</a>
     <h3><a name="border-style">8.4.3 Border style</a></h3>
-    <p>border-style属性指定了一个box中<a href="#padding-area">padding area</a>的style</p>
+    <p>border-style属性指定了一个box中<a href="#padding-area">border area</a>的style</p>
     <dl>
         <dt><a name="none-border-style">none</a></dt>
         <dd>没有边框;此时border-width的computed value为0</dd>
@@ -504,6 +519,8 @@
             </table>
         </dd>
     </dl>
+    <div class="demo"><a href="Test/sec08-04-03a.html" target="blank">border-top-style</a>&nbsp;<a href="Test/sec08-04-03b.html" target="blank">border-right-style</a>
+        &nbsp;<a href="Test/sec08-04-03c.html" target="blank">border-bottom-style</a>&nbsp;<a href="Test/sec08-04-03d.html" target="blank">border-left-style</a></div>
     <dl class="prop-definition">
         <dt>
             <span class="prop-name"><strong>border-style</strong></span>
@@ -545,6 +562,7 @@
     <div class="example">
         <pre>h1{border-style:solid;}               /*top=solid right=solid bottom=solid left=solid*/<br>h1{border-style:solid dashed;}        /*top=solid right=dashed bottom=solid left=dashed*/<br>h1{border-style:solid dashed dotted;} /*top=solid right=dashed bottom=dotted left=dashed*/</pre>
     </div>
+    <a href="Test/sec08-04-03e.html" target="blank" class="demo">demo</a>
     <h3><a name="border-shorthand">8.4.4 Border shorthand</a></h3>
     <dl class="prop-definition">
         <dt>
@@ -584,6 +602,8 @@
             </table>
         </dd>
     </dl>
+    <div class="demo"><a href="Test/sec08-04-04a.html" target="blank">border-top</a>&nbsp;<a href="Test/sec08-04-04b.html" target="blank">border-right</a>
+        &nbsp;<a href="Test/sec08-04-04c.html" target="blank">border-bottom</a>&nbsp;<a href="Test/sec08-04-04d.html" target="blank">border-left</a></div>
     <dl class="prop-definition">
         <dt>
             <span class="prop-name"><strong>border</strong></span>
@@ -621,5 +641,10 @@
             </table>
         </dd>
     </dl>
+    <a href="Test/sec08-04-04e.html" target="blank" class="demo">demo</a>
+    <hr> 
+    <div class="navbar">
+        <p><a href="media.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="vfmmodel.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
 </body>
 </html>

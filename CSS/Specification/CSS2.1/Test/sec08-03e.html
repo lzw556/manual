@@ -22,6 +22,8 @@
         .cl4{padding:1em .5em 5%;}
         .cl5{padding:1em 5% .5em 1em;}
         .cl6{padding:1em;}
+        table.cl7,table.cl7 caption{padding:1em;}
+        table.cl7 tr,table.cl7 tr td,table.cl7 tr th{padding:.5em;}
     </style>
 </head>
 <body>
@@ -62,5 +64,153 @@
 <div class="container" style="width:500px;">
     在这个DIV中存在一个'span'元素,其背景颜色是'olive',文本颜色是'white';这个<span class="cl6 test2">SPAN元素</span>,其class属性值是'cl6',该SPAN元素在4个方向上的padding都是1em
 </div>
+<hr>
+<pre>table.cl7,table.cl7 caption{margin:1em;}
+table.cl7 tr,table.cl7 tr td,table.cl7 tr th{margin:.5em;}</pre>
+<table class="cl7">
+    <caption>2018-2019 Premier League</caption>
+    <thead>
+    <tr>
+        <th>Position</th>
+        <th>Club</th>
+        <th>Played</th>
+        <th>Won</th>
+        <th>Draw</th>
+        <th>Lost</th>
+        <th>Goals For</th>
+        <th>Goals Against</th>
+        <th>Goals Difference</th>
+        <th>Points</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <td colspan="10">all datas from <a href="http://www.premierleague.com">www.premierleague.com</a></td>
+    </tr>
+    </tfoot>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Manchester City</td>
+        <td>38</td>
+        <td>32</td>
+        <td>2</td>
+        <td>4</td>
+        <td>95</td>
+        <td>23</td>
+        <td>+72</td>
+        <td>98</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Liverpool</td>
+        <td>38</td>
+        <td>30</td>
+        <td>7</td>
+        <td>1</td>
+        <td>89</td>
+        <td>22</td>
+        <td>+67</td>
+        <td>97</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Chelsea</td>
+        <td>38</td>
+        <td>21</td>
+        <td>9</td>
+        <td>8</td>
+        <td>63</td>
+        <td>39</td>
+        <td>+24</td>
+        <td>72</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Tottenham Hotspur</td>
+        <td>38</td>
+        <td>23</td>
+        <td>2</td>
+        <td>13</td>
+        <td>67</td>
+        <td>23</td>
+        <td>+39</td>
+        <td>71</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Arsenal</td>
+        <td>38</td>
+        <td>21</td>
+        <td>7</td>
+        <td>10</td>
+        <td>73</td>
+        <td>51</td>
+        <td>+22</td>
+        <td>70</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Manchester United</td>
+        <td>38</td>
+        <td>19</td>
+        <td>9</td>
+        <td>10</td>
+        <td>65</td>
+        <td>54</td>
+        <td>+11</td>
+        <td>66</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Wolverhampton Wanderers</td>
+        <td>38</td>
+        <td>16</td>
+        <td>9</td>
+        <td>13</td>
+        <td>47</td>
+        <td>46</td>
+        <td>+1</td>
+        <td>57</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Everton</td>
+        <td>38</td>
+        <td>15</td>
+        <td>9</td>
+        <td>14</td>
+        <td>54</td>
+        <td>46</td>
+        <td>+8</td>
+        <td>54</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Leicester City</td>
+        <td>38</td>
+        <td>15</td>
+        <td>7</td>
+        <td>16</td>
+        <td>51</td>
+        <td>38</td>
+        <td>+3</td>
+        <td>52</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>West Ham United</td>
+        <td>38</td>
+        <td>15</td>
+        <td>7</td>
+        <td>16</td>
+        <td>52</td>
+        <td>55</td>
+        <td>-3</td>
+        <td>52</td>
+    </tr>
+    </tbody>
+</table>
+<p>这个TABLE元素,class属性值是'cl7',其4个方向上的padding都是1em;其中的TABLE-CAPTION元素,其4个方向上的padding都是1em;其中的TR元素在4个方向上的padding都是0,不应该是0.5em;其中TD和TH元素在4个方向上的padding都是0.5em</p>
 </body>
 </html>

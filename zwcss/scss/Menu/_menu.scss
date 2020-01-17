@@ -1,0 +1,15 @@
+// name: 弹出式菜单
+// overview: 
+//     矩形, 一般是height大于width, 由若干menu item组成, menu item之间可以通过separator进行分组;
+//     每一个menu item包括menu item title, 也可以包括icon和symbol, 也可以打开一个submenu
+// how to open
+//     click a menu title, 通过这种方式弹出的menu一般也叫做pull-down or dropdown menu
+//     click右键 or 选中一段文本, 通过这种方式弹出的menu一般也叫做context or pop-up menu(此时menu没有menu title)
+// how to close
+//     当一个menu被display在屏幕上的时候, 他会一直保持open状态直到用户选择了一个menu item, 
+//     or 导航到其他的menu, or click 这个menu外的区域
+// interaction
+//     select a menu item and click or press shortcut
+// when to use: 
+//     a list of items, 包括command, option等; 
+//     注意用户只可以对menu item进行choose action, 没有other actions, 比如input

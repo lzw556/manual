@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>6 object-oriented programming</title>
+    <link href="/zwcss/css/main.css" rel="stylesheet">
+    <link href="/zwcss/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="hd">
+    <a href="reference-type.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="function-expression.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+</div> 
+<div class="sidebar">
+    <h1>6 object-oriented programming</h1>
+    <ul class="table-of-content">
+        <li><a href="#understanding">6.1 understanding object</a>
+            <ul class="table-of-content">
+                <li><a href="#property-type">6.1.1 type of property</a></li>
+                <li><a href="#multiple-property">6.1.2 define multiple property</a></li>
+                <li><a href="#property-attribute">6.1.3 reading property attribute</a></li>
+            </ul>
+        </li>
+        <li><a href="#creation">6.2 object creation</a>
+            <ul class="table-of-content">
+                <li><a href="#factory">6.2.1 the factory pattern</a></li>
+                <li><a href="#constructor">6.2.2 the constructor pattern</a></li>
+                <li><a href="#prototype">6.2.3 the prototype pattern</a></li>
+                <li><a href="#constructor-prototype">6.2.4 constructor/prototype pattern</a></li>
+                <li><a href="#dynamic-prototype">6.2.5 dynamic prototype pattern</a></li>
+                <li><a href="#parasitic-constructor">6.2.6 parasitic constructor pattern</a></li>
+                <li><a href="#durable-constructor">6.2.7 durable constructor pattern</a></li>
+            </ul>           
+        </li>
+        <li><a href="#inheritance">6.3 inheritance</a>
+            <ul class="table-of-content">
+                <li><a href="#prototype-chaining">6.3.1 prototype chaining</a></li>
+                <li><a href="#constructor-stealing">6.3.2 constructor stealing</a></li>
+                <li><a href="#combination-inheritance">6.3.3 combination inheritance</a></li>
+                <li><a href="#prototypal-inheritance">6.3.4 prototypal inheritance</a></li>
+                <li><a href="#parasitic-inheritance">6.3.5 parasitic inheritance</a></li>
+                <li><a href="#parasitic-combination">6.3.6 parasitic combination inheritance</a></li>
+            </ul>
+        </li>     
+    </ul>    
+</div>
+<div class="main">
+    <div class="section">
+        <h2>6.1 understanding object<a name="understanding" class="anchor-link"></a></h2>
+    </div>
+    <div class="section">
+        <h3>6.1.1 property type<a name="property-type" class="anchor-link"></a></h3>
+        <p><strong>数据属性</strong></p>
+        <p>数据属性包含一个数据值的位置. 有如下4个特性:</p>
+        <ul>
+            <li>[[Configurable]], 表示能否通过delete删除属性, 默认值是true</li>
+            <li>[[Enumerable]], 表示能否通过for-in枚举属性, 默认值是true</li>
+            <li>[[Writable]], 表示能否修改属性的值, 默认值是true</li>
+            <li>[[Value]], 包含这个属性的值, 默认值是undefined</li>
+        </ul>
+        <p>要修改属性默认的特性, 必须使用Object.defineProperty()方法, 如下列:</p>
+        <div class="example">
+            <pre>var person = {
+    name : "lzw",
+    age : 20,
+    job : "software engineer"
+};
+Object.defineProperty(person, "name", {
+    value : "lzw",
+    enumerable : false,
+    writable : false
+});</pre>
+        </div>
+        <p><strong>访问器属性</strong></p>
+        <p>访问器属性不包含数据值, 但包含一对getter和setter函数, 有如下4个特性:</p>
+        <ul>
+            <li>[[Configurable]], 表示能否通过delete删除属性, 默认值是true</li>
+            <li>[[Enumerable]], 表示能否通过for-in枚举属性, 默认值是true</li>
+            <li>[[Get]], 在读取属性时调用的函数, 默认值是undefined</li>
+            <li>[[Set]], 在写入属性时调用的函数, 默认值是undefined</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>6.1.2 define multiple property<a name="multiple-property" class="anchor-link"></a></h3>
+    </div>  
+    <div class="section">
+        <h3>6.1.3 reading property attribute<a name="property-attribute" class="anchor-link"></a></h3>
+    </div>  
+    <div class="section">
+        <h2>6.2 object creation<a name="creation" class="anchor-link"></a></h2>
+        <p>虽然可以使用Object构造函数和对象字面量来创建对象, 但是这些方式有个明显的缺点:使用同一个接口创建很多对象时, 会产生大量重复代码</p>
+    </div>
+    <div class="section">
+        <h3>6.2.1 the factory pattern<a name="factory" class="anchor-link"></a></h3>
+        <div class="example">
+            <pre>function createPerson(name, age, gender){
+    var o = new Object();
+    o.name = name;
+    o.age = age;
+    o.gender = gender;
+    o.sayName = function(){
+        console.log(this.name);
+    };
+    return o;                
+}
+var person1 = createPerson("jim", 15, "male");
+var person2 = createPerson("lily", 13, "female");
+person1.sayName();  //jim
+person2.sayName();  //lily
+console.log(person1.sayName === person2.sayName);    //false
+<span class="note">工厂模式总结:</span>
+//优点: 解决了代码复用问题
+//缺点: 1 创建对象以后, 无法识别其具体类型 2 相同的方法在不同对象之间无法共享</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>6.2.2 the constructor pattern<a name="constructor" class="anchor-link"></a></h3>
+        <p>原生构造函数比如Array, Date, 在运行时会自动出现在执行环境中. 也可以创建自定义的构造函数</p>
+        <div class="example">
+<pre>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender =gender;
+    this.sayName = function(){
+        console.log(this.name);
+    }
+}
+var person1 = new Person("jim", 15, "male");
+var person2 = new Person("lily", 13, "female");
+person1.sayName();  //jim
+person2.sayName();  //lily
+console.log(person1 instanceof Person);     //true
+console.log(person2 instanceof Person);     //true
+console.log(person1.sayName === person2.sayName);   //false</pre>
+        </div>
+        <p class="note">按照惯例, 构造函数的函数名的第一个字母大写, 主要是为了和其他函数区分开来</p>
+        <p><strong>构造函数的特点:</strong></p>
+        <ul>
+            <li>没有显式的创建对象</li>
+            <li>直接将属性和方法赋值给了函数内部的this对象</li>
+            <li>没有使用return语句</li>
+        </ul>
+        <p><strong>构造函数的调用</strong></p>
+        <p>构造函数和其他函数的唯一区别: 就是调用方式不同</p>
+        <p><strong>new操作符</strong></p>
+        <p>要使用构造函数创建对象, 必须使用new操作符, 在使用new操作符调用构造函数时new关键字会做如下操作:</p>
+        <ol>
+            <li>创建一个新对象</li>
+            <li>让这个新对象的内部属性[[prototype]]指向构造函数的prototype</li>
+            <li>把这个新对象赋给构造函数内的this对象, 然后执行这个构造函数</li>
+            <li>返回步骤3中的返回值</li>
+        </ol>
+        <p>因此我们可以通过代码来模拟new操作符的功能:</p>
+        <div class="example">
+            <pre>function doNewOperator(func){
+    var o = {};
+    o.__proto__ = func.prototype;
+    //arguments对象可以调用slice()见MDN
+    var result = func.apply(o, Array.prototype.slice.call(arguments, 1));
+    return result || o;
+}
+var p1 = doNewOperator(Person, "lucy", 15, "female");
+p1.sayName();
+console.log(p1 instanceof Person);</pre>
+        </div>
+        <p><strong>构造函数总结:</strong></p>
+        <p>虽然解决了对象类型识别的问题, 但相同的方法在不同对象之间无法共享</p>
+    </div>    
+    <div class="section">
+        <h3>6.2.3 the prototype pattern<a name="prototype" class="anchor-link"></a></h3>
+        <p>每一个函数都有一个<a href="reference-type.html#prototype">prototype属性</a>, 这个属性是一个指针, 指向一个对象, 这个对象中保存着特定类型的所有实例共享的属性和方法</p>
+        <p class="note">比如toString()和valueOf()等方法实际上都保存在Object.prototype名下, 然后通过各自对象的实例进行访问</p>
+        <p><strong>原型对象, 构造函数和实例三者之间的关系</strong></p>
+        <ul>
+            <li>构造函数的prototype属性指向其原型对象</li>
+            <li>默认情况下, 原型对象会自动获得一个constructor属性, 指向构造函数</li>
+            <li>由构造函数创建的新实例, 这个实例中将包含一个内部属性[[prototype]], 指向原型对象</li>
+        </ul>
+        <div class="example">
+            <pre>function Person(){}
+var person1 = new Person();
+console.log(Person.prototype.isPrototypeOf(person1));   //true
+console.log(Person.prototype.constructor === Person);   //true
+</pre>
+        </div>
+        <p>具体关系如下图:</p>
+        <img src="image/prototype.png" alt="prototype">
+        <p><strong>对象属性查找</strong></p>
+        <ol>
+            <li>首先从对象实例本身开始, 如果找到了给定名字的属性, 则返回该属性的值</li>
+            <li>如果在第一步中没有找到, 则继续搜索对象指向的原型对象, 在原型对象中查找给定名字的属性, 如果找到则返回</li>
+        </ol>
+        <p class="note">这种属性查找的方式正是所有对象实例共享原型对象中保存的方法和属性的基本原理</p>
+        <div class="example">
+            <pre>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+Person.prototype.sayName = function(){
+    console.log(this.name);
+}
+var person1 = new Person("jim", 15, "male");
+person1.sayName();
+var person2 = new Person("lily", 13, "female");
+person2.sayName();
+//相同的方法在不同对象之间实现了共享
+console.log(person1.sayName === person2.sayName);</pre>
+        </div>
+        <p>在上面的例子中, 当执行person1.sayName()时, 首先会在person1中查找sayName, 发现没有则继续搜索, 在Person.prototype中找到了</p>   
+        <p><strong>对象实例中的属性, 会屏蔽原型对象中的同名的属性</strong></p> 
+        <p>如果对象实例和原型对象中分别拥有一个同名的属性, 那么此时通过对象访问这个属性, 就不会去访问原型对象中的那个属性了</p>
+        <div class="example">
+            <pre>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+Person.prototype.sayName = function(){
+    console.log(this.name);
+}
+var person1 = new Person("jim", 15, "male");
+person1.sayName = function() {
+    console.log("my name is " + this.name);
+};
+person1.sayName();      //my name is jim
+delete person1.sayName;
+person1.sayName();      //jim</pre>
+        </div>
+        <p><strong>in操作符</strong></p>
+        <p>单独使用in操作符时, 会在通过对象能够访问给定属性时返回true, 无论这个属性存在于实例中还是原型中</p>
+        <p class="note">同时使用hasOwnProperty()和in操作符, 就可以确定给定属性是存在于实例中, 还是存在于原型中</p>
+        <div class="example">
+            <pre>function Person(){}
+Person.prototype.sayName=function(){
+    console.log("hi");
+}
+var person1 = new Person();
+person1.name = "jim";
+console.log(hasPrototypeProperty(person1, "name"));       //false 
+console.log(hasPrototypeProperty(person1, "sayName"));    //true
+function hasPrototypeProperty(object, name){
+    return !object.hasOwnProperty(name) && (name in object);
+}</pre>
+        </div>
+        <p><strong>重写原型对象</strong></p>
+        <p>原型对象被重写以后, 会影响:</p>
+        <ol>
+            <li>新原型对象中的constructor属性不再指向构造函数</li>
+            <li>被重写之前创建的实例对象, 其内部属性[[prototype]]不会指向新原型对象, 而是依旧指向默认的那个原型对象</li>
+        </ol>
+        <div class="example">
+            <pre>function Person(){}
+var person1 = new Person();
+Person.prototype={
+    sayName : function(){
+        console.log("hi");
+    }
+};
+var person2 = new Person();
+console.log(Person.prototype.isPrototypeOf(person1));       //false 
+console.log(Person.prototype.constructor === Person);    //false
+person2.sayName();      //hi
+person1.sayName();      //error</pre>
+        </div>
+        <p><strong>原生引用类型的原型对象</strong></p>
+        <p>ECMAScript中的原生引用类型, 比如Object, Array等, 也都是采用原型模式创建的, 比如toString()方法就是定义在Object的原型对象中的</p>
+        <div class="example">
+            <pre>1 console.log({}.hasOwnProperty("toString"));    //false
+2 console.log("toString" in {});    //true
+//1 证明toString不是实例属性, 2 证明可以通过实例访问这个属性, 然后1 + 2 就证明这个是原型属性
+3 console.log([].hasOwnProperty("push"));    //false
+4 console.log("push" in []);    //true</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>6.2.4 combination constructor/prototype pattern(组合使用构造函数模式和原型模式)<a name="constructor-prototype" class="anchor-link"></a></h3>
+        <p class="note">构造函数模式用于定义实例属性, 原型模式用于定义所有实例共享的属性和方法, 这种方式可以说是创建自定义引用类型的最佳实践</p>
+        <div class="example">
+            <pre>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+Person.prototype = {
+    constructor : Person,
+    sayName : function(){
+        console.log(this.name);
+    }
+}
+var person1 = new Person("jim", 15, "male");
+var person2 = new Person("lily", 13, "female");
+console.log(person1.sayName === person2.sayName);   //true</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>6.2.5 the dynamic prototype pattern(动态原型模式)<a name="dynamic-prototype" class="anchor-link"></a></h3>
+        <p>动态原型模式是为了解决构造函数和原型独立的问题, 这种模式把所有代码都封装在构造函数中</p>
+        <div class="example">
+            <pre>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    //只在创建第一个实例时初始化原型对象, 而且其他属性不用再判断就可以了
+    if(typeof this.sayName != "function"){
+        Person.prototype.sayName = function(){
+            console.log(this.name);
+        }
+        Person.prototype.sayAge = function(){
+            console.log(this.age);
+        }
+    }
+}</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>6.2.6 parasitic constructor pattern(寄生构造函数模式)<a name="parasitic-constructor" class="anchor-link"></a></h3>
+    </div>
+    <div class="section">
+        <h3>6.2.7 durable constructor pattern(稳妥构造函数模式)<a name="durable-constructor" class="anchor-link"></a></h3>
+    </div>
+    <div class="section">
+        <h2>6.3 inheritance<a name="inheritance" class="anchor-link"></a></h2>
+        <p>ECMAScript中实现继承的基本思想就是通过原型让一个引用类型继承另一个引用类型的属性和方法</p>
+    </div>
+    <div class="section">
+        <h3>6.3.1 prototype chaining(原型链)<a name="prototype-chaining" class="anchor-link"></a></h3>
+        <p>原型链: 实现原型链的方法就是让子类型的原型对象指向父类型的实例对象, 这样就会形成子对象指向子原型, 子原型指向父原型的链条</p>
+        <div class="example">
+            <pre>function Person(){
+    this.personName = "person-instance-personName";
+}
+Person.prototype = {
+    constructor : Person,
+    sayName: function(){
+        console.log(this.personName);
+    }
+}
+function Student(){
+    this.studentName = "student-instance-studentName";
+}
+//实现继承的关键代码
+Student.prototype = new Person();
+var student1 = new Student();
+//继承了来自Person的实例属性
+console.log(student1.personName);      //person-instance-personName
+//继承了来自Person的原型属性
+student1.sayName();      //person-instance-personName
+console.log(Person.prototype.isPrototypeOf(student1));      //true
+console.log(student1 instanceof Person);      //true</pre>
+        </div>
+        <p>通过原型链来实现继承有以下问题: </p>
+        <ul>
+            <li>父类型的实例属性变成了原型属性</li>
+            <li>在创建子类的实例对象时无法向父类型构造函数传递参数</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>6.3.2 constructor stealing(借用构造函数)<a name="constructor-stealing" class="anchor-link"></a></h3>
+        <p>解决了2个问题:</p>
+        <ul>
+            <li>复制(继承)了父类型的实例属性</li>
+            <li>创建子类的实例对象时无法向父类型构造函数传递参数</li>
+        </ul>
+        <div class="example">
+            <pre>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+function Student(name, age, gender){
+    Person.call(this, name, age, gender);
+}</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>6.3.3 combination inheritance(组合继承)<a name="combination-inheritance" class="anchor-link"></a></h3>
+        <p>使用原型链实现对原型属性和方法的继承, 通过借用构造函数来实现对实例属性的复制(继承)</p>
+        <div class="example">
+            <pre>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.personName = "person-instance-personName";
+}
+Person.prototype = {
+    constructor : Person,
+    sayName : function(){
+        console.log(this.name);
+    }
+};
+function Student(name, age, gender){
+    //复制Person的实例属性
+    Person.call(this, name, age, gender);
+}
+Student.prototype = new Person();
+var student1 = new Student("jim", 15, "male", ["lily", "lucy"]);
+//此时子类实例和其原型对象上分别保存着name, age, gender三个相同的属性
+console.log(student1.name);     //jim
+console.log(student1.age);     //15
+console.log(student1.gender);     //male
+student1.sayName();     //jim
+//此时引用的是实例属性
+console.log(student1.personName);     //person-instance-personName
+delete student1.personName;
+//此时引用的是原型属性
+console.log(student1.personName);     //person-instance-personName</pre>
+        </div>
+        <p>组合继承有一个不足之处: 会调用2次父类型的构造函数, 这样会导致子类型的实例和原型中分别保存一份相同的属性</p>
+    </div>
+    <div class="section">
+        <h3>6.3.4 prototypal inheritance(原型式继承)<a name="prototypal-inheritance" class="anchor-link"></a></h3>
+        <p>不用创建自定义类型, 基于已有的对象来创建新对象, 新对象以已有对象为原型</p>
+        <div class="example">
+            <pre>function object(o){
+    function F(){};
+    F.prototype = o;
+    return new F();
+}</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>6.3.5 parasitic inheritance(寄生式继承)<a name="parasitic-inheritance" class="anchor-link"></a></h3>
+    </div>
+    <div class="section">
+        <h3>6.3.6 parasitic combination inheritance(寄生组合式继承)<a name="parasitic-combination" class="anchor-link"></a></h3>
+        <p>寄生组合式继承是实现引用类型继承的最佳实践, 原理就是通过借用构造函数复制(继承)父类型的实例属性, 使用寄生式模式继承父类型的原型属性</p>
+        <div class="example">
+            <pre>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.personName = "person-instance-personName";
+}
+Person.prototype = {
+    constructor : Person,
+    sayName : function(){
+        console.log(this.name);
+    }
+};
+function Student(name, age, gender){
+    //复制Person的实例属性
+    Person.call(this, name, age, gender);
+}
+inheritPrototype(Person, Student);
+var student1 = new Student("jim", 15, "male", ["lily", "lucy"]);
+console.log(student1.name);     //jim
+console.log(student1.age);     //15
+console.log(student1.gender);     //male
+student1.sayName();     //jim
+//此时引用的是实例属性
+console.log(student1.personName);     //person-instance-personName
+delete student1.personName;
+//此时引用的是原型属性
+console.log(student1.personName);     //undefined
+
+function inheritPrototype(parentType, childType){
+    //原型式继承
+    var prototype = object(parentType.prototype);
+    childType.prototype = prototype;
+    childType.prototype.constructor = childType;
+}
+function object(o){
+    function F(){};
+    F.prototype = o;
+    return new F();
+}</pre>
+        </div>
+    </div>
+</div>
+<div class="ft">
+    <a href="reference-type.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="function-expression.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+</div>  
+</body>
+</html>

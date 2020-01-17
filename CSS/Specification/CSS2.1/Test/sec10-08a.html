@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10.8 the height of inline non-replaced element's content area</title>
+    <link href="base.css" rel="stylesheet">
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 10.8 the height of inline non-replaced element's content area</h1>
+    <a href="sec09-04-01.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec10-08b.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <p>指定font-size : 16px, content area高度如下:</p>
+    <div style="font-size:16px;">
+        <span style="font-family:'microsoft yahei';" class="badge badge-primary">microsoft yahei,  21px</span>
+        <span style="font-family:SimSun;" class="badge badge-secondary">simsun,  16px</span>
+        <span style="font-family:arial;" class="badge badge-success">arial,  17px</span>
+        <span style="font-family:sans-serif;" class="badge badge-danger">sans-serif,  21px</span>
+    </div>
+    <p>指定font-family : microsoft yahei, content area高度如下:</p>
+    <div style="font-family:'microsoft yahei';">
+        <span style="font-size:12px;" class="badge badge-primary">font-size : 12px,  16px</span>
+        <span style="font-size:14px;" class="badge badge-secondary">font-size : 14px,  19px</span>
+        <span style="font-size:16px;" class="badge badge-success">font-size : 16px,  21px</span>
+        <span style="font-size:18px;" class="badge badge-danger">font-size : 18px,  24px</span>
+    </div>
+    <p style="color:navy;">在大多数情况下，non-replaced inline element的conteat-area的height比其font-size要高</p>
+</body>
+</html>

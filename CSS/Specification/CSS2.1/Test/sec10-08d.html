@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10.8 inline-level element's baseline</title>
+    <link href="base.css" rel="stylesheet">
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 10.8 inline-level element's baseline</h1>
+    <a href="sec10-08c.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec10-08e.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <h3>replaced inline element : baseline就是其bottom margin edge</h3>
+    <div class="container">
+        <span class="line baseline"></span><img src="../../30.png">
+    </div>
+    <h3>non-replaced inline element : baseline就是字体本身的baseline</h3>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary">primary</span>
+    </div>
+    <h3>inline-block element : 分2种情况, baseline of last line box or bottom margin edge</h3>
+    <p>baseline of last line box in normal flow</p>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary m-b-10 m-t-10 p-t-10 p-b-10" style="display:inline-block;">primary</span>
+    </div>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary m-b-10 m-t-10 p-t-10 p-b-10" style="display:inline-block;">primary<br>another primary</span>
+    </div>
+    <p>no in-flow line box</p>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary m-b-10 m-t-10 p-t-10 p-b-10" style="display:inline-block;width:50px;height:50px;"></span>
+    </div>    
+    <p>'overflow'属性值不是'visible'</p>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary m-b-10 m-t-10 p-t-10 p-b-10" style="display:inline-block;overflow:hidden;">primary</span>
+    </div>
+</body>
+</html>

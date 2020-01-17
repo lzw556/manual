@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10.8 vertical-align</title>
+    <link href="base.css" rel="stylesheet">
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 10.8 vertical-align</h1>
+    <a href="sec10-08d.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec10-08f.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <h3>只适用于inline-level element, 默认值是baseline</h3>
+    <dl>
+        <dt>baseline(默认)</dt>
+        <dd>
+            <div class="container">
+                <span class="line baseline"></span><span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png">
+            </div>
+        </dd>
+        <dt>sub</dt>
+        <dd>
+            <div class="container">
+                <span class="line baseline"></span><span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-sub">
+            </div>
+        </dd> 
+        <dt>super</dt>
+        <dd>
+            <div class="container">
+                <span class="line baseline"></span><span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-super">
+            </div>
+        </dd> 
+        <dt>middle</dt>
+        <dd>
+            <div class="container">
+                <span class="line baseline"></span><span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-middle">
+            </div>
+        </dd> 
+        <dt>text-top</dt>
+        <dd>
+            <div class="container">
+                <span class="line baseline"></span><span class="line text-top"></span><span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-texttop">
+            </div>
+        </dd> 
+        <dt>text-bottom</dt>
+        <dd>
+            <div class="container">
+                <span class="line baseline"></span><span class="line text-bottom"></span><span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-textbottom">
+            </div>
+        </dd> 
+        <dt>top</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-top">
+            </div>
+        </dd>
+        <dt>bottom</dt>
+        <dd>
+            <div class="container">
+                <span class="badge badge-secondary badge-super">primary</span><span class="badge badge-success">primary</span><img src="../../30.png" class="v-align-bottom">
+            </div>
+        </dd>       
+    </dl>
+    <h3>经典问题1:DIV容器中的图片和DIV的下边框之间存在空白间隙</h3>
+    <div class="container">
+        <img src="../../50.png">
+    </div>
+    <p>原因分析:</p>
+    <ul>
+        <li>图片的vertical-align属性默认值是'baseline',图片的baseline是其bottom margin edge</li>
+        <li>strut的baseline和图片的bottom margin edge对齐</li>
+        <li>空白间隙就是strut中baseline和descender line之间的距离</li>
+    </ul>
+    <p>解决方案:</p>
+    <p>1 设置图片的vertical-align:top</p>
+    <div class="container">
+        <img src="../../50.png" class="v-align-top">
+    </div>
+    <p>2 设置DIV的font-size:0 or line-height:0</p>
+    <div class="container" style="line-height:0;">
+        <img src="../../50.png">
+    </div>
+    <h3>问题2:line box's baseline 移动</h3>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary">primary</span><span class="badge badge-secondary badge-super">primary</span>
+    </div>
+    <p>当高的primary的vertical-align:middle/text-bottom/text-top等时,line box的baseline会上下移动</p>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary">primary</span><span class="badge badge-secondary badge-super v-align-middle">primary</span>
+    </div>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary">primary</span><span class="badge badge-secondary badge-super v-align-textbottom">primary</span>
+    </div>
+    <p>当高的primary的vertical-align:top/bottom时,line box的baseline也会上下移动(比较疑惑的地方是当高的primary的vertical-align:bottom时,baseline为什么向下移动)</p>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary">primary</span><span class="badge badge-secondary badge-super v-align-top">primary</span>
+    </div>
+    <div class="container">
+        <span class="line baseline"></span><span class="badge badge-primary">primary</span><span class="badge badge-secondary badge-super v-align-bottom">primary</span>
+    </div>
+    <p>总结:</p>
+    <ul>
+        <li>当一行内有多个vertical-align值互不相同的元素时, line-box的baseline的位置也会为了同时满足这些个所有的vertical-align值而把line-box的baseline移动到恰当的位置为止，常常伴随着line-box的高度也会随之变化</li>
+    </ul>
+</body>
+</html>

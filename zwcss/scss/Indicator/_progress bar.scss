@@ -1,0 +1,9 @@
+// name: 进度条, or 加载条 or 进度指示器
+// overview:
+//     一个水平条, 整体背景色为浅色, 然后用深色背景代表已完成部分, 比如下载进度条
+// how to open: open auto by application
+// how to close: close auto by application
+// interaction: 不可交互
+// when to use: 
+//     当application在加载内容 or 执行一个耗时的数据处理操作时, 不要让用户在一个static屏幕下等待,
+//     使用process bar告诉用户你的app没有暂停, 以及大概需要等待多长时间

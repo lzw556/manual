@@ -1,0 +1,152 @@
+$btn-border-width: $border-width;
+$btn-border-radius: $border-radius;
+$btn-padding-y: .375em;
+$btn-padding-x: .75em;
+// $btn-font-size: $font-size-base;
+// $btn-font-weight: $font-weight-normal;
+// $btn-line-height: $line-height-base;
+$btn-color: $gray-normal;
+$btn-bg: $gray-lighter;
+$btn-hover-color: $gray-dark;
+$btn-disabled-opacity: .6;
+
+//base(include state(the order must be hover/focus before active))
+.btn{
+    display:inline-block;
+    border: solid $btn-border-width transparent;
+    border-radius: $btn-border-radius;
+    padding: $btn-padding-y $btn-padding-x;
+    //font 为什么不inherit???
+    // font-family: $btn-font-family;
+    // font-size: $btn-font-size;
+    // font-weight: $btn-font-weight;
+    // line-height: $btn-line-height;
+    text-align: center;
+    vertical-align: middle;
+    color: $btn-color;
+    background-color: $btn-bg;   
+    &:hover,
+    &:focus{
+        color: $btn-hover-color;
+        background-color: darken($btn-bg, 6%);       
+    }
+    &:hover{
+        text-decoration:none;//for button which tag is <a>
+    }
+    &:focus{
+        outline:0;
+    }
+    &:active,
+    &.active{
+        color:$btn-hover-color;
+        background-color: darken($btn-bg, 10%);
+    }
+    &[disabled],
+    &.disabled{
+        color: $btn-color;
+        background-color: $btn-bg;
+        opacity: $btn-disabled-opacity;
+        cursor: default;
+    }   
+}
+
+//color extend(include state(the order must be hover/focus before active))
+@each $name, $bg-color in $theme-colors{
+    .btn-#{$name}{
+        border-color: $bg-color;
+        color: $white;
+        background-color: $bg-color;  
+        &:hover,
+        &:focus{
+            border-color: darken($bg-color, 6%);
+            color: $white;
+            background-color: darken($bg-color, 6%);       
+        }
+        &:hover{
+            text-decoration:none;//for button which tag is <a>
+        }
+        &:focus{
+            outline:0;
+        }
+        &:active,
+        &.active{
+            border-color: darken($bg-color, 10%);
+            color:$white;
+            background-color: darken($bg-color, 10%);
+        }
+        &[disabled],
+        &.disabled{//禁用状态下不用再写hover状态style是因为这个selector的specificity比较高
+            border-color: $bg-color;
+            color: $white;
+            background-color: $bg-color;
+            opacity: $btn-disabled-opacity - .1;
+            cursor: default;
+        }               
+    }
+    .btn-outline-#{$name}{
+        border-color: $bg-color;
+        color: $bg-color;
+        background-color: $white;
+        &:hover,
+        &:focus{
+            border-color: $bg-color;
+            color: $white;
+            background-color: $bg-color;             
+        }
+        &:hover{
+            text-decoration:none;//for button which tag is <a>     
+        }
+        &:focus{
+            outline:0;
+        }
+        &:active,
+        &.active{
+            border-color: darken($bg-color, 6%);
+            color: $white;
+            background-color: darken($bg-color, 6%);
+        }
+        &[disabled],
+        &.disabled{
+            border-color: $bg-color;
+            color: $bg-color;
+            background-color: $white;
+            opacity: $btn-disabled-opacity - .1;
+            cursor: default;
+        }
+    }
+}
+
+//size extend
+//padding          sm, default and lg之间的比例: 2 : 3 : 4,  y : x = 1 : 2
+$btn-padding-y-sm: .25em;
+$btn-padding-x-sm: .5em;
+$btn-padding-y-lg: .5em;
+$btn-padding-x-lg: 1em;
+//border-radius    sm, default and lg之间的比例: 4 : 5 : 6
+$btn-border-radius-sm: .2em;
+$btn-border-radius-lg: .3em;
+.btn-sm{
+    padding: $btn-padding-y-sm $btn-padding-x-sm;
+    font-size: $font-size-sm;
+    // line-height: $btn-line-height;
+    border-radius: $btn-border-radius-sm;
+}
+.btn-lg{
+    padding: $btn-padding-y-lg $btn-padding-x-lg;
+    font-size: $font-size-lg;
+    // line-height: $btn-line-height;
+    border-radius: $btn-border-radius-lg;
+}
+.btn-block{
+    display: block;
+    width: 100%;
+}
+
+//markup
+// <button class="btn btn-primary">primay button</button>
+// <a class="btn btn-success" href=#>success button</a>
+// <input class="btn btn-error" type="submit" value="error button">
+
+// <button class="btn btn-outline-primary">primay button</button>
+// <a class="btn btn-outline-success" href=#>success button</a>
+// <input class="btn btn-outline-error" type="submit" value="error button">

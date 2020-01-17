@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>10.8 the height of each inline-level box in the line box</title>
+        <link href="base.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>CSS2.1 Test Suite: 10.8 the height of each inline-level box in the line box</h1>
+        <a href="sec10-08a.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec10-08c.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+        <hr>
+        <h3>对于replaced element,inline-block element来说, 在参与计算其所在line box的height时，使用的有效height是其margin box的height</h3>
+        <p>replaced inline element</p>
+        <div class="border">
+            <img src="../../30.png" class="m-b-10 m-t-10 p-t-10 p-b-10 v-align-top">
+        </div>
+        <p>replaced inline-block element</p>
+        <div class="border">
+            <img src="../../30.png" class="m-b-10 m-t-10 p-t-10 p-b-10 v-align-top" style="display:inline-block;">
+        </div>
+        <p>non-replaced inline-block element</p>
+        <div class="border">
+            <span class="badge badge-primary m-b-10 m-t-10 p-t-10 p-b-10" style="display:inline-block;height:100px;">primary</span>    
+        </div>
+        <h3>对于non-replaced inline element,在参与计算其所在line box的height时，使用的有效height是 half heading + the height of content-area + half heading = 'line-height'</h3>
+        <div class="container" style="line-height:31px;">
+            <span class="badge badge-success badge-big v-align-top">primary</span> 0 + 31px + 0
+        </div>
+        <div class="container" style="line-height:21px;">
+            <span class="badge badge-success badge-big v-align-top">primary</span> -5px + 31px + -5px
+        </div>
+        <div class="container" style="line-height:41px;">
+            <span class="badge badge-success badge-big v-align-top">primary</span> 5px + 31px + 5px
+        </div>
+        <p>在上面3个例子中,因为strut和primary的font-size不同,故两者的baseline也不同,line-height不同.为了避免因此造成的干扰,设置strut和primary的line-height相同,primary的vertical-align:top</p>    
+        <h3>对于non-replaced inline element,其padding, border和margin不参与计算line box的height</h3>
+        <div class="container" style="line-height:31px;">
+            <span class="badge badge-success badge-big v-align-top p-b-10 p-t-10">primary</span> 0 + 31px + 0
+        </div>
+        <h3>偶然发现当half heading不是整数时,每个浏览器表现不一致,以下是half heading是2.5px时的情况:</h3>
+        <p>在chrome下:</p>
+        <div class="container" style="line-height:36px;">
+            <span class="badge badge-success badge-big v-align-top">primary</span> 2px + 31px + 3px
+        </div>
+        <p>在firefox下:</p>
+        <div class="container" style="line-height:36px;">
+            <span class="badge badge-success badge-big v-align-top">primary</span> 3px + 31px + 2px
+        </div>
+        <p>所以在设置line-height时最好让half heading为整数</p>
+    </body>
+</html>

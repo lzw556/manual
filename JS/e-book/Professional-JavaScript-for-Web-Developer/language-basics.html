@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3 language basics</title>
+    <link href="/zwcss/css/main.css" rel="stylesheet">
+    <link href="/zwcss/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="hd">
+    <a href="script-element.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="scope.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+</div>
+<div class="sidebar">
+    <h1>3 language basics</h1>
+    <ul class="table-of-content">
+        <li><a href="#syntax">3.1 syntax</a>
+            <ul class="table-of-content">
+                <li><a href="#case-sensitivity">3.1.1 case-sensitivity</a></li>
+                <li><a href="#identifier">3.1.2 identifier</a></li>
+                <li><a href="#comment">3.1.3 comment</a></li>
+                <li><a href="#strict-mode">3.1.4 strict mode</a></li>
+                <li><a href="#statement">3.1.5 statement</a></li>
+            </ul>
+        </li>
+        <li><a href="#keywords">3.2 keywords and reserved words</a></li>
+        <li><a href="#variables">3.3 variables</a></li>
+        <li><a href="#datatype">3.4 data type</a>
+            <ul class="table-of-content">
+                <li><a href="#typeof-operator">3.4.1 the typeof operator</a></li>
+                <li><a href="#undefined-type">3.4.2 the undefined type</a></li>
+                <li><a href="#null-type">3.4.3 the null type</a></li>
+                <li><a href="#boolean-type">3.4.4 the boolean type</a></li>
+                <li><a href="#number-type">3.4.5 the number type</a></li>
+                <li><a href="#string-type">3.4.6 the string type</a></li>
+                <li><a href="#object-type">3.4.7 the object type</a></li>
+            </ul>
+        </li>
+        <li><a href="#operator">3.5 operator</a>
+            <ul class="table-of-content">
+                <li><a href="#unary-operator">3.5.1 unary operator(一元操作符)</a></li>
+                <li><a href="#boolean-operator">3.5.2 boolean operator</a></li>
+                <li><a href="#multiplicative-operator">3.5.3 multiplicative operator</a></li>
+                <li><a href="#addtive-operator">3.5.4 addtive operator</a></li>
+                <li><a href="#relational-operator">3.5.5 relational operator</a></li>
+                <li><a href="#equality-operator">3.5.6 equality operator</a></li>
+                <li><a href="#conditional-operator">3.5.7 conditional operator</a></li>
+                <li><a href="#assignment-operator">3.5.8 assignment operator</a></li>
+                <li><a href="#comma-operator">3.5.9 comma operator</a></li>
+            </ul>
+        </li>
+        <li><a href="#statement">3.6 statement</a>
+            <ul class="table-of-content">
+                <li><a href="#if-statement">3.6.1 the if statement</a></li>
+                <li><a href="#dowhile-statement">3.6.2 the do-while statement</a></li>
+                <li><a href="#while-statement">3.6.3 the while statement</a></li>
+                <li><a href="#for-statement">3.6.4 the for statement</a></li>
+                <li><a href="#forin-statement">3.6.5 the for-in statement</a></li>
+                <li><a href="#break-statement">3.6.6 the break and continue statement</a></li>
+                <li><a href="#with-statement">3.6.7 the with statement</a></li>
+                <li><a href="#switch-statement">3.6.8 the switch statement</a></li>
+            </ul>
+        </li>
+        <li><a href="#function">3.7 function</a>
+            <ul class="table-of-content">
+                <li><a href="#argument">3.7.1 argument</a></li>
+                <li><a href="#overloading">3.7.2 no overloading</a></li>
+            </ul>
+        </li>       
+    </ul>
+</div>
+<div class="main">
+    <div class="section">
+        <h2>3.1 syntax<a name="syntax" class="anchor-link"></a></h2>
+    </div>
+    <div class="section">
+        <h3>3.1.1 case-sensitivity<a name="case-sensitivity" class="anchor-link"></a></h3>
+        <p>ECMAScript中的一切都是case-sensitive</p>
+        <div class="example">
+            <pre>var test = 12,
+Test = 15;
+console.log(test)   //12
+console.log(Test)   //15</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.1.2 identifier<a name="identifier"></a></h3>
+        <p>第一个字符必须是字母, underscore(_), or dollar sign($)</p>
+        <p>其他字符可以是字母, underscore, dollar sign or number</p>
+        <p class="note">ECMAScript中的identifier采用camel case(驼峰大小写格式), 这是一种best practice</p>
+    </div>
+    <div class="section">
+        <h3>3.1.3 comment<a name="comment" class="anchor-link"></a></h3>
+        <div class="example">
+            <pre>//single line comment
+
+/*
+ *  block comment(块级注释)
+ *  也叫作多行注释
+ */</pre>
+        </div>
+    </div>   
+    <div class="section">
+        <h3>3.1.4 strict mode<a name="strict-mode" class="anchor-link"></a></h3>
+    </div> 
+    <div class="section">
+        <h3>3.1.5 statement<a name="statement" class="anchor-link"></a></h3>
+        <p>ECMAScript中的statement以分号(;)结尾</p>
+    </div>    
+    <div class="section">
+        <h2>3.2 keywords and reserved words<a name="keywords" class="anchor-link"></a></h2>
+        <p>即ECMAScript中有特殊用途的单词, 禁止被用于identifier</p>
+        <p class="note">除了ECMAScript中定义的keyword之外, 类似null, undefined, true也不要用于identifier</p>
+    </div>
+    <div class="section">
+        <h2>3.3 variables<a name="variables" class="anchor-link"></a></h2>
+        <div class="example">
+            <pre>var message;   //define,but without initialization, value是undefined
+var message = "hello,world";    //initialization
+var message = "hi";     //local variable
+message = "hello";      //global variable
+        
+//可以使用逗号(,)在一条语句中同时define和initialization多个variable
+var name = "tony",
+age = 12,
+gender = "male";</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h2>3.4 data type<a name="datatype" class="anchor-link"></a></h2>
+        <p>ECMAScript中有5种简单data type:Undefined, Null, Boolean, Number, String.还有一种复杂data type:Object</p>
+    </div>
+    <div class="section">
+        <h3>3.4.1 the typeof operator<a name="typeof-operator" class="anchor-link"></a></h3>
+        <p>typeof是一个operator, 不是function,用来检测给定variable的data type,<span class="note">会返回一个字符串</span></p>
+        <div class="example">
+            <pre>var message;
+typeof message      //"undefined"
+
+typeof null         //"object"
+typeof true         //"boolean"
+typeof 12           //"number"
+typeof "hello"      //"string"</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.4.2 the undefined type<a name="undefined-type" class="anchor-link"></a></h3>
+        <p>Undefined类型只有一个value: undefined.在声明一个variable但未对其初始化时,这个variable的value就是undefined</p>
+        <div class="example">
+            <pre>var message;
+typeof message      //"undefined"</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.4.3 the null type<a name="null-type" class="anchor-link"></a></h3>
+        <p>Null类型只有一个value: null.通常表示空指针,用来初始化一个准备保存对象的variable</p>
+    </div>
+    <div class="section">
+        <h3>3.4.4 the boolean type<a name="boolean-type" class="anchor-link"></a></h3>
+        <p><strong>字面值</strong></p>
+        <p>true和false.<span class="note">这2个value是case-sensitive</span></p>
+        <p>Boolean类型虽然只有2个字面value, 但是ECMAScript中所有类型的值都有与这2个value等价的值</p>
+        <p><strong>类型转换</strong></p>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">Boolean(value: any)</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td><td>任何data type的值</td>
+            </tr>
+            <tr>
+                <td>返回值</td><td>Boolean值</td>
+            </tr>
+            <tr>
+                <td>功能</td><td>将一个值转换为其对应的Boolean值</td>
+            </tr>
+        </table>
+        <p>具体转换规则如下表:</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>data type</th><th>to true</th><th>to false</th>
+                </tr>
+                <tr>
+                    <td>Boolean</td><td>true</td><td>false</td>
+                </tr>
+                <tr>
+                    <td>Number</td><td>任何非0数字</td><td>0 and NaN</td>
+                </tr>
+                <tr>
+                    <td>String</td><td>任何非空字符串</td><td>""</td>
+                </tr>
+                <tr>
+                    <td>Object</td><td>任何对象</td><td>null</td>
+                </tr>
+                <tr>
+                    <td>Undefined</td><td></td><td>undefined</td>
+                </tr>
+            </thead>
+        </table>
+        <p class="note">在流控语句比如if中, Boolean()会自动执行, 具体如下:</p>
+        <div class="example">
+            <pre>var message = "hello";
+if(message){
+console.log("value is true");   //此时会自动执行Boolean(message),然后返回true并执行对应的语句
+}</pre>
+        </div>  
+    </div>
+    <div class="section">
+        <h3>3.4.5 the Number type<a name="number-type" class="anchor-link"></a></h3>
+        <p><strong>数值字面量</strong></p>
+        <ul>
+            <li>十进制(decimal)</li>
+            <li>八进制(octal), 第一位数字必须是0, 然后是八进制数字(0-7)</li>
+            <li>十六进制(hexadecimal), 前2位字符必须是0x, 然后是十六进制数字(0-9, a-f)</li>
+        </ul>
+        <p>在进行算术计算时所有的八进制和十六进制表示的数值最终都被转换为十进制数值</p>
+        <div class="example">
+            <pre>var n1 = 10,
+n2 = 010,
+n3 = 0x10;
+console.log(n1);    //输出10
+console.log(n2);    //输出8
+console.log(n3);    //输出16</pre>
+        </div>
+        <p><strong>浮点数</strong></p>
+        <div class="example">
+            <pre>var n1 = 1.1,
+    n2 = 3.124e5;</pre>
+        </div>
+        <p class="note">0.1 + 0.2 = 0.30000000000000004, 而不是0.3</p>
+        <p><strong>数值范围</strong></p>
+        <p>Number.MAX_VALUE, ESMAScript能够表示的最大数值; Number.MIN_VALUE, ESMAScript能够表示的最小数值</p>
+        <p>Infinity(无穷), 如果某一次计算结果不在最大值和最小值之间, 那么这个结果会被自动转换为这个特殊的值</p>
+        <p><strong>NaN</strong>(Not a Number)</p>
+        <p>用来表示一个本来要返回数值的操作数但未返回数值的情况</p>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">isNaN(value: any)</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td><td>任何data type的值</td>
+            </tr>
+            <tr>
+                <td>返回值</td><td>Boolean值</td>
+            </tr>
+            <tr>
+                <td>功能</td><td>确定参数是否"不是数值"</td>
+            </tr>
+        </table>
+        <p><strong>类型转换</strong></p>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">Number(value: any)</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td><td>任何data type的值</td>
+            </tr>
+            <tr>
+                <td>返回值</td><td>Number值 or NaN</td>
+            </tr>
+            <tr>
+                <td>功能</td><td>把参数转换为其对应的数值</td>
+            </tr>
+        </table>
+        <p>具体转换规则如下:</p>
+        <ul>
+            <li>如果是Boolean值, true和false分别被转换为1和0</li>
+            <li>如果是null, 返回0</li>
+            <li>如果是undefined, 返回NaN</li>
+            <li>如果是字符串, 则:
+                <ol>
+                    <li>如果字符串中只包含数字或有效的浮点数, 则将其转换为数字</li>
+                    <li>如果是空, 则返回0</li>
+                    <li>如果不是数字, 则返回NaN</li>
+                </ol>
+            </li>
+            <li>如果是对象, 则:
+                <ol>
+                    <li>先调用其valueOf()方法, 然后按照上面的规则转换valueOf()方法的返回值;</li>
+                    <li>如果第一步中转换的结果是NaN, 则调用其toString()方法, 然后按照上面的规则转换toString()方法的返回值;</li>
+                </ol>
+            </li>
+        </ul>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">parseInt(s: string, [radix: integer])</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td><td>s, string, 要转换的字符串<br>radix, number, 可选</td>
+            </tr>
+            <tr>
+                <td>返回值</td><td>integer or NaN</td>
+            </tr>
+            <tr>
+                <td>功能</td><td>把字符串转换为其对应的整数</td>
+            </tr>
+        </table>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">parseFloat(s: string)</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td><td>任何data type的值</td>
+            </tr>
+            <tr>
+                <td>返回值</td><td>Number值 or NaN</td>
+            </tr>
+            <tr>
+                <td>功能</td><td>把字符串转换为其对应的浮点数</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section">
+        <h3>3.4.6 the string type<a name="string-type" class="anchor-link"></a></h3>
+        <p><strong>字面量</strong></p>
+        <p>字符串可以由("") or ('')表示</p>
+        <p>String类型包含一些特殊的字面量, 叫作转义字符, 用于表示非打印字符</p>
+        <p><strong>不可改变性</strong></p>
+        <p><strong>类型转换</strong></p>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">toString()</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td><td>无</td>
+            </tr>
+            <tr>
+                <td>返回值</td><td>string值</td>
+            </tr>
+            <tr>
+                <td>功能</td><td>把一个值转换为其对应的字符串</td>
+            </tr>
+        </table>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">String(value: any)</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td><td>任何data type的值</td>
+            </tr>
+            <tr>
+                <td>返回值</td><td>string值</td>
+            </tr>
+            <tr>
+                <td>功能</td><td>把一个值转换为其对应的字符串</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section">
+        <h3>3.4.7 the object type<a name="object-type" class="anchor-link"></a></h3>
+        <p>object类型的每一个实例都拥有的方法和属性:</p>
+        <table class="table">
+            <thead>
+                <tr><th>name</th><th>function</th></tr>
+            </thead>
+            <tr>
+                <td>constructor</td><td>构造函数</td>
+            </tr>
+            <tr>
+                <td>hasOwnProperty(propertyName)</td><td>检查给定属性在当前对象实例中是否存在</td>
+            </tr>
+            <tr>
+                <td>isPrototypeOf(object)</td><td>把一个值转换为其对应的字符串</td>
+            </tr>
+            <tr>
+                <td>propertyIsEnumerable(propertyName)</td><td>检查给定属性是否能够使用for-in进行枚举</td>
+            </tr>
+            <tr>
+                <td>toLocaleString()</td><td>返回对象的字符串表示</td>
+            </tr>
+            <tr>
+                <td>toString()</td><td>返回对象的字符串表示</td>
+            </tr>
+            <tr>
+                <td>valueOf()</td><td>返回对象的字符串,数值 or 布尔值表示</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section">
+        <h2>3.5 operator<a name="operator" class="anchor-link"></a></h2>
+        <p>在ECMAScript中operator最变态的地方在于, 可以用于所有类型的值</p>
+    </div>
+    <div class="section">
+        <h3>3.5.1 unary operator<a name="unary-operator" class="anchor-link"></a></h3>
+        <p><strong>increment/decrement</strong></p>
+        <div class="example">
+            <pre>var age = 12;
+var anotherAge = ++age + 5;
+console.log(age);       //13
+console.log(anotherAge);        //18</pre>
+        </div>
+        <p>前置递增会让操作数的结果加1, 且加1发生在操作数被计算之前; 前置递减与之类似</p>
+        <div class="example">
+                <pre>var age = 12;
+var anotherAge = age++ + 5;
+console.log(age);       //13
+console.log(anotherAge);        //17</pre>
+        </div>
+        <p>后置递增会让操作数的结果加1, 且加1发生在操作数被计算之后; 后置递减与之类似</p>
+        <p><strong>unary plus and minus</strong></p>
+        <p>在对非数值应用一元加/减操作符时, 会通过Number()把非数值转换为数值</p>
+        <div class="example">
+            <pre>console.log(+true);    //1
+var s ="10";
+var s1 = "hello";
+console.log(s);     //10
+console.log(+s1);   //NaN
+console.log(+new Object());     //NaN
+console.log(+new Date());   //1575612685962, 代表当前日期和时间的毫秒数</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.5.2 boolean operator<a name="boolean-operator" class="anchor-link"></a></h3>
+        <p><strong>logical not</strong></p>
+        <p>由(!)表示, 适用于所有类型的值, 返回一个Boolean值</p>
+        <p>操作过程是通过Boolean()先把操作数转换为一个Boolean值, 然后再对其求反</p>
+        <p><strong>logical and</strong></p>
+        <p>由(&&)表示, 适用于所有类型的值, 返回一个 Boolean or 其他类型的值</p>
+        <p>操作过程如下:</p>
+        <ol>
+            <li>求第一个操作数的Boolean值, 如果不是Boolean类型则通过Boolean()转换</li>
+            <li>如果第一个操作数的Boolean值为false, 则直接返回第一个操作数;否则返回第二个操作数</li>
+        </ol>
+        <p class="note">logical and的经典用法: window.loader && loader.done(); 作用是在调用对象的方法之前确保对象已经存在</p>
+        <p><strong>logical or</strong></p>
+        <p>由(||)表示, 适用于所有类型的值, 返回一个 Boolean or 其他类型的值</p>
+        <p>操作过程如下:</p>
+        <ol>
+            <li>求第一个操作数的Boolean值, 如果不是Boolean类型则通过Boolean()转换</li>
+            <li>如果第一个操作数的Boolean值为true, 则直接返回第一个操作数;否则返回第二个操作数</li>
+        </ol>
+        <p class="note">logical or的经典用法: var o = preferredObject || backupObject; 作用是确保为变量赋值一个有效值</p>
+        <p>解析如下:</p>
+        <ul>
+            <li>preferredObject中包含优先赋给变量o的值</li>
+            <li>backupObject负责在preferredObject中不包含有效值的情况下的提供备选值</li>
+            <li>如果preferredObject的值不是null or undefined, 则它的值将被赋值给变量o; 否则将backupObject的值赋值给变量o</li>
+            <li>通常情况下bakcupObject都是{}(即已知的有效值)</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>3.5.3 multiplicative operator<a name="multiplicative-operator" class="anchor-link"></a></h3>
+        <p>乘(*),除(/)和取余(%)这三个operator, 在操作过程中如果有一个操作数不是数值, 则在后台中调用Number()将其转换为数值</p>
+    </div>
+    <div class="section">
+        <h3>3.5.4 addtive operator<a name="addtive-operator" class="anchor-link"></a></h3>
+        <ul>
+            <li>加法(+): 
+                <ol>
+                    <li>如果有一个操作数不是数值, 则会把这个操作数转换为字符串</li>
+                    <li>如果有一个操作数是字符串, 则会把另一个操作数转换为字符串, 然后返回这2个字符串的拼接而成的字符串</li>
+                </ol>
+            </li>
+            <li>减法(-): 如果有一个操作数不是数值, 则调用Number()把这个操作数转换为数值</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>3.5.5 relational operator<a name="relational-operator" class="anchor-link"></a></h3>
+        <p>大于(>), 小于(<), 大于等于(>=)和小于等于(<=)这四个operator, 在操作过程中遵循如下规则:</p>
+        <ul>
+            <li>如果2个操作数都是字符串, 则比较这2个字符串首字母对应的编码值</li>
+            <li>如果有一个操作数不是数值, 则在后台中调用Number()将其转换为数值</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>3.5.6 equality operator<a name="equality-operator" class="anchor-link"></a></h3>
+        <p>==, !=, ===, !==</p>
+    </div>
+    <div class="section">
+        <h3>3.5.7 conditional operator<a name="conditional-operator" class="anchor-link"></a></h3>
+        <p>var var1 = boolean_expression ? true_value : false_value;</p>
+    </div>
+    <div class="section">
+        <h3>3.5.8 assignment operator<a name="assignment-operator" class="anchor-link"></a></h3>
+        <p>var var1 = 10;</p>
+    </div>
+    <div class="section">
+        <h3>3.5.9 comma operator<a name="comma-operator" class="anchor-link"></a></h3>
+        <div class="example">
+            <pre>var a = 10,
+var b = 15;</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h2>3.6 statement<a name="statement" class="anchor-link"></a></h2>
+        <p>if, do-while, while, for, for-in, break/continue, switch</p>
+    </div>
+    <div class="section">
+        <h3>3.6.1 if<a name="if-statement" class="anchor-link"></a></h3>
+        <div class="example">
+            <pre>if(expression){
+    statement
+}else{
+    statement
+}</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.6.2 do-while<a name="dowhile-statement" class="anchor-link"></a></h3>
+        <div class="example">
+            <pre>do{
+    statement
+}while(expression)</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.6.3 while<a name="while-statement" class="anchor-link"></a></h3>
+        <div class="example">
+            <pre>while(expression){
+    statement;
+}</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.6.4 for<a name="for-statement" class="anchor-link"></a></h3>
+        <div class="example">
+            <pre>for(initialization;expression;post-loop-expression;){
+    statement;
+}</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.6.5 for-in<a name="forin-statement" class="anchor-link"></a></h3>
+        <p>用来枚举对象的属性</p>
+        <div class="example">
+            <pre>for(property in expression){
+    statement;
+}</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.6.6 break and continue<a name="break-statement" class="anchor-link"></a></h3>
+        <p>break表示退出当前循环, 然后继续执行循环后面的语句;</p>
+        <p>continue表示退出当次循环, 然后继续执行下一次循环</p>
+    </div>
+    <div class="section">
+        <h3>3.6.7 with<a name="with-statement" class="anchor-link"></a></h3>
+    </div>
+    <div class="section">
+        <h3>3.6.8 switch<a name="switch-statement" class="anchor-link"></a></h3>
+    </div>
+    <div class="section">
+        <h2>3.7 function<a name="function" class="anchor-link"></a></h2>
+        <div class="example">
+            <pre>//定义
+function functionName(arg0, arg1,..., argn){
+    statement
+}
+//调用
+functionName();
+//返回值
+在方法体中通过关键字return返回</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.7.1 argument<a name="argument" class="anchor-link"></a></h3>
+        <p><strong>arguments对象</strong></p>
+        <p>是一个类数组对象, 保存着function中传入的所有参数, 可以通过[]语法来访问每一个参数, 通过length属性来确定传入参数的个数(这个length的值是由传入参数的个数决定的,不是由定义function时的命名参数决定的)</p>
+        <p>这个属性只能在函数内容访问</p>
+        <div class="example">
+            <pre>function method1(){
+    console.log(arguments.length);
+    console.log(arguments[0]);
+}
+method1();          //0, undefined
+method1("lzw");     //1, lzw
+method1("lzw", 30); //2, lzw</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>3.7.2 no overloading<a name="overloading" class="anchor-link"></a></h3>
+        <p>不存在overloading, 如果前后存在2个名字相同的function, 则该名字只属于后面定义的function</p>
+    </div>
+    <script>
+       console.log(+true);
+       var s ="10";
+       var s1 = "hello";
+       console.log(s);
+       console.log(+s1);   
+       console.log(+new Object());
+       console.log(+new Date());
+    </script>
+</div>
+<div class="ft">
+    <a href="script-element.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="scope.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+</div>
+</body>
+</html>

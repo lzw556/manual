@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4 variables, scope, and memory</title>
+    <link href="/zwcss/css/main.css" rel="stylesheet">
+    <link href="/zwcss/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="hd">
+    <a href="language-basics.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="reference-type.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+</div> 
+<div class="sidebar">
+    <h1>4 variables, scope, and memory</h1>
+    <ul class="table-of-content">
+        <li><a href="#primitive-reference-value">4.1 primitive and reference value</a>
+            <ul class="table-of-content">
+                <li><a href="#dynamic-property">4.1.1 dynamic property</a></li>
+                <li><a href="#copying-value">4.1.2 copying value</a></li>
+                <li><a href="#argument-passing">4.1.3 argument passing</a></li>
+                <li><a href="#determining-type">4.1.4 determining type</a></li>
+            </ul>
+        </li>
+        <li><a href="#scope">4.2 execution context and scope</a>
+            <ul class="table-of-content">
+                <li><a href="#ecstack">4.2.1 execution context stack</a></li>
+                <li><a href="#ec">4.2.2 execution context</a></li>
+                <li><a href="#vo">4.2.3 variable object</a></li>
+                <li><a href="#ao">4.2.4 activation object</a></li>
+                <li><a href="#scope-chain">4.2.5 scope chain</a></li>
+                <li><a href="#this">4.2.6 the this object</a>
+                    <ul class="table-of-content">
+                        <li><a href="#referenceType">4.2.6.1 引用类型</a></li>
+                        <li><a href="#referenceType-this">4.2.6.2 引用类型值调用函数</a></li>
+                        <li><a href="#non-referenceType-this">4.2.6.3 非引用类型值调用函数</a></li>
+                        <li><a href="#constructor-this">4.2.6.4 构造函数中的this值</a></li>
+                        <li><a href="#this-value-setting">4.2.6.5 显式指定函数的this值</a></li>
+                    </ul>
+                </li>
+                <li><a href="#no-block-level-scope">4.2.7 no block-level scope</a></li>
+            </ul>           
+        </li>
+        <li><a href="#gc">4.3 garbage collection</a></li>   
+    </ul>    
+</div>
+<div class="main">
+    <div class="section">
+        <h2>4.1 primitive and reference value<a name="primitive-reference-value" class="anchor-link"></a></h2>
+        <p>ECMAScript中变量可能包含2种值:基本类型值和引用类型值, 基本类型值是按值访问的, 引用类型值是按引用访问的</p>
+    </div>
+    <div class="section">
+        <h3>4.1.1 dynamic property<a name="dynamic-property" class="anchor-link"></a></h3>
+        <p>当不同类型的值保存在内存中以后, 引用类型值可以动态添加属性和方法, 也可以改变和删除属性和方法; 基本类型值则不可以修改</p>
+    </div>
+    <div class="section">
+        <h3>4.1.2 copying value<a name="copying-value" class="anchor-link"></a></h3>
+        <p>从一个变量向另一个变量复制值:</p>
+        <ul>
+            <li>如果这个值是基本类型值, 则复制的是这个值的一个副本, 最终2个变量相互独立</li>
+            <li>如果这个值是引用类型值, 则复制的是这个值的引用, 最终2个变量指向同一个对象</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>4.1.3 argument passing<a name="argument-passing" class="anchor-link"></a></h3>
+        <p>ECMAScript中参数传递都是按值传递的, 也就是把函数外部的值传递给函数内部的参数, 和把值从一个变量复制到另一个变量一样</p>
+    </div>
+    <div class="section">
+        <h3>4.1.4 determining type<a name="determining-type" class="anchor-link"></a></h3>     
+        <p><strong>typeof</strong></p>
+        <p>检测值属于哪一种基本类型, 返回String值, 主要用于检测基本类型值</p>
+        <p><strong>instanceof</strong></p>
+        <p>检测值是否属于指定类型的实例, variable instanceof constructor, 返回Boolean值, 主要用于检测引用类型值(对象)</p>
+        <div class="example">
+            <pre>var color = ["red", "green", "blue"];
+console.log(color instanceof Array)     //true
+console.log("hello" instanceof Object);     //false</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h2>4.2 execution context and scope<a name="scope" class="anchor-link"></a></h2>
+        <p>执行环境包括全局执行环境和函数执行环境</p>
+        <p><strong>变量对象</strong></p>
+        <p>属于执行环境, 和执行环境一一对应, 执行环境中定义的所有变量和函数都保存在这个对象中</p>
+        <p>在web浏览器中, 全局执行环境的变量对象是window对象, 故所有的全局变量和函数都是作为window对象的属性和方法创建的</p>
+        <p><strong>执行环境的生命周期</strong></p>
+        <p>当执行环境中的所有代码执行完毕以后, 该环境被销毁, 保存在其中的所有变量和函数也随之销毁(全局执行环境直到关闭网页 or 浏览器才被销毁)</p>
+    </div>  
+    <div class="section">
+        <h3>4.2.1 execution context stack(执行上下文栈)<a name="ecstack" class="anchor-link"></a></h3>
+        <p>execution context stack是js引擎为了实现js执行时的单线程, 维护的一个栈结构, 遵循LIFO(后进先出)原则. 所有操作都发生在栈顶, GEC只有一个且永远位于栈底, FEC可以有多个, 栈顶永远是当前正在执行的execution context</p>
+        <p><strong>js执行是单线程</strong></p>
+        <p>单线程是指js引擎执行js时只分了一个线程给他执行, 也就是执行js时是单线程的</p>
+        <p><strong>为什么是单线程</strong></p>
+        <p>因为js主要用来操作dom, 如果是多线程就可能存在多个线程在同一时刻对同一个dom节点进行操作的复杂问题</p>
+        <p><strong>运行机制</strong></p>
+        <p>当js引擎首次运行脚本时, 会创建一个<a href="#gec">Global execution context(GEC)</a>并把它推入上下文栈中</p>
+        <p>然后每一次调用函数时都会创建一个<a href="#fec">function execution context(FEC)</a>并把它推入上下文栈中, 当这个函数执行完成后再把它的FEC弹出上下文栈, 然后把控制权返回给上一个execution context</p>
+        <p>当所有代码执行完成以后, 弹出所有的FEC, 最后当关闭浏览器的时候, 弹出GEC</p>
+        <div class="example">
+            <pre>(function foo(i){
+    if(i == 3){
+        return;
+    }else{
+        foo(++i);
+    }
+})(0);</pre>
+        <p><span class="note">动态图示:</span></p>
+        <img src="image/es1.gif" alt="">
+        </div>
+    </div>
+    <div class="section">
+        <h3>4.2.2 execution context(执行上下文)<a name="ec" class="anchor-link"></a></h3>
+        <p>ECMAScript中有3种executable code(可执行代码): global code, function code and eval code. 每一种code都是运行在自己的execution context(EC)上</p>
+        <p><strong>EC内的主要属性(主要是FEC)</strong></p>
+        <img src="image/execution-context.png" alt="">
+        <p><strong>EC运行过程(主要是FEC)</strong></p>
+        <ol>
+            <li>在执行函数内代码之前, 开始创建EC</li>
+            <li>进入创建阶段:
+                <ol>
+                    <li>初始化<a href="#scope-chain">scope chain</a></li>
+                    <li>创建variable object(<a href="#vo">VO</a>)</li>
+                    <li>决定<a href="#this">this对象</a>的指向</li>
+                </ol>
+            </li>
+            <li>执行阶段: 给相关变量赋值并执行函数内代码</li>
+        </ol>
+        <p><strong>EC生命周期(主要是FEC)</strong></p>
+        <p>函数执行完以后, 其FEC被弹出execution context stack, 其中定义的变量等待被GC回收</p>
+    </div>
+    <div class="section">
+        <h3>4.2.3 variable object<a name="vo" class="anchor-link"></a></h3>
+        <p><strong>创建过程</strong></p>
+        <ol>
+            <li>创建arguments对象, 初始化形参的值</li>
+            <li>扫描函数声明
+                <ol>
+                    <li>对于函数声明, 在VO中创建属性, 属性名是函数名, 值是函数引用</li>
+                    <li>如果函数名已经存在, 用新的引用覆盖已有的</li>
+                </ol>
+            </li>
+            <li>扫描变量声明
+                <ol>
+                    <li>对于变量的声明, 同样在VO中创建对应的属性，其值初始化为undefined</li>
+                    <li>如果变量的名字已经存在，则跳过继续扫描</li>
+                </ol>
+            </li>
+        </ol>
+        <div class="example">
+            <pre>function test(a){
+    console.log(typeof a);
+    var a = 1;
+    function a(){
+        console.log("hi");
+    }
+    console.log(a);
+}
+test("hi");     
+结果如下:
+//function
+//1
+
+FEC的伪代码如下:
+创建阶段:
+testEC={
+    scopeChain:{},
+    VO:{
+        arguments:{
+            0: "hi",
+            length: 1
+        },
+        a: pointer to function a(){}
+        //变量a被忽略
+    },
+    this:{}
+}
+执行阶段:
+testEC={
+    scopeChain:{},
+    VO:{
+        arguments:{
+            0: "hi",
+            length: 1
+        },
+        a: pointer to function a(){}
+    },
+    this:{}
+}
+//当执行console.log(typeof a);时, a还指向函数
+//当执行var a = 1;时, a的值修改为1
+//当执行console.log(a);时, 输出1</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>4.2.4 activation object(激活对象)<a name="ao" class="anchor-link"></a></h3>
+        <p>创建过程和VO一样, 在FEC中当作VO使用</p>
+    </div>
+    <div class="section">
+        <h3>4.2.5 scope chain<a name="scope-chain" class="anchor-link"></a></h3>
+        <p>作用域链是一个对象列表, 用来在EC中查找标识符, 和原型链类似, 当查询标识符时会从最前端开始, 然后向后直到找到为止</p>
+        <p><strong>[[scope]]</strong></p>
+        <p>函数的内部属性, 这个属性是一个指针, 指向其外围EC的scope chain, <span class="note">这个scope chain是在函数定义时就保存在[[scope]]中的</span></p>
+        <p><strong>创建</strong></p>
+        <p>scope chain = AO + [[scope]]</p>
+        <ol>
+            <li>当创建函数时, 把其外围EC的scope chain保存在[[scope]]中</li>
+            <li>当调用函数时, 通过复制其[[scope]]属性创建一个scope chain, 然后再创建AO并把AO添加到这个scope chain的最前端</li>
+        </ol>
+        <div class="example">
+            <pre>var a = 20;
+function test(){
+        var b = a + 20;
+        function innerTest(){
+                var c = 10;
+                return b + c;
+        }
+        return innerTest();
+}
+//innerTestEC = {
+    VO:{ c:10},
+    scopeChain:[AO(innerTest),VO(test),VO(global)],
+    this:{...}
+}</pre>
+        </div>
+        <img src="image/scope-chain.png" alt="" style="width:900px;">
+    </div>
+    <div class="section">
+        <h3>4.2.6 the this object<a name="this" class="anchor-link"></a></h3>
+        <p>this对象是EC的一个属性, this值在进入EC时确定, 在EC执行代码期间不会改变</p>
+        <p><strong>this value in global code</strong></p>
+        <p>在全局EC中, this值始终指向global对象(在web浏览器中是window对象)</p>
+        <div class="example">
+            <pre>this.a=10;      //显式定义global对象的属性
+b =12;           
+var c =15;      
+console.log(a);     //10
+console.log(this.b);     //12
+console.log(this.c);     //15</pre>
+        </div>
+        <p><strong>this value in function code</strong></p>
+        <p>在函数代码中, this值有可能在每一次调用时都不同, 但在代码执行期间, this的值是不可改变的</p>
+        <div class="example">
+            <pre>var foo = {x:10};
+var bar ={
+    x:20,
+    baz:function(){
+        console.log(this === bar);
+        console.log(this.x);
+    }
+};
+bar.baz();      //true, 20
+foo.baz = bar.baz;
+foo.baz();      //false, 10</pre>
+        </div>
+        <p class="note">由上例可知, 正是调用函数的方式影响了EC中的this值</p>
+    </div>
+    <div class="section">
+        <h3>4.2.6.1 引用类型<a name="referenceType" class="anchor-link"></a></h3>
+        <p>通过伪代码把引用类型表示为拥有2个属性的对象</p>
+        <div class="example">
+            <pre>var valueOfReferenceType={
+    base: &lt;base object&gt;,      //即拥有属性的那个对象
+    propertyName: &lt;property name&gt;
+};</pre>
+            <pre>var foo = 10;
+var fooReference={
+    base:global,
+    propertyName:'foo'
+};</pre>
+        </div>
+        <p>引用类型的值仅存在于2种情况下:</p>
+        <ul>
+            <li>标识符, 比如变量, 函数名, 函数参数和全局对象中未识别的属性名</li>
+            <li>属性访问器</li>
+        </ul>
+        <p>最重要的, function code中的this值和引用类型值之间是如何关联的???</p>
+        <p><span class="note">在function code中, this值由函数的调用方式决定. 如果调用括号()的左边是引用类型的值(即指针), 那么this值就是这个引用类型的base值; 否则this值是global对象</span></p>
+    </div>
+    <div class="section">
+        <h3>4.2.6.2 引用类型值调用函数<a name="referenceType-this" class="anchor-link"></a></h3>
+        <div class="example">
+            <pre>function foo() {
+    console.log(this.bar);
+}
+var x = {bar: 10};
+var y = {bar: 20};
+
+x.test = foo;
+y.test = foo;
+
+x.test();   //10
+y.test();   //20</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>4.2.6.3 非引用类型值调用函数<a name="non-referenceType-this" class="anchor-link"></a></h3>
+        <p>如果调用括号()的左边不是指针, 那么this值就是global对象</p>
+        <div class="example">
+            <pre>(function(){
+    console.log(this===window);     //true
+})();
+
+var x = 20;
+var foo = {
+    x : 10,
+    bar : function(){
+        return function(){
+            console.log(this.x);
+        };
+    }
+};
+foo.bar()();    //20</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>4.2.6.4 构造函数中的this值<a name="constructor-this" class="anchor-link"></a></h3>
+        <p>this值被设置为新创建的对象</p>
+        <div class="example">
+            <pre>function A(){
+    this.x = 10;
+}
+var a = new A();
+console.log(a.x);   //10</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>4.2.6.5 显式指定函数的this值<a name="this-value-setting" class="anchor-link"></a></h3>
+        <p>Function.prototype中定义了2个方法:apply()和call(), 所有函数都可以调用, 他们的第一个参数就是this值</p>
+        <div class="example">
+            <pre>var y =15 ;
+function foo(x){
+    console.log(this.y);
+    console.log(x);
+}
+foo(15);    //15, 15
+foo.call({y:20}, 20);    //20, 20
+foo.apply({y:30}, [30]);    //30, 30</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h3>4.2.7 no block-level scope<a name="no-block-level-scope" class="anchor-link"></a></h3>
+        <p>ECMAScript中没有块级作用域</p>
+        <div class="example">
+            <pre>if(true){
+    var color = "red";                
+}
+console.log(color)      //red
+
+for (var index = 0; index < 10; index++) {
+    index++;
+}
+console.log(index);     //10</pre>
+        </div>
+    </div>
+    <div class="section">
+        <h2>4.3 garbage collection<a name="gc" class="anchor-link"></a></h2>
+        <p></p>
+    </div>
+</div>
+<div class="ft">
+    <a href="language-basics.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="reference-type.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+</div>  
+</body>
+</html>

@@ -1,0 +1,54 @@
+$body-color:$gray-dark;
+$body-bg:$white;
+$dt-font-weight:$font-weight-bold;
+
+body{
+    margin: 0;  
+    font-family: $font-family-base;
+    font-size: $font-size-lg;  
+    font-weight:$font-weight-base;
+    line-height:$line-height-base;
+    color:$body-color;
+    background-color:$body-bg;
+    text-align: left;
+}
+// h1,h2,h3,h4,h5,h6
+// ,p
+// ,ul
+// ,ol
+// ,dl{
+//     margin:0;
+// }
+// ol,ul{
+//     list-style: none;
+//     padding-left:0;
+// }
+dt{font-weight: $dt-font-weight;}
+a{
+    color:$link-color;
+    text-decoration:$link-decoration;
+    &:hover{
+        color:$link-hover-color;
+        text-decoration:$link-hover-decoration;
+    }
+}
+//锚点 TODO
+img{
+    border:0;//Remove the border on images inside links in IE 10-.
+    vertical-align: top;
+}
+table{border-collapse: collapse;}
+input,
+button,
+select,
+textarea{
+    font-family:inherit;
+    font-size:inherit;
+    line-height: inherit;
+}
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"]{
+    cursor: pointer;
+}

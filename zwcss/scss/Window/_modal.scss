@@ -1,0 +1,11 @@
+// 名称: 模态对话框, 弹出窗口
+// 外观: 一种window, 通常包括data entry control, action button等
+// 开关: dynamic, 用户执行某个action后弹出, click dialog上的response button关闭
+// 交互: 
+//      modal dialog
+//         被关闭之前阻止用户对application的其他一切交互, 比如 open dialog or save dialog
+//      modalless dialog
+//         在dialog打开状态下, 用户可以继续进行交互, 比如 find dialog
+// 使用: 一般包括document-modal dialog(比如word中的save dialog),
+//      app-modal dialog(比如vscode中的open dialog)
+//      modalless dialog(比如vscode中的find dialog)

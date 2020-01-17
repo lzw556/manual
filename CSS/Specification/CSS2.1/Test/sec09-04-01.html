@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9.4.1 block formatting contexts</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .outer{
+            border:dashed 5px olive;
+            border-radius:5px;
+            padding:1em;
+            width:450px;
+            font: 1.4em Arial, sans-serif;
+        }
+        .float{
+            float:left;
+            margin-right:20px;
+            padding:1em;
+            background-color:silver;
+            color:navy;
+            width:200px;
+        }
+        .oh{overflow:hidden;}
+        .wrap{background-color:silver;font: 1.4em Arial, sans-serif;}
+        .wrap p{margin:20px 0;background-color:gray;color:navy;}
+    </style>
+</head>
+<body>
+<h1>CSS2.1 Test Suite: 9.4.1 block formatting contexts</h1>
+<a href="sec08-04-04e.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec09-04-02.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+<hr>
+    <div class="container">
+        <div style="width:90%;height:80px;background-color:navy;color:white;">box1</div>
+        <div style="width:70%;height:50px;background-color:olive;color:white;">box2</div>
+        <div style="height:60px;background-color:fuchsia;color:white;">box3</div>
+        <div style="float:left;height:40px;background-color:maroon;color:white;">floating box</div>
+        <div style="width:80%;height:60px;background-color:aqua;color:white;">box4</div>
+    </div>
+    <p><a name="BFC-contain-float"></a>在下面的例子中,我们创建一个容器 .outer,这个容器中包含了一个向左浮动的元素和一段文本.如果文本的数量足够多,那么这些文本会把浮动的元素包裹起来然后容器的边框会把整个区域都包含进去</p>
+    <div class="outer">
+        <div class="float">I am a floated element.</div>
+        I am text inside the outer box. If there is enough text then the text will wrap around the floated element. The border on the outer will then wrap around the text.
+    </div>
+    <p>接下来,我们从容器中移除一部分文本,这样就没有足够的文本来包裹浮动元素了,并且因为浮动元素脱离normal flow,此时容器的下边框会从浮动元素的下面(部分下边框被覆盖)上移直到刚好可以容纳剩余的文本</p>
+    <div class="outer">
+        <div class="float">I am a floated element.</div>
+        I am text inside the outer box.
+    </div>
+    <p>发生这种现象是因为当我们浮动一个元素时,会根据需要缩短与浮动元素相邻的line box,以便为浮动元素的margin box提供足够的空间(换句话说,此时容器的高度自适应文本所在line box的高度,和浮动元素的高度无关)</p>
+    <p>我们通常有2种办法来修复这个布局问题.一种是在浮动元素和文本下方插入一个元素并且设置其clear属性为'both'.另一种方法是使用overflow属性,且设置其值不是'visible'</p>
+    <div class="outer oh">
+        <div class="float">I am a floated element.</div>
+        I am text inside the outer box.
+    </div>
+    <p>在这种方法中,overflow生效的原因是当它的值是非'visible'时会创建一个BFC,而BFC的一个特性就是<strong>contains floats</strong>(详见CSS 2.1 sepc中<a href="../vfmdetails.html#root-height">'Auto' heights for block formatting context</a>).</p>
+    <p><a name="prevent-margin-collapsing"></a><strong>BFC会阻止margin collapsing</strong></p>
+    <p>在接下来的例子中,外层DIV的背景色是silver,其中包含2个P元素,并且这个2个P元素的top margin和bottom margin都是20px</p>
+    <div class="wrap">
+        <p>I am a paragraph one and I have a margin top and bottom of 20px</p>
+        <p>I am a paragraph two and I have a margin top and bottom of 20px</p>
+    </div>
+    <p>因为第一个P元素的top margin和外层div的top margin collapse,第二个P元素的bottom margin和外层div的bottom margin collapse.所以在第一个P元素content area的上方和第二个P元素content area的下方都看不到任何silver背景</p>
+    <p>接下来我们让外层DIV创建一个BFC,这样外层DIV和其中2个P元素分别处于不同的BFC中,故两者的margin不会collapse(详见CSS 2.1 sepc中<a href="../vfmmodel.html#block-formatting-context">BFC</a>),并且此时外层DIV会包含这2个P元素和他们的margin,所以我们可以看到2个P元素margin后面的silver背景</p>
+    <div class="wrap oh">
+        <p>I am a paragraph one and I have a margin top and bottom of 20px</p>
+        <p>I am a paragraph two and I have a margin top and bottom of 20px</p>
+    </div>
+    <p><a name="stopping-text-wrap"></a><strong>BFC会阻止内容环绕浮动元素</strong></p>
+    <p>在下面的例子中,我们创建一个容器 .outer,这个容器中包含了一个向左浮动的元素和一个DIV元素,其中包含一段文本.根据浮动的特性,这个DIV元素中的文本会环绕浮动元素</p>
+    <div class="outer">
+        <div class="float">I am a floated element.</div>
+        <div>I am text inside a div nested inside the outer box. If there is enough text then the text will wrap around the floated element. The border on the outer will then wrap around the text.</div>
+    </div>
+    <p>我们可以通过把文本所在的DIV元素变成BFC的方式来阻止文本环绕浮动的行为(详见CSS 2.1 sepc中<a href="../vfmmodel.html#block-formatting-context">BFC</a>)</p>
+    <div class="outer">
+        <div class="float">I am a floated element.</div>
+        <div class="oh">I am text inside a div nested inside the outer box. I have overflow hidden which makes me a BFC and therefore I do not wrap.</div>
+    </div>
+</body>
+</html>

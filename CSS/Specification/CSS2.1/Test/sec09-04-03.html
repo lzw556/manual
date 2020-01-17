@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9.4.3 relative positioning</title>
+    <link href="base.css" rel="stylesheet">
+    <style>
+        .relative{position:relative;}
+        .absolute{position:absolute;}
+        .fixed{position:fixed;}
+        .bg-gray{
+            background-color:gray;
+        }
+        .bg-silver{
+            background-color:silver;
+        }
+        .bg-aqua{
+            background-color:aqua;
+        }
+        .inline-block{display: inline-block;}
+        .offset-l-50{left:50px;}
+        .offset-t-50{top:50px;}
+        .offset-r-50{right:50px;}
+        .offset-b-50{bottom:50px;}
+    </style>
+</head>
+<body>
+    <h1>CSS2.1 Test Suite: 9.4.3 relative positioning</h1>
+    <a href="sec09-04-02.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="sec09-05-01.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
+    <hr>
+    <h3>block-level box</h3>
+    <p>box2在normal flow中的位置,即position:static时如下:</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver">box1</div>
+        <div class="bg-aqua">box2</div>
+        <div class="bg-gray">box3</div>
+    </div>
+    <p>box2的position:relative,且left:50px</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver">box1</div>
+        <div class="bg-aqua relative offset-l-50">box2</div>
+        <div class="bg-gray">box3</div>
+    </div>
+    <p>box2的position:relative,且top:50px</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver">box1</div>
+        <div class="bg-aqua relative offset-t-50">box2</div>
+        <div class="bg-gray">box3</div>
+    </div>
+    <p>box2的position:relative,且right:50px</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver">box1</div>
+        <div class="bg-aqua relative offset-r-50">box2</div>
+        <div class="bg-gray">box3</div>
+    </div>
+    <p>box2的position:relative,且bottom:50px</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver">box1</div>
+        <div class="bg-aqua relative offset-b-50">box2</div>
+        <div class="bg-gray">box3</div>
+    </div>
+    <h3>inline-block</h3>
+    <p>box2在normal flow中的位置,即position:static时如下:</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver inline-block">box1</div>
+        <div class="bg-aqua inline-block">box2</div>
+        <div class="bg-gray inline-block">box3</div>
+    </div>
+    <p>box2的position:relative,且left:50px</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver inline-block">box1</div>
+        <div class="bg-aqua relative offset-l-50 inline-block">box2</div>
+        <div class="bg-gray inline-block">box3</div>
+    </div>
+    <p>box2的position:relative,且top:50px</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver inline-block">box1</div>
+        <div class="bg-aqua relative offset-t-50 inline-block">box2</div>
+        <div class="bg-gray inline-block">box3</div>
+    </div>
+    <p>box2的position:relative,且right:50px</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver inline-block">box1</div>
+        <div class="bg-aqua relative offset-r-50 inline-block">box2</div>
+        <div class="bg-gray inline-block">box3</div>
+    </div>
+    <p>box2的position:relative,且bottom:50px</p>
+    <div class="container" style="margin-left:auto;margin-right:auto">
+        <div class="bg-silver inline-block">box1</div>
+        <div class="bg-aqua relative offset-b-50 inline-block">box2</div>
+        <div class="bg-gray inline-block">box3</div>
+    </div>
+    <h3>floating box</h3>
+    <p>TODO</p>
+</body>
+</html>

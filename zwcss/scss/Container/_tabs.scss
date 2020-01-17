@@ -1,0 +1,39 @@
+// 名称: 标签选项卡
+// 外观: 由一个 tabbed control 和 content area组成, tabbed control可以在content area的top, bottom, left or right
+// 开关: static, 一旦打开其所在界面就一直存在, 直到关闭界面才关闭
+// 交互: tabbed control中的每一部分叫作tab, click a tab就会在content area中display这个tab对应的面板
+// 使用: 在同一个区域内display多个相互独立的内容面板
+$tabs-border-width: $border-width;
+$tabs-border-color: $gray-lighter;
+$tabs-padding-x: 1em;
+$tabs-padding-y: .5em;
+$tabs-color: $gray-normal;
+$tabs-hover-color: #333;
+$tabs-active-color: $primary;
+$tabs-disabled-color: darken($gray-light, 10%);
+.tabs{
+    border-bottom: solid $tabs-border-width $tabs-border-color;
+    @include clearfix;
+    li{
+        float: left;
+        margin-bottom: -$tabs-border-width;
+    }
+    li a{
+        display: block;
+        border-bottom: solid $tabs-border-width $tabs-border-color;
+        padding: $tabs-padding-y $tabs-padding-x;
+        color: $tabs-color;
+        &:hover{
+            color: $tabs-hover-color;
+            text-decoration: none;
+        }
+    }
+    li.active a{
+        color: $tabs-active-color;
+        border-bottom: solid $tabs-border-width $tabs-active-color;
+    }
+    li.disabled a{
+        color: $tabs-disabled-color;
+        cursor: default;
+    }
+}   

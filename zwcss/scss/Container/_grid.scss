@@ -1,0 +1,29 @@
+$grid-breakpoints: ("xs":0,"sm":576px,"md":768px,"lg":992px,"xl":1200px);
+$grid-columns: (5, 12);
+.g{
+    display: flex;
+    flex-wrap: wrap;
+}
+%unit{
+    width:100%;
+}
+@each $breakpoint in map-keys($grid-breakpoints){
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints); 
+    @each $count in $grid-columns{  
+        @for $i from 1 through $count{
+            .u#{$infix}-#{$i}-#{$count}{
+                @extend %unit; 
+            }
+        }
+    }
+    @include breakpoint-up($breakpoint, $grid-breakpoints){
+        @each $count in $grid-columns{
+            @for $i from 1 through $count{
+                .u#{$infix}-#{$i}-#{$count}{
+                    flex:0 0 percentage($i / $count);
+                    max-width:percentage($i / $count);
+                }   
+            }
+        } 
+    }
+}

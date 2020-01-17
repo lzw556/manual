@@ -1,0 +1,15 @@
+name: 气泡弹出层, or 气泡弹出框
+overview: 一种container view, 出现在其他元素之上, 然后带一个箭头指向popover是从哪里弹出来的
+      弹出层可以是modal, 也可以是nonmodal
+开关: dynamic, application根据需要自动弹出, 用户click alert上的response button关闭
+交互: 
+    open
+        click(desktop) or tap(mobile) a control
+    close
+        如果是modal, click or tap popover上的button
+        如果是nonmodal, click or tap 屏幕上的其他区域   
+使用: a type of transient view(瞬态视图)
+区别1: 
+    tooltip可以不带箭头, 大部分是nonmodal, 通过hover动作触发, 主要用于display 帮助性, 提示性的额外信息, 一般不会包含其他控件
+区别2:
+    alert用户无法选择去看, popover用户可以选择去看
