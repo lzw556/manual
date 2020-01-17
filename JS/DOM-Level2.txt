@@ -1,0 +1,175 @@
+core部分
+
+1 表示文档树中一个单一节点
+	interface Node{
+		
+	   //NodeType
+	   //元素节点
+	   const unsigned short ELEMENT_NODE			=1;
+	   //特性节点
+	   const unsigned short ATTRIBUTE_NODE			=2;
+	   //文本节点
+	   const unsigned short TEXT_NODE			=3;
+	   const unsigned short CDATA_SECTION_NODE		=4;
+	   const unsigned short ENTITY_REFERENCE_NODE		=5;
+	   const unsigned short ENTITY_NODE			=6;
+	   const unsigned short PROCESSING_INSTRUCTION_NODE	=7;
+	   const unsigned short COMMENT_NODE			=8;
+	   //文档节点
+	   const unsigned short DOCUMENT_NODE			=9;
+	   const unsigned short DOCUMENT_TYPE_NODE		=10;
+	   const unsigned short DOCUMENT_FRAGMENT_NODE		=11;
+	   const unsigned short NOTATION_NODE			=12;
+	   
+  	   readonly attribute DOMString		nodeName;
+		    attribute DOMString 	nodeValue;
+	   readonly attribute unsigned short	nodeType;
+	   readonly attribute Node		parentNode;
+	   readonly attribute NodeList		childNodes;
+	   readonly attribute Node		firstChild;
+	   readonly attribute Node		lastChild;
+	   readonly attribute Node		previousSibling;
+	   readonly attribute Node		nextSibling;
+	   readonly attribute NamedNodeMap	attributes;
+	   readonly attribute Document		ownerDocument;
+
+	   Node		insertBefore(in Node newChild, in Node refChild);
+	   Node		replaceChild(in Node newChild, in Node oldChild);			 		
+	   Node		removeChild(in Node oldChild);
+	   Node		appendChild(in Node newChild);
+	   Boolean	hasChildNodes();
+	   Node		cloneNode(in boolean deep);	
+	   void 	normalize();
+	   boolean	isSupported(in DOMString feature, in DOMString version);
+	   
+	   readonly attribute DOMString 	namespaceURI;
+	   	    attribute DOMString		prefix;
+	   readonly attribute DOMString		localName;
+
+	   boolean	hasAttributes();				
+	}
+
+2 表示整个HTML文档, 是文档树的根节点
+	interface Document: Node{
+	   readonly attribute DocumentType	doctype;
+	   readonly attribute DOMImplementation implementation;
+	   readonly attribute Element		documentElement;
+	   
+	   Element		createElement(in DOMString tagName);
+	   DocumentFragment	createDocumentFragment();
+	   Text			createTextNode(in DOMString data);
+	   Comment		createComment(in DOMString data);
+	   CDATASection		createCDATASection(in DOMString data);
+	   Attr			createAttribute(in DOMString name);
+	   NodeList		getElementsByTagName(in DOMString tagname);
+	   Element		getElementById(in DOMString elementId);
+	}
+
+3 表示HTML文档中的一个元素节点
+	interface Element: Node{
+	   readonly attribute DOMString 	tagName;
+
+	   DOMString		getAttribute(in DOMString name);
+	   void			setAttribute(in DOMString name, in DOMString value);
+	   void			removeAttribute(in DOMString name);
+	   Attr			getAttributeNode(in DOMString name);
+	   Attr			setAttributeNode(in Attr newAttr);
+	   Attr			removeAttributeNode(in Attr oldAttr);
+	   NodeList		getElementsByTagName(in DOMString name);
+	   boolean		hasAttribute(in DOMString name);
+	}
+
+4 是一个有序的节点集合. 这个集合是live的
+	interface NodeList{
+	   Node		      item(in unsigned long index);
+	   readonly attribute unsigned long	length;	
+	}
+
+5 表示元素中的一个特性节点, 继承了Node interface, 因为特性节点不是他所描述元素的真实的子节点, DOM不认为他们是
+  文档树的一部分. 因此parentNode,previousSibling,nextSibling都是null	
+	interface Attr: Node{
+	   readonly attribute DOMString		name;
+	   readonly attribute boolean		specified;
+		    attribute DOMString		value;
+	   readonly attribute Element		ownerElement;
+	}
+
+6	
+	interface CharacterData: Node{
+	   	    attribute DOMString		data;
+	   readonly attribute unsigned long	length;
+	   
+	   DOMString		substringData(in unsigned long offset, in unsigned long count);
+	   void			appendData(in DOMString arg);
+	   void			insertData(in unsigned long offset, in DOMString arg);
+	   void			deleteData(in unsigned long offset, in unsigned long count);
+	   void			replaceData(in unsigned long offset, in unsigned long count, in DOMString arg);		
+	}
+
+7	
+	interface Text: CharacterData{
+	   Text			splitText(in unsigned long offset);
+	}
+
+
+8 表示特性节点的集合, 虽然可以通过索引来访问, 但是顺序没有指定		
+	interface NamedNodeMap{
+	   Node			getNamedItem(in DOMString name);
+	   Node			setNamedItem(in Node arg);
+	   Node			removeNamedItem(in DOMString name);
+	   Node			item(in unsigned long index);
+
+	   readonly attribute unsigned long	length;
+	}
+
+html部分
+
+1
+	interface HTMLCollection{
+	   readonly attribute unsigned long	length;
+
+	   Node			item(in unsigned long index);
+	   Node			namedItem(in DOMString name);	
+	}
+
+2
+	interface HTMLOptionsCollection{
+	   	    attribute unsigned long	length;
+
+	   Node			item(in unsigned long index);
+	   Node			namedItem(in DOMString name);	
+	}
+
+3 
+	interface HTMLDocument: Document{
+	     	    attribute DOMString		title;
+	   readonly attribute DOMString		referrer;
+	   readonly attribute DOMString		domain;
+	   readonly attribute DOMString		URL;
+	   	    attribute HTMLElement	body;		
+	   readonly attribute HTMLCollection	images;
+	   readonly attribute HTMLCollection	applets
+	   readonly attribute HTMLCollection	links;
+	   readonly attribute HTMLCollection	forms;
+	   readonly attribute HTMLCollection	anchors;
+		    attribute DOMString		cookie;
+
+	   void			open();
+	   void			close();
+	   void			write(in DOMString text);
+	   void			writeln(in DOMString text);
+	   NodeList		getElementsByName(in DOMString elementName);
+	}
+
+4	
+	interface HTMLElement: Element{
+	   	    attribute DOMString		id;
+	   	    attribute DOMString		title;
+	   	    attribute DOMString		lang;
+	   	    attribute DOMString		dir;
+	   	    attribute DOMString		className;
+	}
+
+event部分
+
+1	
