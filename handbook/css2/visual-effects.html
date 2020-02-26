@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11 Visual effects</title>
+    <link href="/CSS/base.css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar">
+    <p><a href="vfmdetails.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="generate.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+</div>
+<hr>
+    <h1>11 Visual effects</h1>
+    <p><strong>Contents</strong></p>
+    <ul class="table-of-content">
+        <li><a href="#overflow-clipping">11.1 Overflow and clipping</a>
+            <ul class="table-of-content">
+                <li><a href="#overflow">11.1.1 Overflow:the 'overflow' property</a></li>
+                <li><a href="#clipping">11.1.2 Clipping:the 'clip' property</a></li>
+            </ul>
+        </li>
+        <li><a href="#visibility">11.2 Visibility:the 'visibility' property</a></li>
+    </ul>
+    <h2><a name="overflow-clipping">11.1 Overflow and clipping</a></h2>
+    <p>通常,一个block box的内容都被限制在content edge内.在某些情况下,一个box可能会overflow(溢出),即他的部分或全部内容位于box之外,比如:</p>
+    <ul>
+        <li>一行不能拆分,导致line box比block box宽</li>
+        <li>一个block-level box比其containing block宽</li>
+        <li>一个元素的height超过了为其containing block显式指定的'height'</li>
+        <li>后代box是absolutely positioned,部分内容在box外面</li>
+        <li>后代box拥有negative margin,导致这个后代box部分在box外面</li>
+        <li>'text-indent'属性会导致一个inline box挂在block box的edge上</li>
+    </ul>
+    <p>当发生溢出时,'overflow'属性指定一个box的内容是否会被裁剪;以及是否需要提供滚动机制来访问被裁剪掉的内容(即裁剪区外的内容)</p>
+    <h3><a name="overflow">11.1.1 Overflow:the 'overflow' property</a></h3>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>overflow</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td><td>visible&nbsp;|&nbsp;hidden&nbsp;|&nbsp;scroll&nbsp;|&nbsp;auto&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td><td>visible</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td><td><span class="note">block container element</span></td>
+                </tr>
+                <tr>
+                    <td>Inherited</td><td>no</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td><td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td><td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td><td>和specified value相同</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <dl>
+        <dt>visible</dt>
+        <dd>表示内容不会被裁剪</dd>
+        <dt>hidden</dt>
+        <dd>表示内容会被裁剪,但是不会提供滚动界面来访问裁剪区之外的内容</dd>
+        <dt>scroll</dt>
+        <dd>表示内容会被裁剪而且会提供滚动界面来访问裁剪区之外的内容</dd>
+        <dt>auto</dt>
+        <dd>依赖UA</dd>
+    </dl>
+    <h3><a name="clipping">11.1.2 Clipping:the 'clip' property</a></h3>
+    <p>一个裁剪区定义了block box中那部分内容是可见的.默认情况下元素不会被裁剪,但是可以通过'clip'属性显式地设置裁剪区,'clip'属性只适用于absolutely positioned elements</p>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>clip</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td><td>&lt;shape&gt;&nbsp;|&nbsp;auto&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td><td>auto</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td><td><span class="note">absolutely positioned elements</span></td>
+                </tr>
+                <tr>
+                    <td>Inherited</td><td>no</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td><td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td><td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td><td>如果specified value是'auto'则是'auto';否则是一个由4个value表示的矩形</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <dl>
+        <dt>auto</dt>
+        <dd>元素不裁剪</dd>
+        <dt>&lt;shape&gt;</dt>
+        <dd><p>在CSS2.1中,唯一合法的&lt;shape&gt;值为:rect(&lt;top&gt;,&lt;right&gt;,&lt;bottom&gt;,&lt;left&gt;).其中&lt;top&gt;和&lt;bottom&gt;指定了从border-top edge开始向下的偏移,&lt;left&gt;和&lt;right&gt;指定了从border-left edge开始向右的偏移,每个值用","隔开</p>
+            <p>&lt;top&gt;,&lt;right&gt;,&lt;bottom&gt;,&lt;left&gt;可以拥有一个length值或'auto'值.允许负值.对于&lt;top&gt;和&lt;left&gt;来说,'auto'表示0;对于&lt;right&gt;来说,'auto'表示width+水平方向上的padding+border-width;对于&ltbottom&gt;来说,'auto'表示height+垂直方向上的padding+border-width;</p>
+        </dd>
+    </dl>
+    <h2><a name="visibility">11.2 Visibility:the 'visibility' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>visibility</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td><td>visible&nbsp;|&nbsp;hidden&nbsp;|&nbsp;collapse&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td><td>visible</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td><td><span class="note">all elements</span></td>
+                </tr>
+                <tr>
+                    <td>Inherited</td><td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td><td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td><td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td><td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    这个属性指定一个元素生成的box是否呈现,不可见的box仍然影响布局
+    <dl>
+        <dt>visible</dt>
+        <dd>元素生成的box是可见的</dd>
+        <dt>hidden</dt>
+        <dd>元素生成的box是不可见的(完全透明,什么都不绘制),但是仍然影响布局.而且该元素具有'visibility: visible'的后代将是可见的</dd>
+        <dt>collapse</dt>
+        <dd>详见<a href="tables.html#dynamic-effects">dynamic row and column effects</a> in tables</dd>
+    </dl>
+    <hr>
+    <div class="navbar">
+        <p><a href="vfmdetails.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="generate.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <span id="text1" style="font-size:16px;font-family:Simsun;">字体的高度</span><br>
+  <span id="text2"  style="font-size:16px;font-family:'microsoft yahei';">字体的高度</span>
+  <div style="font-size:16px;font-family:'microsoft yahei';">字体的高度</div>
+  <!--字体高度跟font-size和font-family有关,其中Simsun的字体高度和font-size刚好相等-->
+</body>
+</html>
+<script>
+    alert(document.getElementById("text1").offsetHeight)
+    alert(document.getElementById("text2").offsetHeight)
+</script>

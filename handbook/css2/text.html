@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>16 Text</title>
+    <link href="/CSS/base.css" rel="stylesheet">
+    <style>
+        p.case1{text-decoration:underline;}
+        p.case1 em{text-decoration:none;}
+        p.case1 strong{text-decoration:overline;}
+        p.case1 b{color:yellow;}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <p><a href="fonts.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="tables.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+    <hr>
+    <h1>16 Text</h1>
+    <p><strong>Contents</strong></p>
+    <ul class="table-of-content">
+        <li><a href="#indentation">16.1 Indentation: the 'text-indent' property</a></li>
+        <li><a href="#alignment">16.2 Alignment: the 'text-align' property</a></li>
+        <li><a href="#decoration">16.3 Decoration</a>
+            <ul class="table-of-content">
+                <li><a href="#decoration-props">16.3.1 Underlining, overlining, striking, and blinking: the 'text-decoration' property</a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#spacing-props">16.4 Letter and word spacing: the 'letter-spacing' and 'word-spacing' properties</a></li>
+        <li><a href="#text-transform">16.5 Capitalization: the 'text-transform' property</a></li>
+        <li><a href="#white-space-prop">16.6 White space: the 'white-space' property</a>
+            <ul class="table-of-content">
+                <li><a href="#white-space-model">16.6.1 The 'white-space' processing model</a></li>
+                <li><a href="#quotes-sepcify">16.6.2 Example of bidirectionality with white space collapsing</a></li>
+                <li><a href="#quotes-sepcify">16.6.3 Control and combining characters' details</a></li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name="indentation">16.1 Indentation: the 'text-indent' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>text-indent</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>&lt;length&gt;&nbsp;|&nbsp;&lt;percentage&gt;&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>block container box</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>参考width of containing block</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>如果是percentage就是sepcified value,否则就是绝对长度</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定一个block container box中第一行文本的缩进.更精确地说,它指定了这个元素中第一个line box中的第一个box的缩进.第一个box会相对于第一个line box的left edge(对于'direction'值是'rtl'的是right edge)进行缩进,UA必须把缩进渲染为空白空间</p>
+    <p>'text-indent'的值可以为负,但可能存在具体实现限制.如果'text-indent'值为负或者长度超出了该块的宽度,上面描述的第一个box会从块中溢出.'overflow'的值将影响这种从块中溢出的文本是否可见</p>
+    <h2><a name="alignment">16.2 Alignment: the 'text-align' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>text-align</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>left&nbsp;|&nbsp;right&nbsp;|&nbsp;center&nbsp;|&nbsp;&nbsp;justify&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>如果'direction'值是'ltr'('rtl'),则有一个无名值作为'left'('right');</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>block container box</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>参考width of containing block</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>initial value or sepcified value</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性描述在一个block container box中inline-level content的水平对齐</p>
+    <dl>
+        <dt>left,right,center,justify</dt>
+        <dd>当一行中所有inline-level box的总宽度小于他们所在line box的宽度时,这些box在line box中的水平对齐由'text-align'指定.详细内容见<a href="vfmmodel.html#inline-formatting-context">inline formatting context</a>
+        </dd>
+        <dd>对于'left','right','center',这个属性指定每一个line box中inline-level box相对于line box的left edge,right edge和center如何对齐</dd>
+        <dd>对于'justify',这个属性指定如果可以的话,通过扩宽或者缩紧行框的内容(详见<a>'letter-spacing'</a>,<a>word-spacing</a>),让inline-level box与line box的两边都对齐,如果不可以就按照initial value来对齐</dd>
+    </dl>
+    <h2><a name="decoration">16.3 Decoration</a></h2>
+    <h3><a name="decoration-props">16.3.1 Underlining, overlining, striking, and blinking: the 'text-decoration' property</a></h3>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>text-decoration</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>none&nbsp;|&nbsp;[&nbsp;underline&nbsp;&nbsp;||&nbsp;&nbsp;overline&nbsp;&nbsp;||&nbsp;&nbsp;line-through&nbsp;&nbsp;||&nbsp;&nbsp;blink&nbsp;]&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>no(<a href="#text-decoration-effect">见下文</a>)</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和sepcified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性描述了可以给元素文本添加的装饰,这些装饰使用元素的color.</p>
+    <dl>
+        <dt>none</dt>
+        <dd>不产生文本装饰</dd>
+        <dt>underline</dt>
+        <dd>每行文本添加下划线</dd>
+        <dt>overline</dt>
+        <dd>每行文本添加上划线</dd>
+        <dt>line-through</dt>
+        <dd>每行文本都有一条线从中间穿过</dd>
+    </dl>
+    <p>'underline','overline','line-through'只适用于文本(包括white space,letter spacing和word spacing),margin,border和padding会被跳过</p>
+    <p><a name="text-decoration-effect">虽然'text-decoration'默认不可以被继承,但是文本装饰效果会传播到其后代元素上,除非后代元素是floated,absolutely positioned,inline-block box</a>.传播到后代元素上的文本装饰(非显式设置)的颜色必须来自设置了'text-decoration'的祖先元素的color</p>
+    <p>显式设置在后代元素上的'text-decoration'属性对从祖先元素上传播过来的文本装饰效果没有影响,具体见下例:</p>
+    <div class="example">
+        <pre>HTML<br>&lt;p&gt;This text has &lt;em&gt;some emphasized&lt;/em&gt; words and &lt;strong&gt;some strong&lt;/strong&gt; words and &lt;b&gt;some bold&lt;/b&gt; words in it&lt;/p&gt;</pre>
+        <pre>CSS<br>p{text-decoration:underline;}<br>p em{text-decoration:none;}<br>p strong{text-decoration:overline;}<br>p b{color:yellow;}   /*文本装饰颜色不是yellow*/</pre>
+    </div>
+    <div class="demo">
+        <p class="case1">This text has <em>some emphasized</em> words and <strong>some strong</strong> words and <b>some bold</b> words in it</p>
+    </div>
+    <h2><a name="spacing-props">16.4 Letter and word spacing: the 'letter-spacing' and 'word-spacing' properties</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>letter-spacing</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>normal&nbsp;|&nbsp;&lt;length&gt;&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>normal</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>'normal' or绝对长度</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定了文本字符之间的间隔行为.</p>
+    <dl>
+        <dt>normal</dt>
+        <dd>表示当前font的正常间隔.不同于&lt;length&gt;=0,这个值允许UA为了justify text而改变字符之间的间隔.</dd>
+        <dt>&lt;length&gt;</dt>
+        <dd>表示除字符之间默认间隔外的额外间隔.即字符间实际间隔=默认间隔+length.值可以为负，但可能存在具体实现限制.如果为0则表示为默认间隔并且不允许UA改变字符之间的间隔</dd>
+    </dl>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>word-spacing</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>normal&nbsp;|&nbsp;&lt;length&gt;&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>normal</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>如果是'normal'则为0 or绝对长度</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定了单词之间的间隔行为.</p>
+    <dl>
+        <dt>normal</dt>
+        <dd>表示当前font的正常间隔.</dd>
+        <dt>&lt;length&gt;</dt>
+        <dd>表示除单词之间默认间隔外的额外间隔.即单词间实际间隔=默认间隔+length.值可以为负,但可能存在具体实现限制.</dd>
+    </dl>
+    <h2><a name="text-transform">16.5 Capitalization: the 'text-transform' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>text-transform</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>capitalize&nbsp;|&nbsp;uppercase&nbsp;|&nbsp;lowercase&nbsp;|&nbsp;none&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性控制元素文本的大写效果.只有属于"bicameral scripts"(指具有大小写差异的文字)的字符会受到影响</p>
+    <dl>
+        <dt>capitalize</dt>
+        <dd>使每个单词中的第一个字符大写，其它字符不受影响.</dd>
+        <dt>uppercase</dt>
+        <dd>使每个单词中的所有字符大写</dd>
+        <dt>lowercase</dt>
+        <dd>使每个单词中的所有字符小写</dd>
+        <dt>none</dt>
+        <dd>没有大写效果</dd>
+    </dl>
+    <h2><a name="white-space-prop">16.6 White space: the 'white-space' property</a></h2>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>white-space</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>normal&nbsp;|&nbsp;pre&nbsp;|&nbsp;nowrap&nbsp;|&nbsp;pre-wrap&nbsp;|&nbsp;pre-line&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>normal</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>all elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定如何处理元素中的white space</p>
+    <dl>
+        <dt>normal</dt>
+        <dd>collapse连续的white space(空格非nbsp)和换行(回车非br标签),自动换行</dd>
+        <dt>nowrap</dt>
+        <dd>和'normal'一样collapse连续的white space(空格非nbsp)和换行(回车非br标签),但阻止换行(回车非br标签)</dd>
+        <dt>pre</dt>
+        <dd>阻止collapse连续的white space(空格非nbsp)和换行(回车非br标签),只在回车处换行</dd>
+        <dt>pre-wrap</dt>
+        <dd>阻止collapse连续的white space(空格非nbsp)和换行(回车非br标签),在回车处换行or自动换行</dd>
+        <dt>pre-line</dt>
+        <dd>collapse连续的white space(空格非nbsp),在回车处换行or自动换行</dd>
+    </dl>
+    <h3><a name="white-space-model">16.6.1 The 'white-space' processing model</a></h3>
+    <h3><a name="">16.6.2 Example of bidirectionality with white space collapsing</a></h3>
+    <h3><a name="">16.6.3 Control and combining characters' details</a></h3>
+    <hr>
+    <div class="navbar">
+        <p><a href="fonts.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="tables.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .f-cb:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+        .sepline{height:30px;border-bottom:5px dashed #000;margin-bottom:30px;}
+        .container{width:35%;border:1px solid #ccc;margin:0 auto;}
+        .hd,.ft{padding:10px;background-color:#666;color:#fff;}
+    </style>
+</head>
+<body>
+<h2>浮动元素特性3:如果要浮动一个非替换元素,则必须为该元素声明一个width.否则元素的width趋于0,即元素的width由其内容决定,就是宽度自适应</h2>
+<div class="container">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd f-cb">
+        <p style="height:25px;border:1px solid #000;">块级非替换元素</p>
+        <div class="sepline"></div>
+        <p style="float: left;height:25px;border:1px solid #000;"></p>
+        <div class="sepline"></div>
+        <p style="float: left;height:25px;border:1px solid #000;">width由其内容决定</p>
+        <div class="sepline"></div>
+        <p style="float: left;height:25px;border:1px solid #000;">width由其内容决定width由其内容决定</p>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+<h2>浮动元素后的元素会占据浮动元素原来的位置???</h2>
+</body>
+</html>

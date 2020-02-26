@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .f-cb:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+        .sepline{height:30px;border-bottom:5px dashed #000;margin-bottom:30px;}
+        .container{width:35%;border:1px solid #ccc;margin:0 auto;}
+        .hd,.ft{padding:10px;background-color:#666;color:#fff;}
+    </style>
+</head>
+<body>
+<h2>父元素高度塌陷</h2>
+<div class="container">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd">
+        <p style="background-color:#8ABB55;">浮动元素比其父元素高浮动元素比其父元素高浮动元素<img src="../image/6.jpg" alt="6">比其父元素<br>高浮动元素比其父元素高</p>
+        <div class="sepline"></div>
+         <p style="background-color:#8ABB55;">浮动元素比其父元素高浮动元素比其父元素高浮动元素<img style="float:left;margin:5px;" src="../image/6.jpg" alt="6">比其父元素<br>高浮动元素比其父元素高</p>
+         <h3 style="border:1px solid #000;background-color:#009a61;">浮动元素后的标题浮动元素后的标题浮动元素后的标题浮动元素后的标题浮动元素后的标题</h3>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+</body>
+</html>

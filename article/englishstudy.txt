@@ -1,0 +1,5 @@
+tutorial   : [tju:ˈtɔ:riəl], n , 译为教程,指南;
+chapter    : [ˈtʃæptə(r)], n , 译为章节;
+References : [ˈrefrəns], n , 译为参考,参考手册;
+additional : [əˈdɪʃənl], adj , 译为附加的,额外的;
+horizontal : [hɒrɪˈzɒntl], adj , 译为水平的;

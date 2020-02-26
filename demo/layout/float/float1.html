@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .f-cb:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+        .sepline{height:30px;border-bottom:5px dashed #000;margin-bottom:30px;}
+        .container{width:35%;border:1px solid #ccc;margin:0 auto;}
+        .hd,.ft{padding:10px;background-color:#666;color:#fff;}
+        img{width:29px;height:28px;}
+    </style>
+</head>
+<body>
+<h2>浮动元素特性1:会从normal flow中删除,但是还是会影响布局,具体表现就是:周围元素会环绕浮动元素<br>绝对定位的元素不会影响其他元素</h2>
+<div class="container">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd">
+        <p>css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片<img src="../image/1.png" alt="1.png">,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.
+        </p>
+        <div class="sepline"></div>
+        <p>css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片<img style="float:left;" src="../image/1.png" alt="1.png">,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.
+        </p>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+<div class="sepline"></div>
+<div class="container">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd">
+        <p>css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.</p>
+        <p style="width:200px;padding:10px;border:1px solid #000;">css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.</p>
+        <p>css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.</p>
+        <div class="sepline"></div>
+       <p>css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.</p>
+        <p style="float:right;width:200px;padding:10px;border:1px solid #000;">css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.</p>
+        <p>css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.,这个功能是设计float属性的初衷.css属性float的作用:文本环绕图片,这个功能是设计float属性的初衷.</p>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+</body>
+</html>

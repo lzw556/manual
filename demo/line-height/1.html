@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrapper{
+            width:200px;
+            margin:0;
+        }
+        .container{
+            margin-top:1em;
+            border:1px solid;
+        }
+        .content-area{
+            color:#fff;
+            background-color:green;
+        }
+        .fz12{
+            font-size:12px;
+        }
+        .fz16{
+            font-size:16px;
+        }
+        .valign-top{
+            vertical-align:top;
+        }
+    </style>
+</head>
+<body class="wrapper">
+    <div class="container">
+        <span class="content-area fz12">Sphinx</span>
+    </div>
+    <div class="container">
+        <span class="content-area fz16">Sphinx</span> <span class="content-area fz12">Sphinx</span>
+    </div>
+    <div class="container">
+        <span class="content-area fz16">Sphinx</span> <span class="content-area fz12 valign-top">Sphinx</span>
+    </div>
+    <ol>
+        <li>问题:文本顶部和容器上边界存在空白</li>
+        <li>误区:想当然认为文本顶部应该紧挨容器上边界</li>
+        容器和内容字体字号一致就不会存在空白
+    </ol>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>17 Tables</title>
+    <link href="/CSS/base.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <p><a href="text.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="ui.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+    <hr>
+    <h1>17 Tables</h1>
+    <p><strong>Contents</strong></p>
+    <ul class="table-of-content">
+        <li><a href="#tables-intro">17.1 Introduction to tables</a></li>
+        <li><a href="#table-model">17.2 The CSS table model</a>
+            <ul class="table-of-content">
+                <li><a href="#anonymous-object">17.2.1 Anonymous table objects</a></li>
+            </ul>
+        </li>
+        <li><a href="#table-column">17.3 Columns</a></li>
+        <li><a href="#table-vfm">17.4 Tables in the visual formatting model</a>
+            <ul class="table-of-content">
+                <li><a href="#caption-position">17.4.1 Caption position and alignment</a></li>
+            </ul>
+        </li>
+        <li><a href="#table-layout">17.5 Visual layout of table contents</a>
+            <ul class="table-of-content">
+                <li><a href="#table-layer">17.5.1 Table layers and transparency</a></li>
+                <li><a href="#width-layout">17.5.2 Table width algorithms: the 'table-layout' property</a>
+                    <ul class="table-of-content">
+                        <li><a href="#fixed-table-layout">17.5.2.1 Fixed table layout</a></li>
+                        <li><a href="#auto-table-layout">17.5.2.2 Automatic table layout</a></li>
+                    </ul>
+                </li>
+                <li><a href="#height-layout">17.5.3 Table height algorithms</a></li>
+                <li><a href="#column-alignment">17.5.4 Horizontal alignment in a column</a></li>
+                <li><a href="#dynamic-effects">17.5.5 Dynamic row and column effects</a></li>
+            </ul>
+        </li>
+        <li><a href="#table-border">17.6 Borders</a>
+            <ul class="table-of-content">
+                <li><a href="#separated-border">17.6.1 The separated borders model</a>
+                    <ul class="table-of-content">
+                        <li><a href="#empty-cells">17.6.1.1 Borders and Backgrounds around empty cells: the 'empty-cells' property</a></li>
+                    </ul>
+                </li>
+                <li><a href="#collapsing-border">17.6.2 The collapsing border model</a>
+                    <ul class="table-of-content">
+                        <li><a href="#border-conflict-resolution">17.6.2.1 Border conflict resolution</a></li>
+                    </ul>
+                </li>
+                <li><a href="#table-border-style">17.6.3 Border styles</a></li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name="tables-intro">17.1 Introduction to tables</a></h2>
+    <p>本章定义了CSS中table的处理模型.布局是该模型的一部分.对于布局,本章介绍了2种算法:一种是定义好的fixed table layout,另一种automatic table layout,本规范没有完整定义</p>
+    <p>table layout可以被用来表现数据之间的表格化关系.编写者在document language中指定这种关系并使用CSS指定他们的表现</p>
+    <p>在可视化媒体中,table可以被用来实现特定的布局.在这种情况下,编写者不应该在document language中使用table相关的元素,而是应该给相关元素应用CSS来实现需要的布局</p>
+    <p>在HTML4中,各种table元素(table,caption,thead,tbody,tfoot,col,colgroup,tr,td,th)的语义都被明确定义了,但在其他document language(比如XML)中,可能不存在预定义的table元素.因此CSS2.1允许编写者通过'display'属性把document language元素映射到table元素中</p>
+    <h2><a name="table-model">17.2 The CSS table model</a></h2>
+    <p>在这个模型中,一个table由一个可选的caption和任意行数的table cell组成.这种模型可以说是以行为主的,因为编写者在document language中显式指定行而不是列.列是在指定好所有行后衍生出来的(每一行的第一个table cell属于第一列,每一行的第二个table cell属于第二列等等)</p>
+    <p>CSS table model不要求document language含有与这些组件对应的元素.对于没有预定义的表格元素的文档语言(比如XML),编写者必须把document language元素映射到table元素上,这通过'display'属性来完成</p>
+    <dl>
+        <dt>table</dt>
+        <dd>对应HTML中的table,指定元素定义一个block-level table,这个矩形box会参与block formatting context</dd>
+        <dt>inline-table</dt>
+        <dd>对应HTML中的table,指定元素定义一个inline-level table,这个矩形box会参与inline formatting context</dd>
+        <dt>table-row</dt>
+        <dd>对应HTML中的tr,指定元素是一行table cell</dd>
+        <dt>table-row-group</dt>
+        <dd>对应HTML中的tbody,指定元素把一行或多行分组</dd>
+        <dt>table-header-group</dt>
+        <dd>对应HTML中的thead,总是显示在所有行之前和top caption之后</dd>
+        <dt>table-footer-group</dt>
+        <dd>对应HTML中的tfoot,总是显示在所有行之后和bottom caption之前</dd>
+        <dt>table-column</dt>
+        <dd>对应HTML中的col,指定元素描述一列table cell</dd>
+        <dt>table-column-group</dt>
+        <dd>对应HTML中的colgroup,指定元素把一列或多列分组</dd>
+        <dt>table-cell</dt>
+        <dd>对应HTML中的td,th,指定元素代表一个tabletable cell</dd>
+        <dt>table-caption</dt>
+        <dd>对应HTML中的caption,为table指定一个caption</dd>
+    </dl>
+    <h3><a name="anonymous-object">17.2.1 Anonymous table objects</a></h3>
+    <h2><a name="table-column">17.3 Columns</a></h2>
+    <p>tabletable cell可能属于2个context:行和列,但是在源文档中table cell是行的后代元素,而不是列的.尽管如此,仍然可以通过在列上设置属性来影响table cell的某些方面</p>
+    <p>下例适用于col和colgroup的属性:'border','background','width','visibility'</p>
+    <h2><a name="table-vfm">17.4 Tables in the visual formatting model</a></h2>
+    <p>在vfm中,table可以表现得像一个block-level or inline-level元素.在这2种情况中,table会生成一个叫作table wrapper box的principal block box,table wrapper box中包含table box和所有caption box.table box是一个block-level box,包含table的内部table box.caption box是一个block-level box,有自己的content area,padding area,border area和margin area.caption box放在table box之前还是之后由'caption-side'属性决定</p>
+    <p>如果table是block-level,则table wrapper box是block box;如果table是inline-level,则table wrapper box是inline-block box.table wrapper box会建立一个block formatting context.</p>
+    <h3><a name="caption-position">17.4.1 Caption position and alignment</a></h3>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>caption-side</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>top&nbsp;|&nbsp;bottom&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>top</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'table-caption' elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定了caption box相对于table box的位置.'top'表示把caption box放在table box上方;'bottom'表示把caption box放在table box下方</p>
+    <p>在caption box内部,水平方向对齐文本可以使用'text-align'属性</p>
+    <h2><a name="table-layout">17.5 Visual layout of table contents</a></h2>
+    <p>内部table元素会生成带有内容和border的矩形box.table cell也有padding,内部table元素没有margin</p>
+    <h3><a name="table-layer">17.5.1 Table layers and transparency</a></h3>
+    <p>为了找出每个tabletable cell背景,不同的表格元素可以被看作位于6个叠加的层上</p>
+    <ol>
+        <li>最底层是table box</li>
+        <li>接着上一层包含column group</li>
+        <li>column group上一层包含column</li>
+        <li>上一层包含row group</li>
+        <li>上一层包含row</li>
+        <li>最顶层是tabletable cell</li>
+    </ol>
+    <h3><a name="width-layout">17.5.2 Table width algorithms: the 'table-layout' property</a></h3>
+    <p>本节重写了<a href="vfmdetails.html#computing-width-margins.html">10.3</a>节描述的用于计算宽度的规则.特殊的是,如果一个table的margin是0并且width是'auto',table不会自动改变大小以填满其containing block</p>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>table-layout</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>auto&nbsp;|&nbsp;fixed&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>auto</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'table'和'inline-table' elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>no</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性控制用于布局tabletable cell，行和列的算法.fixed表示使用fixed table layout算法;auto表示使用automatic table layout算法</p>
+    <h4><a name="fixed-table-layout">17.5.2.1 Fixed table layout</a></h4>
+    <p>使用这种快速(相对于automatic table layout)算法,table的水平布局不依赖table cell的内容;只取决于table的width,culumns的width,border和cell spacing</p>
+    <p>table的width通过'width'属性显式指定.'width'属性值是'auto'意味着使用automatic table layout算法</p>
+    <p>在fixed table layout中,每一列的width由以下规则决定:</p>
+    <ol>
+        <li>'width'属性值不是'auto'时,列的width就是所指定的长度</li>
+        <li>否则,由该列中第一行'width'属性值不是'auto'的table cell的width来确定该列的width.如果这个table cell跨越了多列,该列的width就是宽度除以列数</li>
+        <li>所有剩余的列平分剩余的水平空间</li>
+    </ol>
+    <p>然后table的width就是'width'属性和所有列的width之和之间的较大值.在这种算法中,UA一旦接收到了完整的第一行就可以开始布局table了</p>
+    <h4><a name="auto-table-layout">17.5.2.2 Automatic table layout</a></h4>
+    <p>table的width由它所包含的列的width决定.该算法可能很低效,因为它需要UA在确定最终布局之前,拿到table中所有内容</p>
+    <h3><a name="height-layout">17.5.3 Table height algorithms</a></h3>
+    <p>table的高度由'height'属性指定.'auto'值表示table的高度是所有行的高度加所有table cell间距加边框之和;其他非'auto'值表示table的最小高度</p>
+    <p>一旦UA有了一行中所有table cell,'table-row'元素的box的高度就可以计算了:这个高度是'table-row'元素的'height'的computed value,每一个table cell的'height'的computed value和每一个table cell内容需要的最小高度(MIN)这些值之间的最大值</p>
+    <p>如果'table-row'元素的box的'height'值是'auto',则表示这一行的高度是MIN</p>
+    <p class="note">一个table cell的高度是其内容需要的最小高度.table cell的'height'值可以影响其所在行的高度,但不会增加table cell的高度</p>
+    <p><a name="table-cell-vertical-prop">table cell的'vertical-align'属性决定其在一行中的垂直位置.每一个table cell的内容都有一个baseline,一个top,一个middle和一个bottom,行也一样有一个baseline,一个top,一个middle和一个bottom</a></p>
+    <dl>
+        <dt>baseline</dt>
+        <dd>table cell的baseline被放在它跨越的第一行的baseline相同的高度</dd>
+        <dt>top</dt>
+        <dd>table cell的top被放在它跨越的第一行的top</dd>
+        <dt>bottom</dt>
+        <dd>table cell的bottom被放在它跨越的最后一行的bottom</dd>
+        <dt>middle</dt>
+        <dd>table cell的center被放在它跨越的所有行的top</dd>
+        <dt>sub,super,text-top,text-bottom,&lt;length&gt;&lt;percentage&gt;</dt>
+        <dd>这些值不适用于table cell,table cell会以baseline对齐</dd>
+    </dl>
+    <p>table cell的baseline是这个table cell中第一个in-flow line box,或者第一个in-flow table-row的baseline,以先出现的为准.如果没有这样的line box或table-row,baseline就是这个table cell的bottom content edge</p>
+    <p>table cell的top到所有'vertical-align'属性是'baseline'的baseline之间的最大距离被用来作为table-row的baseline</p>
+    <h3><a name="column-alignment">17.5.4 Horizontal alignment in a column</a></h3>
+    <p>一个table cell中inline-level内容的水平对齐由'text-align'属性指定</p>
+    <h3><a name="dynamic-effects">17.5.5 Dynamic row and column effects</a></h3>
+    <p>当row,row group,column,column group元素的'visibility'属性值是'collapse'时,这些row或column会从显示结果中被移除.利用这一点可以在不影响table布局的情况下动态移除一个table中的row或column</p>
+    <h2><a name="table-border">17.6 Borders</a></h2>
+    <p>CSS提供了2种model来为table cell设置边框:一种适合围绕着单独的table cell叫作separated边框;另一种适合从table的一边到另一边的连续边框叫作collapse边框</p>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>border-collapse</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>collapse&nbsp;|&nbsp;separate&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>separate</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'table' and 'inline-table' elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性选择一个table的边框model</p>
+    <h3><a name="separated-border">17.6.1 The separated borders model</a></h3>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>border-spacing</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>&lt;length&gt;&nbsp;&lt;length&gt;?&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'table' and 'inline-table' elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>2个绝对长度</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>这个属性指定相邻table cell边框之间的间距.如果指定了1个长度,就把它作为水平和垂直间隔.如果指定了2个,第一个是水平间隔,第二个是垂直间隔.长度不能为负</p>
+    <p>table边界上的table cell的边框和table边框之间的距离等于table在这个边上的padding加table cell在这个边上的border spacing</p>
+    <p>table的宽度是left inner padding edge到right inner padding edge之间的距离</p>
+    <p>在这个model中,每一个table cell都有一个独立的边框.'border-spacing'属性指定相邻table cell边框之间的间距.在这个间距中,row,column,row group,column group的背景是不可见的,会让table的背景透出来.在这种model下,row,column,row group,column group没有边框</p>
+    <h4><a name="empty-cells">17.6.1.1 Borders and Backgrounds around empty cells: the 'empty-cells' property</a></h4>
+    <dl class="prop-definition">
+        <dt><span class="prop-name"><strong>empty-cells</strong></span></dt>
+        <dd class="prop-content">
+            <table class="table">
+                <tr>
+                    <td>Value:</td>
+                    <td>show&nbsp;|&nbsp;hide&nbsp;|&nbsp;inherit</td>
+                </tr>
+                <tr>
+                    <td>Initial:</td>
+                    <td>show</td>
+                </tr>
+                <tr>
+                    <td>Applies to:</td>
+                    <td>'table-cell' elements</td>
+                </tr>
+                <tr>
+                    <td>Inherited:</td>
+                    <td>yes</td>
+                </tr>
+                <tr>
+                    <td>Percentages:</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Media:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Computed value:</td>
+                    <td>和specified value一样</td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <p>在separated border model中,这个属性控制不含可见内容的table cell周围的边框和背景的渲染.空table cell和'visibility'属性值是'hidden'的table cell被认为不含可见内容</p>
+    <p>当该属性值是'show'时,边框和背景被绘制在empty table cell的周围/后面;当属性值是'hide'时,表示在empty table cell的周围/后面没有边框和背景</p>
+    <h3><a name="collapsing-border">17.6.2 The collapsing border model</a></h3>
+    <p>在collapsing border model中,可以给table cell,row,row group,column,column group设置边框.</p>
+    <p>边框在table cell之间的grid line上居中放置</p>
+    <p class="note">在这个model中,table的宽度包含一半的table border-width.table没有padding</p>
+    <h4><a name="border-conflict-resolution">17.6.2.1 Border conflict resolution</a></h4>
+    <p>在collapsing border model中,每一个table cell的4个边框可以被指定多个样式,这些边框可能在border-style,border-width和border-color上有所不同,下列规则决定发生冲突时那种样式胜出:</p>
+    <ol>
+        <li>'border-style'为'hidden'的边框优先于所有其它冲突边框</li>
+        <li>具有'none'样式的边框优先级最低</li>
+        <li>如果没有'hidden'样式,并且它们中至少有一个不为'none',那么窄边框会被丢弃,用更宽的那个<br>
+        如果'border-width'相同,按如下顺序选择:'double','solid','dashed','dotted','ridge','outset','groove','inset'</li>
+        <li>如果边框样式只是在border-color上不同,那么设置在table cell的border-color优先于设置在row上的.如果以上仍分不出胜负,则更靠左更靠上的table cell优先(前提是table的'direction'是'ltr')</li>
+    </ol>
+    <h3><a name="table-border-style">17.6.3 Border styles</a></h3>
+    <p>'border-style'的某些值在表格上和在其它元素上的含义不同,比如'hidden'值在collapsing border model中会抑制其他边框</p>
+    <hr>
+    <div class="navbar">
+        <p><a href="text.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="ui.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a></p>
+    </div>
+</body>
+</html>

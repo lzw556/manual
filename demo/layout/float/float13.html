@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .f-cb:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+        .sepline{height:30px;border-bottom:5px dashed #000;margin-bottom:30px;}
+        .container{width:35%;border:1px solid #ccc;margin:0 auto;}
+        .hd,.ft{padding:10px;background-color:#666;color:#fff;}
+    </style>
+</head>
+<body>
+<h2>浮动元素同时处于流内和流外</h2>
+<div class="container">
+    <div class="hd">
+        <p>header</p>
+    </div>
+    <div class="bd">
+        <img src="../image/1.png" alt="1" style="float:left;margin-left:20px;">
+        <p style="border:1px solid #ccc;">浮动元素后面的块级元素浮动元素后面的块级元素浮动元素后面的块级元素浮动元素后面的块级元素</p>
+    </div>
+    <div class="ft">
+        <p>footer</p>
+    </div>
+</div>
+</body>
+</html>
