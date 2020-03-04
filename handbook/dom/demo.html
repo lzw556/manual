@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul">
+        <li>
+            <p>list item1</p>
+        </li>
+        <li>
+            <p>list item2</p>
+        </li>
+        <li>
+            <p>list item3</p>
+        </li>
+    </ul>
+    <p id="p1"><a href="" class="btn btn-success">link</a></p>
+    <script>
+        var ul = document.getElementById("ul");
+        var firstItem = ul.firstElementChild;
+        var firstPara = firstItem.firstElementChild;
+        // ul.addEventListener("click",function(e){
+        //     console.log("UL-bubbling event listener");
+        //     console.log(e.target)
+        //     console.log(e.currentTarget) 
+        // });
+        // ul.addEventListener("click",function(e){
+        //     console.log("UL-bubbling event listener2");
+        //     console.log(e.target)
+        //     console.log(e.currentTarget) 
+        // });
+        // ul.addEventListener("click",function(e){
+        //     e.stopImmediatePropagation();
+        //     console.log("UL-capture event listener");
+        //     console.log(e.target)
+        //     console.log(e.currentTarget) 
+        // }, true);
+        // ul.addEventListener("click",function(e){
+        //     //e.stopPropagation();
+        //     console.log("UL-capture event listener2");
+        //     console.log(e.target)
+        //     console.log(e.currentTarget) 
+        // }, true);
+
+        // firstItem.addEventListener("click",function(e){
+        //     console.log("bubbling event listener");
+        //     console.log(e.target)
+        //     console.log(e.currentTarget)
+        // });
+        // firstItem.addEventListener("click",function(e){
+        //     console.log("capture event listener");
+        //     console.log(e.target)
+        //     console.log(e.currentTarget)
+        // }, true);
+
+        // firstPara.addEventListener("click",function(e){
+        //     console.log("bubbling event listener");
+        //     console.log(e.target)
+        //     console.log(e.currentTarget)
+        // });
+        // firstPara.addEventListener("click",function(e){
+        //     console.log("capture event listener");
+        //     console.log(e.target)
+        //     console.log(e.currentTarget) 
+        // }, true);
+        // firstItem.addEventListener("dd", function(e){
+        //     console.log("ee");
+        // });
+        // var event = new Event("dd", {bubbles:false,cancelable:true});
+        // firstItem.dispatchEvent(event);
+
+        // console.log(ul.children);
+        // console.log(ul.firstElementChild);
+        // console.log(ul.lastElementChild);
+        // console.log(ul.childElementCount);
+        // console.log(ul.querySelector("li"));
+        // console.log(ul.querySelectorAll("li"));
+
+        // console.log(ul.previousElementSibling);
+        // console.log(ul.nextElementSibling);
+        // console.log(firstItem.previousElementSibling);
+        // console.log(firstItem.nextElementSibling);
+
+        // firstPara.remove();
+
+        // console.log(ul.children.item(0));
+        // console.log(ul.children[1])
+        // console.log(ul.children.length)
+        //console.log(ul.children.namedItem())
+
+        // var observer = new MutationObserver(function(record){
+        //     console.log(record);
+        // });
+        // observer.observe(firstPara,{attributes:true});
+        // firstPara.setAttribute("class","note");
+
+        // console.log(firstPara.nodeType);
+        // console.log(firstPara.nodeName);
+        // console.log(firstPara.baseURI);
+        // console.log(firstPara.ownerDocument);
+        // console.log(firstPara.parentNode);
+        // console.log(firstPara.parentElement);
+
+        // console.log(firstItem.hasChildNodes());
+        // console.log(firstItem.childNodes);
+        // console.log(firstItem.firstChild);
+        // console.log(firstItem.lastChild);
+        // console.log(firstItem.previousSibling);
+        // console.log(firstItem.nextSibling);
+
+        // console.log(firstPara.nodeValue);
+        // console.log(firstPara.textContent);
+        // console.log(firstItem.textContent);
+
+        // console.log(firstPara.normalize());
+        // console.log(firstItem.normalize());
+
+        // console.log(firstItem.hasChildNodes());
+        // console.log(firstItem.childNodes);
+        // console.log(firstItem.firstChild);
+        // console.log(firstItem.lastChild);
+        // console.log(firstItem.previousSibling);
+        // console.log(firstItem.nextSibling);
+
+        // firstItem.appendChild(firstPara.cloneNode());
+        // firstItem.appendChild(firstPara.cloneNode(true));
+
+        //  var lastItem = ul.lastElementChild;
+         
+        //  var link = document.getElementById("p1").children[0];
+        //  ul.insertBefore(document.getElementById("p1"), lastItem);
+        //lastItem.appendChild(ul.firstElementChild)
+
+        // console.log(document.URL);
+        // console.log(document.documentURI);
+        // console.log(document.origin);
+        // console.log(document.compatMode);
+        // console.log(document.characterSet);
+        // console.log(document.contentType);
+
+        // console.log(document.doctype);
+        // console.log(document.documentElement);
+        // console.log(document.getElementsByTagName("li"));
+        // console.log(document.getElementsByClassName("red"));
+      
+        // var li = document.createElement("li"); 
+        // var p  = document.createElement("p");
+        // p.appendChild(document.createTextNode("listitem4"));
+        // li.appendChild(p)
+        // ul.appendChild(li);
+
+        // var li = document.importNode(firstItem);
+        // console.log(document.getElementById("p1").firstElementChild.classList) 
+        // console.log(document.getElementById("p1").firstElementChild.attributes) 
+
+        // document.getElementById("p1").setAttribute("class", "red");
+        // document.getElementById("p1").setAttribute("class", "blue");
+        console.log(document.getElementById("p1").attributes)
+        console.log(document.getElementById("p1").attributes.getNamedItem("id"))
+    </script>
+</body>
+</html>

@@ -1,21 +1,21 @@
-core����
+core module
 
-1 ��ʾ�ĵ�����һ����һ�ڵ�
+1 表示文档树中一个单一节点
 	interface Node{
 		
 	   //NodeType
-	   //Ԫ�ؽڵ�
+	   //元素节点
 	   const unsigned short ELEMENT_NODE			=1;
-	   //���Խڵ�
+	   //特性节点
 	   const unsigned short ATTRIBUTE_NODE			=2;
-	   //�ı��ڵ�
+	   //文本节点
 	   const unsigned short TEXT_NODE			=3;
 	   const unsigned short CDATA_SECTION_NODE		=4;
 	   const unsigned short ENTITY_REFERENCE_NODE		=5;
 	   const unsigned short ENTITY_NODE			=6;
 	   const unsigned short PROCESSING_INSTRUCTION_NODE	=7;
 	   const unsigned short COMMENT_NODE			=8;
-	   //�ĵ��ڵ�
+	   //文档节点
 	   const unsigned short DOCUMENT_NODE			=9;
 	   const unsigned short DOCUMENT_TYPE_NODE		=10;
 	   const unsigned short DOCUMENT_FRAGMENT_NODE		=11;
@@ -49,7 +49,7 @@ core����
 	   boolean	hasAttributes();				
 	}
 
-2 ��ʾ����HTML�ĵ�, ���ĵ����ĸ��ڵ�
+2 表示整个HTML文档, 是文档树的根节点
 	interface Document: Node{
 	   readonly attribute DocumentType	doctype;
 	   readonly attribute DOMImplementation implementation;
@@ -65,7 +65,7 @@ core����
 	   Element		getElementById(in DOMString elementId);
 	}
 
-3 ��ʾHTML�ĵ��е�һ��Ԫ�ؽڵ�
+3 表示HTML文档中的一个元素节点
 	interface Element: Node{
 	   readonly attribute DOMString 	tagName;
 
@@ -79,14 +79,14 @@ core����
 	   boolean		hasAttribute(in DOMString name);
 	}
 
-4 ��һ������Ľڵ㼯��. ���������live��
+4 是一个有序的节点集合. 这个集合是live的
 	interface NodeList{
 	   Node		      item(in unsigned long index);
 	   readonly attribute unsigned long	length;	
 	}
 
-5 ��ʾԪ���е�һ�����Խڵ�, �̳���Node interface, ��Ϊ���Խڵ㲻����������Ԫ�ص���ʵ���ӽڵ�, DOM����Ϊ������
-  �ĵ�����һ����. ���parentNode,previousSibling,nextSibling����null	
+5 表示元素中的一个特性节点, 继承了Node interface, 因为特性节点不是他所描述元素的真实的子节点, DOM不认为他们是
+  文档树的一部分. 因此parentNode,previousSibling,nextSibling都是null	
 	interface Attr: Node{
 	   readonly attribute DOMString		name;
 	   readonly attribute boolean		specified;
@@ -112,7 +112,7 @@ core����
 	}
 
 
-8 ��ʾ���Խڵ�ļ���, ��Ȼ����ͨ������������, ����˳��û��ָ��		
+8 表示特性节点的集合, 虽然可以通过索引来访问, 但是顺序没有指定			
 	interface NamedNodeMap{
 	   Node			getNamedItem(in DOMString name);
 	   Node			setNamedItem(in Node arg);
@@ -122,7 +122,7 @@ core����
 	   readonly attribute unsigned long	length;
 	}
 
-html����
+html module
 
 1
 	interface HTMLCollection{
@@ -170,6 +170,135 @@ html����
 	   	    attribute DOMString		className;
 	}
 
-event����
+event module
 
-1	
+1	event propagation(事件传播, 来自网上一篇文章)
+
+	<ul id="ul">
+        <li>
+            <p>list item</p>
+        </li>
+        <li>
+            <p>list item</p>
+        </li>
+    </ul>
+
+	以上面的DOM为例, 当click元素p时, 不仅仅是为元素p生成了click事件, 也为其父元素li, 爷爷元素ul..所有的祖先元素都生成了click事件
+
+	evnet target
+		元素p, 创建click事件的最内层的元素
+	DOM branch
+		p(event target), li, ul, body, html, window, 这些元素在DOM tree中形成一个branch
+		这个branch是事件传播的path
+		对于给定的事件类型, 事件传播就是依次调用所有事件处理程序的过程, 这些事件处理程序都被注册在属于这个branch的元素上
+	    对于给定的事件类型, 同一个元素上可以注册多个事件处理程序, 当事件传播到这个元素上的时候, 这些处理程序按照被注册的顺序被调用
+		这个branch是static, 即建立在事件的initial dispatch(初始派发)中, 在事件传播期间发生在branch上的DOM变化会被忽略
+	传播是双向的, 从window到event target然后再返回到window, 整个传播过程可以划分为3个阶段:
+		1 从window到event target的parent, 叫作capture phase
+		2 event target, 叫作target phase
+		3 从event target parent返回window, 叫作bubbling phase
+	3个阶段的区别就是在每个阶段中调用的事件处理程序类型不同	
+	
+	event capture phase
+		在这个阶段, 只有capture listener会被调用, 即addEventListener('click',listener, true)第3个参数的值为true
+	event target phase
+		在这个阶段, 所有被注册在event target上的事件处理程序都会被调用, 不管处理程序的类型是不是capture
+	event bubbling phase
+		在这个阶段, 只有不是capture listener会被调用, 即addEventListener('click',listener, true)第3个参数的值为false
+	
+	W3C的一张图片, 表示3个阶段
+   
+    阻断传播
+		stopPropagation()
+
+		可以在任何事件处理程序中通过调用stopPropagation方法来阻断事件的传播, 一旦调用此方法
+		位于currentTarget(之后)的元素上被注册的事件处理程序都不会被调用, 但是currentTarget上被注册的其他处理程序(同事件类型)仍然会被调用
+
+		stopImmediatePropagation()
+		可以在任何事件处理程序中通过调用stopImmediatePropagation方法来阻断事件的传播, 一旦调用此方法
+		位于currentTarget(之后)的元素上被注册的事件处理程序都不会被调用, currentTarget上被注册的其他处理程序(同事件类型)也不会被调用
+
+2 Event flow
+	basic event flow
+	event capture
+	event bubbling
+	event cancelation
+
+3 Event listener registration
+	这个接口被所有的Node实现了, 因此所有的Node实例都可以调用这个接口中的方法
+	interface EventTarget{
+		void		addEventListener(in DOMString  type,
+									 in EventListener listener,
+									 in boolean useCapture)
+		void 		removeEventListener(in DOMString  type,
+									 in EventListener listener,
+									 in boolean useCapture)
+		boolean		dispatchEvent(in Event evt)
+	}
+	这个接口由用户实现, 通常包含当事件发生时要调用的函数
+	interface EventListener{
+		void 		handleEvent(in Event evt)
+	}
+
+4 Event interface
+	设计这个接口的目的是为evnet listener提供和事件相关的上下文信息
+	interface Event{
+		//PhaseType
+		const unsigned short		CAPTURING_PHASE			=1
+		const unsigned short		AT_TARGET			=2
+		const unsigned short		BUBBLING_PHASE			=3
+
+		readonly attribute DOMString		type;
+		readonly attribute EventTarget		target;
+		readonly attribute EventTarget		currentTarget;
+		readonly attribute unsigned short		eventPhase;
+		readonly attribute boolean		bubbles;
+		readonly attribute boolean		cancelable;
+		
+		void 		stopPropagation()
+		void		preventDefault()
+	}
+
+6 Event module
+	UI event
+		interface UIEvent : Event{
+
+		}
+		这些事件的不同类型:
+		DOMFocusIn
+		DOMFocusOut
+		DOMActive
+	Mouse event
+	    设计这个接口的目的是为mouse evnet listener提供和事件相关的上下文信息
+		interface MouseEvent : UIEvent{
+			readonly attribute long             screenX;
+			readonly attribute long             screenY;
+			readonly attribute long             clientX;
+			readonly attribute long             clientY;
+			readonly attribute boolean          ctrlKey;
+			readonly attribute boolean          shiftKey;
+			readonly attribute boolean          altKey;
+			readonly attribute boolean          metaKey;
+			readonly attribute unsigned short   button;
+			readonly attribute EventTarget      relatedTarget;
+		}
+		这些事件的不同类型:
+		click
+		mousedown
+		mouseup
+		mouseover
+		mousemove
+		mouseout
+	HTML event
+		load
+		unload
+		abort
+		error
+		select
+		change
+		submit
+		reset
+		focus
+		blur
+		resize
+		scroll
