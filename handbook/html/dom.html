@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3 Semantics, structure, and APIs of HTML documents</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <h3><a name="interface-document-extension"></a>3.1.1 The Document object</h3>
+    <p>DOM中定义了一个<a href="../dom/DOM4/index.html#interface-document">Document</a>接口, 此处扩展了这个接口</p>
+    <div>
+        <pre>enum <a name="documentreadystate">DocumentReadyState</a> { "loading", "interactive", "complete" };
+typedef (HTMLScriptElement or SVGScriptElement) <a name="htmlorsvgscriptelement">HTMLOrSVGScriptElement</a>;
+
+partial interface Document {
+    // resource metadata management(资源元数据管理)
+    [PutForwards=href, Unforgeable] readonly attribute <a href="">Location</a>? location;
+    attribute USVString domain;
+    readonly attribute USVString referrer;
+    attribute USVString cookie;
+    readonly attribute DOMString lastModified;
+    readonly attribute <a href="#documentreadystate">DocumentReadyState</a> readyState;
+
+    // DOM tree accessors(DOM树访问器)
+    getter object (DOMString name);
+    [CEReactions] attribute DOMString title;
+    [CEReactions] attribute DOMString dir;
+    [CEReactions] attribute <a href="#interface-htmlelement">HTMLElement</a>? body;
+    readonly attribute <a href="#interface-htmlheadelement">HTMLHeadElement</a>? head;
+    [SameObject] readonly attribute <a href="#">HTMLCollection</a> images;
+    [SameObject] readonly attribute <a href="">HTMLCollection</a> embeds;
+    [SameObject] readonly attribute <a href="">HTMLCollection</a> plugins;
+    [SameObject] readonly attribute <a href="">HTMLCollection</a> links;
+    [SameObject] readonly attribute <a href="">HTMLCollection</a> forms;
+    [SameObject] readonly attribute <a href="">HTMLCollection</a> scripts;
+    <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a> getElementsByName(DOMString elementName);
+    readonly attribute <a href="#htmlorsvgscriptelement">HTMLOrSVGScriptElement</a>? currentScript; // classic scripts in a document tree only
+
+    // dynamic markup insertion(动态标记插入)
+    [CEReactions] <a href="#interface-document-extension">Document</a> open(optional DOMString unused1, optional DOMString unused2); // both arguments are ignored
+    <a href="">WindowProxy</a>? open(USVString url, DOMString name, DOMString features);
+    [CEReactions] void close();
+    [CEReactions] void write(DOMString... text);
+    [CEReactions] void writeln(DOMString... text);
+
+    // user interaction(用户交互)
+    readonly attribute <a href="">WindowProxy</a>? defaultView;
+    boolean hasFocus();
+    [CEReactions] attribute DOMString designMode;
+    [CEReactions] boolean execCommand(DOMString commandId, optional boolean showUI = false, optional DOMString value = "");
+    boolean queryCommandEnabled(DOMString commandId);
+    boolean queryCommandIndeterm(DOMString commandId);
+    boolean queryCommandState(DOMString commandId);
+    boolean queryCommandSupported(DOMString commandId);
+    DOMString queryCommandValue(DOMString commandId);
+
+    //只适用于Document对象的事件处理程序属性(IDL attributes)
+    [LenientThis] attribute <a href="">EventHandler</a> onreadystatechange;
+}</pre>
+    <p>Document 实现了 <a href="">GlobalEventHandlers</a></p>
+    <p>Document 实现了 <a href="">DocumentAndElementEventHandlers</a></p>
+    </div>
+    <h3 id="semantics">3.2.1 Semantics(语义)</h3>
+    <p>HTML中的元素, 属性和属性值在本规范中都有明确的含义. html表达的是含义(内容), 不是呈现(表现)</p>
+    <h3><a name="interface-htmlelement"></a>3.2.2 Elements in the DOM</h3>
+    <p>此接口是一个基础接口, 所有的HTML element接口都继承自他</p>
+    <div>
+        <pre>interface HTMLElement : <a href="../dom/DOM4/index.html#interface-element">Element</a> {
+    [HTMLConstructor] constructor();
+
+    // metadata attributes(元数据)
+    [CEReactions] attribute DOMString title;
+    [CEReactions] attribute DOMString lang;
+    [CEReactions] attribute boolean translate;
+    [CEReactions] attribute DOMString dir;
+
+    // user interaction(用户交互)
+    [CEReactions] attribute boolean hidden;
+    void click();
+    [CEReactions] attribute DOMString accessKey;
+    readonly attribute DOMString accessKeyLabel;
+    [CEReactions] attribute boolean draggable;
+    [CEReactions] attribute boolean spellcheck;
+    [CEReactions] attribute DOMString autocapitalize;
+
+    [CEReactions] attribute [TreatNullAs=EmptyString] DOMString innerText;
+
+    ElementInternals attachInternals();
+}
+<p>这个接口包含了 <a href="webappapis.html#interface-globaleventhandler">GlobalEventHandlers</a></p>
+<p>这个接口包含了 <a href="webappapis.html#interface-documentandelementeventhandler">DocumentAndElementEventHandlers</a></p>
+<p>这个接口包含了 <a href="">ElementContentEditable</a></p>
+<p>这个接口包含了 <a href="#interface-htmlorsvgelement">HTMLOrSVGElement</a></p></pre>
+    </div>
+    <div id="interface-htmlorsvgelement">
+        <pre>interface mixin HTMLOrSVGElement {
+    [SameObject] readonly attribute DOMStringMap dataset;
+    attribute DOMString nonce; // intentionally no [CEReactions]
+
+    [CEReactions] attribute boolean autofocus;
+    [CEReactions] attribute long tabIndex;
+    void focus(optional FocusOptions options = {});
+    void blur();
+    }</pre>
+    </div>
+    <h3><a name="element-definition"></a>3.2.4 Element definitions</h3>
+    <dl>
+        <dt>Categories</dt>
+        <dd>
+            <p>元素属于哪一种类型(Metadata, Flow, Sectioning, Heading, Phrasing, Embedded, Interactive)</p>
+            <p>当定义元素的Content model时, 会用到这个类型</p>
+        </dd>
+        <dt>Contexts in which this element can be used</dt>
+        <dd>允许的父元素类型</dd>
+        <dt>Content model</dt>
+        <dd>允许的子元素类型</dd>
+        <dt>Tag omission in text/html</dt>
+        <dd>开始/结束标签是否可以省略</dd>
+        <dt>Content attributes</dt>
+        <dd>可用的特性列表</dd>
+        <dt>DOM interface</dt>
+        <dd>元素必须实现的DOM接口</dd>
+    </dl>
+    <h4><a name="kinds-of-content"></a>3.2.5.2 Kinds of content</h4>
+    <p>每一个html元素都可以归于一个或多个内容类型</p>
+    <ul>
+        <li><a href="#category-metadata">Metadata content</a></li>
+        <li><a href="#category-flow">FLow content</a></li>
+        <li><a href="#category-sectioning">Sectioning content</a></li>
+        <li><a href="#category-heading">Heading content</a></li>
+        <li><a href="#category-phrasing">Phrasing content</a></li>
+        <li><a href="#category-embedded">Embedded content</a></li>
+        <li><a href="#category-interactive">Interactive content</a></li>
+    </ul>
+    <h5><a name="category-metadata"></a>3.2.5.2.1 Metadata content</h5>
+    <p>meta, title, link, script, noscript, style, base</p>
+    <h5><a name="category-flow"></a>3.2.5.2.2 Flow content</h5>
+    <p>可以在body中使用的大多数元素都属于flow content</p>
+    <h5><a name="category-sectioning"></a>3.2.5.2.3 Sectioning content(章节内容)</h5>
+    <p>article, aside, nav, section</p>
+    <h5><a name="category-heading"></a>3.2.5.2.4 Heading content</h5>
+    <p>h1,h2,h3,h4,h5,h6</p>
+    <h5><a name="category-phrasing"></a>3.2.5.2.5 Phrasing content(短语内容)</h5>
+    <p>a, audio, button, code, dfn, em, i, iframe, img, input, label, select, span, strong, textarea, video</p>
+    <p><a name="text-content">Text</a>, nothing or Text nodes</p>
+    <h5><a name="category-embedded"></a>3.2.5.2.6 Embedded content(嵌入内容)</h5>
+    <p>是指引入其他资源的内容</p>
+    <p>audio, iframe, img, svg, video</p>
+    <h5><a name="category-interactive"></a>3.2.5.2.7 Interactive content</h5>
+    <p>button, input, select, textarea, a</p>
+    <h5><a name="category-interactive"></a>3.2.5.2.8 Palpable content(可感知内容)</h5>
+    <h5><a name="category-interactive"></a>3.2.5.2.9 Interactive content()</h5>
+    <p>指那些本身不表示任何东西(即它们不被渲染), 但是被用于支持脚本</p>
+    <p>script, template</p>
+    <h3><a name="global-attributes"></a>3.2.6 Global attributes</h3>
+    <p>下面的特性是通用的, 可以在所有的html元素上指定</p>
+    <ul>
+        <li><a href="#global-attribute-title">title</a></li>
+        <li><a href="#global-attribute-title">lang</a></li>
+        <li><a href="#global-attribute-title">translate</a></li>
+        <li><a href="#global-attribute-title">dir</a></li>
+        <li><a href="#global-attribute-title">style</a></li>
+        <li><a href="#global-attribute-title">data-*</a></li>
+    </ul>
+    <p>DOM API 为任何元素都定义了 id, class属性, 他们也可以在所有的html元素上指定</p>
+    <p><a href="">event handler content attributes可以在任何HTML元素上指定</a></p>
+</body>
+</html>

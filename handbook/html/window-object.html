@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the window object</title>
+</head>
+<body>
+    <h4>7.3 The Window object</h4>
+    <div>
+        <pre>interface Window : <a href="../dom/DOM4/index.html#interface-eventtarget">EventTarget</a> {
+    // the current browsing context
+    [Unforgeable] readonly attribute <a href="#interface-windowproxy">WindowProxy</a> window;
+    [Replaceable] readonly attribute <a href="#interface-windowproxy">WindowProxy</a> self;
+    [Unforgeable] readonly attribute <a href="dom.html#interface-document">Document</a> document;
+    attribute DOMString name; 
+    [PutForwards=href, Unforgeable] readonly attribute <a href="#interface-location">Location</a> location;
+    readonly attribute <a href="#interface-history">History</a> history;
+    readonly attribute <a href="">CustomElementRegistry</a> customElements;
+    [Replaceable] readonly attribute <a>BarProp</a> locationbar;
+    [Replaceable] readonly attribute <a>BarProp</a> menubar;
+    [Replaceable] readonly attribute <a>BarProp</a> personalbar;
+    [Replaceable] readonly attribute <a>BarProp</a> scrollbars;
+    [Replaceable] readonly attribute <a>BarProp</a> statusbar;
+    [Replaceable] readonly attribute <a>BarProp</a> toolbar;
+    attribute DOMString status;
+    void close();
+    readonly attribute boolean closed;
+    void stop();
+    void focus();
+    void blur();
+
+    // other browsing contexts
+    [Replaceable] readonly attribute <a href="#interface-windowproxy">WindowProxy</a> frames;
+    [Replaceable] readonly attribute unsigned long length;
+    [Unforgeable] readonly attribute <a href="#interface-windowproxy">WindowProxy</a>? top;
+    attribute any opener;
+    [Replaceable] readonly attribute <a href="#interface-windowproxy">WindowProxy</a>? parent;
+    readonly attribute <a href="../dom/DOM4/index.html#interface-element">Element</a>? frameElement;
+    <a href="#interface-windowproxy">WindowProxy</a>? open(optional USVString url = "", optional DOMString target = "_blank", optional [TreatNullAs=EmptyString] DOMString features = "");
+    getter object (DOMString name);
+    // Since this is the global object, the IDL named getter adds a NamedPropertiesObject exotic
+    // object on the prototype chain. Indeed, this does not make the global object an exotic object.
+    // Indexed access is taken care of by the WindowProxy exotic object.
+
+    // the user agent
+    readonly attribute <a>Navigator</a> navigator; 
+    [SecureContext] readonly attribute <a>ApplicationCache</a> applicationCache;
+
+    // user prompts
+    void alert();
+    void alert(DOMString message);
+    boolean confirm(optional DOMString message = "");
+    DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
+    void print();
+
+    void postMessage(any message, USVString targetOrigin, optional sequence&lt;object&gt; transfer = []);
+    void postMessage(any message, optional WindowPostMessageOptions options = {});
+}
+<p>这个接口包含了 <a href="webappapis.html#interface-windoworworkerglobalscope">WindowOrWorkerGlobalScope</a></p>
+<p>这个接口包含了 <a href="webstorage.html#interface-windowsessionstorage">WindowSessionStorage</a></p>
+<p>这个接口包含了 <a href="webstorage.html#interface-windowlocalstorage">WindowLocalStorage</a></p>
+</pre>
+    </div>
+    <h4 id="interface-history">7.7.2 The History interface</h4>
+    <div><pre>enum <span id="scrollrestoration">ScrollRestoration</span> {"auto", "manual"}
+interface History {
+    readonly attribute unsigned long length;
+    attribute <a href="#ScrollRestoration">ScrollRestoration</a> scrollRestoration;
+    readonly attribute any state;
+    void go(optional long delta = 0);
+    void back();
+    void forward();
+    void pushState(any data, DOMString title, optional USVString? url = null);
+    void replaceState(any data, DOMString title, optional USVString? url = null);
+}</pre>
+    </div>
+    <h4 id="interface-location">7.7.4 The Location interface</h4>
+    <div>
+        <pre>interface Location {
+    [Unforgeable] stringifier attribute USVString href;
+    [Unforgeable] readonly attribute USVString origin;
+    [Unforgeable] attribute USVString protocol;
+    [Unforgeable] attribute USVString host;
+    [Unforgeable] attribute USVString hostname;
+    [Unforgeable] attribute USVString port;
+    [Unforgeable] attribute USVString pathname;
+    [Unforgeable] attribute USVString search;
+    [Unforgeable] attribute USVString hash;
+
+    [Unforgeable] void assign(USVString url);
+    [Unforgeable] void replace(USVString url);
+    [Unforgeable] void reload();
+
+    [Unforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;        
+}</pre>
+    </div>
+    <h5 id="interface-beforeunloadevent">7.8.11.1 The BeforeUnloadEvent interface</h5>
+    <div>
+        <pre>interface BeforeUnloadEvent : <a href="../dom/DOM4/index.html#interface-event">Event</a> {
+    attribute DOMString returnValue;
+ }</pre>
+    </div>
+    <h4>7.9.10 Application cache API</h4>
+    <div>
+        <pre>interface ApplicationCache : <a href="../dom/DOM4/index.html#interface-eventtarget">EventTarget</a> {
+
+    // update status
+    const unsigned short UNCACHED = 0;
+    const unsigned short IDLE = 1;
+    const unsigned short CHECKING = 2;
+    const unsigned short DOWNLOADING = 3;
+    const unsigned short UPDATEREADY = 4;
+    const unsigned short OBSOLETE = 5;
+    readonly attribute unsigned short status;
+
+    // updates
+    void update();
+    void abort();
+    void swapCache();
+
+    // events
+    attribute <a>EventHandler</a> onchecking;
+    attribute <a>EventHandler</a> onerror;
+    attribute <a>EventHandler</a> onnoupdate;
+    attribute <a>EventHandler</a> ondownloading;
+    attribute <a>EventHandler</a> onprogress;
+    attribute <a>EventHandler</a> onupdateready;
+    attribute <a>EventHandler</a> oncached;
+    attribute <a>EventHandler</a> onobsolete;
+}</pre>
+    </div>
+    <script>
+        window.addEventListener("beforeunload", function(e){
+            debugger
+            var confirmationMessage = 'are you sure?';
+            (e || window.event).returnValue = confirmationMessage;     // Gecko and Trident
+            return confirmationMessage;
+        });
+    </script>
+</body>
+</html>

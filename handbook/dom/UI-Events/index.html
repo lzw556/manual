@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UI Events</title>
+    <link rel="stylesheet" href="../../base.css">
+</head>
+<body>
+    <ul class="table-of-content">
+        <li><a href="#dom-event-architecture">3 DOM Event Architecture</a>
+            <ul>
+                <li><a href="#event-dispatch-and-event-flow">3.1 Event dispatch and DOM event flow</a></li>
+                <li><a href="#default-action-and-cancelable-event">3.2 Default actions and cancelable events</a></li>
+                <li><a href="#sync-async-event">3.3 Synchronous and asynchronous events</a></li>
+                <li><a href="#trusted-event">3.4 Trusted events</a></li>
+                <li><a href="#activation-trigger">3.5 Activation triggers and behavior</a></li>
+                <li><a href="#constructing-mouse-and-keyboard-event">3.6 Constructing Mouse and Keyboard Events</a></li>
+            </ul>
+        </li>
+        <li><a href="#basic-event-interface">4 Basic Event Interfaces</a>
+            <ul>
+                <li><a href="#list-event-types">4.1 List of Event types</a></li>
+            </ul>
+        </li>
+        <li><a href="#event-type">5 Event Type</a>
+            <ul>
+                <li><a href="#ui-events">5.1 User Interface Events</a>
+                    <ul>
+                        <li><a href="#interface-uievent">5.1.1 Interface UIEvent</a></li>
+                        <li><a href="#ui-event-type">5.1.2 UI Event Types</a></li>
+                    </ul>
+                </li>
+                <li><a href="#focus-events">5.2 Focus Events</a>
+                    <ul>
+                        <li><a href="#interface-focusevent">5.2.1 Interface FocusEvent</a></li>
+                        <li><a href="#focus-event-order">5.2.2 Focus Event Order</a></li>
+                        <li><a href="#doc-focus-and-focus-context">5.2.3 Document Focus and Focus Context</a></li>
+                        <li><a href="#focus-event-types">5.2.4 Focus Event Types</a></li>
+                    </ul>
+                </li>
+                <li><a href="#mouse-events">5.3 Mouse Events</a>
+                    <ul>
+                        <li><a href="#interface-mouseevent">5.3.1 Interface MouseEvent</a></li>
+                        <li><a href="#event-modifier">5.3.2 Event Modifier Initializers</a></li>
+                        <li><a href="#mouse-event-order">5.3.3 Mouse Event Order</a></li>
+                        <li><a href="#mouse-event-types">5.3.4 Mouse Event Types</a></li>
+                    </ul>
+                </li>
+                <li><a href="#wheel-events">5.4 Wheel Events</a>
+                    <ul>
+                        <li><a href="#interface-wheelevent">5.4.1 Interface WheelEvent</a></li>
+                        <li><a href="#wheel-event-types">5.4.2 Wheel Event Types</a></li>
+                    </ul>
+                </li>
+                <li><a href="#input-events">5.5 Input Events</a>
+                    <ul>
+                        <li><a href="#interface-inputevent">5.5.1 Interface InputEvent</a></li>
+                        <li><a href="#input-event-order">5.5.2 Input Event Order</a></li>
+                        <li><a href="#input-event-types">5.5.3 Input Event Types</a></li>
+                    </ul>
+                </li>
+                <li><a href="#keyboard-events">5.6 Keyboard Events</a>
+                    <ul>
+                        <li><a href="#interface-keyboardevent">5.6.1 Interface KeyboardEvent</a></li>
+                        <li><a href="#keyboard-event-key">5.6.2 Keyboard Event Key Location</a></li>
+                        <li><a href="#keyboard-event-order">5.6.3 Keyboard Event Order</a></li>
+                        <li><a href="#keyboard-event-types">5.6.4 Keyboard Event Types</a></li>
+                    </ul>
+                </li>
+                <li><a href="#composition-events">5.7 Composition Events</a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#keyboard-events-and-key-values">6 keyboard events and key values</a>
+        </li>
+        <li><a href="#legacy-event-inits">7 Legacy Event Initializers</a>
+        </li>
+        <li><a href="#legacy-key-and-mouse-event-attrs">8 Legacy Key & Mouse Event Attributes</a>
+        </li>
+        <li><a href="#legacy-event-types">9 Legacy Event Types</a>
+        </li>
+        <li><a href="#extending-events">10 Extending Events</a>
+            <ul>
+                <li><a href="#intro-extending-events">10.1 Introduction</a></li>
+                <li><a href="#custom-events">10.2 Custom Events</a></li>
+                <li><a href="#implementation-specific-extensions">10.3  Implementation-Specific Extensions</a>
+                    <ul>
+                        <li><a href="#known-extensions">10.3.1 Known Implementation-Specific Prefixes</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#security-considerations">11 Security Considerations</a></li>
+    </ul>
+    <h3><a name="event-dispatch-and-event-flow"></a>3.1 Event dispatch and DOM event flow</h3>
+    <p>event object 被dispatched给一个event target. 在dispatch开始之前, event object的propagation path必须被确定</p>
+    <p><strong>propagation path(传播路径)</strong></p>
+    <p>propagation path是一个有序列表, 列表中每一项叫作currentTarget, 事件就是在currentTarget之间传递<br>
+       列表中最后一项是event Target, 其前一项是他的父元素, 再前一项是他的父父元素,...
+    </p>
+    <p>一旦确定了propagation path, event object就会在一个或多个event phase之间传递</p>
+    <p><strong>event phase</strong></p>
+    <p>一共有3个event phase: capture phase, target phase and bubble phase<br>
+       如果event object不支持某个phase,或者在传播过程中被停止, 则这个phase可能被跳过</p>
+    <ul>
+        <li>
+            <p>the capture phase</p>
+            <p>event object从 window 开始传播到 event target 的父元素的过程</p>
+        </li>
+        <li>
+            <p>the targt phase</p>
+            <p>event object到达 event target 的过程</p>
+            <p>此时如果event object的bubbles属性是false, the capture phase就会被跳过</p>
+        </li>
+        <li>
+            <p>the capture phase</p>
+            <p>先reverse propagation path, 然后event object从 event target 的父元素 开始传播到 window 的过程</p>
+        </li>
+    </ul>
+    <h2><a name="basic-event-interface"></a>4 Basic Event Interfaces</h2>
+    <p>basic event interface包括: </p>
+    <ul>
+        <li><a href="../DOM4/index.html#interface-event">Event</a></li>
+        <li><a href="../DOM4/index.html#interface-eventtarget">EventTarget</a></li>
+        <li><a href="../DOM4/index.html#interface-eventlistener">EventListener</a></li>
+        <li><a href="../DOM4/index.html#interface-customevent">customEvent</a></li>
+        <li><a href="../DOM4/index.html#interface-document">Document</a>接口中的createEvent()</li>
+    </ul>
+    <p>继承关系如下图:</p>
+    <img src="event-inheritance.svg" alt="UIEvent inheritance">
+    <h3><a href="list-of-event-types"></a>4.1 List of Event types</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>DOM Interface</th>
+                <th>Event Type</th>
+                <th>Sync/Async</th>
+                <th>Bubbles</th>
+                <th>Cancelable</th>
+                <th>Default Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="5"><a href="../DOM4/index.html#interface-event">Event</a></td>
+                <td><a href="#event-type-abort">abort</a></td>
+                <td>sync</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-load">load</a></td>
+                <td>async</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-unload">unload</a></td>
+                <td>sync</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-error">error</a></td>
+                <td>async</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-select">select</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td rowspan="4"><a href="#interface-focusevent">FocusEvent</a></td>
+                <td><a href="#event-type-blur">blur</a></td>
+                <td>sync</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-focus">focus</a></td>
+                <td>sync</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-focusin">focusin</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-focusout">focusout</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td rowspan="10"><a href="#interface-mouseevent">MouseEvent</a></td>
+                <td><a href="#event-type-auxclick">auxclick</a></td>
+                <td>sync</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-click">click</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>好多的</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-dblclick">dblclick</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-mousedown">mousedown</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>1 开始一个拖拽操作; 2 开始一个文本选择; 3 开始一个scroll</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-mouseup">mouseup</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>调用a context menu</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-mouseenter">mouseenter</a></td>
+                <td>sync</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-mouseleave">mouseleave</a></td>
+                <td>sync</td>
+                <td>no</td>
+                <td>no</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-mouseover">mouseover</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-mouseout">mouseout</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-mousemove">mousemove</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>none</td>
+            </tr>
+            <tr>
+                <td><a href="#interface-wheelevent">WheelEvent</a></td>
+                <td><a href="#event-type-wheel">wheel</a></td>
+                <td>async</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>scroll</td>
+            </tr>
+            <tr>
+                <td rowspan="2"><a href="#interface-keyboardevent">KeyboardEvent</a></td>
+                <td><a href="#event-type-keydown">keydown</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>1 input event 2 focus event</td>
+            </tr>
+            <tr>
+                <td><a href="#event-type-keyup">keyup</a></td>
+                <td>sync</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>none</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2><a name="event-types"></a>5 Event Types</h2>
+    <h3><a name="interface-userinterface-event"></a>5.1 User Interface Events</h3>
+    <div>
+        <pre>interface UIEvent : <a href="../DOM4/index.html#interface-event">Event</a>{
+    readonly attribute <a href="">Window</a>? view;
+    readonly attribute long detail;            
+}</pre>
+    </div>
+    <h3><a name="event-type-load"></a>5.1.2.1 load</h3>
+    <p>当DOM实现者加载资源(eg. document, images, style sheets, or scripts)结束时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>load</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td>如果事件来自UI就是<a href="#interface-userinterface-event">UIEvent</a>, 否则<a href="../DOM4/index.html#event">Event</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>async</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Window, Document, Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-unload"></a>5.1.2.2 unload</h3>
+    <p>当DOM实现者移除资源(eg. document, images, style sheets, or scripts)时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>unload</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td>如果事件来自UI就是<a href="#interface-userinterface-event">UIEvent</a>, 否则<a href="../DOM4/index.html#event">Event</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Window, Document, Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-abort"></a>5.1.2.3 abort</h3>
+    <p>当一个资源的加载被终止时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>abort</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td>如果事件来自UI就是<a href="#interface-userinterface-event">UIEvent</a>, 否则<a href="../DOM4/index.html#event">Event</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Window, Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-error"></a>5.1.2.4 error</h3>
+    <p>当一个资源加载失败, or 加载成功但是根据其语义无法解析时(比如无效的image, 脚本错误等)时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>error</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td>如果事件来自UI就是<a href="#interface-userinterface-event">UIEvent</a>, 否则<a href="../DOM4/index.html#event">Event</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>async</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Window, Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-select"></a>5.1.2.5 select</h3>
+    <p>当用户选择了一些文本时, UA必须dispatch这个事件. 在HTML5中, 此事件仅在form元素中的textarea和input(type=text)上有效</p>
+    <table>
+        <tr>
+            <th>Type</th><td>select</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td>如果事件来自UI就是<a href="#interface-userinterface-event">UIEvent</a>, 否则<a href="../DOM4/index.html#event">Event</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>async</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="interface-focusevent"></a>5.2.1 Interface FocusEvent</h3>
+    <div><pre>interface FocusEvent : <a href="#interface-userinterface-event">UIEvent</a> {
+    readonly attribute <a href="../DOM4/index.html#interface-eventTarget">EventTarget</a>? relatedTarget;
+}</pre>
+    </div>
+    <h3><a name="event-type-blur"></a>5.2.4.1 blur</h3>
+    <p>当eventTarget失去焦点时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>blur</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-focusevent">FocusEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Window, Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-focus"></a>5.2.4.2 focus</h3>
+    <p>当eventTarget接受焦点时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>focus</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-focusevent">FocusEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Window, Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-focusin"></a>5.2.4.3 focusin</h3>
+    <p>当eventTarget准备接受焦点时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>focus</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-focusevent">FocusEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Window, Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-focusout"></a>5.2.4.4 focusout</h3>
+    <p>当eventTarget准备失去焦点时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>focus</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-focusevent">FocusEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Window, Element</td>
+        </tr>
+    </table>
+    <h3><a name="interface-mouseevent"></a>5.3.1 Interface MouseEvent</h3>
+    <div>
+        <pre>interface MouseEvent : <a href="#interface-userinterface-event">UIEvent</a> {
+    readonly attribute long screenX;
+    readonly attribute long screenY;
+    readonly attribute long clientX;
+    readonly attribute long clientY;
+
+    readonly attribute boolean ctrlKey;
+    readonly attribute boolean shiftKey;
+    readonly attribute boolean altKey;
+    readonly attribute boolean metaKey;
+
+    readonly attribute short button;
+    readonly attribute unsigned short buttons;
+
+    readonly attribute <a href="../DOM4/index.html#interface-eventTarget">EventTarget</a>? relatedTarget;
+
+    boolean getModifierState(DOMString keyArg);
+}</pre>
+    </div>
+    <h3><a name="event-type-auxclick"></a>5.3.4.1 auxclick</h3>
+    <p>当eventTarget准备失去焦点时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>auxclick</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">PointerEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>视情况而定</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-click"></a>5.3.4.2 click</h3>
+    <p>当在一个元素上单击(press down and release)左键(鼠标的主要按钮)时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>click</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">PointerEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>视情况而定</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-dblclick"></a>5.3.4.3 dblclick</h3>
+    <p>当在一个元素上双击(连续click2次)左键(鼠标的主要按钮)时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>dblclick</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">MouseEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-mousedown"></a>5.3.4.4 mousedown</h3>
+    <p>当在一个元素上按下(press down)任意一个鼠标按钮时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>mousedown</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">MouseEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>1 开始一个拖拽操作; 2 开始一个文本选择; 3 开始一个scroll</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-mouseup"></a>5.3.4.5 mouseup</h3>
+    <p>当在一个元素上释放(release)任意一个鼠标按钮时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>mouseup</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">MouseEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>视情况而不同</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-mouseenter"></a>5.3.4.6 mouseenter</h3>
+    <p>当光标被移动到一个元素或其后代的边界内时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>mouseenter</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">MouseEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-mouseleave"></a>5.3.4.7 mouseleave</h3>
+    <p>当光标被从一个元素和其后代的边界内移出时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>mouseleave</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">MouseEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>no</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-mouseover"></a>5.3.4.8 mouseover</h3>
+    <p>当光标被移动到一个元素或其后代的边界内时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>mouseover</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">MouseEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-mouseout"></a>5.3.4.9 mouseout</h3>
+    <p>当光标被从一个元素和其后代的边界内移出时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>mouseout</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">MouseEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-mousemove"></a>5.3.4.10 mousemove</h3>
+    <p>当光标被移动时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>mousemove</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-mouseevent">MouseEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="interface-wheelevent"></a>5.4.1 Interface WheelEvent</h3>
+    <div>
+        <pre>interface WheelEvent : <a href="#interface-mouseevent">MouseEvent</a> {
+    // DeltaModeCode
+    const unsigned long DOM_DELTA_PIXEL = 0x00;
+    const unsigned long DOM_DELTA_LINE  = 0x01;
+    const unsigned long DOM_DELTA_PAGE  = 0x02;
+
+    readonly attribute double deltaX;
+    readonly attribute double deltaY;
+    readonly attribute double deltaZ;
+    readonly attribute unsigned long deltaMode;
+}</pre>
+    </div>
+    <h3><a name="event-type-wheel"></a>5.4.2.1 wheel</h3>
+    <p>当光标被移动时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>wheel</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-wheelevent">WheelEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>async</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>Scroll</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="interface-inputevent"></a>5.5.1 Interface InputEvent</h3>
+    <div>
+        <pre>interface InputEvent : <a href="#interface-userinterface-event">UIEvent</a> {
+    readonly attribute DOMString? data;
+    readonly attribute boolean isComposing;
+    readonly attribute DOMString inputType;
+}</pre>
+    </div>
+    <h3><a name="event-type-beforeinput"></a>5.5.3.1 beforeinput</h3>
+    <p>当DOM即将被修改时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>beforeinput</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-inputevent">InputEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>Update the DOM element</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-input"></a>5.5.3.2 input</h3>
+    <p>当DOM被修改时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>input</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-inputevent">InputEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="interface-keyboardevent"></a>5.6.1 KeyboardEvent</h3>
+    <div>
+        <pre>interface KeyboardEvent : <a href="#interface-userinterface-event">UIEvent</a> {
+    // KeyLocationCode
+    const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
+    const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
+    const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
+    const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
+
+    readonly attribute DOMString key;
+    readonly attribute DOMString code;
+    readonly attribute unsigned long location;
+
+    readonly attribute boolean ctrlKey;
+    readonly attribute boolean shiftKey;
+    readonly attribute boolean altKey;
+    readonly attribute boolean metaKey;
+
+    readonly attribute boolean repeat;
+    readonly attribute boolean isComposing;
+
+    boolean getModifierState(DOMString keyArg);
+}</pre>
+    </div>
+    <h3><a name="event-type-keydown"></a>5.6.4.1 keydown</h3>
+    <p>当一个key被press down时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>keydown</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-keyboardevent">KeyboardEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>1 input event; 2 focus event等</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+    <h3><a name="event-type-keyup"></a>5.6.4.2 keyup</h3>
+    <p>当一个key被release时, UA必须dispatch这个事件</p>
+    <table>
+        <tr>
+            <th>Type</th><td>keyup</td>
+        </tr>
+        <tr>
+            <th>Interface</th><td><a href="#interface-keyboardevent">KeyboardEvent</a></td>
+        </tr>
+        <tr>
+            <th>Sync/Async</th><td>sync</td>
+        </tr>
+        <tr>
+            <th>Bubbles</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Cancelable</th><td>yes</td>
+        </tr>
+        <tr>
+            <th>Default action</th><td>none</td>
+        </tr>
+        <tr>
+            <th>Trusted Targets</th><td>Element</td>
+        </tr>
+    </table>
+</body>
+</html>

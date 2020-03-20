@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>section element test</title>
+ 
+</head>
+<body onbeforeunload="myfunc()">
+    <article>
+        article, section, nav, aside, header, footer, h1, h2,.., hgroup, address
+    </article>
+    <script>
+        function myfunc(){
+            //beforeunload事件放在以后再研究
+            debugger
+            console.log("document is about to closing");
+            var eventObj = window.event;
+            console.log(eventObj.cancelable)
+            eventObj.preventDefault();
+            return null;
+        }
+    </script>
+</body>
+</html>

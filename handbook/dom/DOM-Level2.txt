@@ -195,7 +195,7 @@ event module
 		这个branch是static, 即建立在事件的initial dispatch(初始派发)中, 在事件传播期间发生在branch上的DOM变化会被忽略
 	传播是双向的, 从window到event target然后再返回到window, 整个传播过程可以划分为3个阶段:
 		1 从window到event target的parent, 叫作capture phase
-		2 event target, 叫作target phase
+		2 event target, 叫作`target phase
 		3 从event target parent返回window, 叫作bubbling phase
 	3个阶段的区别就是在每个阶段中调用的事件处理程序类型不同	
 	

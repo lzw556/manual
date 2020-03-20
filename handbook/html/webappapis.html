@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web application APIs</title>
+</head>
+<body>
+    <h4 id="event-loops">8.1.4 Event loops</h4>
+    <p>对event loop的个人理解</p>
+    <p><strong>每一个迭代的处理过程:</strong></p>
+    <ol>
+        <li>从event loop的taskQueue中取出最早进入的task</li>
+        <li>在js的execution context stack中执行这个task</li>
+        <li>当execution context stack为空会进入event loop的microTaskQueue</li>
+        <li>循环执行完所有的microTask</li>
+        <li>继续执行taskQueue中下一个task</li>
+    </ol>
+    <p><strong>task</strong></p>
+    <p>task包含event, callback, setTimeout()/setTimeInterval()</p>
+    <p>当执行一段脚本, 这个任务会被添加到taskQueue; 当触发一个事件时, 其回调函数会被添加到taskQueue; 当执行到一个由 setTimeout() 或 setInterval() 创建的 timeout 或 interval, 其回调函数会被添加到taskQueue</p>
+    <p>在当前迭代轮次中, 只有那些当事件循环过程开始时 已经处于任务队列中 的任务会被执行. 其余的任务不得不等待到下一次迭代</p>
+    <p><strong>microTask</strong></p>
+    <p>promise和<a href="../dom/DOM4/index.html#interface-mutationobserver">MutationObserver</a>的回调函数都会添加到microTaskQueue, 还可以通过queueMicrotask()这种标准的方式来添加microTask</p>
+    <h3 id="interface-windoworworkerglobalscope">8.2 The WindowOrWorkerGlobalScope mixin</h3>
+    <div>
+        <pre>typedef (DOMString or <a>Function</a>) <span id="timerhandler">TimerHandler</span>;
+
+interface mixin WindowOrWorkerGlobalScope {
+    [Replaceable] readonly attribute USVString origin;
+
+    // base64 utility methods
+    DOMString btoa(DOMString data);
+    ByteString atob(DOMString data);
+
+    // timers
+    long setTimeout(<a href="#timerhandler">TimerHandler</a> handler, optional long timeout = 0, any... arguments);
+    void clearTimeout(optional long handle = 0);
+    long setInterval(<a href="#timerhandler">TimerHandler</a> handler, optional long timeout = 0, any... arguments);
+    void clearInterval(optional long handle = 0);
+
+    // microtask queuing
+    void queueMicrotask(VoidFunction callback);
+
+    // ImageBitmap
+    Promise&lt;<a href="#interface-imagebitmap">ImageBitmap</a>&gt; createImageBitmap(<a href="#interface-imagebitmapsource">ImageBitmapSource</a> image, optional <a href="#interface-imagebitmapoptions">ImageBitmapOptions</a> options = {});
+    Promise<a href="#interface-imagebitmap">ImageBitmap</a>&gt; createImageBitmap(<a href="#interface-imagebitmapsource">ImageBitmapSource</a> image, long sx, long sy, long sw, long sh, optional <a href="#interface-imagebitmapoptions">ImageBitmapOptions</a> options = {});
+}</pre>
+    </div>
+    <h5 id="interface-globaleventhandler">GlobalEventHandlers</h5>
+    <div>
+        <pre>interface mixin GlobalEventHandlers {
+    attribute EventHandler onabort;
+    attribute EventHandler onauxclick;
+    attribute EventHandler onblur;
+    attribute EventHandler oncancel;
+    attribute EventHandler oncanplay;
+    attribute EventHandler oncanplaythrough;
+    attribute EventHandler onchange;
+    attribute EventHandler onclick;
+    attribute EventHandler onclose;
+    attribute EventHandler oncontextmenu;
+    attribute EventHandler oncuechange;
+    attribute EventHandler ondblclick;
+    attribute EventHandler ondrag;
+    attribute EventHandler ondragend;
+    attribute EventHandler ondragenter;
+    attribute EventHandler ondragexit;
+    attribute EventHandler ondragleave;
+    attribute EventHandler ondragover;
+    attribute EventHandler ondragstart;
+    attribute EventHandler ondrop;
+    attribute EventHandler ondurationchange;
+    attribute EventHandler onemptied;
+    attribute EventHandler onended;
+    attribute OnErrorEventHandler onerror;
+    attribute EventHandler onfocus;
+    attribute EventHandler onformdata;
+    attribute EventHandler oninput;
+    attribute EventHandler oninvalid;
+    attribute EventHandler onkeydown;
+    attribute EventHandler onkeypress;
+    attribute EventHandler onkeyup;
+    attribute EventHandler onload;
+    attribute EventHandler onloadeddata;
+    attribute EventHandler onloadedmetadata;
+    attribute EventHandler onloadstart;
+    attribute EventHandler onmousedown;
+    [LenientThis] attribute EventHandler onmouseenter;
+    [LenientThis] attribute EventHandler onmouseleave;
+    attribute EventHandler onmousemove;
+    attribute EventHandler onmouseout;
+    attribute EventHandler onmouseover;
+    attribute EventHandler onmouseup;
+    attribute EventHandler onpause;
+    attribute EventHandler onplay;
+    attribute EventHandler onplaying;
+    attribute EventHandler onprogress;
+    attribute EventHandler onratechange;
+    attribute EventHandler onreset;
+    attribute EventHandler onresize;
+    attribute EventHandler onscroll;
+    attribute EventHandler onsecuritypolicyviolation;
+    attribute EventHandler onseeked;
+    attribute EventHandler onseeking;
+    attribute EventHandler onselect;
+    attribute EventHandler onslotchange;
+    attribute EventHandler onstalled;
+    attribute EventHandler onsubmit;
+    attribute EventHandler onsuspend;
+    attribute EventHandler ontimeupdate;
+    attribute EventHandler ontoggle;
+    attribute EventHandler onvolumechange;
+    attribute EventHandler onwaiting;
+    attribute EventHandler onwebkitanimationend;
+    attribute EventHandler onwebkitanimationiteration;
+    attribute EventHandler onwebkitanimationstart;
+    attribute EventHandler onwebkittransitionend;
+    attribute EventHandler onwheel;}</pre>
+    </div>
+    <h5 id="interface-windoweventhandler">WindowEventHandlers</h5>
+    <div>
+        <pre>interface mixin WindowEventHandlers {
+    attribute EventHandler onafterprint;
+    attribute EventHandler onbeforeprint;
+    attribute OnBeforeUnloadEventHandler onbeforeunload;
+    attribute EventHandler onhashchange;
+    attribute EventHandler onlanguagechange;
+    attribute EventHandler onmessage;
+    attribute EventHandler onmessageerror;
+    attribute EventHandler onoffline;
+    attribute EventHandler ononline;
+    attribute EventHandler onpagehide;
+    attribute EventHandler onpageshow;
+    attribute EventHandler onpopstate;
+    attribute EventHandler onrejectionhandled;
+    attribute EventHandler onstorage;
+    attribute EventHandler onunhandledrejection;
+    attribute EventHandler onunload;
+}</pre>
+    </div>
+    <h5 id="interface-documentandelementeventhandler"></h5>
+    <div>
+        <pre>interface mixin DocumentAndElementEventHandlers {
+    attribute EventHandler oncopy;
+    attribute EventHandler oncut;
+    attribute EventHandler onpaste;
+}</pre>
+    </div>
+    <h4 id="interface-navigator">8.9.1 The Navigator object</h4>
+    <div>
+        <pre>interface Navigator {}</pre>
+        <p>这个接口包含 <a href="#interface-navigatorid">NavigatorID</a></p> 
+        <p>这个接口包含 <a href="#interface-navigatorlanguage">NavigatorLanguage</a></p>
+        <p>这个接口包含 <a href="#interface-navigatoronline">NavigatorOnLine</a></p>
+        <p>这个接口包含 <a href="#interface-navigatorcontentutils">NavigatorContentUtils</a></p>
+        <p>这个接口包含 <a href="#interface-navigatorcookies">NavigatorCookies</a></p>
+        <p>这个接口包含 <a href="#interface-navigatorplugins">NavigatorPlugins</a></p>
+        <p>这个接口包含 <a href="#interface-navigatorconcurrenthardware">NavigatorConcurrentHardware</a></p>
+    </div>
+    <h5 id="interface-navigatorid">8.9.1.1 Client identification</h5>
+    <div>
+        <pre>interface mixin NavigatorID {
+    readonly attribute DOMString appCodeName; // constant "Mozilla"
+    readonly attribute DOMString appName; // constant "Netscape"
+    readonly attribute DOMString appVersion;
+    readonly attribute DOMString platform;
+    readonly attribute DOMString product; // constant "Gecko"
+    [Exposed=Window] readonly attribute DOMString productSub;
+    readonly attribute DOMString userAgent;
+    [Exposed=Window] readonly attribute DOMString vendor;
+    [Exposed=Window] readonly attribute DOMString vendorSub; // constant ""
+}</pre>
+    </div>
+    <h5 id="interface-navigatorlanguage">8.9.1.2 Language preferences</h5>
+    <div>
+        <pre>interface mixin NavigatorLanguage {
+    readonly attribute DOMString language;
+    readonly attribute FrozenArray&lt;DOMString&gt; languages;
+}</pre>
+    </div>
+    <h5 id="interface-navigatorcontentutils">8.9.1.3 Custom scheme handlers: the registerProtocolHandler() method</h5>
+    <div>
+        <pre>interface mixin NavigatorContentUtils {
+    [SecureContext] void registerProtocolHandler(DOMString scheme, USVString url, DOMString title);
+    [SecureContext] void unregisterProtocolHandler(DOMString scheme, USVString url);
+}</pre>
+    </div>
+    <h5 id="interface-navigatorcookies">8.9.1.4 Cookies</h5>
+    <div>
+        <pre>interface mixin NavigatorCookies {
+    readonly attribute boolean cookieEnabled;
+}</pre>
+    </div>
+    <h5 id="interface-navigatorplugins">8.9.1.5 Plugins</h5>
+    <div>
+        <pre>interface mixin NavigatorPlugins {
+    [SameObject] readonly attribute <a href="#interface-pluginarray">PluginArray</a> plugins;
+    [SameObject] readonly attribute <a href="#mimetypearray">MimeTypeArray</a> mimeTypes;
+    boolean javaEnabled();
+}
+
+interface PluginArray {
+    void refresh(optional boolean reload = false);
+    readonly attribute unsigned long length;
+    getter <a href="#interface-plugin">Plugin</a>? item(unsigned long index);
+    getter <a href="#interface-plugin">Plugin</a>? namedItem(DOMString name);
+}
+
+interface MimeTypeArray {
+    readonly attribute unsigned long length;
+    getter <a href="#interface-mimetype">MimeType</a>? item(unsigned long index);
+    getter <a href="#interface-mimetype">MimeType</a>? namedItem(DOMString name);
+}
+
+interface Plugin {
+    readonly attribute DOMString name;
+    readonly attribute DOMString description;
+    readonly attribute DOMString filename;
+    readonly attribute unsigned long length;
+    getter <a href="#interface-mimetype">MimeType</a>? item(unsigned long index);
+    getter <a href="#interface-mimetype">MimeType</a>? namedItem(DOMString name);
+}
+
+interface MimeType {
+    readonly attribute DOMString type;
+    readonly attribute DOMString description;
+    readonly attribute DOMString suffixes; // comma-separated
+    readonly attribute <a href="#interface-plugin">Plugin</a> enabledPlugin;
+}</pre>
+    </div>
+</body>
+</html>

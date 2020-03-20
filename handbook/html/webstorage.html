@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web storage</title>
+</head>
+<body>
+    <h4 id="interface-storage">11.2.1 The Storage interface</h4>
+    <div><pre>interface Storage {
+    readonly attribute unsigned long length;
+    DOMString? key(unsigned long index);
+    getter DOMString? getItem(DOMString key);
+    setter void setItem(DOMString key, DOMString value);
+    deleter void removeItem(DOMString key);
+    void clear();
+}</pre>
+    </div>
+    <h4 id="interface-windowsessionstorage">11.2.2 The sessionStorage attribute</h4>
+    <div><pre>interface mixin WindowSessionStorage {
+    readonly attribute <a href="#interface-storage">Storage</a> sessionStorage;
+}</pre>
+    </div>
+    <h4 id="interface-windowlocalstorage">11.2.3 The localStorage attribute</h4>
+    <div><pre>interface mixin WindowLocalStorage {
+    readonly attribute <a href="#interface-storage">Storage</a> localStorage;
+}</pre>
+    </div>
+    <h5 id="interface-storageevent">11.2.4.1 The StorageEvent interface</h5>
+    <div>
+        <pre>interface StorageEvent : <a href="../dom/DOM4/index.html#interface-event">Event</a> {
+    readonly attribute DOMString? key;
+    readonly attribute DOMString? oldValue;
+    readonly attribute DOMString? newValue;
+    readonly attribute USVString url;
+    readonly attribute <a href="#interface-storage">Storage</a>? storageArea;
+
+    void initStorageEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional DOMString? key = null, optional DOMString? oldValue = null, optional DOMString? newValue = null, optional USVString url = "", optional Storage? storageArea = null);
+    };
+
+    dictionary StorageEventInit : <a href="../dom/DOM4/index.html#eventinit">EventInit</a> {
+    DOMString? key = null;
+    DOMString? oldValue = null;
+    DOMString? newValue = null;
+    USVString url = "";
+    <a href="#interface-storage">Storage</a>? storageArea = null;
+}</pre>
+    </div>
+</body>
+</html>

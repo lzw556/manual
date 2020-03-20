@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- html元素的lang特性, 表示页面元素语言的定义, eg. en表示英文 -->
+<html lang="en">
+<head>
+    <!-- 元数据类型元素meta, 表示字符编码声明 -->
+    <meta charset="UTF-8">
+    <!-- 元数据类型元素meta, 表示关键字 -->
+    <meta name="keywords" content="html, html5, html5 specification">
+    <!-- 元数据类型元素meta, 表示描述 -->
+    <meta name="description" content="">
+    <!-- 元数据类型元素meta, 表示作者 -->
+    <meta name="author" content="">
+    <!-- 控制所有从该文档发出的 HTTP 请求中HTTP Referer 首部的内容 -->
+    <!-- 有以下值: origin, no-referrer等 -->
+    <meta name="referrer" content="always">
+
+    <!-- 编译指令, 让IE browser更接近遵循规范 -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="refresh" content="30;url=http://www.baidu.com">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 元数据类型元素title, 表示文档的title -->
+    <title>element-metadata test</title>
+
+     <!-- 元数据类型元素base, 表示文档中所有相对url的根url(最好作为head的第一个子元素, 这样link也可以用相对url了) -->
+    <base href="http://www.ux.com:10008/">
+
+    <!-- 元数据类型元素link, 指定当前文档中使用的外部资源 -->
+    <!-- 当rel是stylesheet时, 表示样式表 -->
+    <link rel="stylesheet" href="base.css">
+    <!-- 当rel是stylesheet并包含alternate时, 并且title不能为空, 表示可选样式表 -->
+    <link rel="stylesheet alternate" href="alternate-green.css" title="green">
+    <!-- 当media表示样式表的媒体查询 -->
+    <link rel="stylesheet alternate" href="alternate-green.css" title="green" media="print">
+
+    <!-- 当rel是icon时, 表示图标 -->
+    <!-- 当不显示ico图标时, 首先检查是否正确加载; 如果未加载, 除了路径不对也有可能是本地没有域名(只有ip, 特别是本地测试的时候) -->
+    <link rel="icon" href="favicon.ico">
+
+    <!-- 元数据类型元素style, 指定当前文档中使用的stylesheet -->
+    <style>
+
+    </style>
+    <!-- 元数据类型元素script, 指定当前文档中使用的script -->
+    <script>
+
+    </script>
+    <!-- 元数据类型元素noscript, 指定当前文档中使用的noscript -->
+    <noscript>
+
+    </noscript>
+</head>
+<body>
+    <!-- 测试title元素 -->
+    <script>
+        //获取文档中title文本的2种方式
+        var titleText = document.title;
+        var titleInstance = document.getElementsByTagName("title")[0];
+        var titleText2 = titleInstance.text;
+    </script>
+    <!-- 测试base元素 -->
+    <img src="images/404.jpg" alt="test for base element">
+    <p id="testforreloflink">测试link元素中的rel特性</p>
+    <p id="testforreloflink2">测试link元素中的rel特性2</p>
+</body>
+</html>

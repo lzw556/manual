@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2 Common infrastructure(公共基础设施)</title>
+    <style>
+        dt{font-weight: 700;}
+    </style>
+</head>
+<body>
+    <h4>2.4.2 Boolean attributes</h4>
+    <p>对于元素上的一个Boolean attribute, 如果存在这个特性, 其值为true; 不存在, 其值为false</p>
+    <div>
+        <pre>&lt;label&gt;&lt;input type="checkbox" checked&gt;&lt;/label&gt;</pre>
+        <pre>&lt;label&gt;&lt;input type="checkbox" checked="checked"&gt;&lt;/label&gt;</pre>
+        <pre>&lt;label&gt;&lt;input type="checkbox" checked=""&gt;&lt;/label&gt;</pre>
+        <p>上面3个例子是等效的, 其checked特性的值都是true</p>
+    </div>
+    <h4>2.7.1 在 IDL attributes 中映射 content attributes</h4>
+    <dl>
+        <dt>IDL attribute</dt>
+        <dd>
+            <p>IDL, interface description languang, 接口描述语言</p>
+            <p>IDL attribute也叫作js属性, 是定义在DOM API中的属性, eg. <a href="../dom/DOM4/index.html#interface-element">Element</a>中的属性id, className, tagName等</p>
+            <p>读取或设置属性值可以通过这样的方式:element.id</p>
+            <p>命名风格是驼峰, eg. <a href="element.html#interface-htmllabelelement">HTMLLabelElement</a>中的htmlFor, <a href="../dom/DOM4/index.html#interface-parentnode">ParentNode</a>中的firstElementChild等</p>
+        </dd>
+        <dt>content attribute</dt>
+        <dd>
+            <p>content attribute指一个html标签(开始标签)上指定的属性</p>
+            <p>读取或设置属性值可以通过这样的方式:element.setAttribute(), element.getAttribute()</p>
+            <p>命名风格是小写字母, eg. &lt;input type="text" maxlength="" minlength=""&gt;</p>
+        </dd>
+        <dt>映射</dt>
+        <dd>
+            <p>定义有些IDL attribute的目的是为了映射content attribute</p>
+            <p>因为当获取IDL attribute时, 返回的是对应content attribute的当前值(如果content attribute不存在则返回空字符串)</p>
+            <p>当设置IDL attribute时, 会将对应的content attribute的当前值更改为给定值(如果content attribute不存在首先添加它)</p>
+            <p>在大部分情况下, 相互映射的2个属性名字相同(不考虑风格), 偶尔会因为js中的关键字或保留字而不同 eg. className(IDL) vs class(content), htmlFor(IDL) vs for(content)</p>
+        </dd>
+    </dl>
+    <h5 id="interface-htmlallcollection">2.7.2.1 The HTMLAllCollection interface</h5>
+    <div>
+        <pre><code>interface HTMLAllCollection {
+    readonly attribute unsigned long length;
+    getter <a href="../dom/DOM4/index.html#interface-element">Element</a> (unsigned long index);
+    getter (<a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> or <a href="../dom/DOM4/index.html#interface-element">Element</a>)? namedItem(DOMString name);
+    (<a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> or <a href="../dom/DOM4/index.html#interface-element">Element</a>)? item(optional DOMString nameOrIndex);            
+}</code></pre>
+    </div>
+    <h5 id="interface-htmlallcollection">2.7.2.2 The The HTMLFormControlsCollection interface</h5>
+    <div>
+        <pre><code>interface HTMLFormControlsCollection : <a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> {
+    getter (<a href="#interface-radionodelist">RadioNodeList</a> or <a href="../dom/DOM4/index.html#interface-element">Element</a>)? namedItem(DOMString name);       
+}
+
+interface <dfn id="interface-radionodelist">RadioNodeList</dfn> : <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a> {
+    attribute DOMString value;
+}
+</code></pre>
+    </div>
+    <h5 id="interface-htmlallcollection">2.7.2.3 The HTMLOptionsCollection interface</h5>
+    <div>
+        <pre><code>interface HTMLOptionsCollection : <a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> {
+    [CEReactions] attribute unsigned long length; // shadows inherited length
+    [CEReactions] setter void (unsigned long index, <a href="element.html#interface-htmloptionelement">HTMLOptionElement</a>? option);
+    [CEReactions] void add((<a href="element.html#interface-htmloptionelement">HTMLOptionElement</a> or <a href="element.html#interface-htmloptgroupelement">HTMLOptGroupElement</a>) element, optional (<a href="element.html#interface-htmlelement">HTMLElement</a> or long)? before = null);
+    [CEReactions] void remove(long index);
+    attribute long selectedIndex;           
+}</code></pre>
+    </div>
+    <h4 id="interface-domstringlist">2.7.3 The DOMStringList interface</h4>
+    <div>
+        <pre><code>interface DOMStringList {
+    readonly attribute unsigned long length;
+    getter DOMString? item(unsigned long index);
+    boolean contains(DOMString string);         
+}</code></pre>
+    </div>
+</body>
+</html>

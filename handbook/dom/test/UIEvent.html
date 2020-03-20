@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UIEvent</title>
+</head>
+<body>
+    <p>UIEvent, event type: load, unload, abort, error, select</p>
+    <img id="badImage" src="test-event-type-error.jpg" alt="test-event-type-error">
+    <input id="txt1" type="text" value="test-event-type-select">
+    <script>
+        window.addEventListener("load", function(event){
+            console.log("all has been loaded, include document, images, style sheets and scripts")
+        });
+        //刷新页面的一瞬间时dispatch
+        window.addEventListener("unload", function(event){
+            console.log("hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello")
+        });
+        document.getElementById("badImage").addEventListener("error", function(event){
+            console.log("error: image loading")
+        });
+        document.getElementById("txt1").addEventListener("select", function(e){
+            console.log("some text has been selected")
+        });
+    </script>
+</body>
+</html>

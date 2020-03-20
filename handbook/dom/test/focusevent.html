@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>focusevent</title>
+</head>
+<body>
+    <input id="txt1" type="text" placeholder="text1"><br>
+    <input id="txt2" type="text" placeholder="text2"><br>
+    <input id="txt3" type="text" placeholder="text3">
+    <script>
+        document.getElementById("txt1").addEventListener("focusin", function(e){
+            console.log("focusin");
+        });
+        // document.getElementById("txt1").addEventListener("focus", function(e){
+        //     console.log("focus");
+        // });
+        document.getElementById("txt1").addEventListener("focusout", function(e){
+            console.log("focusout");
+        });
+        // document.getElementById("txt1").addEventListener("blur", function(e){
+        //     console.log("blur");
+        // });
+    </script>
+</body>
+</html>

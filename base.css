@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    font-family: Arial, "Microsoft Yahei", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+    text-align: left;
+  }
+  
+  h1, h2, h3, h4, h5, h6
+  , p
+  , ul
+  , ol
+  , dl {
+    margin: 0;
+  }
+  
+  ol, ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  dt {
+    font-weight: 700;
+  }
+  
+  a {
+    color: #0078e7;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #00509b;
+    text-decoration: underline;
+  }
+  
+  img {
+    border: 0;
+    vertical-align: top;
+  }
+  
+  table {
+    border-collapse: collapse;
+  }
+  
+  input,
+  button,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    cursor: pointer;
+  }
+  
+  .table-of-content ul,
+  .table-of-content ol{
+    padding-left: 1.5em;
+  }
+  .comment{color:#888;}
+
+  #testforreloflink{
+    color:red;
+  }

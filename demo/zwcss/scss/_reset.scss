@@ -12,17 +12,17 @@ body{
     background-color:$body-bg;
     text-align: left;
 }
-// h1,h2,h3,h4,h5,h6
-// ,p
-// ,ul
-// ,ol
-// ,dl{
-//     margin:0;
-// }
-// ol,ul{
-//     list-style: none;
-//     padding-left:0;
-// }
+h1,h2,h3,h4,h5,h6
+,p
+,ul
+,ol
+,dl{
+    margin:0;
+}
+ol,ul{
+    list-style: none;
+    padding-left:0;
+}
 dt{font-weight: $dt-font-weight;}
 a{
     color:$link-color;

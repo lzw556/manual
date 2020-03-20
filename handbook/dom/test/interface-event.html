@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM, WebApi, event interface</title>
+</head>
+<body>
+    <ul id="list">
+        <li id="item1"><a id="link1" href="#">DOM4 Specification</a>&nbsp;&nbsp;
+            <a id="link2" href="#">DOM4 Specification2</a>&nbsp;&nbsp;
+            <a id="link3" href="#">DOM4 Specification3</a>
+        </li>
+        <li><a href="">UI Events Specification</a></li>
+        <li><a href="">HTML living standard</a></li>
+    </ul>
+    <script>    
+        // document.getElementById("list").addEventListener("click", handler);
+        // document.getElementById("item1").addEventListener("click", handler);
+        // document.getElementById("link1").addEventListener("click", handler);
+        // document.getElementById("link2").addEventListener("click", handler);
+        // document.getElementById("link3").addEventListener("click", handler);
+        // document.getElementById("link2").addEventListener("click", handler2);
+        // document.getElementById("link3").addEventListener("click", handler2);
+        // function handler(event){
+        //     if(event.target === document.getElementById("link2")){
+        //         //执行完currentTarget上当前的event listenner, 
+        //         //然后执行currentTarget上注册的其他event listenner, 然后停止当前事件的传播
+        //         event.stopPropagation();
+        //     }
+        //     if(event.target === document.getElementById("link3")){
+        //         //执行完currentTarget上当前的event listenner, 
+        //         // 然后停止当前事件的传播
+        //         event.stopImmediatePropagation();
+        //     }
+        //     console.info(event.type);
+        //     console.info(event.target);
+        //     console.info(event.currentTarget);
+        //     console.info(event.eventPhase);
+        // }
+        // function handler2(event){
+        //     console.log("secord event listener")
+        // }
+        document.getElementById("link1").addEventListener("mouseover", function(e){
+            debugger
+            console.log(e.type);
+        });
+    </script>
+</body>
+</html>

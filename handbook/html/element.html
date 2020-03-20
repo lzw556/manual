@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4 The elements of HTML</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <h4><a name="element-html"></a>4.1.1 The html element</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd>None</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>docuemt的documentElement</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>一个head元素, 后面跟一个body元素</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLHtmlElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-head"></a>4.2.1 The head element</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>作为html元素的第一个子元素</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>一个或多个<a href="dom.html#category-metadata">Metadata content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLHeadElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-title"></a>4.2.2 The title element</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-metadata">Metadata content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>作为head元素的子元素</dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#text-content">Text</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLTitleElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+
+    [CEReactions] attribute DOMString text;
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-base"></a>4.2.3 The base element</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-metadata">Metadata content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>作为head元素的子元素</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a>, href, target</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLBaseElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+
+    [CEReactions] attribute DOMString text;
+
+    [CEReactions] attribute USVString href;
+    [CEReactions] attribute DOMString target;
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-link"></a>4.2.4 The link element</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-metadata">Metadata content</a></dd>
+        <dd>如果被允许作为body的子元素及后代, <a href="dom.html#category-flow">Flow content</a> or <a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>作为head元素的子元素</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a>, href, rel, type, media</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLLinkElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+
+    [CEReactions] attribute USVString href;
+    [CEReactions] attribute DOMString? crossOrigin;
+    [CEReactions] attribute DOMString rel;
+    [CEReactions] attribute DOMString as; // (default "")
+    [SameObject, PutForwards=value] readonly attribute DOMTokenList relList;
+    [CEReactions] attribute DOMString media;
+    [CEReactions] attribute DOMString integrity;
+    [CEReactions] attribute DOMString hreflang;
+    [CEReactions] attribute DOMString type;
+    [SameObject, PutForwards=value] readonly attribute DOMTokenList sizes;
+    [CEReactions] attribute USVString imageSrcset;
+    [CEReactions] attribute DOMString imageSizes;
+    [CEReactions] attribute DOMString referrerPolicy;
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-meta"></a>4.2.5 The meta element</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-metadata">Metadata content</a></dd>
+        <dd>如果itemprop特性存在, <a href="dom.html#category-flow">Flow content</a> or <a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>作为head元素的子元素, eg. &lt;meta charset="UTF-8"&gt;</dd>
+        <dd>作为head元素的子元素, eg. &lt;meta name="keywords" content="html spec"&gt;</dd>
+        <dd>作为head元素的子元素, eg. &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd><a href="#standard-metadata-names">name</a>-metadata</dd>
+        <dd><a href="#pragma-directives">http-equiv</a>-编译指令</dd>
+        <dd><a href="dom.html#global-attributes">content</a>-当meta元素存在特性http-equiv或name时, meta元素的值</dd>
+        <dd><a href="#character-encoding">charset</a>-字符编码声明</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLMetaElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+
+    [CEReactions] attribute DOMString name;
+    [CEReactions] attribute DOMString httpEquiv;
+    [CEReactions] attribute DOMString content;
+}</pre>
+        </dd>
+    </dl>
+    <h5><a name="standard-metadata-names"></a>4.2.5.1 Standard metadata names</h5>
+    <dl>
+        <dt>application-name</dt>
+        <dd>定义正运行在该网页上的网络应用名称</dd>
+        <dt>author</dt>
+        <dd>文档的作者</dd>
+        <dt>keywords</dt>
+        <dd>包含与逗号分隔的页面内容相关的单词</dd>
+        <dt>description</dt>
+        <dd>其中包含页面内容的简短和精确的描述, 一些浏览器将其作为书签的默认描述</dd>
+        <dt>generator</dt>
+        <dd>包含生成页面的软件的标识符</dd>
+        <dt>referrer</dt>
+        <dd>控制所有从该文档发出的 HTTP 请求中HTTP Referer 首部的内容</dd>
+        <dt>theme-color</dt>
+        <dd></dd>
+        <dt>viewport(不是规范)</dt>
+        <dd></dd>
+    </dl>
+    <h5><a name="pragma-directives"></a>4.2.5.3 Pragma directives</h5>
+    <p>当meta元素被指定http-equiv特性时, 这个元素是一个编译指令</p>
+    <p>http-equiv特性值如下:</p>
+    <dl>
+        <dt>content-language</dt>
+        <dd></dd>
+        <dt>content-type</dt>
+        <dd>eg. &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt</dd>
+        <dt>default-style</dt>
+        <dd></dd>
+        <dt>refresh</dt>
+        <dd>eg. &lt;meta http-equiv="Refresh" content="300"&gt; 间隔5分钟刷新一次</dd>
+        <dd>eg. &lt;meta http-equiv="Refresh" content="30; url=http://www.baidu.com"&gt; 30秒后重定向至新的url</dd>
+        <dt>content-security-policy</dt>
+        <dd></dd>
+    </dl>
+    <h5><a name="character-encoding"></a>4.2.5.4 Specifying the document's character encoding</h5>
+    <p>eg. eg. &lt;meta charset="utf-8"&gt;</p>
+    <h4><a name="element-style"></a>4.2.6 The style element</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-metadata">Metadata content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>作为head元素的子元素</dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#text-content">Text</a> for css</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd><a href="#attribute-style-media">meida</a>-Applicable media</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLStyleElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+
+    [CEReactions] attribute DOMString media;
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-body"></a>4.3.1 The body element</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-sectioning-root">Sectioning root</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>html元素的第二个子元素</dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>实现了接口 : <a href="">WindowEventHandlers</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLBodyElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-article"></a>4.3.2 The article element</h4>
+    <p>article元素表示文档, 页面, 应用中独立的结构, 意在成为可复用的结构</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-sectioning">Sectioning content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <p>用法:</p>
+    <p>语义中强调是独立的整体, 可以自成一个上下文</p>
+    <p>可以嵌套</p>
+    <h4><a name="element-section"></a>4.3.3 The section element</h4>
+    <p>section元素表示文档中一个带标题的内容分组, 没有更具体的语义, 通常包含一个标题</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-sectioning">Sectioning content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <p>用法:</p>
+    <ul>
+        <li>语义中强调是一个内容分组, 即多个分组之一, 本身无法构成独立的内容,需要所有相关并列分组共同组成一个独立的整体</li>
+        <li>一般都包含一个标题(h1-h6)</li>
+        <li>不要把section当作通用容器元素来使用, 比如当一个元素的片段仅需要美化的时候, 此时可以用div来替代</li>
+    </ul>
+    <h4><a name="element-nav"></a>4.3.4 The nav element</h4>
+    <p>nav元素表示文档中一个导航链接分组, 可以连接到其他页面或者当前页面的其他部分</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-sectioning">Sectioning content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <p>用法:</p>
+    <ul>
+        <li>不是所有的链接分组都必须使用nav, 通常是把比较重要的链接放进去</li>
+        <li>一个页面可以包含多个nav</li>
+        <li>nav不是必须包含一个列表(ul or ol)</li>
+    </ul>
+    <h4><a name="element-aside"></a>4.3.5 The aside element</h4>
+    <p>aside元素表示文档中一个独立的分组, 和页面上的其他内容无关. 通常表现为侧边栏(sidebar)</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-sectioning">Sectioning content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <p>用法:</p>
+    <ul>
+        <li>语义中强调是一个内容分组, 即多个分组之一, 本身无法构成独立的内容,需要所有相关并列分组共同组成一个独立的整体</li>
+        <li>一般都包含一个标题(h1-h6)</li>
+        <li>不要把section当作通用容器元素来使用, 比如当一个元素的片段仅需要美化的时候, 此时可以用div来替代</li>
+    </ul>
+    <h4><a name="element-heading"></a>4.3.6 The h1, h2, h3, h4, h5, and h6 elements</h4>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-heading">Heading content</a></dd>
+        <dd><a href="">palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>hgroup的子元素</dd>
+        <dd><a href="dom.html#category-flow">Flow content</a> 或 <a href="dom.html#category-heading">Heading content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>实现了接口 : <a href="">WindowEventHandlers</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLHeadingElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-hgroup"></a>4.3.7 The hgroup element</h4>
+    <p>hgroup元素表示一个内容分组的标题, 这个标题是有多个h1-h6元素组成的</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-heading">Heading content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> 或 <a href="dom.html#category-heading">Heading content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd>一个或多个h1, h2, h3, h4, h5, h6</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-header"></a>4.3.8 The header element</h4>
+    <p>header元素表示一个分组, 这个分组通常包含介绍性的或导航的元素, eg. logo, 搜索框等</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a>, 但是不能包含 header or footer 的后代</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-footer"></a>4.3.9 The footer element</h4>
+    <p>footer元素表示页脚, 通常包含作者, 版权, 相关链接和爱好等信息</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-heading">Heading content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> 或 <a href="dom.html#category-heading">Heading content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a>, 但是不能包含 header or footer 的后代</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-address"></a>4.3.10 The address element</h4>
+    <p>address元素表示某人或某组织的联系信息</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-heading">Heading content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> 或 <a href="dom.html#category-heading">Heading content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a>, 但是不能包含 header or footer or address 的后代</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-paragraph"></a>4.4.1 The p element</h4>
+    <p>p元素表示一个段落</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLParagraphElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-hr"></a>4.4.2 The hr element</h4>
+    <p>hr元素表示段落之间的主题转换</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLHRElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-pre"></a>4.4.3 The pre element</h4>
+    <p>pre元素表示预定义格式文本. 在该元素中的文本通常按照原文件中的编排,以等宽字体的形式展现出来,文本中的空白符（比如空格和换行符）都会显示出来</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLPreElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-blockquote"></a>4.4.4 The blockquote element</h4>
+    <p>blockquote元素表示其中的文字是引用内容. 在渲染时, 这部分的内容会有一定的缩进</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd><a href="">cite</a>-cite特性值是一个url, 链接到引用资源的出处</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLQuoteElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute USVString cite;
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-ol"></a>4.4.5 The ol element</h4>
+    <p>ol元素表示一个多项有序列表, 改变列表项的顺序就改变了这个元素表示的意义</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd>0 或 多个 li元素</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd><a href="">reversed</a></dd>
+        <dd><a href="">start</a></dd>
+        <dd><a href="">type</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLOListElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute boolean reversed;
+            [CEReactions] attribute long start;
+            [CEReactions] attribute DOMString type;
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-ul"></a>4.4.6 The ul element</h4>
+    <p>ul元素表示一个多项无序列表</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd>0 或 多个 li元素</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd><a href="">reversed</a></dd>
+        <dd><a href="">start</a></dd>
+        <dd><a href="">type</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLUListElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-menu"></a>4.4.7 The menu element</h4>
+    <p>menu元素表示一个工具条, 工具条的内容是一个无序列表, 每一个列表项代表一个命令</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd>0 或 多个 li元素</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLMenuElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-li"></a>4.4.8 The li element</h4>
+    <p>li元素表示一个段落</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>ul, ol, menu</dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLLIElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute long value;
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-dl"></a>4.4.9 The dl element</h4>
+    <p>dl元素表示一个描述列表, 每一项都包含定义和描述</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd>0 or 多组, 每一组包含1 or 多个dt, 后面跟1 or 多个dd</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLDListElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-dt"></a>4.4.10 The dt element</h4>
+    <p>dt元素只能用在dl元素中, 表示其中一项的定义</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>dl</dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-dd"></a>4.4.11 The dd element</h4>
+    <p><p>dd元素只能用在dl元素中, 表示其中一项的描述</p></p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>dl</dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-figure"></a>4.4.12 The figure element</h4>
+    <p>figure元素表示一个独立的内容, 通常和说明(figcation)一起使用, 经常用来表示图文信息</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd>figcaption元素, 之后跟<a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-figcaption"></a>4.4.13 The figcaption element</h4>
+    <p>figcaption元素表示一个figure元素中内容的说明</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>figure</dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-main"></a>4.4.14 The main element</h4>
+    <p>main元素表示文档的主要内容</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a> </dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flowcontent</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-div"></a>4.4.15 The div element</h4>
+    <p>div元素没有特别的语义, 当没有更合适的元素时可以选择使用它</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLDivElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-a"></a>4.5.1 The a element</h4>
+    <p>a元素表示一个超链接, 此链接可以指向其他网页, 文件, 同一页面内的其他内容, 电子邮件地址等</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd>如果存在href特性, <a href="dom.html#category-interactive">Interactive content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a>, 除了a</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>transparent, 除了a, <a href="dom.html#category-interactive">Interactive content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>href-定义在接口 <a href="#interface-htmlhyperlinkelementutils">HTMLHyperlinkElementUtils</a>中, 值是url or url片段(带#)</dd>
+        <dd>target-指定在哪里显示链接内容(_self, 默认值; _blank, _parent, _top)</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLAnchorElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute DOMString target;
+            [CEReactions] attribute DOMString download;
+            [CEReactions] attribute USVString ping;
+            [CEReactions] attribute DOMString rel;
+            [SameObject, PutForwards=value] readonly attribute DOMTokenList relList;
+            [CEReactions] attribute DOMString hreflang;
+            [CEReactions] attribute DOMString type;
+          
+            [CEReactions] attribute DOMString text;
+          
+            [CEReactions] attribute DOMString referrerPolicy;
+        }</pre></dd>
+    </dl>
+    <h4><a name="element-em"></a>4.5.2 The em element</h4>
+    <p>em元素对内容进行强调, 通常会被UA渲染为斜体, 可以通过嵌套来增加强调程度</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-strong"></a>4.5.3 The strong element</h4>
+    <p>strong元素表示内容的重要性, 通常会被UA渲染为粗体, 可以通过嵌套来增加重要程度</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-small"></a>4.5.4 The small element</h4>
+    <p>small元素表示边注释, 通常包含免责声明, 警告, 法律法规, 版权等信息</p>
+    <p>因为其内容字体变小一号, 被认为违反了结构和样式分离的原则</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-cite"></a>4.5.6 The cite element</h4>
+    <p>cite元素表示一个作品的引用, 且必须包含作品的标题</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-q"></a>4.5.7 The q element</h4>
+    <p>q元素表示短文本的引用</p>
+    <p>blockquote表示一大段文本的引用</p>
+    <p>cite表示对一本书, 一首歌, 一部电影等作品的引用, 必须包含标题</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>cite</dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-dfn"></a>4.5.8 The dfn element</h4>
+    <p>dfn元素表示术语的定义</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>title</dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-abbr"></a>4.5.9 The abbr element</h4>
+    <p>abbr元素用于展示缩写</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>title</dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-i"></a>4.5.20 The i element</h4>
+    <p>i元素用于表现因某些原因需要区分普通文本的一系列文本</p>
+    <p>因为其内容字体是斜体, 被认为违反了结构和样式分离的原则</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-b"></a>4.5.21 The b element</h4>
+    <p>b元素用于吸引读者的注意到该元素的内容上</p>
+    <p>因为其内容字体是粗体, 被认为违反了结构和样式分离的原则</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a></dd>
+    </dl>
+    <h4><a name="element-span"></a>4.5.26 The span element</h4>
+    <p>span元素没有特别的语义, 当没有更合适的元素时可以选择使用它</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLSpanElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+                [HTMLConstructor] constructor();
+        }</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-br"></a>4.5.27 The br element</h4>
+    <p>br元素在文本中生成一个换行</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLBRElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+          }</pre>
+        </dd>
+    </dl>
+    <h4>4.6.1 Introduction</h4>
+    <p>在HTML中有2种类型的link:</p>
+    <dl>
+        <dt>链接外部资源</dt>
+        <dd>一般是link元素, 通常由UA自动处理下载</dd>
+        <dt>超链接</dt>
+        <dd>一般是a元素, 通常由用户手动访问</dd>
+    </dl>  
+    <h4 id="interface-htmlhyperlinkelementutils">4.6.3 API for a and area elements</h4>
+    <div>
+        <pre><code>interface mixin HTMLHyperlinkElementUtils {
+    [CEReactions] stringifier attribute USVString href;
+    readonly attribute USVString origin;
+    [CEReactions] attribute USVString protocol;
+    [CEReactions] attribute USVString username;
+    [CEReactions] attribute USVString password;
+    [CEReactions] attribute USVString host;
+    [CEReactions] attribute USVString hostname;
+    [CEReactions] attribute USVString port;
+    [CEReactions] attribute USVString pathname;
+    [CEReactions] attribute USVString search;
+    [CEReactions] attribute USVString hash;
+}</code></pre>
+    </div>
+    <h4 id="link-types">4.6.6 Link types</h4>
+    <table>
+        <tr>
+            <th>链接类型</th>
+            <th>描述</th>
+            <th>支持的元素</th>
+        </tr>
+        <tr>
+            <td>stylesheet</td>
+            <td>外部样式表</td>
+            <td><a href="#element-link">link</a></td>
+        </tr>
+        <tr>
+            <td>icon</td>
+            <td>页面资源, 通常是一个图标</td>
+            <td><a href="#element-link">link</a></td>
+        </tr>
+    </table>
+    <h4><a name="element-ins"></a>4.7.1 The ins element</h4>
+    <p>ins元素表示文档中添加的内容, 可以在需要显示修改记录或者源代码差异的情况使用这个标签</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd>transparent</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>cite</dd>
+        <dd>datetime</dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlmodelement">HTMLModElement</a></dd>
+    </dl>
+    <h4><a name="element-del"></a>4.7.2 The del element</h4>
+    <p>del元素表示文档中删除的内容, 可以在需要显示修改记录或者源代码差异的情况使用这个标签</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="">Palpable content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd>transparent</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>cite</dd>
+        <dd>datetime</dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlmodelement">HTMLModElement</a></dd>
+    </dl>
+    <h4 id="interface-htmlmodelement">4.7.3 Attributes common to ins and del elements</h4>
+    <div>
+        <pre>interface HTMLModElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+
+    [CEReactions] attribute USVString cite;
+    [CEReactions] attribute DOMString dateTime;
+}</pre>
+    </div>
+    <h4><a name="element-picture"></a>4.8.1 The picture element</h4>
+    <p>picture元素表示图像</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="dom.html#category-embedded">Embedded content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>picture元素</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLPictureElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-source"></a>4.8.2 The source element</h4>
+    <p>source为picture, audio, video元素指定多个媒体资源</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>src</dd>
+        <dd>type</dd>
+        <dd>srcset</dd>
+        <dd>sizes</dd>
+        <dd>media</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLSourceElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+    [HTMLConstructor] constructor();
+
+    [CEReactions] attribute USVString src;
+    [CEReactions] attribute DOMString type;
+    [CEReactions] attribute USVString srcset;
+    [CEReactions] attribute DOMString sizes;
+    [CEReactions] attribute DOMString media;
+}</pre>
+        </dd>
+    </dl>
+    <h4><a name="element-img"></a>4.8.3 The img element</h4>
+    <p>img元素表示一个图片</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="dom.html#category-embedded">Embedded content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="dom.html#category-embedded">Embedded content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLImageElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute DOMString alt;
+            [CEReactions] attribute USVString src;
+            [CEReactions] attribute USVString srcset;
+            [CEReactions] attribute DOMString sizes;
+            [CEReactions] attribute DOMString? crossOrigin;
+            [CEReactions] attribute DOMString useMap;
+            [CEReactions] attribute boolean isMap;
+            [CEReactions] attribute unsigned long width;
+            [CEReactions] attribute unsigned long height;
+            readonly attribute unsigned long naturalWidth;
+            readonly attribute unsigned long naturalHeight;
+            readonly attribute boolean complete;
+            readonly attribute USVString currentSrc;
+            [CEReactions] attribute DOMString referrerPolicy;
+            [CEReactions] attribute DOMString decoding;
+            [CEReactions] attribute DOMString loading;
+
+            Promise<void> decode();
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-iframe">4.8.5 The iframe element</h4>
+    <p>iframe元素表示its nested browsing context</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="dom.html#category-embedded">Embedded content</a></dd>
+        <dd><a href="dom.html#category-interactive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="dom.html#category-embedded">Embedded content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLIFrameElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute USVString src;
+            [CEReactions] attribute DOMString srcdoc;
+            [CEReactions] attribute DOMString name;
+            [SameObject, PutForwards=value] readonly attribute DOMTokenList sandbox;
+            [CEReactions] attribute DOMString allow;
+            [CEReactions] attribute boolean allowFullscreen;
+            [CEReactions] attribute boolean allowPaymentRequest;
+            [CEReactions] attribute DOMString width;
+            [CEReactions] attribute DOMString height;
+            [CEReactions] attribute DOMString referrerPolicy;
+            readonly attribute <a href="../dom/DOM4/index.html#interface-document">Document</a>? contentDocument;
+            readonly attribute WindowProxy? contentWindow;
+            Document? getSVGDocument();
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-object">4.8.7 The object element</h4>
+    <p>iframe元素表示引入一个外部资源, 这个资源可能是一张图片, 一个pdf文件, 一个flash文件等</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="dom.html#category-embedded">Embedded content</a></dd>
+        <dd><a href="dom.html#category-interactive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="dom.html#category-embedded">Embedded content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>0 or 多个 param元素</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLObjectElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute USVString data;
+            [CEReactions] attribute DOMString type;
+            [CEReactions] attribute DOMString name;
+            [CEReactions] attribute DOMString useMap;
+            readonly attribute HTMLFormElement? form;
+            [CEReactions] attribute DOMString width;
+            [CEReactions] attribute DOMString height;
+            readonly attribute Document? contentDocument;
+            readonly attribute WindowProxy? contentWindow;
+            Document? getSVGDocument();
+          
+            readonly attribute boolean willValidate;
+            readonly attribute ValidityState validity;
+            readonly attribute DOMString validationMessage;
+            boolean checkValidity();
+            boolean reportValidity();
+            void setCustomValidity(DOMString error);
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-video">4.8.9 The video element</h4>
+    <p>video元素用于在HTML中嵌入媒体播放器, 播放文档内的视频</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="dom.html#category-embedded">Embedded content</a></dd>
+        <dd><a href="dom.html#category-interactive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="dom.html#category-embedded">Embedded content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>如果存在src特性, 0 or 多个 track 元素</dd>
+        <dd>如果不存在src特性, 0 or 多个 source 元素, 然后0 or 多个 track 元素</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLVideoElement : <a href="#interface-htmlmediaelement">HTMLMediaElement</a> {
+            [HTMLConstructor] constructor();
+
+    [CEReactions] attribute unsigned long width;
+    [CEReactions] attribute unsigned long height;
+    readonly attribute unsigned long videoWidth;
+    readonly attribute unsigned long videoHeight;
+    [CEReactions] attribute USVString poster;
+    [CEReactions] attribute boolean playsInline;
+}</pre>
+        </dd>
+    </dl>
+    <h4 id="element-audio">4.8.10 The audio element</h4>
+    <p>audio元素表示音频</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dd><a href="dom.html#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="dom.html#category-embedded">Embedded content</a></dd>
+        <dd><a href="dom.html#category-interactive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="dom.html#category-embedded">Embedded content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>如果存在src特性, 0 or 多个 track 元素</dd>
+        <dd>如果不存在src特性, 0 or 多个 source 元素, 然后0 or 多个 track 元素</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLAudioElement : <a href="dom.html#interface-htmlmediaelement">HTMLMediaElement</a> {
+            [HTMLConstructor] constructor();
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-track">4.8.11 The track element</h4>
+    <p>track元素表示音频</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>video, audio</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>nothing</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLTrackElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute DOMString kind;
+            [CEReactions] attribute USVString src;
+            [CEReactions] attribute DOMString srclang;
+            [CEReactions] attribute DOMString label;
+            [CEReactions] attribute boolean default;
+          
+            const unsigned short NONE = 0;
+            const unsigned short LOADING = 1;
+            const unsigned short LOADED = 2;
+            const unsigned short ERROR = 3;
+            readonly attribute unsigned short readyState;
+          
+            readonly attribute TextTrack track;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="media-elements">4.8.12 Media elements</h4>
+    <p><a href="#interface-htmlmediaelement">HTMLMediaElement</a>对象被称为media elements</p>
+    <div>
+        <pre>interface <dfn id="interface-htmlmediaelement">HTMLMediaElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+
+            // error state
+            readonly attribute MediaError? error;
+          
+            // network state
+            [CEReactions] attribute USVString src;
+            attribute MediaProvider? srcObject;
+            readonly attribute USVString currentSrc;
+            [CEReactions] attribute DOMString? crossOrigin;
+            const unsigned short NETWORK_EMPTY = 0;
+            const unsigned short NETWORK_IDLE = 1;
+            const unsigned short NETWORK_LOADING = 2;
+            const unsigned short NETWORK_NO_SOURCE = 3;
+            readonly attribute unsigned short networkState;
+            [CEReactions] attribute DOMString preload;
+            readonly attribute TimeRanges buffered;
+            void load();
+            CanPlayTypeResult canPlayType(DOMString type);
+          
+            // ready state
+            const unsigned short HAVE_NOTHING = 0;
+            const unsigned short HAVE_METADATA = 1;
+            const unsigned short HAVE_CURRENT_DATA = 2;
+            const unsigned short HAVE_FUTURE_DATA = 3;
+            const unsigned short HAVE_ENOUGH_DATA = 4;
+            readonly attribute unsigned short readyState;
+            readonly attribute boolean seeking;
+          
+            // playback state
+            attribute double currentTime;
+            void fastSeek(double time);
+            readonly attribute unrestricted double duration;
+            object getStartDate();
+            readonly attribute boolean paused;
+            attribute double defaultPlaybackRate;
+            attribute double playbackRate;
+            readonly attribute TimeRanges played;
+            readonly attribute TimeRanges seekable;
+            readonly attribute boolean ended;
+            [CEReactions] attribute boolean autoplay;
+            [CEReactions] attribute boolean loop;
+            Promise<void> play();
+            void pause();
+          
+            // controls
+            [CEReactions] attribute boolean controls;
+            attribute double volume;
+            attribute boolean muted;
+            [CEReactions] attribute boolean defaultMuted;
+          
+            // tracks
+            [SameObject] readonly attribute AudioTrackList audioTracks;
+            [SameObject] readonly attribute VideoTrackList videoTracks;
+            [SameObject] readonly attribute TextTrackList textTracks;
+            TextTrack addTextTrack(TextTrackKind kind, optional DOMString label = "", optional DOMString language = "");
+          }</pre>
+    </div>
+    <h4 id="element-table">4.9.1 The table element</h4>
+    <p>table元素用来表示表格数据</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="dom.html#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd>可选的caption, 然后跟0 或多个colgroup, 然后跟一个可选的thead,
+            然后要么跟0 或多个tbody, 要么跟0 或多个tr, 然后跟一个可选的tfoot
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface HTMLTableElement : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute <a href="#interface-htmltablecaptionelement">HTMLTableCaptionElement</a>? caption;
+            <a href="#interface-htmltablecaptionelement">HTMLTableCaptionElement</a> createCaption();
+            [CEReactions] void deleteCaption();
+
+            [CEReactions] attribute <a href="#interface-htmltablesectionelement">HTMLTableSectionElement</a>? tHead;
+            <a href="#interface-htmltablesectionelement">HTMLTableSectionElement</a> createTHead();
+            [CEReactions] void deleteTHead();
+
+            [CEReactions] attribute <a href="#interface-htmltablesectionelement">HTMLTableSectionElement</a>? tFoot;
+            <a href="#interface-htmltablesectionelement">HTMLTableSectionElement</a> createTFoot();
+            [CEReactions] void deleteTFoot();
+
+            [SameObject] readonly attribute <a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> tBodies;
+            <a href="#interface-htmltablesectionelement">HTMLTableSectionElement</a> createTBody();
+
+            [SameObject] readonly attribute <a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> rows;
+            <a href="#interface-htmltablerowelement">HTMLTableRowElement</a> insertRow(optional long index = -1);
+            [CEReactions] void deleteRow(long index);
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-caption">4.9.2 The caption element</h4>
+    <p>caption元素用来表示表格的标题, 说明</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>table</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            <a href="#category-flow">Flow content</a>
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmltablecaptionelement">HTMLTableCaptionElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-colgroup">4.9.3 The colgroup element</h4>
+    <p>colgroup元素表示表格数据中的列的容器</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>table</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            如果存在span特性, nothing; 如果不存在, 0 或多个col
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>span</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmltablecolelement">HTMLTableColElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-col">4.9.4 The col element</h4>
+    <p>col元素用来表示表格数据中的一列</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>colgroup</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            nothing
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>span</dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="#interface-htmltablecolelement">HTMLTableColElement</a>
+        </dd>
+    </dl>
+    <h4 id="element-tbody">4.9.5 The tbody element</h4>
+    <p>tobdy元素表示表格的主体, 包含多个行</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>table</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            0 或多个tr
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmltablesectionelement">HTMLTableSectionElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [SameObject] readonly attribute <a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> rows;
+            <a href="#interface-htmltablerowelement">HTMLTableRowElement</a> insertRow(optional long index = -1);
+            [CEReactions] void deleteRow(long index);
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-thead">4.9.6 The thead element</h4>
+    <p>thead元素表示表格中的列头的行</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>table</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            0 或多个tr
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="#interface-htmltablesectionelement">HTMLTableSectionElement</a>
+        </dd>
+    </dl>
+    <h4 id="element-tfoot">4.9.7 The tfoot element</h4>
+    <p>tfoot元素表示表格中各列的汇总行</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>table</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            <a href="#category-flow">Flow content</a>
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="#interface-htmltablesectionelement">HTMLTableSectionElement</a>
+        </dd>
+    </dl>
+    <h4 id="element-tr">4.9.8 The tr element</h4>
+    <p>tr元素表示表格中的一行</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>table, thead, tbody, tfoot</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            0 或多个td, th
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmltablerowelement">HTMLTableRowElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            readonly attribute long rowIndex;
+            readonly attribute long sectionRowIndex;
+            [SameObject] readonly attribute HTMLCollection cells;
+            HTMLTableCellElement insertCell(optional long index = -1);
+            [CEReactions] void deleteCell(long index);
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-th">4.9.9 The th element</h4>
+    <p>th元素表示表格中的表头单元格</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>tr</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            <a href="#category-flow">Flow content</a>
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>colspan</dd>
+        <dd>rowspan</dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="#interface-htmltablecellelement">HTMLTableCellElement</a>
+        </dd>
+    </dl>
+    <h4 id="element-td">4.9.10 The td element</h4>
+    <p>td元素表示表格中的一个单元格</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>Sectioning root</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>tr</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            <a href="#category-flow">Flow content</a>
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>colspan</dd>
+        <dd>rowspan</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmltablecellelement">HTMLTableCellElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute unsigned long colSpan;
+            [CEReactions] attribute unsigned long rowSpan;
+            [CEReactions] attribute DOMString headers;
+            readonly attribute long cellIndex;
+
+            [CEReactions] attribute DOMString scope; // only conforming for th elements
+            [CEReactions] attribute DOMString abbr;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-form">4.10.3 The form element</h4>
+    <p>form元素是文档中的一个区域, 此区域包含有交互控制元件, 用来向 Web 服务器提交信息</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            <a href="#category-flow">Flow content</a>, 除了form
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlformelement">HTMLFormElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute DOMString acceptCharset;
+            [CEReactions] attribute USVString action;
+            [CEReactions] attribute DOMString autocomplete;
+            [CEReactions] attribute DOMString enctype;
+            [CEReactions] attribute DOMString encoding;
+            [CEReactions] attribute DOMString method;
+            [CEReactions] attribute DOMString name;
+            [CEReactions] attribute boolean noValidate;
+            [CEReactions] attribute DOMString target;
+            [CEReactions] attribute DOMString rel;
+            [SameObject, PutForwards=value] readonly attribute DOMTokenList relList;
+          
+            [SameObject] readonly attribute <a href="#htmlformcontrolscollection">HTMLFormControlsCollection</a> elements;
+            readonly attribute unsigned long length;
+            getter <a href="../dom/DOM4/index.html#interfac-element">Element</a> (unsigned long index);
+            getter (<a href="#interface-radionodelist">RadioNodeList</a> or <a href="../dom/DOM4/index.html#interfac-element">Element</a>) (DOMString name);
+          
+            void submit();
+            void requestSubmit(optional <a href="dom.html#interface-htmlelement">HTMLElement</a>? submitter = null);
+            [CEReactions] void reset();
+            boolean checkValidity();
+            boolean reportValidity();
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-label">4.10.4 The label element</h4>
+    <p>label元素表示说明</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="#category-interavtive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            <a href="#category-phrasing">Phrasing content</a>
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dd>for</dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmllabelelement">HTMLLabelElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+  readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+  //对应label元素中的for特性
+  [CEReactions] attribute DOMString htmlFor;
+  readonly attribute <a href="dom.html#interface-htmlelement">HTMLElement</a>? control;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-input">4.10.5 The input element</h4>
+    <p>input元素, type特性值不同, 表示的意义不同</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="#category-interavtive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            nothing
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlinputelement">HTMLInputElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute DOMString accept;
+            [CEReactions] attribute DOMString alt;
+            [CEReactions] attribute DOMString autocomplete;
+            [CEReactions] attribute boolean defaultChecked;
+            attribute boolean checked;
+            [CEReactions] attribute DOMString dirName;
+            [CEReactions] attribute boolean disabled;
+            readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+            attribute <a href="">FileList</a>? files;
+            [CEReactions] attribute USVString formAction;
+            [CEReactions] attribute DOMString formEnctype;
+            [CEReactions] attribute DOMString formMethod;
+            [CEReactions] attribute boolean formNoValidate;
+            [CEReactions] attribute DOMString formTarget;
+            [CEReactions] attribute unsigned long height;
+            attribute boolean indeterminate;
+            readonly attribute <a href="#interface-htmlelement">HTMLElement</a>? list;
+            [CEReactions] attribute DOMString max;
+            [CEReactions] attribute long maxLength;
+            [CEReactions] attribute DOMString min;
+            [CEReactions] attribute long minLength;
+            [CEReactions] attribute boolean multiple;
+            [CEReactions] attribute DOMString name;
+            [CEReactions] attribute DOMString pattern;
+            [CEReactions] attribute DOMString placeholder;
+            [CEReactions] attribute boolean readOnly;
+            [CEReactions] attribute boolean required;
+            [CEReactions] attribute unsigned long size;
+            [CEReactions] attribute USVString src;
+            [CEReactions] attribute DOMString step;
+            [CEReactions] attribute DOMString type;
+            [CEReactions] attribute DOMString defaultValue;
+            [CEReactions] attribute [TreatNullAs=EmptyString] DOMString value;
+            attribute object? valueAsDate;
+            attribute unrestricted double valueAsNumber;
+            [CEReactions] attribute unsigned long width;
+          
+            void stepUp(optional long n = 1);
+            void stepDown(optional long n = 1);
+          
+            readonly attribute boolean willValidate;
+            readonly attribute ValidityState validity;
+            readonly attribute DOMString validationMessage;
+            boolean checkValidity();
+            boolean reportValidity();
+            void setCustomValidity(DOMString error);
+          
+            readonly attribute <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a>? labels;
+          
+            void select();
+            attribute unsigned long? selectionStart;
+            attribute unsigned long? selectionEnd;
+            attribute DOMString? selectionDirection;
+            void setRangeText(DOMString replacement);
+            void setRangeText(DOMString replacement, unsigned long start, unsigned long end, optional SelectionMode selectionMode = "preserve");
+            void setSelectionRange(unsigned long start, unsigned long end, optional DOMString direction);
+          }</pre>
+        </dd>
+    </dl>
+    <p><strong>type特性值:</strong></p>
+    <p>默认值是text</p>
+    <table>
+        <tr>
+            <th>keyword</th><th>data type</th><th>control type</th>
+        </tr>
+        <tr>
+            <td>hidden</td>
+            <td>任意字符串</td> 
+            <td> </td>
+        </tr>
+        <tr>
+            <td>text</td>
+            <td>不带换行的文本</td> 
+            <td>单行文本框控件</td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td>不带换行的文本</td> 
+            <td>密码框控件</td>
+        </tr>
+        <tr>
+            <td>checkbox</td>
+            <td>0 or 多个值</td> 
+            <td>复选框控件</td>
+        </tr>
+        <tr>
+            <td>radio</td>
+            <td>一个枚举值</td> 
+            <td>单选按钮控件</td>
+        </tr>
+        <tr>
+            <td>file</td>
+            <td>0 or 多个</td> 
+            <td>一个说明和一个按钮</td>
+        </tr>
+        <tr>
+            <td>submit</td>
+            <td>一个枚举值</td> 
+            <td>按钮控件</td>
+        </tr>
+        <tr>
+            <td>reset</td>
+            <td></td> 
+            <td>按钮控件</td>
+        </tr>
+        <tr>
+            <td>button</td>
+            <td></td> 
+            <td>按钮控件</td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td>一个坐标系</td> 
+            <td>图片按钮控件</td>
+        </tr>
+        <tr>
+            <td>search</td>
+            <td>不带换行的文本</td> 
+            <td>文本输入控件</td>
+        </tr>
+        <tr>
+            <td>tel</td>
+            <td>不带换行的文本</td> 
+            <td>文本输入控件</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>一个email</td> 
+            <td>文本输入控件</td>
+        </tr>
+        <tr>
+            <td>url</td>
+            <td>一个url</td> 
+            <td>文本输入控件</td>
+        </tr>
+        <tr>
+            <td>number</td>
+            <td>一个数值</td> 
+            <td>数字按钮控件</td>
+        </tr>
+        <tr>
+            <td>range</td>
+            <td>一个数值</td> 
+            <td>slider控件</td>
+        </tr>
+        <tr>
+            <td>color</td>
+            <td>8位的rgb值</td> 
+            <td>颜色选择器控件</td>
+        </tr>
+        <tr>
+            <td>date</td>
+            <td>一个日期, 不带时区</td> 
+            <td>日期控件(可以选择年和月和日)</td>
+        </tr>
+        <tr>
+            <td>month</td>
+            <td>一个日期, 不带时区</td> 
+            <td>日期控件(可以选择年和月)</td>
+        </tr>
+        <tr>
+            <td>week</td>
+            <td>一个日期, 不带时区</td> 
+            <td>日期控件(可以选择年和周)</td>
+        </tr>
+        <tr>
+            <td>time</td>
+            <td>一个时间, 不带时区</td> 
+            <td>时间控件</td>
+        </tr>
+    </table>
+    <h4 id="element-button">4.10.6 The button element</h4>
+    <p>button元素表示一个按钮</p>
+    <p>type特性是一个枚举值, 包含submit(默认), reset, button</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="#category-interavtive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+            <a href="#category-phrasing">Phrasing content</a>, 但是后代不能是<a href="#category-interavtive">Interactive content</a>
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlbuttonelement">HTMLButtonElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute boolean disabled;
+            readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+            [CEReactions] attribute USVString formAction;
+            [CEReactions] attribute DOMString formEnctype;
+            [CEReactions] attribute DOMString formMethod;
+            [CEReactions] attribute boolean formNoValidate;
+            [CEReactions] attribute DOMString formTarget;
+            [CEReactions] attribute DOMString name;
+            [CEReactions] attribute DOMString type;
+            [CEReactions] attribute DOMString value;
+          
+            readonly attribute boolean willValidate;
+            readonly attribute ValidityState validity;
+            readonly attribute DOMString validationMessage;
+            boolean checkValidity();
+            boolean reportValidity();
+            void setCustomValidity(DOMString error);
+          
+            readonly attribute <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a> labels;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-select">4.10.7 The select element</h4>
+    <p>select元素表示一个控件, 从一个选项集中进行选择</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="#category-interavtive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+           0 到多个 option, optgroup
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlselectelement">HTMLSelectElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute DOMString autocomplete;
+  [CEReactions] attribute boolean disabled;
+  readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+  [CEReactions] attribute boolean multiple;
+  [CEReactions] attribute DOMString name;
+  [CEReactions] attribute boolean required;
+  [CEReactions] attribute unsigned long size;
+
+  readonly attribute DOMString type;
+
+  [SameObject] readonly attribute <a href="#interface-htmloptionscollection">HTMLOptionsCollection</a> options;
+  [CEReactions] attribute unsigned long length;
+  getter <a href="../dom/DOM4/index.html#interface-element">Element</a>? item(unsigned long index);
+  <a href="interface-htmloptionelement">HTMLOptionElement</a>? namedItem(DOMString name);
+  [CEReactions] void add((<a href="interface-htmloptionelement">HTMLOptionElement</a> or <a href="interface-htmloptgroupelement">HTMLOptGroupElement</a>) element, optional (<a href="interface-htmlelement">HTMLElement</a> or long)? before = null);
+  [CEReactions] void remove(); // ChildNode overload
+  [CEReactions] void remove(long index);
+  [CEReactions] setter void (unsigned long index, <a href="interface-htmloptionelement">HTMLOptionElement</a>? option);
+
+  [SameObject] readonly attribute <a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> selectedOptions;
+  attribute long selectedIndex;
+  attribute DOMString value;
+
+  readonly attribute boolean willValidate;
+  readonly attribute ValidityState validity;
+  readonly attribute DOMString validationMessage;
+  boolean checkValidity();
+  boolean reportValidity();
+  void setCustomValidity(DOMString error);
+
+  readonly attribute <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a> labels;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-optgroup">4.10.9 The optgroup element</h4>
+    <p>optgroup元素表示带标签的一组option</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>select</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+           0 到多个 option
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlselectelement">HTMLSelectElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+           
+  [CEReactions] attribute boolean disabled;
+  [CEReactions] attribute DOMString label;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-option">4.10.10 The option element</h4>
+    <p>option元素表示select元素中的一个option</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>select, optgroup</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+           nothing or text
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlselectelement">HTMLSelectElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+           
+            [CEReactions] attribute boolean disabled;
+            readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+            [CEReactions] attribute DOMString label;
+            [CEReactions] attribute boolean defaultSelected;
+            attribute boolean selected;
+            [CEReactions] attribute DOMString value;
+          
+            [CEReactions] attribute DOMString text;
+            readonly attribute long index;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-textarea">4.10.11 The textarea element</h4>
+    <p>textarea元素表示一个多行纯文本编辑控件</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dd><a href="#category-interavtive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>
+           text
+        </dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmltextareaelement">HTMLTextAreaElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+            [CEReactions] attribute DOMString autocomplete;
+  [CEReactions] attribute unsigned long cols;
+  [CEReactions] attribute DOMString dirName;
+  [CEReactions] attribute boolean disabled;
+  readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+  [CEReactions] attribute long maxLength;
+  [CEReactions] attribute long minLength;
+  [CEReactions] attribute DOMString name;
+  [CEReactions] attribute DOMString placeholder;
+  [CEReactions] attribute boolean readOnly;
+  [CEReactions] attribute boolean required;
+  [CEReactions] attribute unsigned long rows;
+  [CEReactions] attribute DOMString wrap;
+
+  readonly attribute DOMString type;
+  [CEReactions] attribute DOMString defaultValue;
+  attribute [TreatNullAs=EmptyString] DOMString value;
+  readonly attribute unsigned long textLength;
+
+  readonly attribute boolean willValidate;
+  readonly attribute ValidityState validity;
+  readonly attribute DOMString validationMessage;
+  boolean checkValidity();
+  boolean reportValidity();
+  void setCustomValidity(DOMString error);
+
+  readonly attribute <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a> labels;
+
+  void select();
+  attribute unsigned long selectionStart;
+  attribute unsigned long selectionEnd;
+  attribute DOMString selectionDirection;
+  void setRangeText(DOMString replacement);
+  void setRangeText(DOMString replacement, unsigned long start, unsigned long end, optional SelectionMode selectionMode = "preserve");
+  void setSelectionRange(unsigned long start, unsigned long end, optional DOMString direction);
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-output">4.10.12 The output element</h4>
+    <p>output元素表示一个计算结果</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmloutputelement">HTMLOutputElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+    [SameObject, PutForwards=value] readonly attribute DOMTokenList htmlFor;
+    readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+    [CEReactions] attribute DOMString name;
+
+    readonly attribute DOMString type;
+    [CEReactions] attribute DOMString defaultValue;
+    [CEReactions] attribute DOMString value;
+
+    readonly attribute boolean willValidate;
+    readonly attribute <a>ValidityState</a> validity;
+    readonly attribute DOMString validationMessage;
+    boolean checkValidity();
+    boolean reportValidity();
+    void setCustomValidity(DOMString error);
+
+    readonly attribute <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a> labels;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-progress">4.10.13 The progress element</h4>
+    <p>progress元素表示一个任务的完成进度</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlprogresselement">HTMLProgressElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+    [CEReactions] attribute double value;
+    [CEReactions] attribute double max;
+    readonly attribute double position;
+    readonly attribute <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a> labels;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-meter">4.10.14 The meter element</h4>
+    <p>meter元素用来显示已知范围的标量值或者分数值</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlmeterelement">HTMLMeterElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+    [CEReactions] attribute double value;
+    [CEReactions] attribute double min;
+    [CEReactions] attribute double max;
+    [CEReactions] attribute double low;
+    [CEReactions] attribute double high;
+    [CEReactions] attribute double optimum;
+    readonly attribute <a href="../dom/DOM4/index.html#interface-nodelist">NodeList</a> labels;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-fieldset">4.10.15 The fieldset element</h4>
+    <p>fieldset元素表示form控件分组, 带一个可选的caption</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="#category-phrasing">Phrasing content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmlfieldsetelement">HTMLFieldSetElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+    [CEReactions] attribute boolean disabled;
+    readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+    [CEReactions] attribute DOMString name;
+
+    readonly attribute DOMString type;
+
+    [SameObject] readonly attribute <a href="../dom/DOM4/index.html#interface-htmlcollection">HTMLCollection</a> elements;
+
+    readonly attribute boolean willValidate;
+    [SameObject] readonly attribute <a>ValidityState</a> validity;
+    readonly attribute DOMString validationMessage;
+    boolean checkValidity();
+    boolean reportValidity();
+    void setCustomValidity(DOMString error);
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-legend">4.10.16 The legend element</h4>
+    <p>legend元素用来显示已知范围的标量值或者分数值</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>fieldset</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmllegendelement">HTMLLegendElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+    readonly attribute <a href="#interface-htmlformelement">HTMLFormElement</a>? form;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-details">4.11.1 The details element</h4>
+    <p>details元素表示一个可折叠控件, 只有在展开状态下才会显示内含的内容</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd><a href="#category-flow">Flow content</a></dd>
+        <dd><a href="">Sectioning root</a></dd>
+        <dd><a href="#category-interactive">Interactive content</a></dd>
+        <dt>允许的父元素类型</dt>
+        <dd>接受<a href="#category-flow">Flow content</a>的地方</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>一个summary后面跟<a href="#category-flow">Flow content</a></dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd><pre>interface <dfn id="interface-htmldetailselement">HTMLDetailsElement</dfn> : <a href="dom.html#interface-htmlelement">HTMLElement</a> {
+            [HTMLConstructor] constructor();
+
+    [CEReactions] attribute boolean open;
+          }</pre>
+        </dd>
+    </dl>
+    <h4 id="element-summary">4.11.2 The summary element</h4>
+    <p>summary元素表示其父元素details中其余内容的总结, 说明或解释</p>
+    <dl>
+        <dt>Categories</dt>
+        <dd>none</dd>
+        <dt>允许的父元素类型</dt>
+        <dd>details</dd>
+        <dt>允许的子元素类型</dt>
+        <dd>接受<a href="#category-phrasing">Phrasing content</a>的地方</dd>
+        <dt>Content attributes:</dt>
+        <dd><a href="dom.html#global-attributes">Global attributes</a></dd>
+        <dt>DOM interface</dt>
+        <dd>使用 <a href="dom.html#interface-htmlelement">HTMLElement</a>
+        </dd>
+    </dl>
+</body>
+</html>

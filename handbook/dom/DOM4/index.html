@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Spec(WHATWG)</title>
+    <link rel="stylesheet" href="../../base.css">
+</head>
+<body>
+    <h1>DOM Spec(WHATWG)</h1>
+    <p><strong>Contents</strong></p>
+    <a href="#intro">Introduction</a>
+    <ul class="table-of-content">
+        <li>
+            <a href="#infrastructure">1 Infrastructure</a>
+            <ul>
+                <li><a href="#trees">1.1 Trees</a></li>   
+                <li><a href="#ordered-sets">1.2 Ordered sets</a></li>
+                <li><a href="#selectors">1.3 Selectors</a></li>
+                <li><a href="#namespaces">1.4 Namespaces</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#events">2 Events</a>
+            <ul>
+                <li><a href="#intro-to-events">2.1 Introduction to "DOM Events"</a></li>
+                <li><a href="#interface-event">2.2 Interface Event</a></li>
+                <li><a href="#interface-window-extensions">2.3 Legacy extensions to the Window interface</a></li>
+                <li><a href="#interface-customevent">2.4 Interface CustomEvent</a></li>
+                <li><a href="#event-constructing">2.5 Constructing events</a></li>
+                <li><a href="#event-defining">2.6 Defining event interfaces</a></li>
+                <li><a href="#interface-eventtarget">2.7 Interface EventTarget</a></li>
+                <li><a href="#observing-event-listeners">2.8 Observing event listeners</a></li>
+                <li><a href="#dispatching-events">2.9 Dispatching events</a></li>
+                <li><a href="#fire-events">2.10 Firing events</a></li>
+                <li><a href="#event-dispatching">2.11 Action versus occurrence</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#aborting-ongoing-activities">3 Aborting ongoing activities</a>
+            <ul>
+                <li><a href="#interface-abortcontroller">3.1 Interface AbortController</a></li>
+                <li><a href="#interface-AbortSignal">3.2 Interface AbortSignal</a></li>
+                <li><a href="#abortcontroller-api-integration">3.3 Using AbortController and AbortSignal objects in APIs</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#node">4 Nodes</a>
+            <ul>
+                <li><a href="#intro-to-dom">4.1 Introduction to "The DOM"</a></li>
+                <li><a href="#node-tree">4.2 Node tree</a>
+                    <ul>
+                        <li><a href="#doucment-tree">4.2.1 Document tree</a></li>
+                        <li><a href="#shadow-tree">4.2.2 Shadow tree</a>
+                            <ul>
+                                <li><a href="#slots">4.2.2.1 Slots</a></li>
+                                <li><a href="#slotables">4.2.2.2 Slotables</a></li>
+                                <li><a href="#finding-slots-slotables">4.2.2.3 Finding slots and slotables</a></li>
+                                <li><a href="#assigning-slotables-slots">4.2.2.4 Assigning slotables and slots</a></li>
+                                <li><a href="#signaling-slot-change">4.2.2.5 Signaling slot change</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#mutation-algorithms">4.2.3 Mutation algorithms</a></li>
+                        <li><a href="#interface-nonelementparentnode">4.2.4 Mixin NonElementParentNode</a></li>
+                        <li><a href="#interface-documentorshadowroot">4.2.5 Mixin DocumentOrShadowRoot</a></li>
+                        <li><a href="#interface-parentnode">4.2.6 Mixin ParentNode</a></li>
+                        <li><a href="#interface-nondocumenttypechildnode">4.2.7 Mixin NonDocumentTypeChildNode</a></li>
+                        <li><a href="#interface-childnode">4.2.8 Mixin ChildNode</a></li>
+                        <li><a href="#interface-slotable">4.2.9 Mixin Slotable</a></li>
+                        <li><a href="#old-style-collections">4.2.10 Old-style collections: NodeList and HTMLCollection</a>
+                            <ul>
+                                <li><a href="#interface-nodelist">4.2.10.1 Interface NodeList</a></li>
+                                <li><a href="#interface-htmlcollection">4.2.10.2 Interface HTMLCollection</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#mutation-observer">4.3 Mutation observers</a>
+                    <ul>
+                        <li><a href="#interface-mutationobserver">4.3.1 Interface MutationObserver</a></li>
+                        <li><a href="#queuing-mutation-record">4.3.2 Queuing a mutation record</a></li>
+                        <li><a href="#interface-mutationrecord">4.3.3 Interface MutationRecord</a></li>
+                        <li><a href="#gc">4.3.4 Garbage collection</a></li>
+                    </ul>
+                </li>
+                <li><a href="#interface-node">4.4 Interface Node</a></li>
+                <li><a href="#interface-document">4.5 Interface Document</a>
+                    <ul>
+                        <li><a href="interface-domimplementation">4.5.1 Interface DOMImplementation</a></li>
+                    </ul>
+                </li>
+                <li><a href="#interface-documenttype">4.6 Interface DocumentType</a></li>
+                <li><a href="#interface-documentfragment">4.7 Interface DocumentFragment</a></li>
+                <li><a href="#interface-shadowroot">4.8  Interface ShadowRoot</a></li>
+                <li><a href="#interface-element">4.9 Interface Element</a>
+                    <ul>
+                        <li><a href="#interface-namednodemap">4.9.1 Interface NamedNodeMap</a></li>
+                        <li><a href="#interface-attr">4.9.2 Interface Attr</a></li>
+                    </ul>
+                </li>
+                <li><a href="#interface-characterdata">4.10 Interface CharacterData</a></li>
+                <li><a href="#interface-text">4.11 Interface Text</a></li>
+                <li><a href="#interface-cdatasection">4.12 Interface CDATASection</a></li>
+                <li><a href="#interface-processinginstruction">4.13 Interface ProcessingInstruction</a></li>
+                <li><a href="#interface-comment">4.14 Interface Comment</a></li>
+            </ul>
+        </li>
+        <li><a href="#ranges">5 Ranges</a></li>
+        <li>
+            <a href="#traversal">6 Traversal</a>
+        </li>
+        <li>
+            <a href="#sets">7 Sets</a>
+            <ul>
+                <li><a href="#interface-domtokenlist">7.1 Interface DOMTokenList</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#xpath">8 XPath</a>
+        </li>
+        <li>
+            <a href="#historical">9 Historical</a>
+            <ul>
+                <li><a href="#dom-events-changes">9.1 DOM Events</a></li>
+                <li><a href="#dom-core-changes">9.2 DOM Core</a></li>
+                <li><a href="#dom-ranges-changes">9.3 DOM Ranges</a></li>
+                <li><a href="#dom-traversal-changes">9.4 DOM Traversal</a></li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name="infrastructure"></a>1 Infrastructure</h2>
+    <h3><a name="trees"></a>1.1 Trees</h3>   
+    <h3><a name="ordered-sets"></a>1.2 Ordered sets</h3>
+    <h3><a name="selectors"></a>1.3 Selectors</h3>
+    <h3><a name="namespaces"></a>1.4 Namespaces</h3>
+    <h2><a name="events"></a>2 Events</h2>
+    <h3><a name="intro-to-events"></a>2.1 Introduction to "DOM Events"</h3>
+    <h3><a name="interface-event"></a>2.2 Interface Event</h3>
+    <div>
+        <pre>interface Event{
+    constructor(DOMString type, optional <a href="#eventinit">EventInit</a> eventInitDic = {})
+
+    <span class="comment">//返回事件的类型, eg. "click"</span>        
+    readonly attribute DOMString        type;
+
+    <span class="comment">//返回一个对象, 事件被dispatched给了这个对象</span>   
+    readonly attribute <a href="#interface-eventtarget">EventTarget</a>?         target;
+
+    <span class="comment">//返回一个对象, 这个对象的event listener的callback正在被调用</span>   
+    readonly attribute <a href="#interface-eventtarget">EventTarget</a>?         currentTarget;
+
+    readonly attribute <a href="#interface-eventtarget">EventTarget</a>? srcElement; // historical
+
+    const unsigned short        NONE = 0;
+    const unsigned short        CAPTURING_PHASE = 1;
+    const unsigned short        AT_TARGET = 2;
+    const unsigned short        BUBBLING_PHASE = 3;
+    
+    <span class="comment">//NONE: 一个事件在没有被dispatched时所处的阶段</span>   
+    <span class="comment"></span>//CAPTURING_PHASE: 当一个事件被dispatched给了一个对象(event.target), 在事件到达event.target之前其所处的阶段</span>
+    <span class="comment"></span>//AT_TARGET: 当一个事件被dispatched给了一个对象(event.target), 在事件到达event.target时所处的阶段</span>
+    <span class="comment"></span>//BUBBLING_PHASE: 当一个事件被dispatched给了一个对象(event.target), 在事件离开event.target之后其所处的阶段</span>
+    readonly attribute unsigned short       eventPhase;
+
+    
+    <span class="comment">//阻止事件到达任何对象, 除了currentTarget</span>   
+    void stopPropagation();
+
+    <span class="comment">//阻止事件到达任何对象, 除了currentTarget;</span>   
+    <span class="comment">//并且执行完当前的event listener后, 不会继续调用currentTarget上注册的其他event listener</span>   
+    void stopImmediatePropagation();
+
+    attribute boolean cancelBubble; // historical alias of .stopPropagation
+
+    <span class="comment">//返回true or false, 表示该事件是否会向上冒泡</span>   
+    readonly attribute boolean      bubbles;
+
+    <span class="comment">//返回true or false, 表示该事件是否支持取消; 如果是true表示可以通过调用preventDefault()方法来取消事件的默认行为</span>   
+    readonly attribute boolean      cancelable;
+
+    attribute boolean returnValue;  // historical
+
+    <span class="comment">//如果cancelable是true, 调用此方法可以取消事件的默认行为</span>   
+    void preventDefault();
+}
+
+dictionary <a name="eventinit"></a>EventInit {
+    boolean bubbles = false;
+    boolean cancelable = false;
+    boolean composed = false;
+}</pre>
+    </div>
+    <p>每一个事件都有以下相关的标记, 这些标记一开始都是没有设置的</p>
+    <ul>
+        <li>stop propagation flag</li>
+        <li>stop immediate propagation flag</li>
+        <li>canceled flag</li>
+        <li>initialized flag</li>
+        <li>dispatch flag</li>
+    </ul>
+    <p>stopPropagation()方法必须设置stop propagation flag</p>
+    <p>stopImmediatePropagation()方法必须设置stop propagation flag和stop immediate propagation flag</p>
+    <p>如果event.cancelable是true, preventDefault()方法必须设置canceled flag</p>
+    <p>初始化一个事件对象, 需要以下步骤:</p>
+    <ol>
+        <li>设置 initialized flag</li>
+        <li>取消 stop propagation flag, stop immediate propagation flag, and canceled flag 的设置</li>
+        <li>设置 target 属性为null</li>
+        <li>设置 type 属性为type</li>
+        <li>设置 bubbles 属性为bubbles</li>
+        <li>设置 cancelable 属性为cancelable</li>
+    </ol>
+    <h3><a name="interface-window-extensions"></a>2.3 Legacy extensions to the Window interface</h3>
+    <div>
+        <pre>partial interface Window {
+    [Replaceable] readonly attribute any event; // historical
+}</pre>
+    </div>
+    <h3><a name="interface-customevent"></a>2.4 Interface CustomEvent</h3>
+    <h3><a name="event-constructing"></a>2.4 Constructing events</h3>
+    <h3><a name="event-defining"></a>2.6 Defining event interfaces</h3>
+    <h3><a name="interface-eventtarget"></a>2.7 Interface EventTarget</h3>
+    <div>
+        <pre>interface EventTarget{
+    <span class="comment">//向EventTarget的event listener列表中添加一个event listener</span>
+    <span class="comment">//当capture是true时, 表示capture listener; 是false or 未设置时表示bubbling listener</span>
+    <span class="comment">//在CAPTURING_PHASE阶段, 只会调用capture listener中的callback</span>
+    <span class="comment">//在BUBBLING_PHASE阶段, 只会调用bubbling listener中的callback</span>
+    <span class="comment">//在AT_TARGET阶段, 会调用所有类型的event listener</span>
+    void addEventListener(DOMString type, <a href="#interface-eventlistener">EventListener</a>? callback, optional (<a href="#addeventlisteneroptions">AddEventListenerOptions</a> or boolean) options = {});
+
+    void removeEventListener(DOMString type, <a href="#interface-eventlistener">EventListener</a>? callback, optional (<a href="#eventlisteneroptions">EventListenerOptions</a> or boolean) options = {});
+    
+    boolean dispatchEvent(<a href="#interface-event">Event</a> event);
+}
+
+callback interface <a name="interface-eventlistener"></a>EventListener {
+    void handleEvent(<a href="#interface-event">Event</a> event);
+};
+  
+dictionary <a name="eventlisteneroptions"></a>EventListenerOptions {
+    boolean capture = false;
+};
+  
+dictionary <a name="addeventlisteneroptions"></a>AddEventListenerOptions : <a href="#eventlisteneroptions">EventListenerOptions</a> {
+    boolean passive = false;
+    boolean once = false;
+}</pre>
+    </div>
+    <p>EventTarget是一个对象, 当something发生时event被dispatched给了这个对象. 每一个EventTarget都有一个相关的列表, 用来存放event listener</p>
+    <p>每一个event listener都有一个相关的callback, 这个callback的参数是event对象</p>
+    <h3><a name="observing-event-listeners"></a>2.8 Observing event listeners</h3>
+    <h3><a name="dispatching-events"></a>2.9 Dispatching events</h3>
+    <p>把一个event dispatch给一个指定对象, 需要以下步骤:</p>
+    <ol>
+        <li>Let event be the event that is dispatched</li>
+        <li>设置 dispatch flag</li>
+        <li>初始化event对象的target属性为指定对象</li>
+        <li>初始化event path, 这是一个有序列表, 把DOM tree中指定对象的所有祖先元素按自顶向下的顺序依次放进列表</li>
+        <li>初始化event对象的eventPhase属性为CAPTUTING_PHASE</li>
+        <li>遍历event path中的每一个对象, <a href="#invoking">调用当前对象的event listeners</a>, 只要stop propagation flag没有设置</li>
+        <li>初始化event对象的eventPhase属性为AT_TARGET</li>
+        <li><a href="#invoking">调用指定对象的event listeners</a>, 只要stop propagation flag没有设置</li>
+        <li>
+            如果event对象的bubbles 属性是true, 则执行如下步骤:
+            <ol>
+                <li>Reverse event path的顺序</li>
+                <li>初始化event对象的eventPhase属性为BUBBLING_PHASE</li>
+                <li>遍历event path中的每一个对象, <a href="#invoking">调用当前对象的event listeners</a>, 只要stop propagation flag没有设置</li>
+            </ol>
+        </li>
+        <li>取消dispatch flag 设置</li>
+        <li>初始化event对象的eventPhase属性为NONE</li>
+        <li>初始化event对象的target属性为null</li>
+    </ol>
+    <p><a name="invoking" href="#">调用当前对象的event listeners</a>, 需要以下步骤:</p>
+    <ol>
+        <li>初始化event对象的currentTarget属性为evnet path上的当前对象</li>
+        <li>遍历event listeners列表中的每一个event listener, 然后:
+            <ol>
+                <li>如果设置了stop immediate propagation flag, 终止所有的调用</li>
+                <li>如果event对象的type属性不是listner的type, 终止并进入下一个event listener</li>
+                <li>如果event对象的eventPhase属性是CAPTURING_PHASE并且listner的capture是false, 终止并进入下一个event listener</li>
+                <li>如果event对象的eventPhase属性是BUBBLING_PHASE并且listner的capture是true, 终止并进入下一个event listener</li>
+                <li>调用listner的callback的handleEvent</li>
+            </ol>
+        </li>
+        
+    </ol>
+    <h3><a name="fire-events"></a>2.10 Firing events</h3>
+    <h3><a name="event-dispatching"></a>2.11 Action versus occurrence</h3>
+    <h2><a name="name="aborting-ongoing-activities""></a>3 Aborting ongoing activities</h2>
+    <h3><a name="interface-abortcontroller"></a>3.1 Interface AbortController</h3>
+    <h3><a name="interface-AbortSignal"></a>3.2 Interface AbortSignal</h3>
+    <h3><a name="abortcontroller-api-integration"></a>3.3 Using AbortController and AbortSignal objects in APIs</h3>
+    <h2><a name="node"></a>4 Nodes</h2> 
+    <h3><a name="intro-to-dom"></a>4.1 Introduction to "The DOM"</h3>
+    <a><a name="node-tree"></a>4.2 Node tree</h2> 
+    <h4><a name="doucment-tree"></a>4.2.1 Document tree</h4>
+    <h4><a name="shadow-tree"></a>4.2.2 Shadow tree</h4>
+    <h4><a name="slots"></a>4.2.2.1 Slots</h4>
+    <h4><a name="slotables"></a>4.2.2.2 Slotables</h4>
+    <h4><a name="finding-slots-slotables"></a>4.2.2.3 Finding slots and slotables</h4>
+    <h4><a name="assigning-slotables-slots"></a>4.2.2.4 Assigning slotables and slots</h4>
+    <h4><a name="signaling-slot-change"></a>4.2.2.5 Signaling slot change</h4>
+    <h4><a name="mutation-algorithms"></a>4.2.3 Mutation algorithms</h4>
+    <h4><a name="interface-nonelementparentnode"></a>4.2.4 Mixin NonElementParentNode</h4>
+    <div>
+        <pre>interface mixin NonElementParentNode {
+    <span class="comment">//返回 所有后代节点中 ID = elementId的 节点</span>        
+    <a href="#interface-element">Element</a>? getElementById(DOMString elementId);
+}
+<a href="#interface-document">Document</a> includes 这个接口</pre>
+    </div>
+    <h4><a name="interface-documentorshadowroot"></a>4.2.5 Mixin DocumentOrShadowRoot</h4>
+    <h4><a name="interface-parentnode"></a>4.2.6 Mixin ParentNode</h4>
+    <div>
+        <pre>interface mixin ParentNode {
+    <span class="comment">//返回所有子节点中, nodeType = ELEMENT_NODE的 节点集合</span>
+    [SameObject] readonly attribute <a href="#interface-htmlcollection">HTMLCollection</a> children;
+
+    <span class="comment">//返回 所有子节点中 nodeType = ELEMENT_NODE的 第一个节点</span>
+    readonly attribute <a href="#interface-element">Element</a>? firstElementChild;
+
+    <span class="comment">//返回 所有子节点中 nodeType = ELEMENT_NODE的 最后一个节点</span>
+    readonly attribute <a href="#interface-element">Element</a>? lastElementChild;
+
+    <span class="comment">//返回 children.length</span>
+    readonly attribute unsigned long childElementCount;
+
+    <span class="comment">//返回 所有后代节点中 selector匹配到的 nodeType = ELEMENT_NODE的 第一个节点</span>
+    <a href="#interface-element">Element</a>? querySelector(DOMString selectors);
+    <span class="comment">//返回 所有后代节点中 selector匹配到的 nodeType = ELEMENT_NODE的 节点集合(static)</span>
+    [NewObject] <a href="#interface-nodelist">NodeList</a> querySelectorAll(DOMString selectors);
+}
+<a href="#interface-document">Document</a> includes 这个接口
+<a href="#interface-element">Element</a> includes 这个接口</pre>
+    </div>
+    <h4><a name="interface-nondocumenttypechildnode"></a>4.2.7 Mixin NonDocumentTypeChildNode</h4>
+    <div>
+        <pre>interface mixin NonDocumentTypeChildNode {
+    <span class="comment">//返回所有前置兄弟节点中 nodeType = ELEMENT_NODE的 第一个节点</span>
+    readonly attribute <a href="#interface-element">Element</a>? previousElementSibling;
+
+    <span class="comment">//返回所有后置兄弟节点中 nodeType = ELEMENT_NODE的 第一个节点</span>
+    readonly attribute <a href="#interface-element">Element</a>? nextElementSibling;
+}
+<a href="#interface-element">Element</a> includes 这个接口</pre>
+    </div>
+    <h4><a name="interface-childnode"></a>4.2.8 Mixin ChildNode</h4>
+    <div>
+        <pre>interface mixin ChildNode {
+    void remove();
+};
+<a href="#interface-element">Element</a> 实现了这个接口</pre>
+    </div>
+    <h4><a name="interface-slotable"></a>4.2.9 Mixin Slotable</h4>
+    <h4><a name="old-style-collections"></a>4.2.10 Old-style collections: NodeList and HTMLCollection</h4>
+    <p>一个collection是一个对象表示DOM node的列表. 一个collection可以是live or static. 除特别说明, 一个collection必须是live</p>
+    <p>如果一个collection是live, 那么这个collection的属性和方法操作的必须是真实的源数据而非快照</p>
+    <h4><a name="interface-nodelist"></a>4.2.10.1 Interface NodeList</h4>
+    <div>
+        <pre>interface NodeList {
+    <span class="comment">//也可以使用属性表示法 eg. node = collection[index]</span>        
+    getter <a href="#interface-node">Node</a>? item(unsigned long index);
+    readonly attribute unsigned long length;
+    iterable&lt;<a href="#interface-node">Node</a>&gt;;
+}</pre>
+    </div>
+    <h4><a name="interface-htmlcollection"></a>4.2.10.2 Interface HTMLCollection</h4>
+    <div>
+        <pre>interface HTMLCollection {
+    readonly attribute unsigned long length;
+
+    <span class="comment">//也可以使用属性表示法 eg. element = collection[index]</span>   
+    getter <a href="#interface-element">Element</a>? item(unsigned long index);
+
+    <span class="comment">//也可以使用属性表示法 eg. element = collection[name]</span>
+    getter <a href="#interface-element">Element</a>? namedItem(DOMString name);
+}</pre>
+    </div>
+    <h3><a name="mutation-observer"></a>4.3 Mutation observers</h3>
+    <h4><a name="interface-mutationobserver"></a>4.3.1 Interface MutationObserver</h4>
+    <div>
+        <pre>interface MutationObserver {
+    constructor(<a href="#muationcallback">MutationCallback</a> callback)    
+    <span class="comment">//指示UA观察target然后基于options报告变化</span>
+    <span class="comment">//options对象</span>
+        <span class="comment">//childList, 设置为true, 表示观察目标子节点的变化</span>
+        <span class="comment">//attributes, 设置为true, 表示观察目标特性的变化</span>
+        <span class="comment">//subtree, 设置为true, 表示观察目标及其后代节点的变化</span>
+        <span class="comment">//attributeOldValue, 设置为true并且attributes为true或者忽略, 表示可以记录观察前目标的特性值</span>
+        <span class="comment">//attributeFilter, 如果不是所有的特性变化都要观察, 此时设置一个列表并且attributes为true或者忽略</span>
+    void observe(<a href="#interface-node">Node</a> target, <a href="#mutationObserverInit">MutationObserverInit</a> options);
+    
+    <span class="comment">//停止观察变化</span>
+    void disconnect();
+    sequence&lt;<a href="#mutationRecord">MutationRecord</a>&gt; takeRecords();
+}
+
+callback <a name="muationcallback"></a>MatutionCallback = void(sequence&lt;<a href="#interface-mutationrecord">MutationRecord</a>&gt; mutations, <a href="#interface-mutationobserver">MutationObserver</a> observer)
+
+dictionary <span id="mutationObserverInit">MutationObserverInit</span> {
+    boolean childList = false;
+    boolean attributes;
+    boolean characterData;
+    boolean subtree = false;
+    boolean attributeOldValue;
+    boolean characterDataOldValue;
+    sequence<DOMString> attributeFilter;
+}</pre>
+    </div>
+    <h4><a name="queuing-mutation-record"></a>4.3.2 Queuing a mutation record</h4>
+    <h4><a name="interface-mutationrecord"></a>4.3.3 Interface MutationRecord</h4>
+    <div>
+        <pre>interface <span id="mutationRecord">MutationRecord</span>{
+    readonly attribute DOMString type;
+    readonly attribute <a href="#interface-node">Node</a> target;
+    [SameObject] readonly attribute <a href="#interface-nodelist">NodeList</a> addedNodes;
+    [SameObject] readonly attribute <a href="#interface-nodelist">NodeList</a> removedNodes;
+    readonly attribute <a href="#interface-node">Node</a>? previousSibling;
+    readonly attribute <a href="#interface-node">Node</a>? nextSibling;
+    readonly attribute DOMString? attributeName;
+    readonly attribute DOMString? attributeNamespace;
+    readonly attribute DOMString? oldValue;
+}</pre>
+    </div>
+    <h4><a name="gc"></a>4.3.4 Garbage collection</h4>
+    <h3><a name="interface-node"></a>4.4 Interface Node</h3>
+    <div>
+        <pre>interface Node : <a href="#interface-eventtarget">EventTarget</a> {
+    <span class="comment">//nodeType</span>
+    const unsigned short ELEMENT_NODE = 1;
+    const unsigned short TEXT_NODE = 3;
+    const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
+    const unsigned short COMMENT_NODE = 8;
+    const unsigned short DOCUMENT_NODE = 9;
+    const unsigned short DOCUMENT_TYPE_NODE = 10;
+    const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
+
+    readonly attribute unsigned short nodeType;
+
+    <span class="comment">//如果nodeType=1(即元素节点), nodeName = tagName</span>
+    readonly attribute DOMString nodeName;
+
+    readonly attribute DOMString? baseURI;
+
+    <span class="comment">//返回当前节点的顶层的 document 对象</span>
+    readonly attribute <a href="#interface-document">Document</a>? ownerDocument;
+
+    readonly attribute <a href="#interface-node">Node</a>? parentNode;
+    readonly attribute <a href="#interface-element">Element</a>? parentElement;
+    boolean hasChildNodes();
+    [SameObject] readonly attribute <a href="#interface-nodelist">NodeList</a> childNodes;
+    readonly attribute <a href="#interface-node">Node</a>? firstChild;
+    readonly attribute <a href="#interface-node">Node</a>? lastChild;
+    readonly attribute <a href="#interface-node">Node</a>? previousSibling;
+    readonly attribute <a href="#interface-node">Node</a>? nextSibling;
+                
+                <span class="comment">//如果nodeType=1(即元素节点), nodeValue = null</span>
+                attribute DOMString? nodeValue;
+
+                <span class="comment">//如果nodeType=1(即元素节点), textContent 是当前节点下 所有后代节点中 文本节点的内容的总和</span>
+                attribute DOMString? textContent;
+    
+    <span class="comment">//将当前节点和它的后代节点"规范化", "规范化"之后, 不存在一个空的文本节点, 或者两个相邻的文本节点</span>
+    void normalize();
+
+    <span class="comment">//返回当前节点的copy, 如果deep是true, 这个copy包含当前节点的后代节点</span>
+    [NewObject] <a href="#interface-node">Node</a> cloneNode(optional boolean deep = false);
+    
+    boolean isEqualNode(Node? node);
+
+    const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
+    const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
+    const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
+    const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
+    const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
+    const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
+    unsigned short compareDocumentPosition(Node other);
+    boolean contains(Node? other);
+
+    DOMString? lookupPrefix(DOMString? namespace);
+    DOMString? lookupNamespaceURI(DOMString? prefix);
+    boolean isDefaultNamespace(DOMString? namespace);
+
+    <span class="comment"></span>into a parent before a child
+    <span class="comment">//操作parentNode的childNodes, 在参考节点之前插入一个新节点;</span>
+    <span class="comment">//如果新节点已经存在, 将其从当前位置移动到新位置</span>
+    <span class="comment">//返回插入的新节点</span>
+    <a href="#interface-node">Node</a> insertBefore(<a href="#interface-node">Node</a> node, <a href="#interface-node">Node</a>? child);
+
+    <span class="comment">//相当于insertBefore(<a href="#interface-node">Node</a> node, null);</span>
+    <span class="comment">//操作parentNode的childNodes, 在其末尾插入一个新节点</span>
+    <a href="#interface-node">Node</a> appendChild(<a href="#interface-node">Node</a> node);
+
+    <span class="comment">//操作parentNode的childNodes, 用指定节点替换参考节点</span>
+    <a href="#interface-node">Node</a> replaceChild(<a href="#interface-node">Node</a> node, <a href="#interface-node">Node</a> child);
+
+    <span class="comment">//操作parentNode的childNodes, 移除指定节点</span>
+    <a href="#interface-node">Node</a> removeChild(<a href="#interface-node">Node</a> child);
+}</pre>
+    </div>
+    <h3><a name="interface-document"></a>4.5 Interface Document</h3>
+    <div>
+        <pre>interface Document : <a href="#interface-node">Node</a> {
+    [SameObject] readonly attribute <a href="#interface-domimplementation">DOMImplementation</a> implementation;
+    readonly attribute DOMString URL;
+    readonly attribute DOMString documentURI;
+    readonly attribute DOMString origin;
+
+    <span class="comment">//当前文档的渲染模式</span>
+
+    readonly attribute DOMString compatMode;
+    readonly attribute DOMString characterSet;
+
+    <span class="comment">//如果docuemt是HTML, 返回text/html</span>
+    readonly attribute DOMString contentType;
+
+    readonly attribute <a href="#interface-documenttype">DocumentType</a>? doctype;
+
+    <span class="comment">//如果docuemt是HTML, 返回HTMLHtmlElement实例</span>
+    readonly attribute <a href="#interface-element">Element</a>? documentElement;
+
+    <span class="comment">//返回 所有后代元素中 指定tagName的 元素集合</span>
+    <a href="#interface-htmlcollection">HTMLCollection</a> getElementsByTagName(DOMString localName);
+
+    <a href="#interface-htmlcollection">HTMLCollection</a> getElementsByClassName(DOMString classNames);
+    [NewObject] <a href="#interface-element">Element</a> createElement(DOMString localName);
+
+    [NewObject] DocumentFragment createDocumentFragment();
+    [NewObject] <a href="#interface-text">Text</a> createTextNode(DOMString data);
+    [NewObject] <a href="#interface-comment">Coment</a> createComment(DOMString data);
+    [NewObject] <a href="#interface-processinginstruction">ProcessingInstruction</a> createProcessingInstruction(DOMString target, DOMString data);
+    
+    <span class="comment">//返回指定节点的copy, 如果deep为true, 则copy中包含指定节点的后代</span>
+    <span class="comment">//和node.cloneNode()区别:</span>
+    <span class="comment">//1 node.cloneNode()中 node是在当前文档, 返回的copy也属于当前文档</span>
+    <span class="comment">//2 importNode()中, 指定节点可以不在当前文档, 但是返回的copy属于当前文档(ownerDocument为当前文档)</span>
+    [NewObject] <a href="#interface-node">Node</a> importNode(<a href="#interface-node">Node</a> node, optional boolean deep = false);
+
+    <span class="comment">//从外部文档获取一个节点, 原节点和其后代节点会被删除;</span>
+    <span class="comment">//返回的节点的ownerDocument为当前文档</span>
+    <a href="#interface-node">Node</a> adoptNode(<a href="#interface-node">Node</a> node);
+
+    [NewObject] <a href="#interface-event">Event</a> createEvent(DOMString interface);
+
+    [NewObject] Range createRange();
+
+    // NodeFilter.SHOW_ALL = 0xFFFFFFFF
+    [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
+    [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
+}</pre>
+    </div>
+    <h4><a name="interface-domimplementation"></a>4.5.1 Interface DOMImplementation</h4>
+    <h3><a name="interface-documenttype"></a>4.6 Interface DocumentType</h3>
+    <h3><a name="interface-documentfragment"></a>4.7 Interface DocumentFragment</h3>
+    <h3><a name="interface-shadowroot"></a>4.8 Interface ShadowRoot</h3>
+    <h3><a name="interface-element"></a>4.9 Interface Element</h3>
+    <div>
+        <pre>interface Element : <a href="#interface-node">Node</a> {
+    readonly attribute DOMString? namespaceURI;
+    readonly attribute DOMString? prefix;
+    readonly attribute DOMString localName;
+    readonly attribute DOMString tagName;
+
+                attribute DOMString id;
+                //在html中, 设置或读取元素的class特性的值;
+                //不用class是因为在ES中class是关键字
+                attribute DOMString className;
+    [SameObject] readonly attribute <a href="#interface-domtokenlist">DOMTokenList</a> classList;
+
+    [SameObject] readonly attribute <a href="#interface-namednodemap">NamedNodeMap</a></a>> attributes;
+    DOMString? getAttribute(DOMString name);
+
+    void setAttribute(DOMString name, DOMString value);
+
+    void removeAttribute(DOMString name);
+
+    boolean hasAttribute(DOMString name);
+
+
+    <a href="#interface-htmlcollection">HTMLCollection</a> getElementsByTagName(DOMString localName);
+
+    <a href="#interface-htmlcollection">HTMLCollection</a> getElementsByClassName(DOMString classNames);
+}</pre>
+    </div>
+    <h4><a name="interface-namednodemap"></a>4.9.1 Interface NamedNodeMap</h4>
+    <div>
+        <pre>interface NamedNodeMap {
+    readonly attribute unsigned long   length;
+    getter <a href="#interface-attr">Attr</a>? item(unsigned long index);
+    getter <a href="#interface-attr">Attr</a>? getNamedItem(DOMString qualifiedName);
+    [CEReactions] <a href="#interface-attr">Attr</a>? setNamedItem(<a href="#interface-attr">Attr</a> attr);
+    [CEReactions] <a href="#interface-attr">Attr</a> removeNamedItem(DOMString qualifiedName);
+}</pre>
+    </div>
+    <h4><a name="interface-attr"></a>4.9.2 Interface Attr</h4>
+    <div>
+        <pre>interface Attr : <a href="#interface-node">Node</a> {
+    readonly attribute DOMString? namespaceURI;
+    readonly attribute DOMString? prefix;
+    readonly attribute DOMString localName;
+    readonly attribute DOMString name;
+    [CEReactions] attribute DOMString value;
+
+    readonly attribute <a href="#interface-element">Element</a>? ownerElement;
+
+    readonly attribute boolean specified; // useless; always returns true
+}</pre>
+    </div>
+    <h3><a name="interface-characterdata"></a>4.10 Interface CharacterData</h3>
+    <div>
+        <pre>interface CharacterData : <a href="#interface-node">Node</a> {
+    [TreatNullAs=EmptyString] attribute DOMString data;
+    readonly attribute unsigned long length;
+    DOMString substringData(unsigned long offset, unsigned long count);
+    void appendData(DOMString data);
+    void insertData(unsigned long offset, DOMString data);
+    void deleteData(unsigned long offset, unsigned long count);
+    void replaceData(unsigned long offset, unsigned long count, DOMString data);
+}</pre>
+    </div>
+    <h3><a name="interface-text"></a>4.11 Interface Text</h3>
+    <div>
+        <pre>interface Text : <a href="#interface-characterdata">CharacterData</a> {
+    [NewObject] <a href="#interface-text">Text</a> splitText(unsigned long offset);
+    readonly attribute DOMString wholeText;
+}</pre>
+    </div>
+    <h3><a name="interface-cdatasection"></a>4.12 Interface CDATASection</h3>
+    <h3><a name="interface-processinginstruction"></a>4.13 Interface ProcessingInstruction</h3>
+    <div>
+        <pre>interface ProcessingInstruction : <a href="#interface-characterdata">CharacterData</a> {
+    readonly attribute DOMString target;
+}</pre>
+    </div>
+    <h3><a name="interface-comment"></a>4.14 Interface Comment</h3>
+    <div>
+        <pre>interface Comment : <a href="#interface-characterdata">CharacterData</a> {
+}</pre>
+    </div>
+    <h2><a name="ranges"></a>5 Ranges</h2>
+    <h2><a name="traversal"></a>6 Traversal</h2>
+    <h2><a name="sets"></a>7 Sets</h2>
+    <h3><a name="interface-domtokenlist"></a>7.1 Interface DOMTokenList</h3>
+    <div>
+        <pre>interface DOMTokenList {
+    readonly attribute unsigned long length;
+    getter DOMString? item(unsigned long index);
+    boolean contains(DOMString token);
+    [CEReactions] void add(DOMString... tokens);
+    [CEReactions] void remove(DOMString... tokens);
+    [CEReactions] boolean toggle(DOMString token, optional boolean force);
+    [CEReactions] boolean replace(DOMString token, DOMString newToken);
+    boolean supports(DOMString token);
+    [CEReactions] stringifier attribute DOMString value;
+    iterable<DOMString>;
+}</pre>
+    </div>
+    <h2><a name="xpath"></a>8 XPath</h2>
+    <h2><a name="historical"></a>9 Historical</h2>
+    <h3><a name="dom-events-changes"></a>9.1 DOM Events</h3>
+    <h3><a name="dom-core-changes"></a>9.2 DOM Core</h3>
+    <h3><a name="dom-ranges-changes"></a>9.3 DOM Ranges</h3>
+    <h3><a name="dom-traversal-changes"></a>9.4 DOM Traversal</h3>
+</body>
+</html>

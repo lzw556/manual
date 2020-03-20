@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>embedded element</title>
+</head>
+<body>
+    <picture>
+        <!-- source用在picture中, 好像是src不好使, 只能用srcset -->
+        <source srcset="../../../images/404.jpg" media="(max-width:900px)">
+        <img src="../../../images/fox.jpg" alt="test for picture">
+    </picture>
+    <!-- controls boolean属性, 表示会提供用户控制按钮, 进行播放, 暂停等操作 -->
+    <!-- autoplay boolean属性, 表示视频会自动播放(实测自动播放必须加上muted) -->
+    <!-- muted boolean属性, 表示视频里音频的默认设置, 设置了该属性则视频会变成静音 -->
+    <video src="../../../smallviedo1.mp4" controls muted autoplay width="300px" height="500px">
+        标签内的内容是当浏览器不支持这种视频格式时, 进行降级处理的
+    </video>
+</body>
+</html>
