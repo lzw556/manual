@@ -1,1 +1,8 @@
 npm 是 node packaged modules的简称
+
+查看nodejs版本:
+
+    1 win + R, cmd, 进入命令行工具, 输入node -v, 回车
+    2 打开nodejs command prompt, 输入node -v, 回车
+nodejs交互环境
+    继续输入命令node, 回车, 进入交互环境

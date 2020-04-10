@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test module</title>
+</head>
+<body>
+    test module
+<script type="module">
+    import mod11 from "/handbook/ECMAScript/ES2015/module/module1.js";
+    console.log(mod11.mod1_var1);
+    mod11.mod1_method1();
+    import {mod1_var2, mod1_method2} from "/handbook/ECMAScript/ES2015/module/module1.js";
+    console.log(mod1_var2);
+    mod1_method2();
+</script>   
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuejs-v-model</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>请填写个人信息</h3>
+        <p><label>姓名: <input type="text" v-model="name"></label>, 你刚才输入的姓名是{{name}}</p>
+        <p><label>email: <input type="text" v-model.lazy="email"></label>, 你刚才输入的email是{{email}}</p>
+        <p>
+            <label>性别:</label>
+            <label><input type="radio" v-model="gender" value="male">male</label>
+            <label><input type="radio" v-model="gender" value="female">female</label>
+        ,<br>你刚才选择的性别是{{gender}}
+        </p>
+        <p>
+            <label>兴趣爱好:</label>
+            <label><input type="checkbox" v-model="hobby" value="read">read</label>
+            <label><input type="checkbox" v-model="hobby" value="sport">sport</label>
+            <label><input type="checkbox" v-model="hobby" value="shopping">shopping</label>
+        ,<br>你刚才选择的兴趣爱好是{{hobby}}
+        </p>
+        <p>
+            <label>出生年份:</label>
+            <select v-model="birthday">
+                <option v-for="item in years" :value="item">{{item}}</option>
+            </select>
+        ,<br>你刚才选择的出生年份是{{birthday}}
+        </p>
+        <p>
+            <label><input type="checkbox" v-model="isAgree">是否同意XX协议</label>
+        </p>
+        <input type="submit" value="下一步" :disabled="!isAgree">
+        <input type="text" oninput="inputHandler()" onchange="changeHandler()">
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                name :"",
+                gender: "",
+                hobby: [],
+                birthday: 1900,
+                years:[1986,1987,1988,1989,1990],
+                isAgree :false,
+                email:""
+            }
+        })
+        function inputHandler(){
+            console.log("inputHandler")
+        }
+        function changeHandler(){
+            console.log("changeHandler")
+        }
+    </script>
+</body>
+</html>

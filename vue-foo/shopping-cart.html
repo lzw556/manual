@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuejs-shopping-cart</title>
+    <script src="./vue.js"></script>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        table>thead>tr>th, table>tbody>tr>td{
+            padding:1em;
+        }
+        table>thead>tr{background-color:#888}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-if="books.length>0">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>名称</th>
+                        <th>日期</th>
+                        <th>价格</th>
+                        <th>数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, index) in books">
+                        <td>{{index + 1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.price | showPrice}}</td>
+                        <td>
+                            <button @click="decrement(index)" :disabled="item.count==1">-</button>
+                            {{item.count}}
+                            <button @click="increment(index)">+</button>
+                        </td>
+                        <td><button @click="remove(index)">移除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>总金额: {{total | showPrice}}</p>
+        </div>
+        <p v-else>购物车是空的</p>      
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                books:[
+                    {id:1, name:"JavaScript高级程序设计", date:"2012-5-1", count:1, price:80},
+                    {id:1, name:"CSS权威指南", date:"2013-8-1", count:1, price:55},
+                    {id:1, name:"HTTP权威指南", date:"2013-11-11", count:1, price:120}
+                ]
+            },
+            methods:{
+                decrement(index){
+                    this.books[index].count--;
+                },
+                increment(index){
+                    this.books[index].count++;
+                },
+                remove(index){
+                    this.books.splice(index, 1);
+                }
+            },
+            filters:{
+                showPrice(price){
+                    return "$" + price.toFixed(2);
+                }
+            },
+            computed:{
+                total(){
+                    let total =0 ;
+                    // for (let index = 0; index < this.books.length; index++) {
+                    //     total +=this.books[index].price * this.books[index].count;
+                    // }
+                    for (const book of this.books) {
+                        total+=book.price*book.count;
+                    }
+                    return total;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

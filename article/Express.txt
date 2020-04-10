@@ -1,0 +1,55 @@
+1 routing
+    1.1 是什么, app.METHOD(PATH, HANDLER)
+    1.2 route methods
+        eg. app.get(), app.post(), app.all(), ...
+    1.3 route paths
+        eg. app.get("/"), 这个路径将匹配对首页的请求    
+        eg. app.get("/about"), 这个路径将匹配对/about的请求
+    1.4 route parameters
+        eg. app.get("")
+    1.5 route hanlder
+        eg. 一个callback
+        app.get("/", function(req, res){
+            res.send("hello world")
+        })
+        eg. 多个callback
+        app.get("/", function(req, res, next){
+            console.log("baba")
+            next()
+        }, function(req, res){
+            res.send("baba")
+        })
+    1.6 response methods
+        eg. res.send(), res.redirect(), ...
+    1.7 app.route()
+        可以使用这个方法对一个path设置链式handler
+        eg.
+        app.route("/about")
+            .get(function(req, res){
+                res.send("")
+            })
+            .post(function(req, res){
+                res.send("")
+            })
+            .put(function(req, res){
+                res.send("")
+            })
+    1.8 express.Router()
+
+2 middleware(中间件)
+    1.1 是什么, 一个函数, 能够访问请求对象(req), 响应对象(res)以及应用程序的请求/响应周期中的下一个中间件函数
+    1.2 使用中间件函数
+        app.use()
+    1.3 分类
+            application level(应用级)
+            router level(路由级)
+            error handling(错误处理)
+            built-in(内置)
+            third-party(第三方)
+
+3 API
+    3.1 express()
+    3.2 Application
+    3.3 Request
+    3.4 Response
+    3.5 Router

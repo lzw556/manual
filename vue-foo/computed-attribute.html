@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuejs-computed-attribute</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in books">{{item.name}} ￥{{item.price}}</li>
+        </ul>
+        <p>总价格: {{totalPrice}}</p>
+        <p>总价格: {{totalPrice}}</p>
+        <p>总价格: {{totalPrice}}</p>
+        <p>总价格: {{getTotalPrice()}}</p>
+        <p>总价格: {{getTotalPrice()}}</p>
+        <p>总价格: {{getTotalPrice()}}</p>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                books:[
+                    {id:1, name: "JavaScript高级程序设计", price: 80},
+                    {id:2, name: "CSS权威指南", price: 96},
+                    {id:3, name: "HTTP权威指南", price: 128}
+                ]
+            },
+            computed:{
+                totalPrice: function(){
+                    console.log("call computed totalPrice")
+                    let total = 0;
+                    for (let index = 0; index < this.books.length; index++) {
+                        total += this.books[index].price;
+                    }
+                    return total;
+                }
+                // totalPrice:{
+                //     get: function(){
+                //         console.log("read totalPrice")
+                //     },
+                //     set: function(val){
+                //         console.log("set totalPrice")
+                //     }
+                // }
+            },
+            methods:{
+                getTotalPrice: function(){
+                    console.log("call method getTotalPrice")
+                    let total = 0;
+                    for (let index = 0; index < this.books.length; index++) {
+                        total += this.books[index].price;
+                    }
+                    return total;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

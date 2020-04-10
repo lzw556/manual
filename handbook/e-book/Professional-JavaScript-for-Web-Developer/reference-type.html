@@ -226,7 +226,11 @@ console.log(Array.isArray(colors.valueOf()))     //true</pre>
                 <tr><th colspan="2">sort([sortby: fn])</th></tr>
             </thead>
             <tr>
-                <td>参数</td><td>sortby, function, 比较函数, 可选<br>比较函数接受2个参数</td>
+                <td>参数</td>
+                <td>
+                    sortby, function, 比较函数, 可选<br>比较函数接受2个参数, 分别表示第一个用于比较的元素和第二个用于比较的元素
+                    <br>eg. function(a, b){}, 当这个比较函数的返回值>0时, a和b需要交换位置
+                </td>
             </tr>
             <tr>
                 <td>返回值</td>
@@ -278,6 +282,32 @@ console.log(Array.isArray(colors.valueOf()))     //true</pre>
                 </td>
             </tr>
         </table>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">splice([start: number], [deleteCount: number], [...])</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td>
+                <td>start, 整数, 表示开始索引 , 可选
+                    <br>end, 整数, 表示要删除的项数, 可选
+                    <br>从第三个参数开始, 表示要插入的项
+                </td>
+            </tr>
+            <tr>
+                <td>返回值</td>
+                <td>
+                    删除: splice(1, 2), 表示从二项开始, 删除2项(即删除第二项和第三项), 返回一个数组包含删除的项
+                    <br>插入: splice(1, 0, 100), 表示从二项开始, 插入一项(100), 返回一个空数组
+                    <br>替换: splice(1, 1, 100), 表示删除第二项, 从二项开始, 插入一项(100), 返回一个数组包含删除的项
+                </td>
+            </tr>
+            <tr>
+                <td>功能</td>
+                <td>
+                   向数组的中部插入项
+                </td>
+            </tr>
+        </table>
     </div>  
     <div class="section">
         <h3>5.2.7 location method<a name="location-method" class="anchor-link"></a></h3>
@@ -322,11 +352,15 @@ console.log(Array.isArray(colors.valueOf()))     //true</pre>
                 <td>参数</td>
                 <td>
                     callbackfn, function, 要在每一项上运行的函数
-                    <br>此函数接受3个参数分别是: 数组元素, 该元素的索引和数组本身
+                    <br>此函数接受3个参数分别是: 当前元素, 当前元素的索引和数组本身
                 </td>
             </tr>
             <tr>
-                <td>返回值</td><td>对数组中的每一项运行给定函数, 如果运行函数对每一项返回true,则返回true</td>
+                <td>返回值</td>
+                <td>
+                    对数组中的每一项运行给定函数, 如果运行函数对每一项返回true,则返回true
+                    <br>短路操作, 如果第一次返回false则直接返回false不会继续进行第二次迭代
+                </td>
             </tr>
             <tr>
                 <td>功能</td>
@@ -341,7 +375,7 @@ console.log(Array.isArray(colors.valueOf()))     //true</pre>
                 <td>参数</td>
                 <td>
                     callbackfn, function, 要在每一项上运行的函数
-                    <br>此函数接受3个参数分别是: 数组元素, 该元素的索引和数组本身
+                    <br>此函数接受3个参数分别是: 当前元素, 当前元素的索引和数组本身
                 </td>
             </tr>
             <tr>
@@ -360,7 +394,7 @@ console.log(Array.isArray(colors.valueOf()))     //true</pre>
                 <td>参数</td>
                 <td>
                     callbackfn, function, 要在每一项上运行的函数
-                    <br>此函数接受3个参数分别是: 数组元素, 该元素的索引和数组本身
+                    <br>此函数接受3个参数分别是: 当前元素, 当前元素的索引和数组本身
                 </td>
             </tr>
             <tr>
@@ -379,11 +413,13 @@ console.log(Array.isArray(colors.valueOf()))     //true</pre>
                 <td>参数</td>
                 <td>
                     callbackfn, function, 要在每一项上运行的函数
-                    <br>此函数接受3个参数分别是: 数组元素, 该元素的索引和数组本身
+                    <br>此函数接受3个参数分别是: 当前元素, 当前元素的索引和数组本身
                 </td>
             </tr>
             <tr>
-                <td>返回值</td><td>对数组中的每一项运行给定函数, 如果运行函数对任一项返回true,则返回true</td>
+                <td>返回值</td><td>对数组中的每一项运行给定函数, 如果运行函数对任一项返回true,则返回true
+                    <br>短路操作, 如果第一次返回true则直接返回true不会继续进行第二次迭代
+                </td>
             </tr>
             <tr>
                 <td>功能</td>
@@ -398,7 +434,7 @@ console.log(Array.isArray(colors.valueOf()))     //true</pre>
                 <td>参数</td>
                 <td>
                     callbackfn, function, 要在每一项上运行的函数
-                    <br>此函数接受3个参数分别是: 数组元素, 该元素的索引和数组本身
+                    <br>此函数接受3个参数分别是: 当前元素, 当前元素的索引和数组本身
                 </td>
             </tr>
             <tr>
@@ -412,7 +448,31 @@ console.log(Array.isArray(colors.valueOf()))     //true</pre>
     </div>
     <div class="section">
         <h3>5.2.9 reduction method<a name="reduction-method" class="anchor-link"></a></h3>
-        <p>reduce()和reduceRight()</p>
+        <table class="table">
+            <thead>
+                <tr><th colspan="2">reduce(callbackfn: fn, [initialValue])</th></tr>
+            </thead>
+            <tr>
+                <td>参数</td>
+                <td>
+                    callbackfn, function, 要在每一项上运行的函数
+                    <br>此函数接受4个参数分别是: 前一个值, 当前元素, 当前元素的索引和数组本身
+                    <br>初始值
+                </td>
+            </tr>
+            <tr>
+                <td>返回值</td>
+                <td>
+                    如果存在存在第二个参数(初始值), 则从数组的第一项开始迭代,第一次prev=初始值
+                    <br>如果不存在, 则从数组的第二项开始迭代, 第一次prev=第一项的值
+                    <br>然后对数组中的每一项运行给定函数, 每次调用结果都会自动传给下一次的prev, 然后返回最后一次的prev
+                </td>
+            </tr>
+            <tr>
+                <td>功能</td>
+                <td>适合并归一个数组</td>
+            </tr>
+        </table>
     </div>
     <div class="section">
         <h2>5.3 date type<a name="date" class="anchor-link"></a></h2>
@@ -954,12 +1014,5 @@ function sum(n1, n2){return n1 + n2;}</pre>
 <div class="ft">
     <a href="scope.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="object-oriented-programming.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
 </div>  
-<script>
-function selectFrom(lower, upper){
-    var total = upper -lower +1;
-    return Math.floor(Math.random()*total +lower);
-}
-console.log(selectFrom(3, 20));
-</script>
 </body>
 </html>

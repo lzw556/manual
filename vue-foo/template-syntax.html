@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuejs-template-syntax</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{firstName}} {{lastName}}</p>
+        <p>{{firstName + ' ' + lastName}}</p>
+        <p v-text="city"></p>
+        <p v-text="team"></p>
+        <p v-html="site"></p>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                firstName : "kobe",
+                lastName : "bryant",
+                city: "Los Angeles",
+                team: "Lakers",
+                site: "<a href=\"http://www.baidu.com\">官网</a>"
+            }
+        })
+    </script>
+</body>
+</html>

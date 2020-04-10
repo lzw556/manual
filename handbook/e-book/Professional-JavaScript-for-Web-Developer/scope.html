@@ -362,5 +362,16 @@ console.log(index);     //10</pre>
 <div class="ft">
     <a href="language-basics.html">previous</a>&nbsp;&nbsp;&nbsp;<a href="reference-type.html">next</a>&nbsp;&nbsp;&nbsp;<a href="index.html">index</a>
 </div>  
+<script>
+   function letTest() {
+        let x = 1;
+        {
+            let x = 2;  // 不同的变量
+            console.log(x);  // 2
+        }
+        console.log(x);  // 1
+    }  
+    letTest();   
+</script>
 </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuejs-directive-bind-attribute</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <img v-bind:src="src" v-bind:title="title"> -->
+        <img :src="src" :title="title">
+        <p :class="classList" :style="styleRules">v-bind绑定class特性</p>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                src: "../images/vue-logo.png",
+                title: "v-bind binding attribute",
+                classList:{
+                    active: true,
+                    big : true
+                },
+                styleRules:{
+                    color: 'red',
+                    fontSize:"16px"
+                }   
+            }
+        })
+    </script>
+</body>
+</html>

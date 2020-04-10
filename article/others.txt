@@ -1,8 +1,0 @@
-foxmail
-filezilla
-7-zip
-Remote Desktop Connection Manager
-wps
-禅道
-TortoiseSVN
-VisualSVN vs中支持svn的插件

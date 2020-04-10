@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuejs-directive-v-for</title>
+    <script src="./vue.js"></script>
+    <style>
+        .active{color:red;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in books">{{item}}</li>
+        </ul>
+        <p><button @click="testPop">pop</button></p>
+        <p><button @click="testPush">push</button></p>
+        <p><button @click="testShift">shift</button></p>
+        <p><button @click="testUnshift">unshift</button></p>
+        <p><button @click="testReverse">reverse</button></p>
+        <p><button @click="testSort">sort</button></p>
+        <p><button @click="testSplice">splice</button></p>
+        <!-- 思路 -->
+
+        <!-- 默认
+        0 === 0
+        0 === 1
+        0 === 2 -->
+       <!-- 当点击第二项时
+        1 === 0
+        1 === 1
+        1 === 2 -->
+        <!-- 当点击第三项时
+        2 === 0
+        2 === 1
+        2 === 2 -->
+        <ul>
+            <li v-for="(item, index) in books" :class="{active:currentIndex===index}" @click="pick(index)">{{index}} {{item}}</li>
+        </ul>
+        <ul>
+            <li v-for="(value, key, index) in personal">{{value}} {{key}} {{index}}</li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                books: ["JavaScript高级程序设计", "CSS权威指南", "HTTP权威指南"],
+                personal:{
+                    name : "jim",
+                    age : 20,
+                    gender : "male"
+                },
+                currentIndex : 0
+            },
+            methods:{
+                testPop(){
+                    this.books.pop();
+                },
+                testPush(){
+                    this.books.push("大话设计模式");
+                },
+                testReverse(){
+                    this.books.reverse();
+                },
+                testSort(){
+                    this.books.sort();
+                },
+                testShift(){
+                    this.books.shift();
+                },
+                testUnshift(){
+                    this.books.unshift("CSS世界");
+                },
+                testSplice(){
+                    this.books.splice(0, 0, "计算机原理");
+                },
+                pick(index){
+                    this.currentIndex = index;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
