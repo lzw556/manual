@@ -1,0 +1,75 @@
+table-cell height
+
+假如一行中有3个cell,其中一个内容是30,其他2个是20,那么这3个cell的height就是30
+
+textarea 默认宽度 input 默认宽度
+
+chrome中td在查看时绿色的不一定是padding
+
+button标签 放在form中并且没有添加“type”属性时，单击时会submit，要阻止此行为有以下方法：
+
+1 加 type="button"
+2 
+
+
+问题：
+html 
+
+   <ul>
+     <li>
+        <input type=text readonly>
+
+
+li click中移除readonly,在IE中实际要用鼠标多点击一次才可以输入
+后来发现好像是jquery的removeAttr在IE中不兼容的原因
+
+idea：增加单行文本框的高度：
+
+一开始使用line-height,经测试在Chrome和FF中增加line-height，单行文本框的高度会随之增加；IE则不会
+
+然后又回头看了CSS Spec，根据规范：对于block container，line-height指定元素内line box的最小高度，由此推断IE的表现
+不符合规范
+
+然后自己反思，即便在IE中符合预期，那么做这个功能用line-height真的合适吗？line-height主要用来设置2个line box之间的距离，用在单行文本框中真的好吗？
+
+那么到底怎么实现这个需求好呢？
+1 使用height，但是在IE中会出现文本不垂直居中的问题，需要加相同高度的line-height
+2 使用font-size和数值型line-height
+
+
+
+illegal 非法的 不合法的, eg. 
+status bar  状态条 status bar item状态条中的一项
+
+compile 编译
+turn on
+
+customize 定制
+
+suffix 后缀 prefix前缀 infix中缀
+opposie 对立面
+
+img max-width:100%;  可以实现这样的效果:容器width>图片固有width时,图片是固有width;<图片固有width时,图片是容器width
+
+omit 忽略
+
+
+third-party
+
+vendor
+
+    <link href="/bootstrap-master/dist/css/bootstrap-grid.css" rel="stylesheet">  不加rel属性的话 不会加载css文件
+
+forward-slash  /  正斜杠
+
+css 百分比布局必须要用border-box吗?
+
+state
+hover focus active  disabled
+
+前面三个要按照顺序,后面的由于selector优先级高,所以会覆盖前3个
+z-index在pagination中的应用
+
+
+
+button和a focus状态下的outline 要不要去掉
