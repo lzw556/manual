@@ -5,3 +5,10 @@
     * prefix, 表示在一个空的html文件中, 当输入此值时, 会触发vscode打开代码片段
     * body, 表示代码块内容, 其他可能包括转义字符 eg. \" 表示双引号, \t 表示tab
     * description, 表示在输入prefix时, 展示的提示信息
+
+## settings
+* 插件
+    * vscode-icons
+    * open in browser
+* 终端
+* tabsize

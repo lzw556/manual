@@ -5,6 +5,7 @@
         * el, string/HTMLElement, 指定一个DOM元素, 作为Vue实例的挂载目标
         * template
         * render
+        * 如果同时指定el和template, 那么template会替换el
     * data
         * data, 指定数据对象, 内部会将data的属性转换为getter/setter
         * computed, 计算属性, 缓存一个值, 只有依赖值发生改变才会重新计算
@@ -125,3 +126,44 @@
 * ViewModel层, 相当于Vue实例
     * DataBindings, 可以把data对象中的数据绑定到DOM上, 而且是响应式的. 当数据改变时DOM自动更新
     * DOM listners, 监听DOM变化, 然后通过回调更新数据
+
+## component
+* 组件相当于一个Vue实例，在构造时除了el之外，其他的参数和创建Vue实例一样
+* 组件的data必须是一个函数
+* template，组件的模板, 需要在最外层包裹一个div
+* 注册组件（组件要用在哪里就需要在哪里注册，和交保护费一样）
+    * 全局注册
+      <br>Vue.component()，可以在所有Vue根实例和其子组件中使用
+    * 局部注册
+      <br>定义在组件的components中，只能在该组件内部使用
+* 父子组件
+    * 父子组件之间的各自的数据默认独立
+    * 把父组件的数据传递给子组件
+        * 子组件的props中定义 自定义属性
+        * 在子组件的标签上使用v-bind:自定义属性, 绑定父组件中的数据
+        * 然后在子组件的模板中可以像使用其自身data数据一样使用自定义属性
+    * 把子组件的数据传递给父组件
+        * 子组件中通过this.$emit派发一个自定义事件
+        * 然后在子组件的标签上使用v-on:自定义事件，绑定父组件中的method
+    * 在父组件中访问子组件
+        * 在子组件的标签上添加ref属性
+        * 在父组件中通过this.$refs[ref属性值]来访问子组件实例
+
+## slot，[sla:t]，插槽
+* 在组件的模板中通过slot标签定义一个插槽，可以在开始标签和结束标签之间定义默认值
+* 在子组件的开始标签和结束标签内部定义内容来替换slot
+* 命名插槽
+    * 一个组件模板中定义了多个slot
+    * 每一个slot通过添加name属性来区分
+    * 在子组件的开始标签和结束标签内部定义内容来替换slot时，通过添加slot属性来精准替换插槽
+
+## 结合webpack开发
+* 安装vue
+* import
+* 配置resolve
+* 单文件组件
+    * 安装vue-loader（超过15开头的版本要配置一个插件VueLoaderPlugin） vue-template-compiler
+    * 配置loader
+* 组件式开发
+    * 一个单文件代表一个组件
+    * 然后需要用在哪里就在那个单文件的script中先导入, 再注册
