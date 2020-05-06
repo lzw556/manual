@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES2015</title>
+</head>
+<body>
+    <h3>关键字: let, const</h3>
+    <dl>
+        <dt><dfn>let</dfn></dt>
+        <dd>作用域为当前所在块</dd>
+        <dd>同一个作用域内不能重复声明</dd>
+        <dd>不能提升</dd>
+    </dl>
+    <h3>module</h3>
+    <dl>
+        <dt><dfn>export</dfn></dt>
+        <dd>用于从模块中导出函数, 对象或原始值, 以便在其他模块中通过import语句使用它们</dd>
+        <dd>export语句不能用在嵌入式脚本中, 无论是否声明, 都处于严格模式</dd>
+        <dd>
+            <ul>
+                <li>命名导出(每个模块可包含任意数量)
+                    <ul>
+                        <li>eg. export let name1 = 5;</li>
+                        <li>eg. export function methodName(){..};</li>
+                        <li>eg. export {name1, methodName}</li>
+                    </ul>
+                </li>
+                <li>默认导出(每个模块至多一个)
+                    <ul>
+                        <li>eg. export default function methodName(){...}</li>
+                        <li>eg. export default {name1, methodName}</li>
+                    </ul>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+    <dl>
+        <dt><dfn>import</dfn></dt>
+        <dd>用于导入由另一个模块导出的绑定, 无论是否声明, 都处在严格模式</dd>
+        <dd>import语句属于静态导入. 在浏览器中, 只能在声明了 type="module" 的 script 的标签中使用</dd>
+        <dd>
+            <ul>
+                <li>
+                    <p>导入模块的默认导出</p>
+                    <p>import 别名 from "modulePath"</p>
+                </li>
+                <li>
+                    <p>导入模块的命名导出</p>
+                    <p>import {命名1, 命名2, ...} from "modulePath"</p>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+    <h3>arrow function expression</h3>
+    <dl>
+        <dt><dfn>let</dfn></dt>
+        <dd>作用域为当前所在块</dd>
+        <dd>同一个作用域内不能重复声明</dd>
+        <dd>不能提升</dd>
+    </dl>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flex</title>
+  <style>
+    body{margin:0}
+    .tab-bar{
+      display:flex;
+      position:fixed;
+      left: 0;
+      right: 0;
+      bottom:0;
+      height: 49px;
+      background-color: #f2f2f2;
+
+    }
+    .tab-bar>.tab-bar-item{
+      flex:1;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="tab-bar">
+    <div class="tab-bar-item">首页</div>
+    <div class="tab-bar-item">分类</div>
+    <div class="tab-bar-item">购物车</div>
+    <div class="tab-bar-item">我的</div>
+  </div>
+</body>
+</html>

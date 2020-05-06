@@ -1,4 +1,0 @@
-d:, 进入d盘
-mkdir foo, 新建名称为foo的文件夹
-cd foo, 进入d:/foo目录
-cd ../, 返回上一级目录
