@@ -7,26 +7,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+      .container{
+        display:flex;
+        /* 主轴方向 */
+        /* flex-direction: row; */
+        /* flex-direction: column; */
+
+        /* flex items 在主轴上的对齐 */
+        /* justify-content:center; */
+        /* justify-content: flex-start; */
+        /* justify-content: flex-end; */
+        /* justify-content: space-around; */
+        /* justify-content: space-between; */
+        /* justify-content: space-evenly; */
+
+        /* flex items 在交叉轴上的对齐(既适用于单行又适用于多行) */
+        /* 当用于多行时, 会把交叉轴上多余的空间平均分给每一行 */
+        /* align-items: center; */
+        /* align-items:flex-start; */
+        
+        /* flex items 是单行还是多行 */
+        /* flex-wrap: nowrap; */
+        /* flex-wrap: wrap; */
+
+        /* 多行flex items 在交叉轴上的对齐 */
+        /* align-content: center; */
+        /* align-content: space-between; */
+        /* align-content: flex-start; */
+        /* align-content: space-around; */
+
+        width:350px;
+        height: 450px;
+        background-color: burlywood;
+      }
+      .box{
+        width: 100px;
+        height: 100px;
+        color:#fff;
+        /* flex-grow: 1; */
+        flex-shrink: 1;
+        flex-basis: 70px;
+      }
+    </style>
 </head>
 <body>
   <a href="/UX">返回首页</a>
-    <p>flex-basis</p>
-    <p>当flex-item的flex-basis属性的specified value是:</p>
-    <ul>
-        <li>auto
-            <ul>
-                <li>当'width'属性值是'auto'时,flex-basis的used value是shirnk to fit</li>
-                <li>当'width'属性值不是'auto'时,flex-basis的used value是就是'width'的值</li>
-            </ul>
-        </li>
-        <li>非auto(length, or percentage, or 0)
-            <ul>
-                <li>此时'width'属性无效</li>
-                <li>如果specified value是0, used value是缩放至最小的width</li>
-                <li>如果specified value小于这个缩放至最小的width, used value仍然是缩放至最小的width</li>
-                <li>如果specified value大于缩放至最小的width, used value是specified value</li>
-            </ul>
-        </li>
-    </ul>
+  <div class="container">
+    <div class="box" style="background-color: red;">box1</div>
+    <div class="box" style="background-color: green;">box2</div>
+    <div class="box" style="background-color: blue;">box3</div>
+    <div class="box" style="background-color: orange;">box4</div>
+  </div> 
 </body>
 </html>

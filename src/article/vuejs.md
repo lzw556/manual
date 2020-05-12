@@ -153,7 +153,12 @@
         * 然后在子组件的标签上使用v-on:自定义事件，绑定父组件中的method
     * 在父组件中访问子组件
         * 在子组件的标签上添加ref属性
-        * 在父组件中通过this.$refs[ref属性值]来访问子组件实例
+        * $refs 一个对象, 返回注册过ref的dom元素和vue实例
+        * 在父组件中通过this.$refs[ref属性值]来访问子组件实例(只能访问data属性和methods中的方法),不是响应式的
+        * ref也可以用在普通的dom元素上, eg. `<input ref="input">`, 然后通过this.$refs.input获取这个dom对象
+        * $children vue实例数组
+    * 子访问父
+        * $parent 一个vue实例
 
 ## slot，[sla:t]，插槽
 * 在组件的模板中通过slot标签定义一个插槽，可以在开始标签和结束标签之间定义默认值
